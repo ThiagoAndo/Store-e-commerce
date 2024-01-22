@@ -9,7 +9,7 @@ function Login() {
   const fNameInputRef = useRef();
   const lNameInputRef = useRef();
   const passwortInputRef = useRef();
-
+console.log(emailInputRef)
   function submitFormHandler(event) {
     event.preventDefault();
 
@@ -20,14 +20,7 @@ function Login() {
       email,
       password,
     };
-    fetch("/api/user/login", {
-      method: "POST",
-      body: JSON.stringify(reqBody),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
+    fetch("/api/user/login").then((response) => {
         if (response.ok) {
           return response.json();
         }
@@ -37,8 +30,9 @@ function Login() {
         });
       })
       .then((data) => {
+        console.log(data.user.first_name)
         setResp(true);
-        setFeedback(data.resp.first_name);
+        setFeedback(data.user.first_name);
       })
       .catch((error) => {
         setResp(false);
