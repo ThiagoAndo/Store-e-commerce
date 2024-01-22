@@ -47,7 +47,7 @@ console.log(emailInputRef)
         <h1>The Log in Page</h1>
         <form onSubmit={submitFormHandler}>
           <div>
-            <label style={{ color: "gray" }} htmlFor="email">
+            <label style={{ color: "green" }} htmlFor="email">
               Your Email Address
             </label>
             <br />
