@@ -1,0 +1,34 @@
+.header {
+  padding: 1rem 10%;
+  height: 5rem;
+  background-color: #202020;
+}
+
+.navigation {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  list-style: none;
+}
+
+.link {
+  text-decoration: none;
+  color: #74dacc;
+  font-size: 1rem;
+}
+.active {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #825348;
+}
+@media (min-width: 768px) {
+  .logo {
+    font-size: 2.5rem;
+  }
+
+  .navigation a {
+    font-size: 1.5rem;
+  }
+}

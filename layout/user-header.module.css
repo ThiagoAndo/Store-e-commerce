@@ -1,0 +1,41 @@
+.header {
+  padding: 1rem 10%;
+  height: 4rem;
+  background-color: #47444423;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navigation {
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  list-style: none;
+}
+
+.link {
+  text-decoration: none;
+  color: #327067;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.active {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #bb4125;
+  font-weight: bold;
+
+}
+@media (min-width: 768px) {
+  .logo {
+    font-size: 2.5rem;
+  }
+
+  .navigation a {
+    font-size: 1.5rem;
+  }
+}
