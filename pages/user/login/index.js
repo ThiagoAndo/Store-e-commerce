@@ -9,7 +9,6 @@ function Login() {
   const fNameInputRef = useRef();
   const lNameInputRef = useRef();
   const passwortInputRef = useRef();
-console.log(emailInputRef)
   function submitFormHandler(event) {
     event.preventDefault();
 
@@ -20,24 +19,21 @@ console.log(emailInputRef)
       email,
       password,
     };
-    fetch("/api/user/login").then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-
-        return response.json().then((data) => {
-          throw new Error(data.err);
-        });
+    fetch(`/api/user/${email}/${password}`)
+      .then((response) => {
+        return response.json();
       })
       .then((data) => {
-        console.log(data.user.first_name)
-        setResp(true);
-        setFeedback(data.user.first_name);
-      })
-      .catch((error) => {
-        setResp(false);
-        setFeedback(error.message);
+        console.log(data)
+        if (data.event.message) {
+          setResp(false);
+          setFeedback(data.event.message);
+        } else {
+          setResp(true);
+          setFeedback(data.user.first_name);
+        }
       });
+   
   }
 
   return (
