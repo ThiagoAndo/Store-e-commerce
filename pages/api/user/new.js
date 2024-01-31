@@ -8,7 +8,6 @@ async function handler(req, res) {
     client.password = await hash(client.password, 12);
     client.id = uniqid();
     client.created_at = getCurrentDate();
-    console.log(client)
     try {
       let response = await fetch("http://localhost:8080/events/user/new", {
         method: "POST",
@@ -18,15 +17,8 @@ async function handler(req, res) {
         },
       });
       if (response.ok) {
-        console.log(response)
-        // response = await response.json();
-        // if (response.status === 404) {
-        //   res.status(404).json({
-        //     message: response.message,
-        //   });
-        // } else {
-        //   res.status(200).json(response);
-        // }
+        response = await response.json();
+        res.status(200).json(response);
       }
     } catch (error) {
       console.log(error)

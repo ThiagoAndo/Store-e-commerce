@@ -10,18 +10,11 @@ async function handler(req, res) {
     );
     if (response.ok) {
       response = await response.json();
-      if (response.status === 404) {
-        res.status(404).json({
-          message: response.message ,
-        });
-      } else {
-        res.status(200).json(response);
-      }
+      console.log(response);
+      res.status(200).json(response);
     }
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: error || "Connecting to the database failed!" });
+    res.status(500).json({ message: "Connecting to the database failed!" });
   }
 }
 

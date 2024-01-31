@@ -25,22 +25,37 @@ function SignIn() {
       setFeedbackItems("Password is too short!");
     }
 
-  
 
-    fetch("/api/user/new", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.message)
-        setFeedbackItems(data.message);
-      });
+    try {
+      fetch("/api/user/new", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            setFeedbackItems("Connecting to the database failed!");
+            throw "Connecting to the database failed!";
+          }
+        })
+        .then((data) => {
+          console.log(data)
+          if (data.hasOwnProperty("message")) {
+            setFeedbackItems(data.message);
+          } else {
+            setFeedbackItems(data.first_name);
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
+    
   return (
     <>
       <UserHeader />

@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import UserHeader from "../../../layout/user-header";
+// import { error } from "console";
 
 function Login() {
   const [feedback, setFeedback] = useState("Your data will apear here");
@@ -19,21 +20,31 @@ function Login() {
       email,
       password,
     };
-    fetch(`/api/user/${email}/${password}`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data)
-        if (data.event.message) {
-          setResp(false);
-          setFeedback(data.event.message);
-        } else {
-          setResp(true);
-          setFeedback(data.user.first_name);
-        }
-      });
-   
+    try {
+      fetch(`/api/user/${email}/${password}`)
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            setResp(false);
+            setFeedback("Connecting to the database failed!");
+            throw "Connecting to the database failed!";
+          }
+        })
+        .then((data) => {
+          console.log('data')
+          console.log(data)
+          if (data.hasOwnProperty("message")) {
+            setResp(false);
+            setFeedback(data.message);
+          } else {
+            setResp(true);
+            setFeedback(data.first_name);
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
