@@ -54,7 +54,7 @@ function Login() {
         <h1>The Log in Page</h1>
         <form onSubmit={submitFormHandler}>
           <div>
-            <label style={{ color: "green" }} htmlFor="email">
+            <label style={{ color: "blue" }} htmlFor="email">
               Your Email Address
             </label>
             <br />
