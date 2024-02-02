@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import UserHeader from "../../../layout/user-header";
+import UserHeader from "../../../components/layout/user-header";
 // import { error } from "console";
 
 function Login() {
@@ -7,8 +7,6 @@ function Login() {
   const [resp, setResp] = useState(false);
 
   const emailInputRef = useRef();
-  const fNameInputRef = useRef();
-  const lNameInputRef = useRef();
   const passwortInputRef = useRef();
   function submitFormHandler(event) {
     event.preventDefault();
@@ -16,10 +14,6 @@ function Login() {
     const email = emailInputRef.current.value;
     const password = passwortInputRef.current.value;
 
-    const reqBody = {
-      email,
-      password,
-    };
     try {
       fetch(`/api/user/${email}/${password}`)
         .then((response) => {
@@ -32,8 +26,6 @@ function Login() {
           }
         })
         .then((data) => {
-          console.log('data')
-          console.log(data)
           if (data.hasOwnProperty("message")) {
             setResp(false);
             setFeedback(data.message);
@@ -87,3 +79,5 @@ function Login() {
 }
 
 export default Login;
+
+

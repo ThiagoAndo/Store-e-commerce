@@ -1,12 +1,11 @@
-import UserHeader from "../../../layout/user-header";
+import UserHeader from "../../../components/layout/user-header";
 import {
   getCurrentDate,
   isEmailValid,
   isNameValid,
   isPasswordValid,
 } from "../../../utils/functions";
-import { useState} from "react";
-
+import { useState } from "react";
 
 function SignIn() {
   const [feedbackItems, setFeedbackItems] = useState();
@@ -25,7 +24,6 @@ function SignIn() {
       setFeedbackItems("Password is too short!");
     }
 
-
     try {
       fetch("/api/user/new", {
         method: "POST",
@@ -43,7 +41,7 @@ function SignIn() {
           }
         })
         .then((data) => {
-          console.log(data)
+          console.log(data);
           if (data.hasOwnProperty("message")) {
             setFeedbackItems(data.message);
           } else {
@@ -55,7 +53,6 @@ function SignIn() {
     }
   }
 
-    
   return (
     <>
       <UserHeader />

@@ -2,10 +2,14 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   font-family: 'Open Sans', 'Lato', sans-serif;
+  background: linear-gradient(90deg, #ffffff, #e0dfda);
+
 }
 
 h1,
@@ -16,3 +20,4 @@ h5,
 h6 {
   font-family: 'Lato', sans-serif;
 }
+

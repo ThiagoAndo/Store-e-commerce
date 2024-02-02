@@ -1,13 +1,29 @@
-import { useRef, useState } from "react";
+import ProductGrid from "../components/product/product-grid";
+import { getAllProducts } from "../helpers/fetchProducts";
+import { useContext, useEffect } from "react";
+import { ProductContext } from "../store/products-context";
 
-import Link from "next/link";
+function Products(props) {
+  const { products } = props;
+  const store = useContext(ProductContext);
+  useEffect(() => {
+    store.addProducts(products);
+  }, []);
 
-function HomePage() {
-  return (
-    <div>
-      <h1 style ={ { color: "green", fontSize:'4rem' ,textAlign:'center'}}>Let test it !</h1>
-    </div>
-  );
+  if (!products.hasOwnProperty("error")) {
+    return <ProductGrid items={products} />;
+  } else {
+    return <h1>{products.error}</h1>;
+  }
 }
+export async function getStaticProps() {
+  const data = await getAllProducts();
 
-export default HomePage;
+  return {
+    props: {
+      products: data,
+    },
+    revalidate: 1130,
+  };
+}
+export default Products;
