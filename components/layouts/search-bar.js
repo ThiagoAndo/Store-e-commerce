@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { ProductContext } from "../../store/products-context";
-import classes from "./search-bar.module.css";
+import classes from "./main-header.module.css";
 
 const formatResult = (item) => {
   return (
@@ -10,6 +10,10 @@ const formatResult = (item) => {
     </div>
   );
 };
+
+function hadleKey(e) {
+  console.log(e);
+}
 function SearchBar({ click }) {
   const handleOnSelect = (item) => {
     console.log(item.id);
@@ -24,19 +28,22 @@ function SearchBar({ click }) {
       items={store.productsTitle}
       onSelect={handleOnSelect}
       formatResult={formatResult}
+      onKeyDown={(e) => {
+        hadleKey(e);
+      }}
       placeholder={"Search for a product"}
       autoFocus
       styling={{
         height: "39px",
         border: "1px solid #FFFAFA",
         borderRadius: "8px",
-        backgroundColor: "#5c5553",
+        backgroundColor: "#ddd6cb",
         hoverBackgroundColor: "#f9b241",
-        color: "#FFFAFA",
+        color: "#142020",
         fontSize: "20px",
-        iconColor: "white",
+        iconColor: "142020",
         lineColor: "#f9b241",
-        placeholderColor: "#FFFAFA",
+        placeholderColor: "#142020",
         clearIconMargin: "3px 8px 0 0",
         zIndex: "2",
       }}

@@ -8,7 +8,7 @@ function Products(props) {
   const store = useContext(ProductContext);
   useEffect(() => {
     store.addProducts(products);
-  }, []);
+  }, [store.addProducts]);
 
   if (!products.hasOwnProperty("error")) {
     return <ProductGrid items={products} />;

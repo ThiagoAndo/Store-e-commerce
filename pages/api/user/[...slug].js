@@ -10,7 +10,7 @@ async function handler(req, res) {
     );
     if (response.ok) {
       response = await response.json();
-      console.log(response);
+
       res.status(200).json(response);
     }
   } catch (error) {

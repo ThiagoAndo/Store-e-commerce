@@ -29,12 +29,12 @@ function MainHeader() {
           whileHover={{ width: 400 }}
           transition={{ duration: 0.3, type: "spring" }}
         >
-          <SearchBar myclass={classes.bar} click={handleClick} key={serchKey} />
+          <SearchBar myclass={classes.bar} keyDown={handleClick}  />
         </motion.div>
         <div id="btn">
           <div className="filt"></div>
           <div>
-            <p>Light Mode</p>
+            <p>Sign In</p>
           </div>
         </div>
       </nav>

@@ -16,7 +16,7 @@
 }
 
 .search{
-  width: 7.5em;
+  min-width: 7.5em;
 }
 
 .link {
