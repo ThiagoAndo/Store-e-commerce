@@ -1,9 +1,9 @@
 import UserLogin from "@/components/user/UserLogin";
 import { useState } from "react";
-
+import { signIn } from "next-auth/react";
 function Login() {
-  const [feedback, setFeedback] = useState("Your data will apear here");
-  const [resp, setResp] = useState(true);
+  const [feedback, setFeedback] = useState('');
+
   function handleLogin(email, password) {
     try {
       fetch(`/api/user/${email}/${password}`)
@@ -11,25 +11,27 @@ function Login() {
           if (response.ok) {
             return response.json();
           } else {
-            setResp(false);
             setFeedback("Connecting to the database failed!");
             throw "Connecting to the database failed!";
           }
         })
         .then((data) => {
           if (data.hasOwnProperty("message")) {
-            setResp(false);
             setFeedback(data.message);
           } else {
-            setResp(true);
-            setFeedback(data.first_name);
+            signIn("credentials", {
+              redirect: false,
+              email: email,
+              password: password,
+            });
           }
         });
     } catch (error) {
       console.log(error);
     }
   }
-  return <UserLogin handle={handleLogin} response={resp} feedback={feedback} />;
+
+  return <UserLogin handling={handleLogin} feedback={feedback} />;
 }
 
 export default Login;

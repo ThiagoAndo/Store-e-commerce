@@ -1,8 +1,7 @@
 // import { buildFeedbackPath, extractFeedback } from '.';
 import { NextRouter } from "next/router";
 async function handler(req, res) {
-  const email_address = req.body.email;
-  const password = req.body.password;
+
 
   try {
     let response = await fetch(

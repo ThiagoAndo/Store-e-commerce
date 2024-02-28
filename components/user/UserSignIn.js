@@ -21,7 +21,7 @@ function UserSignIn({ submitHandler, feedBack }) {
             <input type="text" id="first_name" name="first_name" />
           </div>
           <div>
-            <label htmlFor="last_name">Last Namne</label>
+            <label htmlFor="last_name">Last Name</label>
             <br />
             <input type="text" id="last_name" name="last_name" />
           </div>

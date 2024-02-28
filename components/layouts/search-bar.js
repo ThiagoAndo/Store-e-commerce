@@ -46,6 +46,7 @@ function SearchBar({ click }) {
         placeholderColor: "#142020",
         clearIconMargin: "3px 8px 0 0",
         zIndex: "2",
+        fontFamily: "Lato",
       }}
     />
   );

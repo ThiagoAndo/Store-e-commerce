@@ -16,7 +16,13 @@ export default function ProductsContextProvider({ children }) {
 
   function addTitle() {
     products.map((product) => {
-      productsTitle.push({ id: product.id, name: product.title });
+      let title;
+      if (product.title.length > 35) {
+        title = product.title.slice(0, 35) + "...";
+      } else {
+        title = product.title;
+      }
+      productsTitle.push({ id: product.id, name: title });
     });
   }
 

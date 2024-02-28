@@ -26,7 +26,7 @@ function MainHeader() {
         </div>
         <motion.div
           className={classes.search}
-          whileHover={{ width: 400 }}
+          whileHover={{ width: 380 }}
           transition={{ duration: 0.3, type: "spring" }}
         >
           <SearchBar myclass={classes.bar} keyDown={handleClick}  />

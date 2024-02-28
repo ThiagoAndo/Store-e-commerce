@@ -1,11 +1,13 @@
 import UserSignIn from "@/components/user/UserSignIn";
 import { isEmailValid, isNameValid, isPasswordValid } from "@/utils/functions";
 import { useState } from "react";
+import { signIn } from "next-auth/react";
+
 function SignIn() {
   const [feedbackItems, setFeedbackItems] = useState();
-  const [hasData, setHasData] = useState(true);
+  const [hasData, setHasData] = useState();
 
-  function submitFormHandler() {
+  function submitFormHandler(event) {
     const fd = new FormData(event.target);
     const data = Object.fromEntries(fd.entries());
     const email = isEmailValid(data.email_address);
@@ -41,11 +43,15 @@ function SignIn() {
             if (data.hasOwnProperty("message")) {
               setFeedbackItems(data.message);
             } else {
-              setFeedbackItems(data.first_name);
+              signIn("credentials", {
+                redirect: false,
+                email: email,
+                password: password,
+              });
             }
           });
       } catch (error) {
-        console.log.apply(error);
+        console.log(error);
       }
     }
   }
