@@ -1,31 +1,17 @@
 import UserSignIn from "@/components/user/UserSignIn";
-import { isEmailValid, isNameValid, isPasswordValid } from "@/utils/functions";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 
 function SignIn() {
+ 
   const [feedbackItems, setFeedbackItems] = useState();
-  const [hasData, setHasData] = useState();
 
-  function submitFormHandler(event) {
-    const fd = new FormData(event.target);
-    const data = Object.fromEntries(fd.entries());
-    const email = isEmailValid(data.email_address);
-    const name = isNameValid(data.first_name + " " + data.last_name);
-    const password = isPasswordValid(data.password);
-
-    if (!email) {
-      setFeedbackItems("Email is not valid!");
-    } else if (!name) {
-      setFeedbackItems("Name is not valid!");
-    } else if (!password) {
-      setFeedbackItems("Password is too short!");
-    }
-    if (email && name && password) {
+  function submitFormHandler(user) {
+  
       try {
         fetch("/api/user/new", {
           method: "POST",
-          body: JSON.stringify(data),
+          body: JSON.stringify(user),
           headers: {
             "Content-Type": "application/json",
           },
@@ -39,21 +25,20 @@ function SignIn() {
             }
           })
           .then((data) => {
-            console.log(data.hasOwnProperty("message"));
             if (data.hasOwnProperty("message")) {
-              setFeedbackItems(data.message);
+              setFeedbackItems(data);
             } else {
+              setFeedbackItems(data);
               signIn("credentials", {
                 redirect: false,
-                email: email,
-                password: password,
+                email: user.email,
               });
             }
           });
       } catch (error) {
         console.log(error);
       }
-    }
+
   }
 
   return (

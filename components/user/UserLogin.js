@@ -1,5 +1,5 @@
-import { useRef, useContext, useEffect, useState } from "react";
-import { useAnimate, stagger } from "framer-motion";
+import { useRef, useContext, useEffect } from "react";
+import { useAnimate, stagger, motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
@@ -8,13 +8,18 @@ import NotificationContext from "@/store/notification-context";
 
 import style from "./UserLogin.module.css";
 
-function UserLogin({ handling, feedback }) {
+function UserLogin({ handling, LoginBack }) {
   const notificationCtx = useContext(NotificationContext);
   const emailInputRef = useRef();
   const passwortInputRef = useRef();
   const [scope, animate] = useAnimate();
   const router = useRouter();
   const { data: session, status } = useSession();
+
+  function handleClick(e) {
+    e.preventDefault();
+    router.replace("/user/signIn");
+  }
 
   function handleFocus(e) {
     const myTarget = "#" + e.target.id;
@@ -33,7 +38,6 @@ function UserLogin({ handling, feedback }) {
 
   const handleEmpty = (label, input) => {
     const inp = "#" + input;
-    console.log(inp);
 
     animate(
       inp,
@@ -50,8 +54,8 @@ function UserLogin({ handling, feedback }) {
 
   function loginHandler(e) {
     e.preventDefault();
-    let email = emailInputRef.current.value;
-    let password = passwortInputRef.current.value;
+    let email = emailInputRef.current.value.trim().toLowerCase();
+    let password = passwortInputRef.current.value.trim();
 
     function hadleNotification(field) {
       notificationCtx.showNotification({
@@ -61,24 +65,24 @@ function UserLogin({ handling, feedback }) {
       });
     }
 
-    if (!email.trim() && !password.trim()) {
+    if (!email && !password) {
       handleEmpty("labEmail", "Email");
       handleEmpty("labPassword", "Password");
       return;
-    } else if (!email.trim()) {
+    } else if (!email) {
       handleEmpty("labEmail", "Email");
       return;
-    } else if (!password.trim()) {
+    } else if (!password) {
       handleEmpty("labPassword", "Password");
       return;
     }
 
-    if (!isEmailValid(email) || feedback.slice(0, 4) === "Could") {
+    if (!isEmailValid(email) ) {
       hadleNotification("email");
       handleEmpty("labEmail", "Email");
 
       return;
-    } else if (!isPasswordValid(password) || feedback.slice(0, 4) === "Wrong") {
+    } else if (!isPasswordValid(password)) {
       hadleNotification("password");
       handleEmpty("labPassword", "Password");
 
@@ -89,74 +93,110 @@ function UserLogin({ handling, feedback }) {
   }
 
   useEffect(() => {
-    if (feedback != "") {
+    if(LoginBack?.message){
       notificationCtx.showNotification({
         title: "Not Found:",
-        message: feedback,
+        message: LoginBack.message ,
         status: "error",
       });
-    }
 
-    if (feedback.slice(0, 5) === "Could") {
+    if (LoginBack.message.slice(0, 5) === "Could") {
       handleEmpty("labEmail", "Email");
       emailInputRef.current.value = "";
       return;
-    } else if (feedback.slice(0, 5) === "Wrong") {
+    } else if (LoginBack.message.slice(0, 5) === "Wrong") {
       handleEmpty("labPassword", "Password");
       passwortInputRef.current.value = "";
-
       return;
     }
-
+  }
     if (session) {
       router.replace("/");
     }
-  }, [feedback, session]);
+  }, [LoginBack, session]);
 
   return (
     <>
-      <div className={style.h2_container}>
-        <p className={style.paragraph}>Already Registered?</p>
-        <p className={style.paragraph}>New User?</p>
-      </div>
-      <div className={style.container}>
-        <form className={style.form} onSubmit={loginHandler} ref={scope}>
-          <label className={style.label} htmlFor="email" id="labEmail">
-            Your Email Address
-          </label>
-          <br />
-          <input
-            className={style.input}
-            type="text"
-            id="Email"
-            ref={emailInputRef}
-            onFocus={handleFocus}
-          />
-          <br />
-          <label className={style.label} htmlFor="password" id="labPassword">
-            Password
-          </label>
-          <br />
-          <input
-            className={style.input}
-            type="text"
-            id="Password"
-            ref={passwortInputRef}
-            onFocus={handleFocus}
-          />
-          <br />
-          <button className={style.button}>Sign in Securely </button>
-        </form>
+      <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, type: "spring" }}
+          className={style.h2_container}
+        >
+          <p className={style.paragraph}>Already Registered?</p>
+          <p className={style.paragraph}>New User?</p>
+        </motion.div>
+        <div className={style.container}>
+          <motion.form
+            initial={{ x: -15, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.6, type: "spring" }}
+            className={style.form}
+            onSubmit={loginHandler}
+            ref={scope}
+          >
+            <div className={style.cont_container}>
+              <label className={style.label} htmlFor="email" id="labEmail">
+                Your Email Address
+              </label>
+              <input
+                placeholder="e.g. stephenking@lorem.com"
+                className={style.input}
+                type="text"
+                id="Email"
+                ref={emailInputRef}
+                onFocus={handleFocus}
+              />
+              <label
+                className={style.label}
+                htmlFor="password"
+                id="labPassword"
+              >
+                Password
+              </label>
+              <input
+                placeholder="Minimum of eight characters"
+                className={style.input}
+                type="text"
+                id="Password"
+                ref={passwortInputRef}
+                onFocus={handleFocus}
+              />
+            </div>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 150 }}
+              className={style.button}
+            >
+              Sign in Securely{" "}
+            </motion.button>
+          </motion.form>
 
-        <form className={style.form}>
-          <h3>✔ Receive special offers and promotions.</h3>
-          <h3>✔ Speed your way through checkout.</h3>
-          <h3>✔ View your order history and your current addresses.</h3>
-          <h3>✔ Access your saved items. </h3>
-          <h3>✔ Instant access to your account.</h3>
-          <button className={style.button}>Sign in Securely </button>
-        </form>
-      </div>
+          <motion.form
+            initial={{ x: 15, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.6, type: "spring" }}
+            className={style.form}
+          >
+            <div className={style.cont_container}>
+              <h3>✔ Receive special offers and promotions.</h3>
+              <h3>✔ Speed your way through checkout.</h3>
+              <h3>✔ View your order history and your current addresses.</h3>
+              <h3>✔ Access your saved items. </h3>
+              <h3>✔ Instant access to your account.</h3>
+            </div>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 150 }}
+              className={style.button}
+              onClick={handleClick}
+            >
+              Continue Securely
+            </motion.button>
+          </motion.form>
+        </div>
+      </AnimatePresence>
     </>
   );
 }

@@ -1,5 +1,4 @@
 import NextAuth from "next-auth";
-import Providers from "next-auth/react";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export default NextAuth({
@@ -10,8 +9,11 @@ export default NextAuth({
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
-        return { email: credentials.email };
+    
+
+        return { email: credentials.email_address };
       },
     }),
   ],
+  secret: process.env.SECRET_API_KEY,
 });

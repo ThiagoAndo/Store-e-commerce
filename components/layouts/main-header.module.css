@@ -16,7 +16,7 @@
 }
 
 .search{
-  min-width: 7em;
+  min-width: 15em;
 }
 
 .link {
@@ -27,11 +27,13 @@
   font-weight: bold;
   
 }
-.active {
-  text-decoration: none;
-  font-size: 1rem;
-  color: #825348;
+
+
+.img {
+  margin-top: 5px;
 }
+
+
 @media (min-width: 768px) {
   .logo {
     font-size: 2.5rem;

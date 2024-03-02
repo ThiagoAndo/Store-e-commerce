@@ -3,7 +3,6 @@ import Notification from '@/components/ui/notification';
 import NotificationContext from '@/store/notification-context';
 
 import MainHeader from "./main-header";
-import UserHeader from "./user-header";
 
 function Layout(props) {
   const notificationCtx = useContext(NotificationContext);
@@ -12,7 +11,6 @@ function Layout(props) {
   return (
     <Fragment>
       <MainHeader />
-      <UserHeader/>
       <main>{props.children}</main>
       {activeNotification && (
         <Notification

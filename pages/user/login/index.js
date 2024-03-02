@@ -11,18 +11,17 @@ function Login() {
           if (response.ok) {
             return response.json();
           } else {
-            setFeedback("Connecting to the database failed!");
+            setFeedback({message:"Connecting to the database failed!"});
             throw "Connecting to the database failed!";
           }
         })
         .then((data) => {
           if (data.hasOwnProperty("message")) {
-            setFeedback(data.message);
+            setFeedback(data);
           } else {
             signIn("credentials", {
               redirect: false,
               email: email,
-              password: password,
             });
           }
         });
@@ -31,7 +30,7 @@ function Login() {
     }
   }
 
-  return <UserLogin handling={handleLogin} feedback={feedback} />;
+  return <UserLogin handling={handleLogin} LoginBack={feedback} />;
 }
 
 export default Login;

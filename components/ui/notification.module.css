@@ -20,13 +20,13 @@
 }
 
 .pending {
-  background-color: #177bbecc;
+  background-color: #177bbee0;
 }
 
 .success {
-  background-color: #10be58cc;
+  background-color: #10be58e0;
 }
 
 .error {
-  background-color: #e64f35cc;
+  background-color: #e64f35e0;
 }

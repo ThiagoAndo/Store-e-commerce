@@ -8,11 +8,11 @@ function MyApp({ Component, pageProps }) {
   return (
     <SessionProvider session={pageProps.session}>
       <NotificationContextProvider>
-        <ProductsContextProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ProductsContextProvider>
+          <ProductsContextProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ProductsContextProvider>
       </NotificationContextProvider>
     </SessionProvider>
   );
