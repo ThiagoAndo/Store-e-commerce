@@ -4,7 +4,6 @@
   min-height: 6rem;
   background: linear-gradient(90deg, #202020, #25200f);
 }
-
 .navigation {
   width: 100%;
   display: flex;
@@ -14,20 +13,17 @@
   align-items: center;
   list-style: none;
 }
-
-.search{
+.search {
   min-width: 15em;
-}
+  margin-right: 40px;
 
+}
 .link {
   text-decoration: none;
-  color:#FFFAFA;
-
+  color: #FFFAFA;
   font-size: 3rem;
   font-weight: bold;
-  
 }
-
 
 .img {
   margin-top: 5px;

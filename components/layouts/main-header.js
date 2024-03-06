@@ -7,24 +7,25 @@ import Image from "next/image";
 import User from "@/assets/user.svg";
 import Userlog from "@/assets/userLog.svg";
 import { useSession, signOut } from "next-auth/react";
+import { useContext } from "react";
+import { ProductContext } from "@/store/products-context";
 
 function MainHeader() {
-  const [mySvg, setMySvg] = useState(User);
+  const [isLogin, setIsLogin] = useState(false);
   const { data: session, status } = useSession();
+  const store = useContext(ProductContext);
 
   useEffect(() => {
     if (session) {
-      setMySvg(Userlog) ;
+      setIsLogin(true);
     }
   }, [session]);
 
-  function handleClick(call) {
-    if (call) {
-      setIsSearch(false);
-      setSearchKey(Math.random());
-    } else {
-      setIsSearch(true);
-    }
+  function handleClick() {
+    store.getFiltered(6);
+  }
+  function logoutHandler() {
+    signOut();
   }
   return (
     <header className={classes.header}>
@@ -32,10 +33,12 @@ function MainHeader() {
         <motion.div
           whileHover={{
             scale: 1.05,
-            boxShadow: "0 0 2px rgba(242, 100, 18, 0.8)",
+            boxShadow: "0 2px 0px rgba(242, 100, 18, 0.8)",
             borderRadius: " 0.5rem",
+            paddingBottom: "0.3rem",
           }}
-          transition={{ type: "spring", duration: 0.5 }}
+          transition={{ type: "spring", duration: 0.3 }}
+          onClick={handleClick}
         >
           <Link className={classes.link} href="/">
             Next Store
@@ -43,28 +46,61 @@ function MainHeader() {
         </motion.div>
         <motion.div
           className={classes.search}
-          whileHover={{ width: 380 }}
-          transition={{ type: "spring" }}
+          whileHover={{ width: 410 }}
+          transition={{ type: "spring", duration: 0.6, marginRight: 0 }}
         >
-          <SearchBar myclass={classes.bar} keyDown={handleClick} />
+          <SearchBar />
         </motion.div>
-        <motion.div
-          whileHover={{
-            scale: 1.1,
-          }}
-          transition={{ type: "spring", duration: 0.5 }}
-        >
-          <Link className={classes.link} href="/user/login">
-            <Image
-              className={classes.img}
-              priority
-              src={mySvg}
-              alt="user"
-              height={60}
-              width={60}
-            />
-          </Link>
-        </motion.div>
+        {isLogin || (
+          <motion.div
+            whileHover={{
+              scale: 1.1,
+              borderRadius: "10rem",
+              boxShadow: "0 2px 0px rgba(242, 100, 18, 0.8)",
+            }}
+            transition={{ type: "spring", duration: 0.3 }}
+          >
+            <Link className={classes.link} href="/user/login">
+              <Image
+                className={classes.img}
+                priority
+                src={User}
+                alt="user"
+                height={60}
+                width={60}
+              />
+            </Link>
+          </motion.div>
+        )}
+        {isLogin && (
+          <motion.div
+            whileHover={{
+              scale: 1.1,
+              borderRadius: "10rem",
+              boxShadow: "0 2px 0px rgba(242, 100, 18, 0.8)",
+            }}
+          >
+            <Link className={classes.link} href="#">
+              <Image
+                className={classes.img}
+                priority
+                src={Userlog}
+                alt="user"
+                height={60}
+                width={60}
+              />
+            </Link>
+          </motion.div>
+     
+        )}
+     <Link className={classes.link} href="/product/01">
+          product
+        </Link>
+        {session && (
+          <div>
+            <button onClick={logoutHandler}>Logout</button>
+          </div>
+        )}
       </nav>
     </header>
   );

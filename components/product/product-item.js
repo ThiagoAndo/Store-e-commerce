@@ -6,8 +6,6 @@ import classes from "./product-item.module.css";
 export default function ProductItem({
   title,
   description,
-  price,
-  stock,
   brand,
   thumbnail,
 }) {
@@ -15,7 +13,7 @@ export default function ProductItem({
     <article className={classes.product}>
       <header>
         <div className={classes.image}>
-          <Image src={thumbnail} alt={title} fill />
+          <Image src={thumbnail} alt={title} width={50} height={70} />
         </div>
         <div className={classes.headerText}>
           <h2>{title}</h2>
@@ -23,7 +21,6 @@ export default function ProductItem({
         </div>
       </header>
       <div className={classes.content}>
-        <p className={classes.summary}>{description}</p>
         <div className={classes.actions}>
           <Link href={`#`}>View Details</Link>
         </div>

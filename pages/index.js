@@ -4,15 +4,18 @@ import { useContext, useEffect } from "react";
 import { ProductContext } from "../store/products-context";
 
 function Products(props) {
-  const { products } = props;
+  const { products, images} = props;
   const store = useContext(ProductContext);
   useEffect(() => {
+    if (products.length > 1) {
+      store.addProducts(products, images);
 
-    products.length > 1 && store.addProducts(products);
+    }
+
   }, [store.addProducts]);
 
   if (!products.hasOwnProperty("error") && products.length > 1) {
-    return <ProductGrid items={products} />;
+    return <ProductGrid />;
   } else {
     return <h1 style={{marginTop:'5rem',color:'red',margin:'auto', width:'70%', textAlign:'center'}}>{products.error?? 'Could not feth products'}🚫</h1>;
   }
@@ -22,9 +25,10 @@ export async function getStaticProps() {
 
   return {
     props: {
-      products: data,
+      products: data.products, 
+      images:data.images
     },
-    revalidate: 1130,
+    // revalidate: 1130,((( will inplament it only if alawing add product )))
   };
 }
 export default Products;

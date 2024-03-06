@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { ProductContext } from "../../store/products-context";
 import classes from "./main-header.module.css";
@@ -15,6 +15,7 @@ function hadleKey(e) {
   console.log(e);
 }
 function SearchBar({ click }) {
+  const [items, setItems] = useState();
   const handleOnSelect = (item) => {
     console.log(item.id);
   };
@@ -22,10 +23,14 @@ function SearchBar({ click }) {
   const store = useContext(ProductContext);
   store.addTitle();
 
+  useEffect(() => {
+    setItems(store.productsTitle);
+  }, []);
+
   return (
     <ReactSearchAutocomplete
       className={classes.search}
-      items={store.productsTitle}
+      items={items}
       onSelect={handleOnSelect}
       formatResult={formatResult}
       onKeyDown={(e) => {
@@ -37,13 +42,13 @@ function SearchBar({ click }) {
         height: "39px",
         border: "1px solid #FFFAFA",
         borderRadius: "8px",
-        backgroundColor: "#ddd6cb",
+        backgroundColor: "#25200f",
         hoverBackgroundColor: "#f9b241",
-        color: "#142020",
+        color: "white",
         fontSize: "20px",
-        iconColor: "142020",
+        iconColor: "white",
         lineColor: "#f9b241",
-        placeholderColor: "#142020",
+        placeholderColor: "white",
         clearIconMargin: "3px 8px 0 0",
         zIndex: "2",
         fontFamily: "Lato",
