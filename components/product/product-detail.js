@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "@/store/products-context";
-
+import Link from 'next/link'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -9,18 +9,20 @@ import "slick-carousel/slick/slick-theme.css";
 import classes from "./product-detail.module.css";
 
 const ProductDetail = ({ id }) => {
-  const [product, setProduct] = useState(null);
-
+  const [product, setProduct] = useState([]);
   const [nav1, setNav1] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slider1, setSlider1] = useState(null);
   const store = useContext(ProductContext);
+
+
+
   useEffect(() => {
     setNav1(slider1);
   }, [slider1]);
 
   useEffect(() => {
-    setProduct(store.products[id-1]);
+    setProduct(store.getProFiltered(id));
   }, []);
 
   const settings = {
@@ -81,7 +83,10 @@ const ProductDetail = ({ id }) => {
     ],
   };
 
-  if (product) {
+  if (product.length === 1) {
+    console.log("product==============");
+    const [myproduc] = product;
+    console.log(myproduc.images);
     return (
       <>
         <div className={classes["content"]}>
@@ -91,14 +96,14 @@ const ProductDetail = ({ id }) => {
               asNavFor={nav1}
               ref={(slider) => setSlider1(slider)}
             >
-              {product.images.map((img, idx) => (
+              {myproduc.images.map((img, idx) => (
                 <div className={classes["img-body"]} key={idx}>
                   <img src={img.image} className={classes["body_img"]} />
                 </div>
               ))}
             </Slider>
             <div className={classes["thumb-wrapper"]}>
-              {product.images.map((img, idx) => (
+              {myproduc.images.map((img, idx) => (
                 <div
                   key={idx}
                   className={currentSlide === idx ? classes["active"] : null}
@@ -115,13 +120,16 @@ const ProductDetail = ({ id }) => {
         </div>
       </>
     );
-  }  else{
+  } else {
     return (
-      <div className="center">
-        <p>Loading...</p>
+      <div className="not-found">
+        <h1>Ooops...</h1>
+        <h2>That page cannot be found :(</h2>
+        <p>Go back to the <Link href="/">Homepage</Link></p>
       </div>
     );
   }
+
 };
 
 export default ProductDetail;

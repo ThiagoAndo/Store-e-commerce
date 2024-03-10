@@ -91,11 +91,8 @@ function MainHeader() {
               />
             </Link>
           </motion.div>
-     
         )}
-     <Link className={classes.link} href="/product/01">
-          product
-        </Link>
+        
         {session && (
           <div>
             <button onClick={logoutHandler}>Logout</button>

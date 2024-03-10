@@ -9,10 +9,7 @@ import FilterHeader from "./filter-header";
 
 function Layout(props) {
   const currentPath = usePathname();
-  console.log("currentPath");
-  console.log(currentPath);
   const notificationCtx = useContext(NotificationContext);
-
   const activeNotification = notificationCtx.notification;
   return (
     <Fragment>

@@ -3,6 +3,7 @@ import { getAllProducts } from "../helpers/fetchProducts";
 import { useContext, useEffect } from "react";
 import { ProductContext } from "../store/products-context";
 
+
 function Products(props) {
   const { products } = props;
 

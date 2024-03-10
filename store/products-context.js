@@ -3,6 +3,7 @@ import { useEffect, createContext, useState } from "react";
 export const ProductContext = createContext({
   products: [],
   men: [],
+  proFiltered: {},
   woman: [],
   elctronics: [],
   home: [],
@@ -13,6 +14,7 @@ export const ProductContext = createContext({
   addTitle: () => {},
   categories: () => {},
   getFiltered: () => {},
+  getProFiltered: () => {},
 });
 const productsTitle = [];
 const productsMen = [];
@@ -23,6 +25,7 @@ const productsSelfcare = [];
 
 export default function ProductsContextProvider({ children }) {
   const [products, setProducts] = useState([]);
+  const [proFiltered, setProFiltered] = useState({});
   const [filtered, setFiltered] = useState([]);
 
   useEffect(() => {
@@ -34,9 +37,11 @@ export default function ProductsContextProvider({ children }) {
     let neWproduc = [];
     prts.map((prt) => {
       prt.images = images.filter((img) => prt.id === img.item_id);
-      neWproduc.push(prt);
+      if (prt.images.length > 1) {
+        neWproduc.push(prt);
+      }
     });
-    if (products.length ===0) setProducts(neWproduc);
+    if (products.length === 0) setProducts(neWproduc);
   }
 
   function addTitle() {
@@ -105,6 +110,11 @@ export default function ProductsContextProvider({ children }) {
         console.log("Something went wrong with getFiltered");
     }
   }
+
+  function getProFiltered(id) {
+    return products.filter((pro) => pro.id === id);
+  }
+
   // useEffect(() => {
   //   console.log("productsTitle");
   //   console.log(productsTitle);
@@ -131,10 +141,12 @@ export default function ProductsContextProvider({ children }) {
     products,
     productsTitle,
     filtered,
+    proFiltered,
     addProducts,
     addTitle,
     categories,
     getFiltered,
+    getProFiltered,
   };
 
   return (

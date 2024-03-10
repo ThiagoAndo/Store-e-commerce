@@ -23,3 +23,16 @@ body {
   );
 }
 
+.not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 7rem;
+  text-align: center;
+  height: 10rem;
+}
+
+.not-found a{
+  color: #ff9b05;
+  text-decoration: underline;
+}
