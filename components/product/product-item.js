@@ -3,17 +3,15 @@ import Image from "next/image";
 
 import classes from "./product-item.module.css";
 
-export default function ProductItem({
-  title,
-  description,
-  brand,
-  thumbnail,
-}) {
+export default function ProductItem({ title, brand, thumbnail, id }) {
+  const link = `product/${id}`;
+
+
   return (
     <article className={classes.product}>
       <header>
         <div className={classes.image}>
-          <Image src={thumbnail} alt={title} width={50} height={70} />
+          <Image src={thumbnail} alt={title} fill />
         </div>
         <div className={classes.headerText}>
           <h2>{title}</h2>
@@ -22,7 +20,9 @@ export default function ProductItem({
       </header>
       <div className={classes.content}>
         <div className={classes.actions}>
-          <Link href={`#`}>View Details</Link>
+          <Link href={link} >
+            View Details
+          </Link>
         </div>
       </div>
     </article>

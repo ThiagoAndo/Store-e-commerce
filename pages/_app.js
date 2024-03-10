@@ -4,7 +4,7 @@ import ProductsContextProvider from "../store/products-context";
 import { NotificationContextProvider } from "@/store/notification-context";
 import { SessionProvider } from "next-auth/react";
 
-function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   return (
     <SessionProvider session={pageProps.session}>
       <NotificationContextProvider>
@@ -18,4 +18,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default App;

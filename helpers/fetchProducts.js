@@ -9,3 +9,12 @@ export async function getAllProducts() {
     return { error: "Connecting to the database failed!" };
   }
 }
+
+
+// export async function selectedId(id) {
+//   return {
+//     id,
+//     title: "",
+//     description: ""
+//   };
+// }
