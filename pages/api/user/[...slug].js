@@ -1,8 +1,4 @@
-// import { buildFeedbackPath, extractFeedback } from '.';
-import { NextRouter } from "next/router";
 async function handler(req, res) {
-
-
   try {
     // let response = await fetch(
     //   `http://localhost:8080/events/user/${req.query.slug[0]}/${req.query.slug[1]}`

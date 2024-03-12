@@ -6,6 +6,7 @@ import NotificationContext from '@/store/notification-context';
 
 import MainHeader from "./main-header";
 import FilterHeader from "./filter-header";
+import Footer from './footer';
 
 function Layout(props) {
   const currentPath = usePathname();
@@ -16,6 +17,7 @@ function Layout(props) {
       <MainHeader />
       {currentPath ==='/'?<FilterHeader />:null}
       <main>{props.children}</main>
+      <Footer/>
       {activeNotification && (
         <Notification
           title={activeNotification.title}

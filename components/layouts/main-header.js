@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import classes from "./main-header.module.css";
 import SearchBar from "./search-bar";
 import Image from "next/image";
+
 import User from "@/assets/user.svg";
 import Userlog from "@/assets/userLog.svg";
 import { useSession, signOut } from "next-auth/react";

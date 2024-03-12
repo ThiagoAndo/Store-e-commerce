@@ -1,7 +1,7 @@
 .header {
   display: flex;
   padding: 1rem 5%;
-  min-height: 6rem;
+  height:20vh;
   background: linear-gradient(90deg, #202020, #25200f);
 }
 .navigation {
