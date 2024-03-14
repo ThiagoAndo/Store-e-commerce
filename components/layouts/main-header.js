@@ -14,8 +14,8 @@ function MainHeader() {
   const [isLogin, setIsLogin] = useState(false);
   const { data: session } = useSession();
   const store = useContext(ProductContext);
-  console.log(session);
 
+  console.log();
   useEffect(() => {
     if (session) {
       setIsLogin(true);
@@ -42,7 +42,7 @@ function MainHeader() {
           onClick={handleClick}
         >
           <Link className={classes.link} href="/">
-            Next Store
+            {currentPath.includes("product") ? " ⬅ Back" : "Next Store"}
           </Link>
         </motion.div>
         <motion.div

@@ -9,13 +9,13 @@ async function handler(req, res) {
     client.id = uniqid();
     client.created_at = getCurrentDate();
     try {
-    //   let response = await fetch("http://localhost:8080/events/user/new", {
-    //     method: "POST",
-    //     body: JSON.stringify(client),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
+      // let response = await fetch("http://localhost:8080/events/user/new", {
+      //   method: "POST",
+      //   body: JSON.stringify(client),
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // });
 
       let response = await fetch("https://libraryapi-gtct.onrender.com/events/user/new", {
         method: "POST",
