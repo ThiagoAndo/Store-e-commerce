@@ -3,6 +3,7 @@ import Image from "next/image";
 import Face from "@/assets/facebook.svg";
 import Twitter from "@/assets/twitter.svg";
 import Instagram from "@/assets/instagram.svg";
+import Linkedin from "@/assets/linkedin.svg";
 
 import classes from "./footer.module.css";
 
@@ -92,7 +93,7 @@ function Footer() {
               <a className={classes._a}>
                 <Image
                   priority
-                  src={Twitter}
+                  src={Linkedin}
                   alt="user"
                   width={30}
                   height={30}

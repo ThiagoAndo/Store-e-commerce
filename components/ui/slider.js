@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import classes from "./slider.module.css";
 
-function ProductSlider({myproduc}) {
+function ProductSlider({ myproduc }) {
   const [nav1, setNav1] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slider1, setSlider1] = useState(null);
@@ -22,7 +22,7 @@ function ProductSlider({myproduc}) {
     infinite: true,
     autoplay: true,
     onReInit: () => setCurrentSlide(slider1?.innerSlider.state.currentSlide),
-    autoplaySpeed: 700,
+    autoplaySpeed: 2500,
     lazyLoad: true,
     asNavFor: ".slider-nav",
     focusOnSelect: true,
@@ -82,7 +82,7 @@ function ProductSlider({myproduc}) {
           >
             {myproduc.images.map((img, idx) => (
               <div className={classes["img-body"]} key={idx}>
-                <img src={img.image} className={classes["body_img"]} />
+                <img alt= {`Product images ${idx}`} src={img.image} className={classes["body_img"]} />
               </div>
             ))}
           </Slider>
@@ -95,7 +95,11 @@ function ProductSlider({myproduc}) {
                   slider1?.slickGoTo(idx);
                 }}
               >
-                <img src={img.image} className={classes["img_wrapper"]} />
+                <img
+                  alt={`Product images ${idx}`}
+                  src={img.image}
+                  className={classes["img_wrapper"]}
+                />
                 {currentSlide}
               </div>
             ))}

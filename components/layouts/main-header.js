@@ -1,20 +1,20 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import classes from "./main-header.module.css";
 import SearchBar from "./search-bar";
-import Image from "next/image";
-
-import User from "@/assets/user.svg";
-import Userlog from "@/assets/userLog.svg";
+import { usePathname } from "next/navigation";
+import UserIcon from "../ui/user-icon";
+import CartIcon from "../ui/cart-icon";
 import { useSession, signOut } from "next-auth/react";
-import { useContext } from "react";
 import { ProductContext } from "@/store/products-context";
 
 function MainHeader() {
+  const currentPath = usePathname();
   const [isLogin, setIsLogin] = useState(false);
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const store = useContext(ProductContext);
+  console.log(session);
 
   useEffect(() => {
     if (session) {
@@ -50,9 +50,9 @@ function MainHeader() {
           whileHover={{ width: 410 }}
           transition={{ type: "spring", duration: 0.6, marginRight: 0 }}
         >
-          <SearchBar />
+          {currentPath === "/" ? <SearchBar /> : null}
         </motion.div>
-        {isLogin || (
+        <div className={classes.icon_container}>
           <motion.div
             whileHover={{
               scale: 1.1,
@@ -60,41 +60,37 @@ function MainHeader() {
               boxShadow: "0 2px 0px rgba(242, 100, 18, 0.8)",
             }}
             transition={{ type: "spring", duration: 0.3 }}
+            className={classes.icon_user}
           >
-            <Link className={classes.link} href="/user/login">
-              <Image
-                className={classes.img}
-                priority
-                src={User}
-                alt="user"
-                height={60}
-                width={60}
-              />
-            </Link>
+            <div
+              className={
+                session?.user ? classes.icon_user_log : classes.icon_user
+              }
+            >
+              {session?.user ? (
+                <UserIcon />
+              ) : (
+                <Link href="/user/login">
+                  <UserIcon />
+                </Link>
+              )}
+            </div>
           </motion.div>
-        )}
-        {isLogin && (
+
           <motion.div
             whileHover={{
               scale: 1.1,
               borderRadius: "10rem",
-              boxShadow: "0 2px 0px rgba(242, 100, 18, 0.8)",
+              boxShadow: "0px 2px 0px rgba(242, 100, 18, 0.8)",
             }}
+            className={classes.cart_effec}
           >
-            <Link className={classes.link} href="#">
-              <Image
-                className={classes.img}
-                priority
-                src={Userlog}
-                alt="user"
-                height={60}
-                width={60}
-              />
-            </Link>
+            <div className={classes.icon_cart}>
+              <CartIcon />
+            </div>
           </motion.div>
-        )}
-        
-        {session && (
+        </div>
+        {isLogin && (
           <div>
             <button onClick={logoutHandler}>Logout</button>
           </div>

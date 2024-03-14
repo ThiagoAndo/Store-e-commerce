@@ -1,20 +1,17 @@
 import React from "react";
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "@/store/products-context";
-import Link from 'next/link'
-import ProductSlider from "./slider";
+import Link from "next/link";
+import ProductSlider from "../ui/slider";
 import ProductInfo from "./product-info";
 import classes from "./product-detail.module.css";
 
 const ProductDetail = ({ id }) => {
   const [product, setProduct] = useState([]);
-
   const store = useContext(ProductContext);
-
   useEffect(() => {
     setProduct(store.getProFiltered(id));
   }, [id]);
-
   if (product.length === 1) {
     const [produc] = product;
     return (

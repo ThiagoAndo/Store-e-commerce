@@ -3,6 +3,7 @@
     flex-direction: column;
     align-content: space-around;
     height: 60%;
+    margin:0 2rem;
     margin-top: 6rem;
     border-radius: 10px;
     color: black;
@@ -10,12 +11,6 @@
     background: linear-gradient(90deg, #2c1e19, #131007);
 
 }
-
-.product div:nth-child(2) {
-    padding: 0.5rem 1rem 0 1rem;
-
-}
-
 .headerText {
     height: 55%;
     padding: 0.5rem 1rem 0 1rem;
@@ -23,60 +18,64 @@
     flex-direction: column;
     justify-content: space-between;
 }
-
 .headerText h2 {
     margin: 0;
     color: #ffffff;
 
 }
-
-.headerText p:first-of-type {
-    font-size: .8rem;
+.headerText > p:first-of-type {
+    margin-top: 0.5rem;
+    font-size: 1rem;
     color: #ffffff;
 }
-
-.headerText p:last-of-type {
-    margin-bottom: 1rem;
+.headerText div {
+    margin-bottom: 2rem;
 }
-
 .headerText p {
     font-size: 1rem;
     color: #cfa69b;
     font-style: italic;
 }
-
 .product h2,
 .product p {
     margin: 0;
 }
-
-
-.price {
+.price,
+.rating {
     display: flex;
     flex-direction: row;
+    padding: 0.5rem 1rem 0 1rem;
+}
+.rating {
+    position: relative;
+    margin-top: 1rem;
+}
+.rating p {
+    font-size: .75rem;
+    color: #ffffff;
+    padding-top: 3px;
+    margin-left: .5rem;
+    cursor: pointer;
 }
 
 .price p:first-of-type {
     color: #ffffff;
-
     font-weight: 900;
 }
 
- .price p:last-of-type {
+.price p:last-of-type {
     font-size: .75rem;
     color: #f9b241;
     text-decoration: line-through;
     padding-top: 2px;
     margin-left: .70rem;
-    
-}
 
+}
 .actions {
-    padding: 1rem;
+    padding-bottom: 1rem;
     text-align: center;
 }
-
-.actions button{
+.actions button {
     width: 50%;
     margin: auto;
     height: 2.3rem;
@@ -89,4 +88,5 @@
     cursor: pointer;
     margin-top: 2rem;
     font-weight: bold;
+    font-size: 1rem;
 }
