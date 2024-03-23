@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-
 import classes from "./product-item.module.css";
 
 export default function ProductItem({ title, brand, thumbnail, id }) {

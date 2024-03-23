@@ -1,4 +1,4 @@
-import classes from "./Cart.module.css";
+import classes from "./cart.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "@/store/redux/cart-slice";
 import { formatValue } from "@/helpers/functions";
@@ -32,7 +32,7 @@ const Cart = () => {
       </AnimatePresence>
       <div className={classes.total}>
         <span>Total Amount</span>
-        <span>{formatValue(total)}</span>
+        <span className={classes.my_value}>{formatValue(total)}</span>
       </div>
       <div className={classes.actions}>
         <motion.button

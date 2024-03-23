@@ -1,13 +1,19 @@
-import classes from "./CartItem.module.css";
+import classes from "./cart-item.module.css";
 import { useDispatch } from "react-redux";
 import { cartActions } from "@/store/redux/cart-slice";
 import { formatValue } from "@/helpers/functions";
 import { motion } from "framer-motion";
+import { useContext } from "react";
+import { ProductContext } from "@/store/context/products-context";
+import Image from "next/image";
 
 const CartItem = (props) => {
   const dispatch = useDispatch();
+  const store = useContext(ProductContext);
   const { title, amount, price, id } = props;
-
+  const [prt] = store.getProFiltered(id);
+  console.log("prt");
+  console.log(prt.thumbnail);
   const removeItemHandler = () => {
     dispatch(cartActions.removeItemFromCart(id));
   };
@@ -26,13 +32,14 @@ const CartItem = (props) => {
     <motion.li
       layout
       exit={{ y: -30, opacity: 0 }}
-      className={classes["cart-item"]}
+      className={classes.cart_item}
     >
       <div>
         <h2>{title}</h2>
         <div className={classes.summary}>
-          <span className={price}>{formatValue(price)}</span>
-          <span className={amount}>x {amount}</span>
+          <Image src={prt.thumbnail} alt={prt.title} height={60} width={60} />
+          <span className={classes.price}>{formatValue(price)}</span>
+          <span className={classes.amount}>x {amount}</span>
         </div>
       </div>
       <div className={classes.actions}>

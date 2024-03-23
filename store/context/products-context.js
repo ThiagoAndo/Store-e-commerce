@@ -115,27 +115,6 @@ export default function ProductsContextProvider({ children }) {
     return products.filter((pro) => pro.id === id);
   }
 
-  // useEffect(() => {
-  //   console.log("productsTitle");
-  //   console.log(productsTitle);
-
-  // }, [filtered]);
-  // function deleteChallenge(challengeId) {
-  //   setChallenges((prevChallenges) =>
-  //     prevChallenges.filter((challenge) => challenge.id !== challengeId)
-  //   );
-  // }
-
-  // function updateChallengeStatus(challengeId, newStatus) {
-  //   setChallenges((prevChallenges) =>
-  //     prevChallenges.map((challenge) => {
-  //       if (challenge.id === challengeId) {
-  //         return { ...challenge, status: newStatus };
-  //       }
-  //       return challenge;
-  //     })
-  //   );
-  // }
 
   const productContext = {
     products,
