@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import { ProductContext } from "../../store/products-context";
+import { ProductContext } from "../../store/context/products-context";
 import { useRouter } from 'next/router'
 import classes from "./main-header.module.css";
 

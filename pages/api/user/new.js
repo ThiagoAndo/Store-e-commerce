@@ -1,7 +1,7 @@
 import pkg from "bcryptjs";
 const { hash } = pkg;
 import uniqid from "uniqid";
-import { getCurrentDate } from "../../../utils/functions";
+import { getCurrentDate } from "../../../helpers/functions";
 async function handler(req, res) {
   if (req.method === "POST") {
     const client = req.body;
@@ -30,12 +30,11 @@ async function handler(req, res) {
         res.status(200).json(response);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       res
         .status(500)
         .json({ message: error || "Connecting to the database failed!" });
     }
-  
   }
 }
 

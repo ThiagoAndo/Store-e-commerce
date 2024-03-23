@@ -1,22 +1,28 @@
-import classes from "./filter-header.module.css";
+import classes from "./filter-nav.module.css";
 import { useContext, useEffect, useState } from "react";
-import { ProductContext } from "@/store/products-context";
+import { ProductContext } from "@/store/context/products-context";
 import {
   motion,
   AnimatePresence,
   useScroll,
   useTransform,
 } from "framer-motion";
-import Link from "next/link";
 
 function FilterHeader() {
   const store = useContext(ProductContext);
   const { scrollY } = useScroll();
-
   const [scrollPosition, setScrollPosition] = useState(0);
+  const ul = useTransform(scrollY, [0, 30, 130], ["70%", "90%", "95%"]);
   const handleScroll = () => {
     const position = window.scrollY;
     setScrollPosition(position);
+  };
+
+  const handleBtn = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   useEffect(() => {
@@ -27,21 +33,13 @@ function FilterHeader() {
     };
   }, []);
 
-  const header = useTransform(scrollY, [0, 30, 115], ["100%", "90%", "80%"]);
-  const ul = useTransform(scrollY, [0, 30, 130], ["70%", "90%", "95%"]);
-  const headerPos = useTransform(
-    scrollY,
-    [0, 30, 130, 175, 215],
-    [0, 0, 0, 60, 90]
-  );
-
   function handleClick(num) {
     store.getFiltered(num);
   }
 
   return (
     <AnimatePresence>
-      <motion.header
+      <motion.nav
         className={
           scrollPosition >= 121
             ? `${classes.header + " " + classes.fixed}`
@@ -166,8 +164,20 @@ function FilterHeader() {
             </motion.button>
           </li>
         </motion.ul>
-        <Link href={'#'} className={classes.up_btn}>Up</Link>
-      </motion.header>
+        {scrollPosition >= 700 ? (
+          <motion.button
+            className={classes.up_btn}
+            onClick={handleBtn}
+            variants={{
+              hidden: { opacity: 0, scale: 0.5 },
+              visible: { opacity: 1, scale: [0.8, 1.3, 1] },
+            }}
+            transition={{ type: "spring", duration: 0.4 }}
+          >
+            Up
+          </motion.button>
+        ) : null}
+      </motion.nav>
     </AnimatePresence>
   );
 }

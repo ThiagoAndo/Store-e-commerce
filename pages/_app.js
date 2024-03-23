@@ -1,22 +1,26 @@
 import "../styles/globals.css";
 import Layout from "../components/layouts/layout";
-import ProductsContextProvider from "../store/products-context";
-import { NotificationContextProvider } from "@/store/notification-context";
-import StorageContextProvider from "@/store/storage-context";
+import ProductsContextProvider from "../store/context/products-context";
+import { NotificationContextProvider } from "@/store/context/notification-context";
+import StorageContextProvider from "@/store/context/storage-context";
 import { SessionProvider } from "next-auth/react";
+import { Provider } from "react-redux";
+import store from "@/store/redux";
 
 function App({ Component, pageProps }) {
   return (
     <SessionProvider session={pageProps.session}>
-      <StorageContextProvider>
-      <NotificationContextProvider>
-          <ProductsContextProvider>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </ProductsContextProvider>
-      </NotificationContextProvider>
-      </StorageContextProvider>
+      <Provider store={store}>
+        <StorageContextProvider>
+          <NotificationContextProvider>
+            <ProductsContextProvider>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </ProductsContextProvider>
+          </NotificationContextProvider>
+        </StorageContextProvider>
+      </Provider>
     </SessionProvider>
   );
 }

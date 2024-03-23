@@ -1,8 +1,7 @@
 import ProductGrid from "../components/product/product-grid";
 import { getAllProducts } from "../helpers/fetchProducts";
 import { useContext, useEffect } from "react";
-import { ProductContext } from "../store/products-context";
-
+import { ProductContext } from "../store/context/products-context";
 
 function Products(props) {
   const { products } = props;

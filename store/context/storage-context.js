@@ -9,6 +9,7 @@ export function StorageContextProvider(props) {
   const [storagePro, setStoragePro] = useState([]);
   let set = null;
   useEffect(() => {
+
     set = Array.from(
       new Set(
         storagePro.map((pro) => {
@@ -16,7 +17,9 @@ export function StorageContextProvider(props) {
         })
       )
     );
-    localStorage.setItem("cart", JSON.stringify(set));
+    if (set.length > 0) {
+      localStorage.setItem("cart", JSON.stringify(set));
+    }
   }, [storagePro]);
 
   function addStorage(id) {

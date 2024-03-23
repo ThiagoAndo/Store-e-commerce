@@ -38,11 +38,18 @@
   color: #FFFFFF;
   fill: #FFFFFF;
 }
+
+.icon_cart_full {
+  width: 60px !important;
+  height:60px !important;
+  color: #ff9b05;
+}
+
+
 .icon_user {
   width: 75px !important;
   height:75px !important;
   color: #FFFFFF;
-  fill: #FFFFFF;
 }
 
 
@@ -65,7 +72,28 @@
 }
 
 
+.bump {
+  animation: bump 300ms ease-out;
+}
 
+@keyframes bump {
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(0.9);
+  }
+  30% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1.30);
+  }
+  100% {
+    transform: scale(1);
+  }  
+
+}
 
 
 @media (min-width: 768px) {

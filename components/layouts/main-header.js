@@ -1,26 +1,38 @@
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState, useEffect, useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { cartActions } from "@/store/redux/cart-slice";
+import { usePathname } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
+import { ProductContext } from "@/store/context/products-context";
+import Link from "next/link";
 import classes from "./main-header.module.css";
 import SearchBar from "./search-bar";
-import { usePathname } from "next/navigation";
-import UserIcon from "../ui/user-icon";
-import CartIcon from "../ui/cart-icon";
-import { useSession, signOut } from "next-auth/react";
-import { ProductContext } from "@/store/products-context";
-
+import UserIcon from "../ui/user/user-icon";
+import CartIcon from "../ui/cart/cart-icon";
+let stp = false;
 function MainHeader() {
   const currentPath = usePathname();
-  const [isLogin, setIsLogin] = useState(false);
-  const { data: session } = useSession();
+  const dispatch = useDispatch();
   const store = useContext(ProductContext);
+  const total = useSelector((state) => state.cart.totalQuantity);
 
-  console.log();
+  const [isLogin, setIsLogin] = useState(false);
+  const [cartClass, setCartClass] = useState(classes.icon_cart);
+  const { data: session } = useSession();
+
   useEffect(() => {
     if (session) {
       setIsLogin(true);
     }
   }, [session]);
+
+  useEffect(() => {
+    if (stp) {
+      handleClickIcon();
+    }
+    stp = true;
+  }, [total]);
 
   function handleClick() {
     store.getFiltered(6);
@@ -28,6 +40,22 @@ function MainHeader() {
   function logoutHandler() {
     signOut();
   }
+
+  function handleClickIcon() {
+    if(total===0){
+      setCartClass(classes.icon_cart);
+    }else{
+    setCartClass(classes.icon_cart_full + " " + classes.bump);
+    setTimeout(() => {
+      setCartClass(classes.icon_cart_full);
+    }, 400);
+  }
+  }
+
+  function handleToggle() {
+    dispatch(cartActions.toggle());
+  }
+
   return (
     <header className={classes.header}>
       <nav className={classes.navigation}>
@@ -85,7 +113,7 @@ function MainHeader() {
             }}
             className={classes.cart_effec}
           >
-            <div className={classes.icon_cart}>
+            <div className={cartClass} onClick={handleToggle}>
               <CartIcon />
             </div>
           </motion.div>

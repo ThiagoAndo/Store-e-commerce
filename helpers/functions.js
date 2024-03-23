@@ -36,3 +36,11 @@ export function isPasswordValid(password){
     return false;
   }
 }
+
+
+export function formatValue(value) {
+  return new Intl.NumberFormat("de-DE", {
+    style: "currency",
+    currency: "EUR",
+  }).format(value);
+}

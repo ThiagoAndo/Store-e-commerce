@@ -1,8 +1,8 @@
 import React from "react";
 import { useContext, useEffect, useState } from "react";
-import { ProductContext } from "@/store/products-context";
+import { ProductContext } from "@/store/context/products-context";
 import Link from "next/link";
-import ProductSlider from "../ui/slider";
+import ProductSlider from "../ui/slider/slider";
 import ProductInfo from "./product-info";
 import classes from "./product-detail.module.css";
 

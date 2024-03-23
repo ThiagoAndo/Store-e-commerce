@@ -3,8 +3,8 @@ import { useAnimate, stagger, motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
-import { isEmailValid, isPasswordValid } from "@/utils/functions";
-import NotificationContext from "@/store/notification-context";
+import { isEmailValid, isPasswordValid } from "@/helpers/functions";
+import NotificationContext from "@/store/context/notification-context";
 
 import style from "./UserLogin.module.css";
 

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import classes from "./notification.module.css";
-import NotificationContext from "../../store/notification-context";
+import NotificationContext from "../../../store/context/notification-context";
 
 function Notification(props) {
   const notificationCtx = useContext(NotificationContext);

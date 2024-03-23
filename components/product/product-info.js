@@ -1,38 +1,44 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useContext } from "react";
-import StarRating from "../ui/StarRating";
-import { StorageContext } from "@/store/storage-context";
+import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { cartActions } from "@/store/redux/cart-slice";
+import { formatValue } from "@/helpers/functions";
+// import { useContext } from "react";
+// import { StorageContext } from "@/store/storage-context";
+import StarRating from "../ui/rating/StarRating";
 import classes from "./product-info.module.css";
-
 function ProductInfo({ props }) {
-  const price = props.price - props.price * (props.discountPercentage * 0.01);
-  const rating = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
-  const store_storage = useContext(StorageContext);
+  const dispatch = useDispatch();
+  // const store_storage = useContext(StorageContext);
+  const { title, brand, description, id } = props;
 
-  function format(value) {
-    return new Intl.NumberFormat("de-DE", {
-      style: "currency",
-      currency: "EUR",
-    }).format(value);
-  }
+  let price = props.price - props.price * (props.discountPercentage * 0.01);
+  const rating = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+
   function handleClick() {
-    store_storage.addStorage(props.id);
+    // store_storage.addStorage(props.id);
+    dispatch(
+      cartActions.addItemToCart({
+        id,
+        title,
+        price,
+      })
+    );
   }
 
   return (
     <article className={classes.product}>
       <div className={classes.headerText}>
-        <p>{props.brand}</p>
-        <h2>{props.title}</h2>
+        <p>{brand}</p>
+        <h2>{title}</h2>
         <div>
           <p>Description</p>
-          <p>{props.description}</p>
+          <p>{description}</p>
         </div>
       </div>
       <div>
         <div className={classes.price}>
-          <p>{format(price)}</p>
-          <p>{format(props.price)}</p>
+          <p>{formatValue(price)}</p>
+          <p>{formatValue(props.price)}</p>
         </div>
         <div className={classes.rating}>
           <StarRating props={{ type: "score", score: rating }} key={"score"} />

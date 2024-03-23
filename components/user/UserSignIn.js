@@ -4,8 +4,12 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
 import style from "./UserSignIn.module.css";
-import NotificationContext from "@/store/notification-context";
-import { isEmailValid, isNameValid, isPasswordValid } from "@/utils/functions";
+import NotificationContext from "@/store/context/notification-context";
+import {
+  isEmailValid,
+  isNameValid,
+  isPasswordValid,
+} from "@/helpers/functions";
 
 function UserSignIn({ submitHandler, feedBack }) {
   const [scope, animate] = useAnimate();
