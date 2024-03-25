@@ -7,6 +7,8 @@ import { useContext } from "react";
 import { ProductContext } from "@/store/context/products-context";
 import Image from "next/image";
 
+//his is just a tst on git faHubspot;
+
 const CartItem = (props) => {
   const dispatch = useDispatch();
   const store = useContext(ProductContext);
