@@ -12,16 +12,14 @@
   align-items: center;
   font-size: 1.5rem;
   margin: 1rem 0;
-  font-weight:bold;
-
+  font-weight: bold;
 }
 
-.my_value{
-  color:#000000;    
-  text-shadow: 1px 0 #000000;
-  letter-spacing:2px;
-  font-weight:bold;
-
+.my_value {
+  color: #000000;
+  text-shadow: 0.5px 0 #000000;
+  letter-spacing: 2px;
+  font-weight: bold;
 }
 
 .actions {
@@ -52,4 +50,19 @@
 .actions .button {
   background-color: #8a2b06;
   color: white;
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.error h1 {
+  text-align: center;
+}
+.error div:last-of-type {
+  width: auto;
+  margin: auto;
 }

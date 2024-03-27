@@ -1,5 +1,19 @@
-import { uiActions } from "./ui-slice";
-import { cartActions } from "./cart-slice";
+import { cartActions } from "../store/redux/cart-slice";
+
+export const getStorageData = () => {
+  const cart = JSON.parse(localStorage.getItem("cart"));
+  const qntTotal = Number(localStorage.getItem("qnt"));
+  return (dispatch) => {
+    if (qntTotal > 0) {
+      dispatch(
+        cartActions.replaceCart({
+          items: cart,
+          totalQuantity: qntTotal,
+        })
+      );
+    }
+  };
+};
 
 export const fetchCartData = () => {
   return async (dispatch) => {
@@ -27,36 +41,27 @@ export const fetchCartData = () => {
         })
       );
     } catch (error) {
-      dispatch(
-        uiActions.showNotification({
-          status: "error",
-          title: "Error!",
-          message: "Fetching cart data failed!",
-        })
-      );
+      console.log(error);
     }
   };
 };
 
 export const sendCartData = (cart) => {
   return async (dispatch) => {
-    dispatch(
-      uiActions.showNotification({
-        status: "pending",
-        title: "Sending...",
-        message: "Sending cart data!",
-      })
-    );
-
     const sendRequest = async () => {
+      const id = localStorage.getItem("id");
       const response = await fetch(
-        "https://library-98cc7-default-rtdb.europe-west1.firebasedatabase.app/cart.json",
+        // `http://localhost:8080/events/cart/new`,
+        "https://libraryapi-gtct.onrender.com/events/cart/new",
         {
-          method: "PUT",
+          method: "POST",
           body: JSON.stringify({
-            items: cart.items,
-            totalQuantity: cart.totalQuantity,
+            items: cart,
+            id,
           }),
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       );
 
@@ -68,22 +73,6 @@ export const sendCartData = (cart) => {
     try {
       await sendRequest();
       console.log(cart.items);
-
-      dispatch(
-        uiActions.showNotification({
-          status: "success",
-          title: "Success!",
-          message: "Sent cart data successfully!",
-        })
-      );
-    } catch (error) {
-      dispatch(
-        uiActions.showNotification({
-          status: "error",
-          title: "Error!",
-          message: "Sending cart data failed!",
-        })
-      );
-    }
+    } catch (error) {}
   };
 };

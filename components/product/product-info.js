@@ -1,28 +1,34 @@
 import { motion } from "framer-motion";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "@/store/redux/cart-slice";
 import { formatValue } from "@/helpers/functions";
-// import { useContext } from "react";
-// import { StorageContext } from "@/store/storage-context";
+import { getCurrentDate } from "@/helpers/functions";
+import { useSession } from "next-auth/react";
 import StarRating from "../ui/rating/StarRating";
 import classes from "./product-info.module.css";
 function ProductInfo({ props }) {
   const dispatch = useDispatch();
-  // const store_storage = useContext(StorageContext);
-  const { title, brand, description, id } = props;
+  const items = useSelector((state) => state.cart.items);
 
+  const { data: session } = useSession();
+  const { title, brand, description, id } = props;
   let price = props.price - props.price * (props.discountPercentage * 0.01);
   const rating = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
 
+  let createAt = null;
   function handleClick() {
-    // store_storage.addStorage(props.id);
-    dispatch(
+    if (items.length === 0) createAt = getCurrentDate();
+    else createAt = items[0].createAt;
+    createAt = dispatch(
       cartActions.addItemToCart({
         id,
         title,
         price,
+        createAt,
       })
     );
+   
+    
   }
 
   return (

@@ -2,7 +2,7 @@ import UserLogin from "@/components/user/UserLogin";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 function Login() {
-  const [feedback, setFeedback] = useState('');
+  const [feedback, setFeedback] = useState("");
 
   function handleLogin(email, password) {
     try {
@@ -11,7 +11,7 @@ function Login() {
           if (response.ok) {
             return response.json();
           } else {
-            setFeedback({message:"Connecting to the database failed!"});
+            setFeedback({ message: "Connecting to the database failed!" });
             throw "Connecting to the database failed!";
           }
         })
@@ -23,6 +23,7 @@ function Login() {
               redirect: false,
               email: email,
             });
+            localStorage.setItem("id", data.id);
           }
         });
     } catch (error) {

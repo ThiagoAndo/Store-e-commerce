@@ -10,13 +10,15 @@ import classes from "./main-header.module.css";
 import SearchBar from "./search-bar";
 import UserIcon from "../ui/user/user-icon";
 import CartIcon from "../ui/cart/cart-icon";
+import NotificationContext from "@/store/context/notification-context";
 let stp = false;
+
 function MainHeader() {
   const currentPath = usePathname();
   const dispatch = useDispatch();
   const store = useContext(ProductContext);
+  const notificationCtx = useContext(NotificationContext);
   const total = useSelector((state) => state.cart.totalQuantity);
-
   const [isLogin, setIsLogin] = useState(false);
   const [cartClass, setCartClass] = useState(classes.icon_cart);
   const { data: session } = useSession();
@@ -31,6 +33,9 @@ function MainHeader() {
     if (stp) {
       handleClickIcon();
     }
+    if (total === 0) {
+      handleToggle();
+    }
     stp = true;
   }, [total]);
 
@@ -42,17 +47,24 @@ function MainHeader() {
   }
 
   function handleClickIcon() {
-    if(total===0){
+    if (total === 0) {
       setCartClass(classes.icon_cart);
-    }else{
-    setCartClass(classes.icon_cart_full + " " + classes.bump);
-    setTimeout(() => {
-      setCartClass(classes.icon_cart_full);
-    }, 400);
-  }
+    } else {
+      setCartClass(classes.icon_cart_full + " " + classes.bump);
+      setTimeout(() => {
+        setCartClass(classes.icon_cart_full);
+      }, 400);
+    }
   }
 
-  function handleToggle() {
+  function handleToggle(click) {
+    if (total === 0 && click === "click") {
+      notificationCtx.showNotification({
+        title: "Empty cart:",
+        message: `There is nothing to display. Choose a product.`,
+        status: "pending",
+      });
+    }
     dispatch(cartActions.toggle());
   }
 
@@ -113,7 +125,10 @@ function MainHeader() {
             }}
             className={classes.cart_effec}
           >
-            <div className={cartClass} onClick={handleToggle}>
+            <div
+              className={cartClass}
+              onClick={handleToggle.bind(null, "click")}
+            >
               <CartIcon />
             </div>
           </motion.div>

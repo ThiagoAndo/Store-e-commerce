@@ -8,11 +8,16 @@ const cartSlice = createSlice({
     changed: false,
     cartIsVisible: false,
     totalCart: 0,
+    createAt: null,
   },
   reducers: {
     replaceCart(state, action) {
       state.totalQuantity = action.payload.totalQuantity;
       state.items = action.payload.items;
+      state.totalCart = state.items.reduce(
+        (accumulator, item) => accumulator + item.totalPrice,
+        0
+      );
     },
     addItemToCart(state, action) {
       const newItem = action.payload;
@@ -27,6 +32,7 @@ const cartSlice = createSlice({
           quantity: 1,
           totalPrice: newItem.price,
           name: newItem.title,
+          createAt: newItem.createAt,
         });
       } else {
         existingItem.quantity++;
@@ -41,6 +47,8 @@ const cartSlice = createSlice({
         (accumulator, item) => accumulator + item.totalPrice,
         0
       );
+      localStorage.setItem("cart", JSON.stringify(state.items));
+      localStorage.setItem("qnt", JSON.stringify(state.totalQuantity));
     },
     removeItemFromCart(state, action) {
       const id = action.payload;
@@ -57,9 +65,12 @@ const cartSlice = createSlice({
         (accumulator, item) => accumulator + item.totalPrice,
         0
       );
+      localStorage.setItem("cart", JSON.stringify(state.items));
+      localStorage.setItem("qnt", JSON.stringify(state.totalQuantity));
     },
     toggle(state) {
-      state.cartIsVisible = !state.cartIsVisible;
+      if (state.totalQuantity === 0) state.cartIsVisible = false;
+      else state.cartIsVisible = !state.cartIsVisible;
     },
   },
 });

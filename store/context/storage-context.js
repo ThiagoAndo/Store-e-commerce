@@ -7,8 +7,9 @@ export const StorageContext = createContext({
 
 export function StorageContextProvider(props) {
   const [storagePro, setStoragePro] = useState([]);
-  let set = null;
+  
   useEffect(() => {
+    let set = null;
 
     set = Array.from(
       new Set(
