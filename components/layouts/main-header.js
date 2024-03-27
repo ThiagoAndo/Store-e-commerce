@@ -22,8 +22,8 @@ function MainHeader() {
   const [isLogin, setIsLogin] = useState(false);
   const [cartClass, setCartClass] = useState(classes.icon_cart);
   const { data: session } = useSession();
-
   useEffect(() => {
+   
     if (session) {
       setIsLogin(true);
     }

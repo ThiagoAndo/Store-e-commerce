@@ -1,12 +1,21 @@
 import UserLogin from "@/components/user/UserLogin";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { signIn } from "next-auth/react";
+import NotificationContext from "@/store/context/notification-context";
+
 function Login() {
   const [feedback, setFeedback] = useState("");
+  const notificationCtx = useContext(NotificationContext);
 
   function handleLogin(email, password) {
+      notificationCtx.showNotification({
+        title: "Sending Request:",
+        message: `Getting User Credentials.`,
+        status: "pending",
+      });
     try {
       fetch(`/api/user/${email}/${password}`)
+      
         .then((response) => {
           if (response.ok) {
             return response.json();

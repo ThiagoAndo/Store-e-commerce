@@ -2,16 +2,47 @@ import ProductGrid from "../components/product/product-grid";
 import { getAllProducts } from "../helpers/fetchProducts";
 import { useContext, useEffect } from "react";
 import { ProductContext } from "../store/context/products-context";
+import { useDispatch, useSelector } from "react-redux";
+import { useSession } from "next-auth/react";
+import {
+  getStorageData,
+  fetchCartData,
+  sendCartData,
+} from "@/helpers/cart-actions";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 function Products(props) {
   const { products } = props;
-
+  const items = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
+  const { data: session } = useSession();
   const store = useContext(ProductContext);
+
   useEffect(() => {
     if (!products.hasOwnProperty("error")) {
       store.addProducts(products.products, products.images);
     }
   }, [store.addProducts]);
+  console.log("items");
+  console.log(items);
+
+  useEffect(() => {
+    if (items.length === 0) {
+      if (session) {
+        console.log("entrou");
+        dispatch(fetchCartData());
+        return;
+      } else {
+        dispatch(getStorageData());
+      }
+    }
+  }, [session]);
+
+  useEffect(() => {
+    if (session && items.length > 0) {
+      dispatch(sendCartData(items));
+    }
+  }, [items]);
 
   if (!products.hasOwnProperty("error")) {
     return <ProductGrid />;

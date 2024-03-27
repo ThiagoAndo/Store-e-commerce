@@ -16,10 +16,12 @@ export const getStorageData = () => {
 };
 
 export const fetchCartData = () => {
+  const userId = localStorage.getItem("id");
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://library-98cc7-default-rtdb.europe-west1.firebasedatabase.app/cart.json"
+        `http://localhost:8080/events/cart/${userId}`
+        // `https://libraryapi-gtct.onrender.com/events/cart/${userId}`,
       );
 
       if (!response.ok) {
@@ -36,7 +38,7 @@ export const fetchCartData = () => {
 
       dispatch(
         cartActions.replaceCart({
-          items: cartData.items || [],
+          items: cartData.items ,
           totalQuantity: cartData.totalQuantity,
         })
       );
@@ -51,8 +53,8 @@ export const sendCartData = (cart) => {
     const sendRequest = async () => {
       const id = localStorage.getItem("id");
       const response = await fetch(
-        // `http://localhost:8080/events/cart/new`,
-        "https://libraryapi-gtct.onrender.com/events/cart/new",
+        `http://localhost:8080/events/cart/new`,
+        // "https://libraryapi-gtct.onrender.com/events/cart/new",
         {
           method: "POST",
           body: JSON.stringify({
