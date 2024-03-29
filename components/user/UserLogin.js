@@ -96,7 +96,7 @@ function UserLogin({ handling, LoginBack }) {
     if(LoginBack?.message){
       notificationCtx.showNotification({
         title: "Not Found:",
-        message: LoginBack.message ,
+        message: " Email might not be right, Or user has not been registered",
         status: "error",
       });
 

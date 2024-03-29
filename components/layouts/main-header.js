@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 import { useState, useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "@/store/redux/cart-slice";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { ProductContext } from "@/store/context/products-context";
+import { sendCartData } from "@/helpers/cart-actions";
 import Link from "next/link";
 import classes from "./main-header.module.css";
 import SearchBar from "./search-bar";
@@ -19,11 +21,12 @@ function MainHeader() {
   const store = useContext(ProductContext);
   const notificationCtx = useContext(NotificationContext);
   const total = useSelector((state) => state.cart.totalQuantity);
+  const cart = useSelector((state) => state.cart.items);
   const [isLogin, setIsLogin] = useState(false);
   const [cartClass, setCartClass] = useState(classes.icon_cart);
   const { data: session } = useSession();
+  const router = useRouter();
   useEffect(() => {
-   
     if (session) {
       setIsLogin(true);
     }
@@ -42,10 +45,18 @@ function MainHeader() {
   function handleClick() {
     store.getFiltered(6);
   }
-  function logoutHandler() {
-    signOut();
-  }
 
+  //this code has to be emplemeted on user menu =====================
+  function logoutHandler() {
+    dispatch(sendCartData(cart));
+    setTimeout(() => {
+      signOut({
+        callbackUrl:
+          "https://store-comerce-ahwgoy6xn-thiago-freitas-projects-0d31c9d5.vercel.app/",
+      });
+    }, 1000);
+  }
+  //====================================================================
   function handleClickIcon() {
     if (total === 0) {
       setCartClass(classes.icon_cart);

@@ -21,7 +21,7 @@ export const fetchCartData = () => {
     const fetchData = async () => {
       const response = await fetch(
         // `http://localhost:8080/events/cart/${userId}`
-        `https://libraryapi-gtct.onrender.com/events/cart/${userId}`,
+        `https://libraryapi-gtct.onrender.com/events/cart/${userId}`
       );
 
       if (!response.ok) {
@@ -34,12 +34,20 @@ export const fetchCartData = () => {
     };
 
     try {
-      const cartData = await fetchData();
-
+      const { items } = await fetchData();
+      const transData = items.map((item) => {
+        return {
+          ["id"]: item.item_id,
+          ["price"]: item.price,
+          ["quantity"]: item.qnt,
+          ["totalPrice"]: item.price,
+          ["name"]: item.name,
+          ["createAt"]: item.creation_at,
+        };
+      });
       dispatch(
         cartActions.replaceCart({
-          items: cartData.items ,
-          totalQuantity: cartData.totalQuantity,
+          items: transData,
         })
       );
     } catch (error) {
@@ -49,12 +57,14 @@ export const fetchCartData = () => {
 };
 
 export const sendCartData = (cart) => {
+  console.log("cart");
+  console.log(cart);
   return async (dispatch) => {
     const sendRequest = async () => {
       const id = localStorage.getItem("id");
       const response = await fetch(
-        `http://localhost:8080/events/cart/new`,
-        // "https://libraryapi-gtct.onrender.com/events/cart/new",
+        // `http://localhost:8080/events/cart`,
+        "https://libraryapi-gtct.onrender.com/events/cart",
         {
           method: "POST",
           body: JSON.stringify({
@@ -74,7 +84,8 @@ export const sendCartData = (cart) => {
 
     try {
       await sendRequest();
-      console.log(cart.items);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 };

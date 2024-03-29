@@ -4,12 +4,7 @@ import { useContext, useEffect } from "react";
 import { ProductContext } from "../store/context/products-context";
 import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
-import {
-  getStorageData,
-  fetchCartData,
-  sendCartData,
-} from "@/helpers/cart-actions";
-import { faL } from "@fortawesome/free-solid-svg-icons";
+import { getStorageData, fetchCartData } from "@/helpers/cart-actions";
 
 function Products(props) {
   const { products } = props;
@@ -23,26 +18,15 @@ function Products(props) {
       store.addProducts(products.products, products.images);
     }
   }, [store.addProducts]);
-  console.log("items");
-  console.log(items);
 
   useEffect(() => {
     if (items.length === 0) {
+      dispatch(getStorageData());
       if (session) {
-        console.log("entrou");
         dispatch(fetchCartData());
-        return;
-      } else {
-        dispatch(getStorageData());
       }
     }
   }, [session]);
-
-  useEffect(() => {
-    if (session && items.length > 0) {
-      dispatch(sendCartData(items));
-    }
-  }, [items]);
 
   if (!products.hasOwnProperty("error")) {
     return <ProductGrid />;
@@ -64,10 +48,6 @@ function Products(props) {
 }
 export async function getStaticProps() {
   const data = await getAllProducts();
-  const paths = data.products.map((product) => ({
-    params: { productId: product.id },
-  }));
-
   return {
     props: {
       products: data,
