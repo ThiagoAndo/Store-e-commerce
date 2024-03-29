@@ -20,8 +20,8 @@ export const fetchCartData = () => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch(
-        `http://localhost:8080/events/cart/${userId}`
-        // `https://libraryapi-gtct.onrender.com/events/cart/${userId}`,
+        // `http://localhost:8080/events/cart/${userId}`
+        `https://libraryapi-gtct.onrender.com/events/cart/${userId}`,
       );
 
       if (!response.ok) {
