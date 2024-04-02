@@ -8,15 +8,14 @@ import MainHeader from "./main-header";
 import FilterHeader from "./filter-nav";
 import Footer from "./footer";
 import Cart from "../cart/cart";
+import UserMenu from "../user/UserMenu";
 
 function Layout(props) {
   const currentPath = usePathname();
   const notificationCtx = useContext(NotificationContext);
   const activeNotification = notificationCtx.notification;
   const isVisible = useSelector((state) => state.cart.cartIsVisible);
-
-
-
+  const isMenu = useSelector((state) => state.user.menuVisible);
 
   return (
     <Fragment>
@@ -25,6 +24,7 @@ function Layout(props) {
       {currentPath === "/" ? <FilterHeader /> : null}
       <main>{props.children}</main>
       <Footer />
+      <AnimatePresence>{isMenu && <UserMenu />}</AnimatePresence>
       {activeNotification && (
         <Notification
           title={activeNotification.title}

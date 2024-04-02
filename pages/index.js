@@ -34,9 +34,10 @@ function Products(props) {
     return (
       <h1
         style={{
-          marginTop: "5rem",
           color: "red",
           margin: "auto",
+          marginTop: "5rem",
+          marginBottom: "5rem",
           width: "70%",
           textAlign: "center",
         }}

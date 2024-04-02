@@ -8,14 +8,13 @@ function Login() {
   const notificationCtx = useContext(NotificationContext);
 
   function handleLogin(email, password) {
-      notificationCtx.showNotification({
-        title: "Sending Request:",
-        message: `Getting User Credentials.`,
-        status: "pending",
-      });
+    notificationCtx.showNotification({
+      title: "Sending Request:",
+      message: `Getting User Credentials.`,
+      status: "pending",
+    });
     try {
       fetch(`/api/user/${email}/${password}`)
-      
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -33,6 +32,13 @@ function Login() {
               email: email,
             });
             localStorage.setItem("id", data.id);
+            localStorage.setItem("email", data.email_address);
+            localStorage.setItem(
+              "name",
+              data.first_name + " " + data.last_name
+            );
+
+            if (data?.address) localStorage.setItem("n", data.id);
           }
         });
     } catch (error) {

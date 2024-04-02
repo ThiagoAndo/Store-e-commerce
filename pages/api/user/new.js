@@ -22,7 +22,6 @@ async function handler(req, res) {
         }
       );
 
-
       if (response.ok) {
         response = await response.json();
         res.status(200).json(response);

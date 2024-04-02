@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import { useState, useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "@/store/redux/cart-slice";
+import { userActions } from "@/store/redux/user.slice";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { ProductContext } from "@/store/context/products-context";
-import { sendCartData } from "@/helpers/cart-actions";
 import Link from "next/link";
 import classes from "./main-header.module.css";
 import SearchBar from "./search-bar";
@@ -21,16 +21,8 @@ function MainHeader() {
   const store = useContext(ProductContext);
   const notificationCtx = useContext(NotificationContext);
   const total = useSelector((state) => state.cart.totalQuantity);
-  const cart = useSelector((state) => state.cart.items);
-  const [isLogin, setIsLogin] = useState(false);
   const [cartClass, setCartClass] = useState(classes.icon_cart);
   const { data: session } = useSession();
-  const router = useRouter();
-  useEffect(() => {
-    if (session) {
-      setIsLogin(true);
-    }
-  }, [session]);
 
   useEffect(() => {
     if (stp) {
@@ -46,17 +38,6 @@ function MainHeader() {
     store.getFiltered(6);
   }
 
-  //this code has to be emplemeted on user menu =====================
-  function logoutHandler() {
-    dispatch(sendCartData(cart));
-    setTimeout(() => {
-      signOut({
-        callbackUrl:
-          "https://store-comerce-ahwgoy6xn-thiago-freitas-projects-0d31c9d5.vercel.app/",
-      });
-    }, 1000);
-  }
-  //====================================================================
   function handleClickIcon() {
     if (total === 0) {
       setCartClass(classes.icon_cart);
@@ -77,6 +58,13 @@ function MainHeader() {
       });
     }
     dispatch(cartActions.toggle());
+  }
+  function handleUserMenuVis() {
+    if (session) dispatch(userActions.visible());
+  }
+
+  function handleUserMenuHid() {
+    dispatch(userActions.hidden());
   }
 
   return (
@@ -108,30 +96,6 @@ function MainHeader() {
             whileHover={{
               scale: 1.1,
               borderRadius: "10rem",
-              boxShadow: "0 2px 0px rgba(242, 100, 18, 0.8)",
-            }}
-            transition={{ type: "spring", duration: 0.3 }}
-            className={classes.icon_user}
-          >
-            <div
-              className={
-                session?.user ? classes.icon_user_log : classes.icon_user
-              }
-            >
-              {session?.user ? (
-                <UserIcon />
-              ) : (
-                <Link href="/user/login">
-                  <UserIcon />
-                </Link>
-              )}
-            </div>
-          </motion.div>
-
-          <motion.div
-            whileHover={{
-              scale: 1.1,
-              borderRadius: "10rem",
               boxShadow: "0px 2px 0px rgba(242, 100, 18, 0.8)",
             }}
             className={classes.cart_effec}
@@ -143,12 +107,43 @@ function MainHeader() {
               <CartIcon />
             </div>
           </motion.div>
+
+          {session?.user ? (
+            <div
+              className={classes.icon_user}
+              onMouseEnter={handleUserMenuVis}
+              onMouseLeave={handleUserMenuHid}
+            >
+              <div
+                className={
+                  session?.user ? classes.icon_user_log : classes.icon_user
+                }
+              >
+                <UserIcon />
+              </div>
+            </div>
+          ) : (
+            <motion.div
+              whileHover={{
+                scale: 1.1,
+                borderRadius: "10rem",
+                boxShadow: "0 2px 0px rgba(242, 100, 18, 0.8)",
+              }}
+              transition={{ type: "spring", duration: 0.3 }}
+              className={classes.icon_user}
+            >
+              <div
+                className={
+                  session?.user ? classes.icon_user_log : classes.icon_user
+                }
+              >
+                <Link href="/user/login">
+                  <UserIcon />
+                </Link>
+              </div>
+            </motion.div>
+          )}
         </div>
-        {isLogin && (
-          <div>
-            <button onClick={logoutHandler}>Logout</button>
-          </div>
-        )}
       </nav>
     </header>
   );
