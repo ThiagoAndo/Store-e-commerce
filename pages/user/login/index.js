@@ -2,7 +2,7 @@ import UserLogin from "@/components/user/UserLogin";
 import { useState, useContext } from "react";
 import { signIn } from "next-auth/react";
 import NotificationContext from "@/store/context/notification-context";
-
+import { setStorage } from "@/helpers/functions";
 function Login() {
   const [feedback, setFeedback] = useState("");
   const notificationCtx = useContext(NotificationContext);
@@ -14,7 +14,10 @@ function Login() {
       status: "pending",
     });
     try {
-      fetch(`/api/user/${email}/${password}`)
+      fetch(
+        `http://localhost:8080/events/user/${email}/${password}`
+        // `https://libraryapi-gtct.onrender.com/events/user/${email}/${password}`,
+      )
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -31,18 +34,15 @@ function Login() {
               redirect: false,
               email: email,
             });
-            localStorage.setItem("id", data.id);
-            localStorage.setItem("email", data.email_address);
-            localStorage.setItem(
-              "name",
-              data.first_name + " " + data.last_name
-            );
-
-            if (data?.address) localStorage.setItem("n", data.id);
+            setStorage(data);
           }
         });
     } catch (error) {
-      console.log(error);
+      notificationCtx.showNotification({
+        title: "Sending Request:",
+        message: error.message,
+        status: "error",
+      });
     }
   }
 

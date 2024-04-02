@@ -32,6 +32,7 @@
   height: 75px;
 }
 .icon_cart {
+  cursor: pointer;
   width: 60px !important;
   height: 60px !important;
   color: #ffffff;
@@ -39,6 +40,7 @@
 }
 
 .icon_cart_full {
+  cursor: pointer;
   width: 60px !important;
   height: 60px !important;
   color: #ff9b05;

@@ -4,6 +4,7 @@
   padding: 0;
   max-height: 20rem;
   overflow: auto;
+  color: #ffffff;
 }
 
 .total {
@@ -16,8 +17,8 @@
 }
 
 .my_value {
-  color: #000000;
-  text-shadow: 0.5px 0 #000000;
+  color: #ffffff;
+  text-shadow: 0.5px 0 #ffffff;
   letter-spacing: 2px;
   font-weight: bold;
 }
@@ -30,7 +31,7 @@
   font: inherit;
   cursor: pointer;
   background-color: transparent;
-  border: 1px solid #8a2b06;
+  border: 1px solid #ff9b05;
   padding: 0.5rem 2rem;
   border-radius: 25px;
   margin-left: 1rem;
@@ -38,18 +39,17 @@
 
 .actions button:hover,
 .actions button:active {
-  background-color: #5a1a01;
-  border-color: #5a1a01;
-  color: white;
+  background: linear-gradient(90deg, #f9572a, #ff9b05);
+  color: black;
+  border: solid 1px white;
 }
 
 .actions .button--alt {
-  color: #8a2b06;
+  color: #ff9b05;
 }
 
 .actions .button {
-  background-color: #8a2b06;
-  color: white;
+  background: linear-gradient(90deg, #f9572a, #ff9b05);
 }
 
 .error {

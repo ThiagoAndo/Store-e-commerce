@@ -1,8 +1,7 @@
 .userMenu {
   position: fixed;
-  top: 5.5rem;
+  top: 6rem;
   right: 1rem;
-  width: 17%;
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -57,5 +56,3 @@
   padding: 1.2rem;
   font-weight: bold;
 }
-
-

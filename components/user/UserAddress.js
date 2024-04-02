@@ -83,54 +83,7 @@ function UserSignIn({ submitHandler, feedBack }) {
       handleEmpty("lablast_name", "last_name");
       return;
     }
-
-    first = first[0].toUpperCase() + first.slice(1);
-    last = last[0].toUpperCase() + last.slice(1);
-
-    email = isEmailValid(user.email_address);
-    const name = isNameValid(first + " " + last);
-    password = isPasswordValid(user.password);
-
-    if (!email) {
-      user.email_address = "";
-      hadleNotification("email");
-      handleEmpty("labemail_address", "email_address");
-    } else if (!name) {
-      user.first_name = "";
-      user.last_name = "";
-      hadleNotification("name");
-      handleEmpty("labfirst_name", "first_name");
-      handleEmpty("lablast_name", "last_name");
-    } else if (!password) {
-      user.password = "";
-      hadleNotification("password");
-      handleEmpty("labpassword", "password");
-    }
-    if (email && name && password) {
-      submitHandler(user);
-    }
   }
-
-
-
-  useEffect(() => {
-    if (feedBack?.message) {
-      notificationCtx.showNotification({
-        title: "Invalid Action:",
-        message: feedBack.message,
-        status: "error",
-      });
-      return;
-    } else if (feedBack?.email_address) {
-      notificationCtx.showNotification({
-        title: "Registered:",
-        message: "User registered successfully!",
-        status: "success",
-      });
-
-      router.replace("/");
-    }
-  }, [feedBack]);
 
   return (
     <>
@@ -146,64 +99,64 @@ function UserSignIn({ submitHandler, feedBack }) {
               <div className={style.input_container}>
                 <label
                   className={style.label}
-                  htmlFor="email_address"
-                  id="labemail_address"
+                  htmlFor="line_one"
+                  id="labeline_one"
                 >
                   Your Email Address
                 </label>
                 <input
-                  placeholder="e.g. stephenking@lorem.com"
+                  placeholder="e.g. 156 ashgrove"
                   className={style.input}
-                  type="email"
-                  id="email_address"
-                  name="email_address"
+                  type="text"
+                  id="line_one"
+                  name="line_one"
                   onFocus={handleFocus}
                 />
                 <label
                   className={style.label}
-                  htmlFor="password"
-                  id="labpassword"
+                  htmlFor="line_two"
+                  id="labline_two"
                 >
                   Password
                 </label>
                 <input
-                  placeholder="Minimum of eight characters"
+                  placeholder="e.g cookstown"
                   className={style.input}
                   type="text"
-                  id="password"
-                  name="password"
+                  id="line_two"
+                  name="line_two"
                   onFocus={handleFocus}
                 />
               </div>
               <div className={style.input_container}>
                 <label
                   className={style.label}
-                  htmlFor="first_name"
-                  id="labfirst_name"
+                  htmlFor="town_city"
+                  id="labtown_city"
                 >
                   First Name
                 </label>
                 <input
-                  placeholder="e.g. Stephen"
+                  placeholder="e.g. Dublin 12"
                   className={style.input}
                   type="text"
-                  id="first_name"
-                  name="first_name"
+                  id="town_city"
+                  name="town_city"
                   onFocus={handleFocus}
                 />
                 <label
                   className={style.label}
-                  htmlFor="last_name"
-                  id="lablast_name"
+                  htmlFor="constry_state"
+                  id="labconstry_state"
                 >
                   Last Name
                 </label>
                 <input
-                  placeholder="e.g. King"
+                  placeholder="e.g. Dublin"
                   className={style.input}
                   type="text"
-                  id="last_name"
-                  name="last_name"
+                  id="constry_state"
+                  name="constry_state"
                   onFocus={handleFocus}
                 />
               </div>
@@ -213,7 +166,7 @@ function UserSignIn({ submitHandler, feedBack }) {
               transition={{ type: "spring", stiffness: 150 }}
               className={style.button}
             >
-              Register
+              Continue
             </motion.button>
           </form>
         </motion.div>

@@ -1,4 +1,4 @@
-export  function getCurrentDate() {
+export function getCurrentDate() {
   const date = new Date();
   const day = date.getDate();
   const month = date.getMonth() + 1;
@@ -29,18 +29,25 @@ export function isNameValid(name) {
   }
 }
 
-export function isPasswordValid(password){
-  if (password.trim().length >=8) {
+export function isPasswordValid(password) {
+  if (password.trim().length >= 8) {
     return true;
   } else {
     return false;
   }
 }
 
-
 export function formatValue(value) {
   return new Intl.NumberFormat("de-DE", {
     style: "currency",
     currency: "EUR",
   }).format(value);
+}
+
+export  function setStorage(data) {
+  localStorage.setItem("id", data.id);
+  localStorage.setItem("email", data.email_address);
+  localStorage.setItem("name", data.first_name + " " + data.last_name);
+
+  if (data?.address) localStorage.setItem("n", data.id);
 }

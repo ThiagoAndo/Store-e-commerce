@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
-import { useRouter } from "next/router";
 import { useState, useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "@/store/redux/cart-slice";
 import { userActions } from "@/store/redux/user.slice";
 import { usePathname } from "next/navigation";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { ProductContext } from "@/store/context/products-context";
 import Link from "next/link";
 import classes from "./main-header.module.css";
@@ -53,7 +52,7 @@ function MainHeader() {
     if (total === 0 && click === "click") {
       notificationCtx.showNotification({
         title: "Empty cart:",
-        message: `There is nothing to display. Choose a product.`,
+        message: `You have not choose any product.`,
         status: "pending",
       });
     }

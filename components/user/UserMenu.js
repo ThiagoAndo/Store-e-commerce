@@ -2,13 +2,17 @@ import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { sendCartData } from "@/helpers/cart-actions";
 import { signOut } from "next-auth/react";
-
+import { cartActions } from "@/store/redux/cart-slice";
+import NotificationContext from "@/store/context/notification-context";
+import { useContext } from "react";
 import { userActions } from "@/store/redux/user.slice";
 import classes from "./UserMenu.module.css";
 
 function UserMenu() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.items);
+  const notificationCtx = useContext(NotificationContext);
+  const total = useSelector((state) => state.cart.totalQuantity);
 
   const email = localStorage.getItem("email");
   const name = localStorage.getItem("name");
@@ -22,12 +26,22 @@ function UserMenu() {
     dispatch(userActions.hidden());
   }
 
+  function handleToggle(click) {
+    if (total === 0 && click === "click") {
+      notificationCtx.showNotification({
+        title: "Empty cart:",
+        message: `You have not choose any product.`,
+        status: "pending",
+      });
+    }
+    dispatch(cartActions.toggle());
+  }
+
   function logoutHandler() {
     dispatch(sendCartData(cart));
     setTimeout(() => {
       localStorage.clear();
     }, 900);
-
     setTimeout(() => {
       signOut({
         callbackUrl:
@@ -38,10 +52,10 @@ function UserMenu() {
   return (
     <motion.div
       className={classes.userMenu}
-      initial={{ opacity: 0, y: -5 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ y: -30, opacity: 0 }}
-      transition={{ duration: 0.5, type: "spring" }}
+      initial={{ x: 300, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: 300, opacity: 0 }}
+      transition={{ duration: 0.7, type: "spring" }}
       onMouseEnter={handleUserMenuVis}
       onMouseLeave={handleUserMenuHid}
     >
@@ -61,6 +75,7 @@ function UserMenu() {
               key={0}
               whileHover={{ scale: 1.01, color: "#ff9b05" }}
               transition={{ type: "spring", stiffness: 150 }}
+              onClick={handleToggle.bind(null, "click")}
             >
               My cart
             </motion.p>

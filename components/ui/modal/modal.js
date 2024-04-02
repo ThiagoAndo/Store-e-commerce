@@ -13,12 +13,13 @@ const ModalOverlay = (props) => {
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, y: 30 },
+        hidden: { opacity: 0, y: 100 },
         visible: { opacity: 1, y: 0 },
       }}
       initial="hidden"
       animate="visible"
-      exit={{ opacity: 0, y: 30 }}
+      transition={{ duration: 0.5, type: "spring" }}
+      exit={{ opacity: 0, y: 100 }}
       open
       className={classes.modal}
     >

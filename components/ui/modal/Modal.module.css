@@ -10,20 +10,13 @@
 
 .modal {
   position: fixed;
-  top: 20vh;
-  left: 5%;
-  width: 90%;
-  background-color: white;
+  top: 12vh;
+  left: 30%;
+  width: 40%;
+  background: linear-gradient(90deg, #2c1e19, #25200f);
   padding: 1rem;
   border-radius: 14px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   z-index: 30;
+  color: #ffffff;
 }
-
-@media (min-width: 768px) {
-  .modal {
-    width: 40rem;
-    left: calc(50% - 20rem);
-  }
-}
-
