@@ -2,7 +2,6 @@ import { useRef, useContext, useEffect } from "react";
 import { useAnimate, stagger, motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-
 import { isEmailValid, isPasswordValid } from "@/helpers/functions";
 import NotificationContext from "@/store/context/notification-context";
 
@@ -14,7 +13,7 @@ function UserLogin({ handling, LoginBack }) {
   const passwortInputRef = useRef();
   const [scope, animate] = useAnimate();
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   function handleClick(e) {
     e.preventDefault();
@@ -31,7 +30,7 @@ function UserLogin({ handling, LoginBack }) {
     );
     animate(
       labelTarget,
-      { color: "#ddd6cb" },
+      { color: "#000000" },
       { type: "spring", duration: 0.2 }
     );
   }
@@ -47,7 +46,7 @@ function UserLogin({ handling, LoginBack }) {
 
     animate(
       "#" + label,
-      { x: [-10, 0, 10, 0], color: "#FA8072" },
+      { x: [-10, 0, 10, 0], color: "#000000" },
       { type: "spring", duration: 0.3, delay: stagger(0.05) }
     );
   };
@@ -77,7 +76,7 @@ function UserLogin({ handling, LoginBack }) {
       return;
     }
 
-    if (!isEmailValid(email) ) {
+    if (!isEmailValid(email)) {
       hadleNotification("email");
       handleEmpty("labEmail", "Email");
 
@@ -93,23 +92,23 @@ function UserLogin({ handling, LoginBack }) {
   }
 
   useEffect(() => {
-    if(LoginBack?.message){
+    if (LoginBack?.message) {
       notificationCtx.showNotification({
         title: "Not Found:",
         message: " Email might not be right, Or user has not been registered",
         status: "error",
       });
 
-    if (LoginBack.message.slice(0, 5) === "Could") {
-      handleEmpty("labEmail", "Email");
-      emailInputRef.current.value = "";
-      return;
-    } else if (LoginBack.message.slice(0, 5) === "Wrong") {
-      handleEmpty("labPassword", "Password");
-      passwortInputRef.current.value = "";
-      return;
+      if (LoginBack.message.slice(0, 5) === "Could") {
+        handleEmpty("labEmail", "Email");
+        emailInputRef.current.value = "";
+        return;
+      } else if (LoginBack.message.slice(0, 5) === "Wrong") {
+        handleEmpty("labPassword", "Password");
+        passwortInputRef.current.value = "";
+        return;
+      }
     }
-  }
     if (session) {
       router.replace("/");
     }
@@ -118,7 +117,8 @@ function UserLogin({ handling, LoginBack }) {
   return (
     <>
       <AnimatePresence>
-        <motion.div key={1}
+        <motion.div
+          key={1}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, type: "spring" }}
@@ -128,7 +128,8 @@ function UserLogin({ handling, LoginBack }) {
           <p className={style.paragraph}>New User?</p>
         </motion.div>
         <div className={style.container}>
-          <motion.form key={2}
+          <motion.form
+            key={2}
             initial={{ x: -15, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6, type: "spring" }}
@@ -138,7 +139,7 @@ function UserLogin({ handling, LoginBack }) {
           >
             <div className={style.cont_container}>
               <label className={style.label} htmlFor="email" id="labEmail">
-                Your Email Address
+                Email Address
               </label>
               <input
                 placeholder="e.g. stephenking@lorem.com"
@@ -164,16 +165,18 @@ function UserLogin({ handling, LoginBack }) {
                 onFocus={handleFocus}
               />
             </div>
-            <motion.button key={3}
+            <motion.button
+              key={3}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 150 }}
               className={style.button}
             >
-              Sign in Securely{" "}
+              Sign in Securely
             </motion.button>
           </motion.form>
 
-          <motion.form key={4}
+          <motion.form
+            key={4}
             initial={{ x: 15, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6, type: "spring" }}
@@ -186,7 +189,8 @@ function UserLogin({ handling, LoginBack }) {
               <h3>✔ Access your saved items. </h3>
               <h3>✔ Instant access to your account.</h3>
             </div>
-            <motion.button key={5}
+            <motion.button
+              key={5}
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 150 }}
               className={style.button}

@@ -136,7 +136,7 @@ function MainHeader() {
                   session?.user ? classes.icon_user_log : classes.icon_user
                 }
               >
-                <Link href="/user/login">
+                <Link href="/user/logIn">
                   <UserIcon />
                 </Link>
               </div>

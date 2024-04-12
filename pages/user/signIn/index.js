@@ -1,4 +1,4 @@
-import UserSignIn from "@/components/user/UserSignIn";
+import UserSignIn from "@/components/forms/UserSignIn";
 import { useState, useContext } from "react";
 import { signIn } from "next-auth/react";
 import NotificationContext from "@/store/context/notification-context";
@@ -26,8 +26,8 @@ function SignIn() {
     setStorage(user);
     try {
       let response = await fetch(
-        "http://localhost:8080/events/user/new",
-        // "https://libraryapi-gtct.onrender.com/events/user/new",
+        // "http://localhost:8080/events/user/new",
+        "https://libraryapi-gtct.onrender.com/events/user/new",
         {
           method: "POST",
           body: JSON.stringify(user),

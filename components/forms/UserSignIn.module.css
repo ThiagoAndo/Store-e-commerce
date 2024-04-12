@@ -1,0 +1,48 @@
+.container {
+  width: 30%;
+  margin: 5rem auto;
+  padding: 2rem;
+  background: linear-gradient(90deg, #ffffff, #d1d0cf41);
+  border-radius: 8px;
+  box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.5);
+}
+
+.action {
+  display: flex;
+  justify-content: space-between;
+   padding-bottom: 2rem;
+  border-bottom: solid black 1px;
+  margin-bottom: 2rem;
+}
+.action > button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-right: 3px;
+}
+
+
+.input_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+
+
+.button {
+  width: 100%;
+  margin: auto;
+  height: 3rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.3rem;
+  border-radius: 4px;
+  border: none;
+  background: linear-gradient(90deg, #fd4715, #f9b241);
+  box-shadow: 0 0 12px rgba(242, 100, 18, 0.8);
+  color: #d9e2f1;
+  cursor: pointer;
+  margin: 2rem 0 1rem 0;
+}

@@ -1,10 +1,26 @@
-.cart-items {
+.cart_items {
   list-style: none;
   margin: 0;
   padding: 0;
   max-height: 20rem;
   overflow: auto;
-  color: #ffffff;
+  color: #000000;
+}
+.li_action {
+  display: flex;
+  justify-content: space-between;
+}
+.li_action > button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-right: 3px;
+}
+
+.li_action > button:hover {
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
 }
 
 .total {
@@ -12,13 +28,14 @@
   justify-content: space-between;
   align-items: center;
   font-size: 1.5rem;
-  margin: 1rem 0;
+  margin: 0.3rem 0 1rem 0;
   font-weight: bold;
+  color: #000000;
 }
 
 .my_value {
-  color: #ffffff;
-  text-shadow: 0.5px 0 #ffffff;
+  color: #000000;
+  text-shadow: 0.5px 0 #000000;
   letter-spacing: 2px;
   font-weight: bold;
 }
@@ -30,10 +47,10 @@
 .actions button {
   font: inherit;
   cursor: pointer;
-  background-color: transparent;
+  background-color: #e7e5e5;
   border: 1px solid #ff9b05;
-  padding: 0.5rem 2rem;
-  border-radius: 25px;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
   margin-left: 1rem;
 }
 

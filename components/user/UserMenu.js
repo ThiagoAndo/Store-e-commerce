@@ -37,17 +37,26 @@ function UserMenu() {
     dispatch(cartActions.toggle());
   }
 
-  function logoutHandler() {
+  async function logoutHandler() {
     dispatch(sendCartData(cart));
-    setTimeout(() => {
+    let myPromise = new Promise(function (myResolve, myReject) {
       localStorage.clear();
-    }, 900);
-    setTimeout(() => {
+      const id = localStorage.getItem("id");
+
+      if (!id) {
+        myResolve("OK");
+      } else {
+        myReject("Error");
+      }
+    });
+    const resolve = await myPromise;
+
+    if (resolve === "OK") {
       signOut({
         callbackUrl:
           "https://store-comerce-ahwgoy6xn-thiago-freitas-projects-0d31c9d5.vercel.app/",
       });
-    }, 1000);
+    }
   }
   return (
     <motion.div

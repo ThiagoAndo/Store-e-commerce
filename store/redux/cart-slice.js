@@ -64,6 +64,12 @@ const cartSlice = createSlice({
       record(state.items, state.totalQuantity);
       state.totalQuantity = totalQnt(state.items);
     },
+    removeAll(state) {
+      state.items.length = 0;
+      state.totalQuantity = 0;
+      localStorage.removeItem("cart");
+      localStorage.removeItem("qnt");
+    },
     toggle(state) {
       if (state.totalQuantity === 0) state.cartIsVisible = false;
       else state.cartIsVisible = !state.cartIsVisible;

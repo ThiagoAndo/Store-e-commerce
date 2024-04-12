@@ -1,18 +1,16 @@
-
 .h2_container {
   display: flex;
-  margin-top: 2rem;
-
+  margin-top: 4rem;
 }
 
 .container {
   display: flex;
   height: 70vh;
-  padding-top: .5rem;
-  margin-bottom: 3rem;
+  padding-top: 0.5rem;
+  margin-bottom: 5rem;
 }
 
-.cont_container{
+.cont_container {
   height: 15rem;
   display: flex;
   flex-direction: column;
@@ -22,13 +20,12 @@
 .paragraph {
   font-size: 1.5rem;
   width: 50%;
-  font-weight:900;
+  font-weight: 900;
   padding-left: 1rem;
 }
 
 .form h3 {
-  color: #ddd6cb;
-
+  color: #000000;
 }
 
 .form {
@@ -37,16 +34,16 @@
   align-content: flex-start;
   width: 50%;
   max-width: 50%;
-  margin: .5rem 1rem;
+  margin: 0.5rem 1rem;
   padding: 2rem;
-  background: linear-gradient(90deg, #2c1e19, #25200f);
+  background: linear-gradient(90deg, #ffffff, #d1d0cf41);
   border-radius: 8px;
   box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.5);
 }
 
 .label {
   font-size: 1.3rem;
-  color: #ddd6cb;
+  color: #000000;
   font-weight: bold;
 }
 
@@ -56,8 +53,8 @@
   padding: 0.5rem;
   font-size: 1.3rem;
   border-radius: 4px;
-  border: 1px solid #cfa69b;
-  background-color: #ddd6cb;
+  border: 1px solid #000000;
+  background-color: #fcf8f1;
   color: #142020;
 }
 
@@ -69,8 +66,7 @@
   border: none;
   background: linear-gradient(90deg, #fd4715, #f9b241);
   box-shadow: 0 0 12px rgba(242, 100, 18, 0.8);
-  color: #d9e2f1;
+  color: #ffffff;
   cursor: pointer;
   margin-top: 2rem;
 }
-
