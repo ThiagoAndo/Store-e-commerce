@@ -39,7 +39,7 @@ const Cart = () => {
     } else {
       dispatch(cartActions.toggle());
       localStorage.setItem("order", "ordering");
-      router.push("/user/logIn");
+      router.push("/user/login");
     }
   }
 
