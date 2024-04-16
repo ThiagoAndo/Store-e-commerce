@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect } from "react";
+import { Fragment, useContext } from "react";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { AnimatePresence } from "framer-motion";
@@ -9,6 +9,7 @@ import FilterHeader from "./filter-nav";
 import Footer from "./footer";
 import Cart from "../cart/cart";
 import UserMenu from "../user/UserMenu";
+import Modal from "../ui/modal/modal";
 
 function Layout(props) {
   const currentPath = usePathname();
@@ -19,7 +20,13 @@ function Layout(props) {
 
   return (
     <Fragment>
-      <AnimatePresence>{isVisible && <Cart />}</AnimatePresence>
+      <AnimatePresence>
+        {isVisible && (
+          <Modal>
+            <Cart />
+          </Modal>
+        )}
+      </AnimatePresence>
       <MainHeader />
       {currentPath === "/" ? <FilterHeader /> : null}
       <main>{props.children}</main>

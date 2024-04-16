@@ -7,11 +7,9 @@ import { useContext } from "react";
 import { ProductContext } from "@/store/context/products-context";
 import Image from "next/image";
 
-
-const CartItem = (props) => {
+const CartItem = ({ title, amount, price, id, isShow }) => {
   const dispatch = useDispatch();
   const store = useContext(ProductContext);
-  const { title, amount, price, id } = props;
   const [prt] = store.getProFiltered(id);
   let btnDisplay = null;
   if (amount === 1) btnDisplay = "🗑️";
@@ -53,22 +51,25 @@ const CartItem = (props) => {
           </div>
         </div>
         <div className={classes.actions}>
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: "spring" }}
-            onClick={removeItemHandler}
-          >
-            {btnDisplay}
-          </motion.button>
+          {isShow && (
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring" }}
+              onClick={removeItemHandler}
+            >
+              {btnDisplay}
+            </motion.button>
+          )}
           <button className={classes.amount}>x {amount}</button>
-
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: "spring" }}
-            onClick={addItemHandler}
-          >
-            +
-          </motion.button>
+          {isShow && (
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring" }}
+              onClick={addItemHandler}
+            >
+              +
+            </motion.button>
+          )}
         </div>
       </motion.li>
     )

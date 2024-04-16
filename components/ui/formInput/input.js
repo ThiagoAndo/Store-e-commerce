@@ -1,6 +1,6 @@
 import style from "./formInput.module.css";
 
-export default function Input({ id, ph, handleFocus }) {
+export default function Input({ id, ph, typeI ,handleFocus }) {
   let label = id.split("_");
 
   label =
@@ -9,7 +9,7 @@ export default function Input({ id, ph, handleFocus }) {
         label[0].slice(1, label[0].length) +
         " " +
         label[1][0].toUpperCase() +
-        label[1].slice(1, label[0].length)
+        label[1].slice(1, label[0].length+1)
       : id[0].toUpperCase() + id.slice(1, id.length);
 
   return (
@@ -22,6 +22,7 @@ export default function Input({ id, ph, handleFocus }) {
         name={id}
         className={style.input}
         placeholder={ph}
+        type={typeI}
         onFocus={handleFocus}
       />
     </div>

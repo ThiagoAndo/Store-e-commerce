@@ -1,111 +1,81 @@
-import { useRef, useContext, useEffect } from "react";
-import { useAnimate, stagger, motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { isEmailValid, isPasswordValid } from "@/helpers/functions";
+import { useInputAnimation } from "@/hooks/useInput";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import { isEmailValid, isPasswordValid } from "@/helpers/functions";
-import NotificationContext from "@/store/context/notification-context";
-
+import { inpuReg } from "@/helpers/inputInfo";
+import { useNotification } from "@/hooks/useNotification";
+import Input from "../ui/formInput/input";
 import style from "./UserLogin.module.css";
 
 function UserLogin({ handling, LoginBack }) {
-  const notificationCtx = useContext(NotificationContext);
-  const emailInputRef = useRef();
-  const passwortInputRef = useRef();
-  const [scope, animate] = useAnimate();
   const router = useRouter();
   const { data: session } = useSession();
+  const { focus, empty, scope } = useInputAnimation();
+  const { handle } = useNotification();
+  let user;
+  const fields = [];
+  fields.push(inpuReg[2]);
+  fields.push(inpuReg[3]);
+  const fieldNames = [
+    { label: "labemail_address", input: "email_address" },
+    { label: "labpassword", input: "password" },
+  ];
 
   function handleClick(e) {
     e.preventDefault();
     router.replace("/user/signIn");
   }
 
-  function handleFocus(e) {
-    const myTarget = "#" + e.target.id;
-    const labelTarget = "#lab" + e.target.id;
-    animate(
-      myTarget,
-      { background: "#ddd6cb", color: "#142020" },
-      { type: "spring", duration: 0.2 }
-    );
-    animate(
-      labelTarget,
-      { color: "#000000" },
-      { type: "spring", duration: 0.2 }
-    );
-  }
-
-  const handleEmpty = (label, input) => {
-    const inp = "#" + input;
-
-    animate(
-      inp,
-      { x: [-10, 0, 10, 0], background: "#FA8072", color: "#FA8072" },
-      { type: "spring", duration: 0.3, delay: stagger(0.05) }
-    );
-
-    animate(
-      "#" + label,
-      { x: [-10, 0, 10, 0], color: "#000000" },
-      { type: "spring", duration: 0.3, delay: stagger(0.05) }
-    );
-  };
-
   function loginHandler(e) {
     e.preventDefault();
-    let email = emailInputRef.current.value.trim().toLowerCase();
-    let password = passwortInputRef.current.value.trim();
+    const fd = new FormData(e.target);
+    user = Object.fromEntries(fd.entries());
+    let entries = [];
+    let index = 0;
+    let check = 0;
+    entries[0] = user.email_address.trim().toLowerCase();
+    entries[1] = user.password.trim();
 
-    function hadleNotification(field) {
-      notificationCtx.showNotification({
-        title: "Wrong Input:",
-        message: `Your ${field} is not valid. Make sure to enter a valid one!.`,
-        status: "error",
-      });
-    }
+    entries.map((field) => {
+      if (!field) {
+        empty(fieldNames[index]);
+        check++;
+      }
+      index++;
+    });
 
-    if (!email && !password) {
-      handleEmpty("labEmail", "Email");
-      handleEmpty("labPassword", "Password");
-      return;
-    } else if (!email) {
-      handleEmpty("labEmail", "Email");
-      return;
-    } else if (!password) {
-      handleEmpty("labPassword", "Password");
-      return;
-    }
+    if (check > 0) return;
 
-    if (!isEmailValid(email)) {
-      hadleNotification("email");
-      handleEmpty("labEmail", "Email");
+    if (!isEmailValid(entries[0])) {
+      handle("email");
+      empty(fieldNames[0]);
 
       return;
-    } else if (!isPasswordValid(password)) {
-      hadleNotification("password");
-      handleEmpty("labPassword", "Password");
+    } else if (!isPasswordValid(entries[1])) {
+      handle("password");
+      empty(fieldNames[1]);
 
       return;
-    } else if (isEmailValid(email) && isPasswordValid(password)) {
-      handling(email, password);
+    } else if (isEmailValid(entries[0]) && isPasswordValid(entries[1])) {
+      handling(entries[0], entries[1]);
     }
   }
 
   useEffect(() => {
     if (LoginBack?.message) {
-      notificationCtx.showNotification({
-        title: "Not Found:",
-        message: " Email might not be right, Or user has not been registered",
-        status: "error",
-      });
-
       if (LoginBack.message.slice(0, 5) === "Could") {
-        handleEmpty("labEmail", "Email");
-        emailInputRef.current.value = "";
+        handle(
+          null,
+          "email might not be right, Or user has not been registered",
+          "Not Found"
+        );
+        empty(fieldNames[0]);
         return;
       } else if (LoginBack.message.slice(0, 5) === "Wrong") {
-        handleEmpty("labPassword", "Password");
-        passwortInputRef.current.value = "";
+        empty(fieldNames[1]);
+        handle(null, "wrong password", null);
         return;
       }
     }
@@ -138,32 +108,15 @@ function UserLogin({ handling, LoginBack }) {
             ref={scope}
           >
             <div className={style.cont_container}>
-              <label className={style.label} htmlFor="email" id="labEmail">
-                Email Address
-              </label>
-              <input
-                placeholder="e.g. stephenking@lorem.com"
-                className={style.input}
-                type="text"
-                id="Email"
-                ref={emailInputRef}
-                onFocus={handleFocus}
-              />
-              <label
-                className={style.label}
-                htmlFor="password"
-                id="labPassword"
-              >
-                Password
-              </label>
-              <input
-                placeholder="Minimum of eight characters"
-                className={style.input}
-                type="text"
-                id="Password"
-                ref={passwortInputRef}
-                onFocus={handleFocus}
-              />
+              {fields.map((inp) => (
+                <Input
+                  key={inp.id}
+                  id={inp.id}
+                  ph={inp.ph}
+                  typeI={inp.typeI}
+                  handleFocus={focus}
+                />
+              ))}
             </div>
             <motion.button
               key={3}
