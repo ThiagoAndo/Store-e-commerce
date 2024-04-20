@@ -6,8 +6,8 @@ export function useNotification() {
 
   const hadleNotification = (
     field,
-    passed = null,
     title = null,
+    passed = null,
     status = null
   ) => {
     const thisTitle = title || "Wrong Input:";
@@ -21,5 +21,5 @@ export function useNotification() {
     });
   };
 
-  return { handle: hadleNotification };
+  return { notification: hadleNotification };
 }

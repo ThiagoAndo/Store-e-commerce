@@ -28,6 +28,11 @@ function Products(props) {
     }
   }, [session]);
 
+    useEffect(() => {
+      localStorage.removeItem("order");
+
+    }, []);
+
   if (!products.hasOwnProperty("error")) {
     return <ProductGrid />;
   } else {

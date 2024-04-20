@@ -1,4 +1,5 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInputAnimation } from "@/hooks/useInput";
 import { useNotification } from "@/hooks/useNotification";
@@ -23,14 +24,15 @@ import {
 } from "@/helpers/functions";
 
 function UserSignIn({ submitHandler, feedBack }) {
-  const inputRef = useRef();
-  const inputRef2 = useRef();
-  const router = useRouter();
-  const [isGuest, setIsGuest] = useState(false);
+  const cartItems = useSelector((state) => state.cart.items);
   const { focus, empty, scope } = useInputAnimation();
-  const { handle } = useNotification();
+  const [isGuest, setIsGuest] = useState(false);
+  const [isOrdering, setIsOrdering] = useState(null);
   const [checked, setChecked] = useState("e-money");
+  const { notification } = useNotification();
+  const router = useRouter();
   const inpCheck = inpuReg.slice();
+
   inpCheck.pop();
   const namesCheck = [
     ...fieldNames.slice(0, 3),
@@ -47,6 +49,17 @@ function UserSignIn({ submitHandler, feedBack }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (cartItems.length <= 0 && isGuest) {
+      notification(
+        null,
+        "Empty cart:",
+        `You have not choose any product.`,
+        "pending"
+      );
+      return;
+    }
+
     const entries = gatherData(e);
     let index = 0;
     let check = 0;
@@ -79,13 +92,13 @@ function UserSignIn({ submitHandler, feedBack }) {
 
     if (!email) {
       empty(fieldNames[2]);
-      handle("email");
+      notification("email");
     } else if (!name) {
-      handle("name", "make sure to write one name per field.");
+      notification("name", "make sure to write one name per field.");
       empty(fieldNames[0]);
       empty(fieldNames[1]);
     } else if (!password && !isGuest) {
-      handle("password");
+      notification("password");
       empty(fieldNames[3]);
     }
     if (email && name && password && !isGuest) {
@@ -99,20 +112,24 @@ function UserSignIn({ submitHandler, feedBack }) {
   }
 
   useEffect(() => {
-    const isOrdering = localStorage.getItem("order");
     if (feedBack?.message) {
-      handle(null, feedBack.message, "Invalid Action:");
+      notification(null, feedBack.message, "Invalid Action:");
       return;
     } else if (feedBack?.email_address) {
-      handle(null, "User registered successfully!", "Registered:", "success");
-
-      if (isOrdering === "ordering") {
-        router.replace("/addressForm");
-      } else {
-        router.replace("/");
-      }
+      notification(
+        null,
+        "User registered successfully!",
+        "Registered:",
+        "success"
+      );
     }
-  }, [feedBack]);
+
+    const order = localStorage.getItem("order");
+    if (order) {
+      setIsOrdering(true);
+      setIsGuest(true);
+    }
+  }, [feedBack, setIsOrdering, setIsGuest, notification]);
 
   const singIn = (
     <>
@@ -125,13 +142,15 @@ function UserSignIn({ submitHandler, feedBack }) {
         <form onSubmit={handleSubmit} ref={scope}>
           <div className={style.action}>
             <h2>REGISTRATION</h2>
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 250 }}
-              onClick={handleGuest}
-            >
-              Guest checkout
-            </motion.a>
+            {isOrdering && (
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 250 }}
+                onClick={handleGuest}
+              >
+                Guest checkout
+              </motion.a>
+            )}
           </div>
           <div className={style.input_container}>
             {inpuReg.map((inp) => (
@@ -229,10 +248,11 @@ function UserSignIn({ submitHandler, feedBack }) {
             </motion.button>
           </form>
         </div>
-
-        <div className={style_2.summary}>
-          <Cart cart={false} />
-        </div>
+        {cartItems.length > 0 && (
+          <div className={style_2.summary}>
+            <Cart cart={false} />
+          </div>
+        )}
       </motion.div>
     </AnimatePresence>
   );

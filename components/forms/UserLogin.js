@@ -64,6 +64,7 @@ function UserLogin({ handling, LoginBack }) {
   }
 
   useEffect(() => {
+    const isOrdering = localStorage.getItem('order')
     if (LoginBack?.message) {
       if (LoginBack.message.slice(0, 5) === "Could") {
         handle(
@@ -79,8 +80,10 @@ function UserLogin({ handling, LoginBack }) {
         return;
       }
     }
-    if (session) {
+    if (session && !isOrdering) {
       router.replace("/");
+    }else if (session && isOrdering) {
+      router.replace("/user/signIn");
     }
   }, [LoginBack, session]);
 

@@ -6,22 +6,22 @@ import { userActions } from "@/store/redux/user.slice";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { ProductContext } from "@/store/context/products-context";
+import { useNotification } from "@/hooks/useNotification";
 import Link from "next/link";
 import classes from "./main-header.module.css";
 import SearchBar from "./search-bar";
 import UserIcon from "../ui/user/user-icon";
 import CartIcon from "../ui/cart/cart-icon";
-import NotificationContext from "@/store/context/notification-context";
 let stp = false;
 
 function MainHeader() {
   const currentPath = usePathname();
   const dispatch = useDispatch();
   const store = useContext(ProductContext);
-  const notificationCtx = useContext(NotificationContext);
   const total = useSelector((state) => state.cart.totalQuantity);
   const [cartClass, setCartClass] = useState(classes.icon_cart);
   const { data: session } = useSession();
+  const { notification } = useNotification();
 
   useEffect(() => {
     if (stp) {
@@ -50,11 +50,12 @@ function MainHeader() {
 
   function handleToggle(click) {
     if (total === 0 && click === "click") {
-      notificationCtx.showNotification({
-        title: "Empty cart:",
-        message: `You have not choose any product.`,
-        status: "pending",
-      });
+      notification(
+        null,
+        "Empty cart:",
+        `You have not choose any product.`,
+        "pending"
+      );
     }
     dispatch(cartActions.toggle());
   }
