@@ -1,0 +1,24 @@
+.radio {
+  height: 2.5rem;
+  border: 1px solid #ababab;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding-left: 0.5rem;
+}
+
+.radio input {
+  cursor: pointer;
+}
+
+.isClicked {
+  border-color: #ff9b05;
+}
+
+.radio input[type="radio"]:checked {
+  accent-color: #ff9b05;
+  border-color: #ff9b05;
+}

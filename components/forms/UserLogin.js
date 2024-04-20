@@ -4,7 +4,7 @@ import { useInputAnimation } from "@/hooks/useInput";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import { inpuReg } from "@/helpers/inputInfo";
+import { inpuReg } from "@/components/ui/formInput/inputInfo";
 import { useNotification } from "@/hooks/useNotification";
 import Input from "../ui/formInput/input";
 import style from "./UserLogin.module.css";

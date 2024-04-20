@@ -1,11 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInputAnimation } from "@/hooks/useInput";
 import { useNotification } from "@/hooks/useNotification";
 import { useRouter } from "next/router";
-import { inpuReg } from "@/helpers/inputInfo";
-import { inpuShip } from "@/helpers/inputInfo";
-import { inpuCheck } from "@/helpers/inputInfo";
+import Radio from "../ui/formInput/inputRadio";
+import {
+  inpuReg,
+  inpuShip,
+  inpuPay,
+  fieldNames,
+} from "@/components/ui/formInput/inputInfo";
+import { gatherData } from "@/helpers/functions";
 import Cart from "../cart/cart";
 import Input from "../ui/formInput/input";
 import style from "./UserSignIn.module.css";
@@ -18,19 +23,23 @@ import {
 } from "@/helpers/functions";
 
 function UserSignIn({ submitHandler, feedBack }) {
+  const inputRef = useRef();
+  const inputRef2 = useRef();
   const router = useRouter();
   const [isGuest, setIsGuest] = useState(false);
   const { focus, empty, scope } = useInputAnimation();
   const { handle } = useNotification();
-
-  let entries = [];
-
-  const fieldNames = [
-    { label: "labemail_address", input: "email_address" },
-    { label: "labfirst_name", input: "first_name" },
-    { label: "lablast_name", input: "last_name" },
-    { label: "labpassword", input: "password" },
+  const [checked, setChecked] = useState("e-money");
+  const inpCheck = inpuReg.slice();
+  inpCheck.pop();
+  const namesCheck = [
+    ...fieldNames.slice(0, 3),
+    ...fieldNames.slice(4, fieldNames.length),
   ];
+
+  const onOptionChange = (val) => {
+    setChecked(val);
+  };
 
   function handleGuest() {
     setIsGuest(!isGuest);
@@ -38,55 +47,54 @@ function UserSignIn({ submitHandler, feedBack }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const fd = new FormData(e.target);
-    const user = Object.fromEntries(fd.entries());
-
-    const acquisitionChannel = fd.getAll("acquisition");
-    const data = Object.fromEntries(fd.entries());
-    data.acquisition = acquisitionChannel;
-
+    const entries = gatherData(e);
     let index = 0;
     let check = 0;
 
-    let line_one = user.line_one.trim().toLowerCase();
-    let line_two = user.line_two.trim().toLowerCase();
-    let town_city = user.town_city.trim().toLowerCase();
-    let constry_state = user.constry_state.trim();
+    function confEmpty(fields) {
+      entries.map((field) => {
+        if (field === "") {
+          empty(fields[index]);
+          check++;
+        }
+        index++;
+      });
+    }
+    confEmpty(
+      isGuest === true
+        ? namesCheck
+        : checked === "e-money"
+        ? fieldNames
+        : [...fieldNames[fieldNames.length - 2]]
+    );
 
-    entries[0] = user.email_address.trim().toLowerCase();
-    entries[1] = user.first_name.trim().toLowerCase();
-    entries[2] = user.last_name.trim().toLowerCase();
-    entries[3] = user.password.trim();
-
-    entries.map((field) => {
-      if (!field) {
-        empty(fieldNames[index]);
-        check++;
-      }
-      index++;
-    });
     if (check > 0) return;
 
-    entries[1] = entries[1][0].toUpperCase() + entries[1].slice(1);
-    entries[2] = entries[2][0].toUpperCase() + entries[2].slice(1);
+    const first = entries[0][0].toUpperCase() + entries[0].slice(1);
+    const last = entries[1][0].toUpperCase() + entries[1].slice(1);
 
-    const email = isEmailValid(entries[0]);
-    const name = isNameValid(entries[1] + " " + entries[2]);
+    const email = isEmailValid(entries[2]);
+    const name = isNameValid(first + " " + last);
     const password = isPasswordValid(entries[3]);
 
     if (!email) {
-      empty(fieldNames[0]);
+      empty(fieldNames[2]);
       handle("email");
     } else if (!name) {
       handle("name", "make sure to write one name per field.");
+      empty(fieldNames[0]);
       empty(fieldNames[1]);
-      empty(fieldNames[2]);
-    } else if (!password) {
+    } else if (!password && !isGuest) {
       handle("password");
       empty(fieldNames[3]);
     }
-    if (email && name && password) {
-      // submitHandler(user);
+    if (email && name && password && !isGuest) {
+      submitHandler({
+        first_name: first,
+        last_name: last,
+        email_address: entries[2],
+        password: entries[3],
+      });
     }
   }
 
@@ -151,29 +159,77 @@ function UserSignIn({ submitHandler, feedBack }) {
   const checkOut = (
     <AnimatePresence>
       <motion.div
-        className={style.container + " " + style_2.container}
+        className={style_2.check_pag}
         initial={{ y: 200, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, type: "spring" }}
       >
-        <form onSubmit={handleSubmit}>
-          <div className={style.action}>
-            <h2>CHECKOUT</h2>
-          </div>
-          <div className={style_2.inf}>
-            {inpuCheck.map((inp) => (
-              <Input
-                key={inp.id}
-                id={inp.id}
-                ph={inp.ph}
-                typeI={inp.type}
-                styleL={style.label}
-                styleP={style.input}
-                handleFocus={focus}
+        <div className={style.container + " " + style_2.container}>
+          <form onSubmit={handleSubmit} ref={scope}>
+            <div className={style.action}>
+              <h2>CHECKOUT</h2>
+            </div>
+            <p>BILLING DETAILS</p>
+            <div className={style_2.detail}>
+              {inpCheck.map((inp) => (
+                <Input
+                  key={inp.id}
+                  id={inp.id}
+                  ph={inp.ph}
+                  typeI={inp.type}
+                  handleFocus={focus}
+                />
+              ))}
+            </div>
+            <p>SHIPPING INFO</p>
+            <div className={style_2.shipping}>
+              {inpuShip.map((inp) => (
+                <Input
+                  key={inp.id}
+                  id={inp.id}
+                  ph={inp.ph}
+                  typeI={inp.type}
+                  handleFocus={focus}
+                />
+              ))}
+            </div>
+            <p>SHIPPING INFO</p>
+            <div className={style_2.payment}>
+              <p>Payment Method </p>
+              <Radio
+                id={"e-money"}
+                lab={"e-money"}
+                onChoice={onOptionChange}
+                check={checked}
               />
-            ))}
-          </div>
-        </form>
+              <Radio
+                id={"cash"}
+                name={"acquisition"}
+                lab={"Cash on Delivery"}
+                onChoice={onOptionChange}
+                check={checked}
+              />
+              {inpuPay.map((inp) => (
+                <Input
+                  key={inp.id}
+                  id={inp.id}
+                  ph={inp.ph}
+                  typeI={inp.type}
+                  dis={checked === "e-money" ? false : true}
+                  handleFocus={focus}
+                />
+              ))}
+            </div>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 150 }}
+              className={style.button}
+            >
+              CONTINUE & PAY
+            </motion.button>
+          </form>
+        </div>
+
         <div className={style_2.summary}>
           <Cart cart={false} />
         </div>

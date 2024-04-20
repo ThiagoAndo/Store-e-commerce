@@ -52,3 +52,12 @@ export function setStorage(data) {
   if (data?.address) localStorage.setItem("n", data.id);
 }
 
+export function gatherData(e) {
+  let entries = [];
+  const fd = new FormData(e.target);
+  const data = Object.fromEntries(fd.entries());
+  for (const property in data) {
+    entries.push(data[property].trim().toLowerCase());
+  }
+  return entries;
+}

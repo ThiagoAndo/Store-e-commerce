@@ -2,9 +2,9 @@
   width: 30%;
   margin: 5rem auto;
   padding: 2rem;
-  background: linear-gradient(90deg, #ffffff, #d1d0cf41);
+  background: linear-gradient(90deg, #ffffff, #dbdbdb41);
   border-radius: 8px;
-  box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.5);
 }
 
 .action {

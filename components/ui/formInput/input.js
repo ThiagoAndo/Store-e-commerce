@@ -1,6 +1,6 @@
-import style from "./formInput.module.css";
+import style from "./input.module.css";
 
-export default function Input({ id, ph, typeI ,handleFocus }) {
+export default function Input({ id, ph, typeI ,handleFocus, dis=false}) {
   let label = id.split("_");
 
   label =
@@ -24,6 +24,7 @@ export default function Input({ id, ph, typeI ,handleFocus }) {
         placeholder={ph}
         type={typeI}
         onFocus={handleFocus}
+         disabled={dis}
       />
     </div>
   );
