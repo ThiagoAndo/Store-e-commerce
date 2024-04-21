@@ -171,11 +171,11 @@ function FilterHeader() {
               onClick={handleBtn}
               variants={{
                 hidden: { opacity: 0 },
-                visible: { opacity: 1, scale: [0.8, 1.3, 1] },
+                visible: { opacity: 1, scale: [0.3, 0.6, 0.9,1.5, 1] },
               }}
               initial="hidden"
               animate="visible"
-              exit={{ opacity: 0 }}
+              exit={{ opacity: 1, scale: [1, 0.9, 0.6, 0.3, 0] }}
               transition={{ duration: 0.5, type: "spring" }}
             >
               Up
