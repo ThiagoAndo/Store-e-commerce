@@ -1,6 +1,6 @@
 import ProductGrid from "../components/product/product-grid";
 import { getAllProducts } from "../helpers/fetchProducts";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../store/context/products-context";
 import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
@@ -8,10 +8,16 @@ import { getStorageData, fetchCartData } from "@/helpers/cart-actions";
 
 function Products(props) {
   const { products } = props;
+  const [scrollPosition, setScrollPosition] = useState(0);
   const items = useSelector((state) => state.cart.items);
-  const dispatch = useDispatch();
-  const { data: session } = useSession();
   const store = useContext(ProductContext);
+  const { data: session } = useSession();
+  const dispatch = useDispatch();
+
+  const handleScroll = () => {
+    const position = window.scrollY;
+    setScrollPosition(position);
+  };
 
   useEffect(() => {
     if (!products.hasOwnProperty("error")) {
@@ -28,10 +34,39 @@ function Products(props) {
     }
   }, [session]);
 
-    useEffect(() => {
-      localStorage.removeItem("order");
+  useEffect(() => {
+    localStorage.removeItem("order");
+    let timer1 = setTimeout(
+      () => {
+        localStorage.setItem("position", scrollPosition);
+      },
 
-    }, []);
+      200
+    );
+
+    return () => {
+      clearTimeout(timer1);
+    };
+  }, [scrollPosition]);
+
+
+  useEffect(() => {
+    let position = localStorage.getItem("position");
+    if (!position) {
+      position = window.scrollY;
+    }
+    localStorage.removeItem("position");
+    window.scrollTo({
+      top: position,
+    });
+    localStorage.removeItem("position");
+    setInterval(() => {
+      window.addEventListener("scroll", handleScroll, { passive: true });
+    }, 500);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   if (!products.hasOwnProperty("error")) {
     return <ProductGrid />;

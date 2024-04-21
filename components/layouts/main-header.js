@@ -80,7 +80,7 @@ function MainHeader() {
           transition={{ type: "spring", duration: 0.3 }}
           onClick={handleClick}
         >
-          <Link className={classes.link} href="/">
+          <Link className={classes.link} href="/" >
             {currentPath.includes("product") ? " ⬅ Back" : "Next Store"}
           </Link>
         </motion.div>

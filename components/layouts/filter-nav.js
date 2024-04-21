@@ -1,13 +1,12 @@
-import classes from "./filter-nav.module.css";
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "@/store/context/products-context";
+import classes from "./filter-nav.module.css";
 import {
   motion,
   AnimatePresence,
   useScroll,
   useTransform,
 } from "framer-motion";
-
 function FilterHeader() {
   const store = useContext(ProductContext);
   const { scrollY } = useScroll();
@@ -17,26 +16,21 @@ function FilterHeader() {
     const position = window.scrollY;
     setScrollPosition(position);
   };
-
   const handleBtn = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
-
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
   function handleClick(num) {
     store.getFiltered(num);
   }
-
   return (
     <AnimatePresence>
       <motion.nav
@@ -99,7 +93,6 @@ function FilterHeader() {
               Women
             </motion.button>
           </li>
-
           <li>
             <motion.button
               whileHover={{
@@ -171,7 +164,7 @@ function FilterHeader() {
               onClick={handleBtn}
               variants={{
                 hidden: { opacity: 0 },
-                visible: { opacity: 1, scale: [0.3, 0.6, 0.9,1.5, 1] },
+                visible: { opacity: 1, scale: [0.3, 0.6, 0.9, 1.5, 1] },
               }}
               initial="hidden"
               animate="visible"
@@ -186,5 +179,4 @@ function FilterHeader() {
     </AnimatePresence>
   );
 }
-
 export default FilterHeader;

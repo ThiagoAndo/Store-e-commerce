@@ -6,25 +6,21 @@
   padding: 1rem 0;
   margin: 1rem 0 0.5rem;
 }
-
 .summary {
   width: 13rem;
   display: flex;
   align-items: center;
 }
-
 .summary > div {
   margin-left: 0.5rem;
   display: flex;
   flex-direction: column;
   gap: 2.1rem;
 }
-
 .price {
   color: #000000;
   font-weight: bold;
 }
-
 .amount {
   font-weight: bold;
   border: 1px solid #ccc;
@@ -33,18 +29,15 @@
   font-size: 1rem;
   color: #000000;
 }
-
 .actions {
   display: flex;
   flex-direction: column;
 }
-
 @media (min-width: 768px) {
   .actions {
     flex-direction: row;
   }
 }
-
 .cart_item button {
   font: inherit;
   font-weight: bold;
@@ -59,7 +52,6 @@
   margin: 0.25rem;
   background-color: #e7e5e5;
 }
-
 .cart_item button:hover,
 .cart_item button:active {
   color: #000000;

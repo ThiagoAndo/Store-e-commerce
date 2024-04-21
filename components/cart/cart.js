@@ -1,14 +1,11 @@
-import classes from "./cart.module.css";
 import { useSelector, useDispatch } from "react-redux";
+import { AnimatePresence, motion } from "framer-motion";
 import { cartActions } from "@/store/redux/cart-slice";
 import { formatValue } from "@/helpers/functions";
-import { AnimatePresence, motion } from "framer-motion";
-import { useContext } from "react";
-import { ProductContext } from "@/store/context/products-context";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import fetchUserAdd from "@/helpers/fetchUserAdrress";
-
+import classes from "./cart.module.css";
 import CartItem from "./cart-item";
 const Cart = ({ cart = true }) => {
   const cartItems = useSelector((state) => state.cart.items);
@@ -17,15 +14,13 @@ const Cart = ({ cart = true }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { data: session } = useSession();
-
   async function orderStorage() {
     if (session) {
       const id = localStorage.getItem("id");
       const ret = await fetchUserAdd(id);
-
       if (ret?.message) {
         dispatch(cartActions.toggle());
-        localStorage.setItem("order", "no_address");
+        localStorage.setItem("addresss", "no_address");
         router.push("/user/signIn");
       } else {
         localStorage.setItem("order", "ordering");
@@ -38,15 +33,12 @@ const Cart = ({ cart = true }) => {
       router.push("/user/login");
     }
   }
-
   function handleRemove() {
     dispatch(cartActions.removeAll());
   }
-
-  const handleClose = () => {
+  function handleClose() {
     dispatch(cartActions.toggle());
-  };
-
+  }
   return (
     <>
       <AnimatePresence>
@@ -75,7 +67,6 @@ const Cart = ({ cart = true }) => {
           ))}
         </ul>
       </AnimatePresence>
-
       <div className={classes.total}>
         <span>Total Amount</span>
         <span className={classes.my_value}>{formatValue(total)}</span>
@@ -103,5 +94,4 @@ const Cart = ({ cart = true }) => {
     </>
   );
 };
-
 export default Cart;

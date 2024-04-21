@@ -1,12 +1,11 @@
-import classes from "./cart-item.module.css";
+import { ProductContext } from "@/store/context/products-context";
 import { useDispatch } from "react-redux";
 import { cartActions } from "@/store/redux/cart-slice";
 import { formatValue } from "@/helpers/functions";
 import { motion } from "framer-motion";
 import { useContext } from "react";
-import { ProductContext } from "@/store/context/products-context";
+import classes from "./cart-item.module.css";
 import Image from "next/image";
-
 const CartItem = ({ title, amount, price, id, isShow }) => {
   const dispatch = useDispatch();
   const store = useContext(ProductContext);
@@ -14,11 +13,9 @@ const CartItem = ({ title, amount, price, id, isShow }) => {
   let btnDisplay = null;
   if (amount === 1) btnDisplay = "🗑️";
   else btnDisplay = "-";
-
   const removeItemHandler = () => {
     dispatch(cartActions.removeItemFromCart(id));
   };
-
   const addItemHandler = () => {
     dispatch(
       cartActions.addItemToCart({
@@ -28,7 +25,6 @@ const CartItem = ({ title, amount, price, id, isShow }) => {
       })
     );
   };
-
   return (
     prt && (
       <motion.li
@@ -75,5 +71,4 @@ const CartItem = ({ title, amount, price, id, isShow }) => {
     )
   );
 };
-
 export default CartItem;
