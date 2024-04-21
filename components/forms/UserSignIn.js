@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInputAnimation } from "@/hooks/useInput";
 import { useNotification } from "@/hooks/useNotification";
-import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+
 import Radio from "../ui/formInput/inputRadio";
 import {
   inpuReg,
@@ -30,7 +31,8 @@ function UserSignIn({ submitHandler, feedBack }) {
   const [isOrdering, setIsOrdering] = useState(null);
   const [checked, setChecked] = useState("e-money");
   const { notification } = useNotification();
-  const router = useRouter();
+  const { data: session } = useSession();
+
   const inpCheck = inpuReg.slice();
 
   inpCheck.pop();
@@ -41,6 +43,18 @@ function UserSignIn({ submitHandler, feedBack }) {
 
   const onOptionChange = (val) => {
     setChecked(val);
+    if (val != "e-money") {
+          focus({
+        target: {
+          id: namesCheck[namesCheck.length - 1].input,
+        },
+      });
+           focus({
+             target: {
+               id: namesCheck[namesCheck.length - 2].input,
+             },
+           });
+    }
   };
 
   function handleGuest() {
@@ -125,9 +139,10 @@ function UserSignIn({ submitHandler, feedBack }) {
     }
 
     const order = localStorage.getItem("order");
-    if (order) {
-      setIsOrdering(true);
+    if (order && session) {
       setIsGuest(true);
+    } else if (order && !session) {
+      setIsOrdering(true);
     }
   }, [feedBack, setIsOrdering, setIsGuest, notification]);
 
