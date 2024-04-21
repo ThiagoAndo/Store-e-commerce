@@ -1,11 +1,9 @@
 import { useAnimate, stagger } from "framer-motion";
-
 export function useInputAnimation() {
   const [scope, animate] = useAnimate();
-
-  function handleFocus(e) {
-    const myTarget = "#" + e.target.id;
-    const labelTarget = "#lab" + e.target.id;
+  function handleFocus(e, tar = null, lab = null) {
+    const myTarget = tar || "#" + e.target.id;
+    const labelTarget = lab || "#lab" + e.target.id;
     animate(
       myTarget,
       { background: "#ddd6cb", color: "#142020" },

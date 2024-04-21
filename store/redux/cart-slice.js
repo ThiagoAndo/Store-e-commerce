@@ -20,12 +20,16 @@ const cartSlice = createSlice({
     cartIsVisible: false,
     totalCart: 0,
     createAt: null,
+    oneTimeReplace: 0,
   },
   reducers: {
     replaceCart(state, action) {
-      state.totalQuantity = totalQnt(action.payload.items);
-      state.items = action.payload.items;
-      state.totalCart = some(action.payload.items);
+      if (!state.oneTimeReplace > 0) {
+        state.totalQuantity = totalQnt(action.payload.items);
+        state.items = action.payload.items;
+        state.totalCart = some(action.payload.items);
+      }
+      state.oneTimeReplace++;
     },
     addItemToCart(state, action) {
       const newItem = action.payload;
