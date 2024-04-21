@@ -12,7 +12,7 @@ function FilterHeader() {
   const store = useContext(ProductContext);
   const { scrollY } = useScroll();
   const [scrollPosition, setScrollPosition] = useState(0);
-  const ul = useTransform(scrollY, [0, 30, 130], ["70%", "90%", "95%"]);
+  const navWidth = useTransform(scrollY, [0, 30, 130], ["70%", "90%", "95%"]);
   const handleScroll = () => {
     const position = window.scrollY;
     setScrollPosition(position);
@@ -56,7 +56,7 @@ function FilterHeader() {
         animate="visible"
         transition={{ duration: 0.3, type: "spring" }}
       >
-        <motion.ul className={classes.navigation} style={{ width: ul }}>
+        <motion.ul className={classes.navigation} style={{ width: navWidth }}>
           <li>
             <motion.button
               whileHover={{
@@ -164,19 +164,24 @@ function FilterHeader() {
             </motion.button>
           </li>
         </motion.ul>
-        {scrollPosition >= 700 ? (
-          <motion.button
-            className={classes.up_btn}
-            onClick={handleBtn}
-            variants={{
-              hidden: { opacity: 0, scale: 0.5 },
-              visible: { opacity: 1, scale: [0.8, 1.3, 1] },
-            }}
-            transition={{ type: "spring", duration: 0.4 }}
-          >
-            Up
-          </motion.button>
-        ) : null}
+        <AnimatePresence>
+          {scrollPosition >= 700 ? (
+            <motion.button
+              className={classes.up_btn}
+              onClick={handleBtn}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, scale: [0.8, 1.3, 1] },
+              }}
+              initial="hidden"
+              animate="visible"
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, type: "spring" }}
+            >
+              Up
+            </motion.button>
+          ) : null}
+        </AnimatePresence>
       </motion.nav>
     </AnimatePresence>
   );

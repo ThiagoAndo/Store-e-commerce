@@ -15,8 +15,6 @@ const Cart = ({ cart = true }) => {
   const cartQnt = useSelector((state) => state.cart.totalQuantity);
   const total = useSelector((state) => state.cart.totalCart);
   const dispatch = useDispatch();
-  const store = useContext(ProductContext);
-  const prts = store.products;
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -77,32 +75,30 @@ const Cart = ({ cart = true }) => {
           ))}
         </ul>
       </AnimatePresence>
-      
-        
-          <div className={classes.total}>
-            <span>Total Amount</span>
-            <span className={classes.my_value}>{formatValue(total)}</span>
-          </div>
-          {cart && (
-          <div className={classes.actions}>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 250 }}
-              className={classes["button--alt"]}
-              onClick={handleClose}
-            >
-              Close
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring" }}
-              className={classes.button}
-              onClick={orderStorage}
-            >
-              Order
-            </motion.button>
-          </div>
-        
+
+      <div className={classes.total}>
+        <span>Total Amount</span>
+        <span className={classes.my_value}>{formatValue(total)}</span>
+      </div>
+      {cart && (
+        <div className={classes.actions}>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 250 }}
+            className={classes["button--alt"]}
+            onClick={handleClose}
+          >
+            Close
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring" }}
+            className={classes.button}
+            onClick={orderStorage}
+          >
+            Order
+          </motion.button>
+        </div>
       )}
     </>
   );
