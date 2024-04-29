@@ -21,11 +21,11 @@ const Cart = ({ cart = true }) => {
       if (ret?.message) {
         dispatch(cartActions.toggle());
         localStorage.setItem("addresss", "no_address");
-        router.push("/user/signIn");
+        router.push("/checkout");
       } else {
-        localStorage.setItem("order", "ordering");
+        localStorage.setItem("addresss", ret);
         dispatch(cartActions.toggle());
-        router.push("/user/signIn");
+        router.push("/checkout");
       }
     } else {
       dispatch(cartActions.toggle());
@@ -33,6 +33,8 @@ const Cart = ({ cart = true }) => {
       router.push("/user/login");
     }
   }
+
+
   function handleRemove() {
     dispatch(cartActions.removeAll());
   }

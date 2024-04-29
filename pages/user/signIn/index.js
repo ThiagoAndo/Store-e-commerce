@@ -1,24 +1,29 @@
-import UserSignIn from "@/components/forms/UserSignIn";
-import { useState, useContext } from "react";
+import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
-import NotificationContext from "@/store/context/notification-context";
 import pkg from "bcryptjs";
 const { hash } = pkg;
 import uniqid from "uniqid";
 import { getCurrentDate } from "../../../helpers/functions";
 import { setStorage } from "../../../helpers/functions";
+import { useNotification } from "@/hooks/useNotification";
+import UserSignIn from "@/components/forms/UserSignIn";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 function SignIn() {
   const [feedbackItems, setFeedbackItems] = useState();
-  const notificationCtx = useContext(NotificationContext);
+  const [isOrdering, setIsOrdering] = useState(null);
+  const { notification } = useNotification();
+  const [isGuest, setIsGuest] = useState(true);
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  function handleGuest() {
+    router.replace("/checkout");
+  }
 
   async function submitFormHandler(user) {
-    notificationCtx.showNotification({
-      title: "Sending Request:",
-      message: `Registering new user.`,
-      status: "pending",
-    });
-
+    notification(null, "Sending Request:", "Registering new user", "pending");
     user.password = await hash(user.password, 12);
     user.id = uniqid();
     user.created_at = getCurrentDate();
@@ -54,16 +59,36 @@ function SignIn() {
         });
       }
     } catch (error) {
-      notificationCtx.showNotification({
-        title: "Sending Request:",
-        message: error.message,
-        status: "error",
-      });
+      notification(null, "Sending Request:", error.message, "error");
     }
   }
 
+  useEffect(() => {
+    if (feedbackItems?.message) {
+      notification(null, feedbackItems.message, "Invalid Action:");
+      return;
+    } else if (feedbackItems?.email_address) {
+      router.replace("/");
+      notification(
+        null,
+        "User registered successfully!",
+        "Registered:",
+        "success"
+      );
+    }
+
+    const order = localStorage.getItem("order");
+    if (order) {
+      setIsOrdering(true);
+    }
+  }, [feedbackItems]);
+
   return (
-    <UserSignIn submitHandler={submitFormHandler} feedBack={feedbackItems} />
+    <UserSignIn
+      isOrdering={isOrdering}
+      handleGuest={handleGuest}
+      handleSubmit={submitFormHandler}
+    />
   );
 }
 

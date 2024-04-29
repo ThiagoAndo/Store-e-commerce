@@ -21,8 +21,6 @@ export const inpuReg = [
   },
 ];
 
-
-
 export const inpuShip = [
   {
     id: "line_one",
@@ -59,11 +57,15 @@ export const inpuPay = [
   },
 ];
 
-export const fieldNames = [
+export const fieldRegister = [
   { label: "labfirst_name", input: "first_name" },
   { label: "lablast_name", input: "last_name" },
   { label: "labemail_address", input: "email_address" },
   { label: "labpassword", input: "password" },
+];
+
+export const fieldChekout = [
+  ...fieldRegister.slice(0, 3),
   { label: "labline_one", input: "line_one" },
   { label: "labline_two", input: "line_two" },
   { label: "labtown_city", input: "town_city" },

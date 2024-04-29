@@ -1,7 +1,9 @@
 import style from "./input.module.css";
+import { useInputAnimation } from "@/hooks/useInput";
 
-export default function Input({ id, ph, typeI ,handleFocus, dis=false}) {
+export default function Input({ id, ph, typeI, handleFocus, dis = false }) {
   let label = id.split("_");
+  const { focus, scope } = useInputAnimation();
 
   label =
     label.length > 1
@@ -9,7 +11,7 @@ export default function Input({ id, ph, typeI ,handleFocus, dis=false}) {
         label[0].slice(1, label[0].length) +
         " " +
         label[1][0].toUpperCase() +
-        label[1].slice(1, label[0].length+1)
+        label[1].slice(1, label[0].length + 1)
       : id[0].toUpperCase() + id.slice(1, id.length);
 
   return (
@@ -24,7 +26,7 @@ export default function Input({ id, ph, typeI ,handleFocus, dis=false}) {
         placeholder={ph}
         type={typeI}
         onFocus={handleFocus}
-         disabled={dis}
+        disabled={dis}
       />
     </div>
   );

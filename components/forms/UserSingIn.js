@@ -4,13 +4,8 @@ import Input from "../ui/formInput/input";
 import style from "./UserSignIn.module.css";
 import useForm from "@/hooks/useForm";
 
-function UserSignIn({ handleGuest, isOrdering, handleSubmit }) {
-  const { scope, focus, getEvent } = useForm();
-
-  function handleEvent(e) {
-    const { signin, data } = getEvent(e);
-    signin && handleSubmit(data);
-  }
+ function SignInForm({ handleSubmit }) {
+  const { scope, checked, focus, setChecked, getEvent } = useForm();
 
   return (
     <>
@@ -20,7 +15,7 @@ function UserSignIn({ handleGuest, isOrdering, handleSubmit }) {
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.6, type: "spring" }}
       >
-        <form onSubmit={handleEvent} ref={scope}>
+        <form onSubmit={handleSubmit} ref={scope}>
           <div className={style.action}>
             <h2>REGISTRATION</h2>
             {isOrdering && (
@@ -57,4 +52,3 @@ function UserSignIn({ handleGuest, isOrdering, handleSubmit }) {
   );
 }
 
-export default UserSignIn;

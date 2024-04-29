@@ -5,12 +5,17 @@
 }
 .container {
   width: 80%;
-  margin-top: 0;
+  margin: 5rem auto;
+  padding: 2rem;
+  background: linear-gradient(90deg, #ffffff, #dbdbdb41);
+  border-radius: 8px;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.5);
 }
 
 .container P {
   margin: 3rem 0 1.5rem 0;
   color: #ff9b05;
+  background-color: transparent;
 }
 
 .detail {
@@ -26,8 +31,6 @@
   grid-template-rows: 1fr 1fr 1fr;
   gap: 2rem;
 }
-
-
 
 .shipping div:first-of-type {
   grid-area: 1/1/2/3;

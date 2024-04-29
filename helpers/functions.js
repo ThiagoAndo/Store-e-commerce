@@ -59,5 +59,8 @@ export function gatherData(e) {
   for (const property in data) {
     entries.push(data[property].trim().toLowerCase());
   }
-  return entries;
+  return {
+    entries,
+    data,
+  };
 }
