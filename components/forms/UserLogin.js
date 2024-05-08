@@ -1,27 +1,28 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { isEmailValid, isPasswordValid } from "@/helpers/functions";
-import { useInputAnimation } from "@/hooks/useInput";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { inpuReg } from "@/components/ui/formInput/inputInfo";
 import { useNotification } from "@/hooks/useNotification";
 import Input from "../ui/formInput/input";
+import useForm from "@/hooks/useForm";
+import {
+  fieldRegister,
+} from "@/components/ui/formInput/inputInfo";
+
 import style from "./UserLogin.module.css";
 
 function UserLogin({ handling, LoginBack }) {
+  const { scope, focus, getEvent } = useForm();
   const router = useRouter();
   const { data: session } = useSession();
-  const { focus, empty, scope } = useInputAnimation();
-  const { handle } = useNotification();
-  let user;
+  const { notification } = useNotification();
   const fields = [];
   fields.push(inpuReg[2]);
   fields.push(inpuReg[3]);
-  const fieldNames = [
-    { label: "labemail_address", input: "email_address" },
-    { label: "labpassword", input: "password" },
-  ];
+  const fieldNames = [];
+  fieldNames.push(fieldRegister[2]);
+  fieldNames.push(fieldRegister[3]);
 
   function handleClick(e) {
     e.preventDefault();
@@ -29,45 +30,16 @@ function UserLogin({ handling, LoginBack }) {
   }
 
   function loginHandler(e) {
-    e.preventDefault();
-    const fd = new FormData(e.target);
-    user = Object.fromEntries(fd.entries());
-    let entries = [];
-    let index = 0;
-    let check = 0;
-    entries[0] = user.email_address.trim().toLowerCase();
-    entries[1] = user.password.trim();
-
-    entries.map((field) => {
-      if (!field) {
-        empty(fieldNames[index]);
-        check++;
-      }
-      index++;
-    });
-
-    if (check > 0) return;
-
-    if (!isEmailValid(entries[0])) {
-      handle("email");
-      empty(fieldNames[0]);
-
-      return;
-    } else if (!isPasswordValid(entries[1])) {
-      handle("password");
-      empty(fieldNames[1]);
-
-      return;
-    } else if (isEmailValid(entries[0]) && isPasswordValid(entries[1])) {
-      handling(entries[0], entries[1]);
-    }
+    const { login, data } = getEvent(e, false, true, false);
+    login && handling(data);
+   
   }
 
   useEffect(() => {
-    const isOrdering = localStorage.getItem('order')
+    const isOrdering = localStorage.getItem("order");
     if (LoginBack?.message) {
       if (LoginBack.message.slice(0, 5) === "Could") {
-        handle(
+        notification(
           null,
           "email might not be right, Or user has not been registered",
           "Not Found"
@@ -76,13 +48,13 @@ function UserLogin({ handling, LoginBack }) {
         return;
       } else if (LoginBack.message.slice(0, 5) === "Wrong") {
         empty(fieldNames[1]);
-        handle(null, "wrong password", null);
+        notification(null, "wrong password", null);
         return;
       }
     }
     if (session && !isOrdering) {
       router.replace("/");
-    }else if (session && isOrdering) {
+    } else if (session && isOrdering) {
       router.replace("/user/signIn");
     }
   }, [LoginBack, session]);

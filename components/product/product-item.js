@@ -5,7 +5,6 @@ import classes from "./product-item.module.css";
 export default function ProductItem({ title, brand, thumbnail, id }) {
   const link = `product/${id}`;
 
-
   return (
     <article className={classes.product}>
       <header>
@@ -19,9 +18,7 @@ export default function ProductItem({ title, brand, thumbnail, id }) {
       </header>
       <div className={classes.content}>
         <div className={classes.actions}>
-          <Link href={link} >
-            View Details
-          </Link>
+          <Link href={link}>View Details</Link>
         </div>
       </div>
     </article>

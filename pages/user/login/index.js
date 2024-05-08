@@ -7,7 +7,7 @@ function Login() {
   const [feedback, setFeedback] = useState("");
   const notificationCtx = useContext(NotificationContext);
 
-  function handleLogin(email, password) {
+  function handleLogin({ email_address, password }) {
     notificationCtx.showNotification({
       title: "Sending Request:",
       message: `Getting User Credentials.`,
@@ -15,8 +15,18 @@ function Login() {
     });
     try {
       fetch(
-        // `http://localhost:8080/events/user/${email}/${password}`
-        `https://libraryapi-gtct.onrender.com/events/user/${email}/${password}`
+        // `http://localhost:8080/events/user/get`
+        `https://libraryapi-gtct.onrender.com/user/get`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: email_address,
+            password,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       )
         .then((response) => {
           if (response.ok) {
@@ -32,7 +42,7 @@ function Login() {
           } else {
             signIn("credentials", {
               redirect: false,
-              email: email,
+              email: email_address,
             });
             setStorage(data);
           }
@@ -45,8 +55,6 @@ function Login() {
       });
     }
   }
-
-
 
   return <UserLogin handling={handleLogin} LoginBack={feedback} />;
 }

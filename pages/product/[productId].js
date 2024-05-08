@@ -1,15 +1,11 @@
-import ProductDetail from "@/components/product/product-detail"
+import ProductDetail from "@/components/product/product-detail";
 import { getAllProducts, selectedId } from "@/helpers/fetchProducts";
 function DetailedProduct(props) {
-    const id = props.selectedEvent;
-    return <ProductDetail id={id} />;
-
-
+  const id = props.selectedEvent;
+  return <ProductDetail id={id} />;
 }
 export async function getStaticProps(context) {
   let eventId = context.params.productId;
-
-
   return {
     props: {
       selectedEvent: eventId,
@@ -17,7 +13,6 @@ export async function getStaticProps(context) {
     revalidate: 30,
   };
 }
-
 export async function getStaticPaths() {
   const data = await getAllProducts();
 
@@ -31,4 +26,4 @@ export async function getStaticPaths() {
   };
 }
 
-export default DetailedProduct
+export default DetailedProduct;

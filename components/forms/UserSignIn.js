@@ -8,7 +8,7 @@ function UserSignIn({ handleGuest, isOrdering, handleSubmit }) {
   const { scope, focus, getEvent } = useForm();
 
   function handleEvent(e) {
-    const { signin, data } = getEvent(e);
+    const { signin, data } = getEvent(e,true, false,false);
     signin && handleSubmit(data);
   }
 

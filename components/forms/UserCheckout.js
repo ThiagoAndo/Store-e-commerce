@@ -35,8 +35,8 @@ function UserCheckOut({ handleSubmit }) {
   };
 
   const handleThisSubmit = (e) => {
-    const { check } = getEvent(e, true);
-    check && console.log("submit");
+    const { check } = getEvent(e, false, false, true);
+    check && alert("checkOut");
   };
   return (
     <motion.div
@@ -74,7 +74,7 @@ function UserCheckOut({ handleSubmit }) {
               />
             ))}
           </div>
-          <p>SHIPPING INFO</p>
+          <p>PAYMENT DETAILS</p>
           <div className={style_2.payment}>
             <p>Payment Method </p>
             <Radio

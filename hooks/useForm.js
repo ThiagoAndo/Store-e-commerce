@@ -22,13 +22,21 @@ export default function useForm() {
   const [checked, setChecked] = useState("e-money");
   const cartItems = useSelector((state) => state.cart.items);
 
-  const getEvent = (e, isGuest = false) => {
+  const getEvent = (e, isSignin, isLogin, isCheck) => {
     e.preventDefault();
-    let inpFields;
+    let inpFields = [];
+    let name = true;
 
-    isGuest === true ? (inpFields = fieldChekout) : (inpFields = fieldRegister);
+    if (isSignin) {
+      inpFields = fieldRegister;
+    } else if (isLogin) {
+      inpFields.push(fieldRegister[2]);
+      inpFields.push(fieldRegister[3]);
+    } else if (isCheck) {
+      inpFields = fieldChekout;
+    }
 
-    if (cartItems.length <= 0 && isGuest) {
+    if (cartItems.length <= 0 && isCheck) {
       notification(
         null,
         "Empty cart:",
@@ -43,7 +51,7 @@ export default function useForm() {
 
     const { entries, data } = gatherData(e);
     let index = 0;
-    let check = 0;
+    let checkEmpty = 0;
 
     function confEmpty(passed) {
       entries.map(() => {
@@ -57,15 +65,19 @@ export default function useForm() {
       entries.map((field) => {
         if (field === "") {
           empty(passed[index]);
-          check++;
+          checkEmpty++;
         }
         index++;
       });
     }
 
-    if (!isGuest) {
+    if (isSignin) {
       confEmpty(fieldRegister);
-    } else {
+    } else if (isLogin) {
+      confEmpty(inpFields);
+      entries.unshift("","");
+      inpFields.unshift("","")
+    } else if (isCheck) {
       confEmpty(
         checked === "e-money"
           ? fieldChekout
@@ -73,18 +85,20 @@ export default function useForm() {
       );
     }
 
-    if (check > 0) {
+    if (checkEmpty > 0) {
       return {
+        login: false,
         check: false,
         signin: false,
       };
     }
 
-    const first = entries[0][0].toUpperCase() + entries[0].slice(1);
-    const last = entries[1][0].toUpperCase() + entries[1].slice(1);
-
+    if (isSignin || isCheck) {
+      const first = entries[0][0].toUpperCase() + entries[0].slice(1);
+      const last = entries[1][0].toUpperCase() + entries[1].slice(1);
+      name = isNameValid(first + " " + last);
+    }
     const email = isEmailValid(entries[2]);
-    const name = isNameValid(first + " " + last);
     const password = isPasswordValid(entries[3]);
 
     if (!email) {
@@ -94,11 +108,12 @@ export default function useForm() {
       notification("name", "make sure to write one name per field.");
       empty(inpFields[0]);
       empty(inpFields[1]);
-    } else if (!password && !isGuest) {
+    } else if (!password && (isSignin||isLogin)) {
       notification("password");
       empty(inpFields[3]);
     }
     return {
+      login: email && password,
       check: email && name,
       signin: email && name && password,
       data,

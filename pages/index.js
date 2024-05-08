@@ -1,9 +1,10 @@
-import ProductGrid from "../components/product/product-grid";
-import { getAllProducts } from "../helpers/fetchProducts";
 import { useContext, useEffect, useState } from "react";
-import { ProductContext } from "../store/context/products-context";
 import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
+import useSWR from "swr";
+import ProductGrid from "../components/product/product-grid";
+import { getAllProducts } from "../helpers/fetchProducts";
+import { ProductContext } from "../store/context/products-context";
 import { getStorageData, fetchCartData } from "@/helpers/cart-actions";
 
 function Products(props) {

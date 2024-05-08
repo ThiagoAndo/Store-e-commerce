@@ -1,21 +1,18 @@
-import { useState, useEffect } from "react";
-import { signIn } from "next-auth/react";
 import pkg from "bcryptjs";
 const { hash } = pkg;
 import uniqid from "uniqid";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
 import { getCurrentDate } from "../../../helpers/functions";
 import { setStorage } from "../../../helpers/functions";
 import { useNotification } from "@/hooks/useNotification";
 import UserSignIn from "@/components/forms/UserSignIn";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 
 function SignIn() {
   const [feedbackItems, setFeedbackItems] = useState();
   const [isOrdering, setIsOrdering] = useState(null);
   const { notification } = useNotification();
-  const [isGuest, setIsGuest] = useState(true);
-  const { data: session } = useSession();
   const router = useRouter();
 
   function handleGuest() {
@@ -31,8 +28,8 @@ function SignIn() {
     setStorage(user);
     try {
       let response = await fetch(
-        // "http://localhost:8080/events/user/new",
-        "https://libraryapi-gtct.onrender.com/events/user/new",
+        // "http://localhost:8080/user/new",
+        "https://libraryapi-gtct.onrender.com/user/new",
         {
           method: "POST",
           body: JSON.stringify(user),
