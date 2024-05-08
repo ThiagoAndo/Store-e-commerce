@@ -55,7 +55,7 @@ function UserLogin({ handling, LoginBack }) {
     if (session && !isOrdering) {
       router.replace("/");
     } else if (session && isOrdering) {
-      router.replace("/user/signIn");
+      router.replace("/checkout");
     }
   }, [LoginBack, session]);
 
