@@ -1,6 +1,4 @@
 import { motion } from "framer-motion";
-import { useDispatch, useSelector } from "react-redux";
-import { sendCartData } from "@/helpers/cart-actions";
 import Radio from "../ui/formInput/inputRadio";
 import {
   inpuShip,
@@ -15,9 +13,6 @@ import style_2 from "./UserCheckout.module.css";
 import useForm from "@/hooks/useForm";
 
 function UserCheckOut({ handleSubmit }) {
-  const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.items);
-  const total = useSelector((state) => state.cart.totalQuantity);
 
   const { cartItems, scope, checked, focus, setChecked, getEvent } = useForm();
   const inpCheck = inpuReg.slice();
@@ -41,7 +36,6 @@ function UserCheckOut({ handleSubmit }) {
 
   const handleThisSubmit = (e) => {
     const { check, data } = getEvent(e, false, false, true);
-    dispatch(sendCartData(cart));
     check && handleSubmit(data);
     localStorage.removeItem(`guest`);
   };

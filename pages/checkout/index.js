@@ -1,5 +1,5 @@
 import UserCheckOut from "@/components/forms/UserCheckout";
-import {  useContext } from "react";
+import { useContext } from "react";
 import NotificationContext from "@/store/context/notification-context";
 
 function CheckoutPage() {
@@ -20,39 +20,52 @@ function CheckoutPage() {
       }
     };
 
-    const thisBody = {
-      id: localStorage.getItem("id") || null,
+    const id = localStorage.getItem("id") || null;
+
+    const order = {
+      identifier: "order",
+      id,
       name: data.first_name + " " + data.last_name,
       email: data.email_address,
       cart: isGuest(),
     };
 
-    console.log(thisBody);
-    try {
-      fetch(
-        `http://localhost:8080/order`,
-        //  `https://libraryapi-gtct.onrender.com/user/get`,
-        {
-          method: "POST",
-          body: JSON.stringify(thisBody),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-        });
-    } catch (error) {
-      notificationCtx.showNotification({
-        title: "Sending Request:",
-        message: error.message,
-        status: "error",
-      });
-    }
+    const add = {
+      identifier: "add",
+      line_one: data.line_one,
+      line_two: data.line_two,
+      town_city: data.town_city,
+      constry_state: data.constry_state,
+      id,
+    };
+    const myArray = [order, add];
+
+    myArray.forEach((e) => {
+      console.log(e.identifier);
+      console.log({ ...e });
+
+      try {
+        fetch(
+          `http://localhost:8080/${e.identifier}`,
+          //  `https://libraryapi-gtct.onrender.com/user/get`,
+          {
+            method: "POST",
+            body: JSON.stringify({ ...e }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    });
   }
 
   return <UserCheckOut handleSubmit={handleCheck} />;
