@@ -57,7 +57,6 @@ export const fetchCartData = () => {
 
 export const sendCartData = (cart) => {
   console.log("cart");
-  console.log(cart);
   return async (dispatch) => {
     const sendRequest = async () => {
       const id = localStorage.getItem("id");
@@ -67,7 +66,7 @@ export const sendCartData = (cart) => {
         {
           method: "POST",
           body: JSON.stringify({
-            items: cart,
+            item: cart,
             id,
           }),
           headers: {
@@ -87,4 +86,55 @@ export const sendCartData = (cart) => {
       console.log(error);
     }
   };
+};
+
+export const deleteCartData = async (cart, op) => {
+  try {
+    let response = await fetch(`http://localhost:8080/cart`, {
+      method: "DELETE",
+      body: JSON.stringify({
+        cart,
+        op,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    // let response = await fetch(
+    //   `https://libraryapi-gtct.onrender.com/add/${id}`
+    // );
+
+    if (response.ok) {
+      response = await response.json();
+      return response;
+    }
+  } catch (error) {
+    return { error: "Connecting to the database failed!" };
+  }
+};
+
+export const updateCartData = async (cart) => {
+  try {
+    let response = await fetch(
+      `http://localhost:8080/cart`,
+      //   `https://libraryapi-gtct.onrender.com/add/${id}`
+
+      {
+        method: "PATCH",
+        body: JSON.stringify({
+          cart,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (response.ok) {
+      response = await response.json();
+      return response;
+    }
+  } catch (error) {
+    return { error: "Connecting to the database failed!" };
+  }
 };

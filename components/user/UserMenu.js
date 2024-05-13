@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { sendCartData } from "@/helpers/cart-actions";
 import { signOut } from "next-auth/react";
 import { cartActions } from "@/store/redux/cart-slice";
 import NotificationContext from "@/store/context/notification-context";
@@ -10,7 +9,6 @@ import classes from "./UserMenu.module.css";
 
 function UserMenu() {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.items);
   const notificationCtx = useContext(NotificationContext);
   const total = useSelector((state) => state.cart.totalQuantity);
 
@@ -38,7 +36,6 @@ function UserMenu() {
   }
 
   async function logoutHandler() {
-    dispatch(sendCartData(cart));
     let myPromise = new Promise(function (myResolve, myReject) {
       localStorage.clear();
       const id = localStorage.getItem("id");

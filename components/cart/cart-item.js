@@ -1,13 +1,16 @@
 import { ProductContext } from "@/store/context/products-context";
+import { useSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
 import { cartActions } from "@/store/redux/cart-slice";
 import { formatValue } from "@/helpers/functions";
 import { motion } from "framer-motion";
 import { useContext } from "react";
+import { deleteCartData, updateCartData } from "@/helpers/cart-actions";
 import classes from "./cart-item.module.css";
 import Image from "next/image";
 const CartItem = ({ title, amount, price, id, isShow }) => {
   const dispatch = useDispatch();
+  const { data: session } = useSession();
   const store = useContext(ProductContext);
   const [prt] = store.getProFiltered(id);
   let btnDisplay = null;
@@ -15,6 +18,15 @@ const CartItem = ({ title, amount, price, id, isShow }) => {
   else btnDisplay = "-";
   const removeItemHandler = () => {
     dispatch(cartActions.removeItemFromCart(id));
+    if (session && amount >1) {
+      updateCartData({
+        item_id: id,
+        user_id: localStorage.getItem("id"),
+        qnt: (amount -= 1),
+      });
+    } else {
+      deleteCartData({ item_id: id, user_id: localStorage.getItem("id") },1);
+    }
   };
   const addItemHandler = () => {
     dispatch(
@@ -24,6 +36,12 @@ const CartItem = ({ title, amount, price, id, isShow }) => {
         price,
       })
     );
+
+    updateCartData({
+      item_id: id,
+      user_id: localStorage.getItem("id"),
+      qnt: (amount += 1),
+    });
   };
   return (
     prt && (

@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
 import { cartActions } from "@/store/redux/cart-slice";
+import { deleteCartData } from "@/helpers/cart-actions";
 import { formatValue } from "@/helpers/functions";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
@@ -35,6 +36,10 @@ const Cart = ({ cart = true }) => {
 
 
   function handleRemove() {
+    if (session) {
+      const user_id = localStorage.getItem("id");
+      deleteCartData( user_id ,  0 );
+    }
     dispatch(cartActions.removeAll());
   }
   function handleClose() {
