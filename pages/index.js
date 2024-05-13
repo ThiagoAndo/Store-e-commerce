@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
-import useSWR from "swr";
 import ProductGrid from "../components/product/product-grid";
 import { getAllProducts } from "../helpers/fetchProducts";
 import { ProductContext } from "../store/context/products-context";

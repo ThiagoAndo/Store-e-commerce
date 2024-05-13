@@ -48,8 +48,6 @@ export function setStorage(data) {
   localStorage.setItem("id", data.id);
   localStorage.setItem("email", data.email_address);
   localStorage.setItem("name", data.first_name + " " + data.last_name);
-
-  if (data?.address) localStorage.setItem("n", data.id);
 }
 
 export function gatherData(e) {

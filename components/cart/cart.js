@@ -20,7 +20,6 @@ const Cart = ({ cart = true }) => {
       const ret = await fetchUserAdd(id);
       if (ret?.message) {
         dispatch(cartActions.toggle());
-        localStorage.setItem("addresss", "no_address");
         router.push("/checkout");
       } else {
         localStorage.setItem("addresss", ret);

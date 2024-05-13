@@ -16,6 +16,7 @@ function SignIn() {
   const router = useRouter();
 
   function handleGuest() {
+    localStorage.setItem("guest", "guest");
     router.replace("/checkout");
   }
 

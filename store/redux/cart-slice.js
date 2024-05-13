@@ -6,10 +6,16 @@ const record = (items, totalQuantity) => {
 };
 
 const some = (items) =>
-  items.reduce((accumulator, item) => accumulator + item.totalPrice, 0);
+  items.reduce(
+    (accumulator, item) => accumulator + item.price * item.quantity,
+    0
+  );
 
 const totalQnt = (items) =>
-  items.reduce((accumulator, item) => accumulator + item.quantity, 0);
+  items.reduce(
+    (accumulator, item) => accumulator + item.quantity,
+    0
+  );
 
 const cartSlice = createSlice({
   name: "cart",

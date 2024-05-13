@@ -5,7 +5,7 @@
 }
 .container {
   width: 80%;
-  margin: 5rem auto;
+  margin: auto;
   padding: 2rem;
   background: linear-gradient(90deg, #ffffff, #dbdbdb41);
   border-radius: 8px;
