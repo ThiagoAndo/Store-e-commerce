@@ -1,5 +1,5 @@
 import UserCheckOut from "@/components/forms/UserCheckout";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import NotificationContext from "@/store/context/notification-context";
 
 function CheckoutPage() {
@@ -11,7 +11,7 @@ function CheckoutPage() {
       message: `Processing Invoice.`,
       status: "pending",
     });
-    const isGuest = () => {
+    let isGuest = () => {
       const isGuest = localStorage.getItem("guest");
       if (isGuest) {
         return JSON.parse(localStorage.getItem("cart"));
@@ -20,23 +20,21 @@ function CheckoutPage() {
       }
     };
 
-    const id = localStorage.getItem("id") || null;
-
-    const order = {
+    let order = {
       route: "order",
-      id,
+      id: localStorage.getItem("id") || null,
       name: data.first_name + " " + data.last_name,
       email: data.email_address,
       cart: isGuest(),
     };
 
-    const add = {
+    let add = {
       route: "add",
       line_one: data.line_one,
       line_two: data.line_two,
       town_city: data.town_city,
       constry_state: data.constry_state,
-      id,
+      id: localStorage.getItem("id") || null,
     };
     const myArray = [order, add];
 
@@ -47,7 +45,7 @@ function CheckoutPage() {
       try {
         fetch(
           // `http://localhost:8080/${e.route}`,
-           `https://libraryapi-gtct.onrender.com/${e.route}`,
+          `https://libraryapi-gtct.onrender.com/${e.route}`,
           {
             method: "POST",
             body: JSON.stringify({ ...e }),
@@ -67,7 +65,11 @@ function CheckoutPage() {
       }
     });
   }
+  useEffect(() => {
 
+
+    
+  }, []);
   return <UserCheckOut handleSubmit={handleCheck} />;
 }
 

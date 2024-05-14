@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Radio from "../ui/formInput/inputRadio";
 import {
@@ -18,7 +19,8 @@ function UserCheckOut({ handleSubmit }) {
   const { cartItems, scope, checked, focus, setChecked, getEvent } = useForm();
   const inpCheck = inpuReg.slice();
   inpCheck.pop();
-  const { user, add } = getStorageUser();
+  const [User, setUSer] = useState([[], []]);
+
   const onOptionChange = (val) => {
     setChecked(val);
     if (val != "e-money") {
@@ -40,6 +42,25 @@ function UserCheckOut({ handleSubmit }) {
     check && handleSubmit(data);
     localStorage.removeItem(`guest`);
   };
+  useEffect(() => {
+    const { user, add } = getStorageUser();
+    setTimeout(() => {
+      setUSer([
+        [
+          localStorage.getItem("first"),
+          localStorage.getItem("last"),
+          localStorage.getItem("email"),
+        ],
+        [
+          localStorage.getItem("line_one"),
+          localStorage.getItem("line_two"),
+          localStorage.getItem("town_city"),
+          localStorage.getItem("constry_state"),
+        ],
+      ]);
+    }, 500);
+  }, []);
+
   return (
     <motion.div
       className={style_2.check_pag}
@@ -61,7 +82,7 @@ function UserCheckOut({ handleSubmit }) {
                 ph={inp.ph}
                 typeI={inp.type}
                 handleFocus={focus}
-                val={user[i]}
+                val={User[0][i]}
               />
             ))}
           </div>
@@ -74,7 +95,7 @@ function UserCheckOut({ handleSubmit }) {
                 ph={inp.ph}
                 typeI={inp.type}
                 handleFocus={focus}
-                val={add[i]}
+                val={User[1][i]}
               />
             ))}
           </div>
