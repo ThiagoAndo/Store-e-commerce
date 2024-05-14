@@ -6,9 +6,8 @@ import { inpuReg } from "@/components/ui/formInput/inputInfo";
 import { useNotification } from "@/hooks/useNotification";
 import Input from "../ui/formInput/input";
 import useForm from "@/hooks/useForm";
-import {
-  fieldRegister,
-} from "@/components/ui/formInput/inputInfo";
+import { fieldRegister } from "@/components/ui/formInput/inputInfo";
+import Button from "../ui/button/btn";
 
 import style from "./UserLogin.module.css";
 
@@ -32,7 +31,6 @@ function UserLogin({ handling, LoginBack }) {
   function loginHandler(e) {
     const { login, data } = getEvent(e, false, true, false);
     login && handling(data);
-   
   }
 
   useEffect(() => {
@@ -93,14 +91,7 @@ function UserLogin({ handling, LoginBack }) {
                 />
               ))}
             </div>
-            <motion.button
-              key={3}
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 150 }}
-              className={style.button}
-            >
-              Sign in Securely
-            </motion.button>
+            <Button style={style.button}>Sign in Securely </Button>
           </motion.form>
 
           <motion.form
@@ -117,15 +108,10 @@ function UserLogin({ handling, LoginBack }) {
               <h3>✔ Access your saved items. </h3>
               <h3>✔ Instant access to your account.</h3>
             </div>
-            <motion.button
-              key={5}
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 150 }}
-              className={style.button}
-              onClick={handleClick}
-            >
+
+            <Button click={handleClick} style={style.button}>
               Continue Securely
-            </motion.button>
+            </Button>
           </motion.form>
         </div>
       </AnimatePresence>

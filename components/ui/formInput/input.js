@@ -1,7 +1,7 @@
 import style from "./input.module.css";
 import { useInputAnimation } from "@/hooks/useInput";
 
-export default function Input({ id, ph, typeI, handleFocus, dis = false }) {
+export default function Input({ id, ph, typeI, handleFocus, dis = false, val }) {
   let label = id.split("_");
   const { focus, scope } = useInputAnimation();
 
@@ -27,6 +27,7 @@ export default function Input({ id, ph, typeI, handleFocus, dis = false }) {
         type={typeI}
         onFocus={handleFocus}
         disabled={dis}
+        value={val}
       />
     </div>
   );

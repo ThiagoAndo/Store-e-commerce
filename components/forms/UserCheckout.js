@@ -11,13 +11,14 @@ import Input from "../ui/formInput/input";
 import style from "./UserSignIn.module.css";
 import style_2 from "./UserCheckout.module.css";
 import useForm from "@/hooks/useForm";
+import { getStorageUser } from "@/helpers/functions";
+import Button from "../ui/button/btn";
 
 function UserCheckOut({ handleSubmit }) {
-
   const { cartItems, scope, checked, focus, setChecked, getEvent } = useForm();
   const inpCheck = inpuReg.slice();
   inpCheck.pop();
-
+  const { user, add } = getStorageUser();
   const onOptionChange = (val) => {
     setChecked(val);
     if (val != "e-money") {
@@ -53,25 +54,27 @@ function UserCheckOut({ handleSubmit }) {
           </div>
           <p>BILLING DETAILS</p>
           <div className={style_2.detail}>
-            {inpCheck.map((inp) => (
+            {inpCheck.map((inp, i) => (
               <Input
                 key={inp.id}
                 id={inp.id}
                 ph={inp.ph}
                 typeI={inp.type}
                 handleFocus={focus}
+                val={user[i]}
               />
             ))}
           </div>
           <p>SHIPPING INFO</p>
           <div className={style_2.shipping}>
-            {inpuShip.map((inp) => (
+            {inpuShip.map((inp, i) => (
               <Input
                 key={inp.id}
                 id={inp.id}
                 ph={inp.ph}
                 typeI={inp.type}
                 handleFocus={focus}
+                val={add[i]}
               />
             ))}
           </div>
@@ -102,13 +105,7 @@ function UserCheckOut({ handleSubmit }) {
               />
             ))}
           </div>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 150 }}
-            className={style.button}
-          >
-            CONTINUE & PAY
-          </motion.button>
+          <Button style={style.button}>CONTINUE & PAY </Button>
         </form>
       </div>
       {cartItems.length > 0 && (

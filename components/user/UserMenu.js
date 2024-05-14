@@ -1,21 +1,19 @@
-import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { signOut } from "next-auth/react";
-import { cartActions } from "@/store/redux/cart-slice";
-import NotificationContext from "@/store/context/notification-context";
-import { useContext } from "react";
+import { getStorageUser } from "@/helpers/functions";
 import { userActions } from "@/store/redux/user.slice";
+import { cartActions } from "@/store/redux/cart-slice";
+import { useContext } from "react";
+import { signOut } from "next-auth/react";
+import { motion } from "framer-motion";
 import classes from "./UserMenu.module.css";
+import NotificationContext from "@/store/context/notification-context";
 
 function UserMenu() {
   const dispatch = useDispatch();
   const notificationCtx = useContext(NotificationContext);
   const total = useSelector((state) => state.cart.totalQuantity);
-
-  const email = localStorage.getItem("email");
-  const name = localStorage.getItem("name");
-  let userInitials = name.split(" ");
-  userInitials = userInitials[0][0] + userInitials[1][0];
+  const {user} =getStorageUser()
+  const userInitials = user[0][0] + "" + user[1][0];
   function handleUserMenuVis() {
     dispatch(userActions.visible());
   }
@@ -70,8 +68,8 @@ function UserMenu() {
           <div className={classes.head}>
             <div className={classes.head_log}>{userInitials}</div>
             <div className={classes.head_inf}>
-              <div>{name}</div>
-              <div>{email}</div>
+              <div>{`${user[0] + " " + user[1]}`}</div>
+              <div>{user[2]}</div>
             </div>
           </div>
         </li>

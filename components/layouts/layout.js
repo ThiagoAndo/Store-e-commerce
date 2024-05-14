@@ -26,6 +26,11 @@ function Layout(props) {
             <Cart />
           </Modal>
         )}
+        {isVisible && (
+          <Modal>
+            <Cart />
+          </Modal>
+        )}
       </AnimatePresence>
       <MainHeader />
       {currentPath === "/" ? <FilterHeader /> : null}

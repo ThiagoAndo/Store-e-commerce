@@ -5,6 +5,7 @@ import { deleteCartData } from "@/helpers/cart-actions";
 import { formatValue } from "@/helpers/functions";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import Button from "../ui/button/btn";
 import classes from "./cart.module.css";
 import CartItem from "./cart-item";
 const Cart = ({ cart = true }) => {
@@ -26,7 +27,7 @@ const Cart = ({ cart = true }) => {
   }
   function handleRemove() {
     if (session) {
-      const  user_id = localStorage.getItem("id");
+      const user_id = localStorage.getItem("id");
       deleteCartData(user_id, 0);
     }
     dispatch(cartActions.removeAll());
@@ -41,13 +42,7 @@ const Cart = ({ cart = true }) => {
           {cart && (
             <li className={classes.li_action}>
               <h4>Cart ({cartQnt})</h4>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 250 }}
-                onClick={handleRemove}
-              >
-                Remove all
-              </motion.button>
+              <Button click={handleRemove}> Remove all</Button>
             </li>
           )}
           {cartItems.map((item) => (
@@ -68,22 +63,12 @@ const Cart = ({ cart = true }) => {
       </div>
       {cart && (
         <div className={classes.actions}>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 250 }}
-            className={classes["button--alt"]}
-            onClick={handleClose}
-          >
+          <Button style={classes["button--alt"]} click={handleClose}>
             Close
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring" }}
-            className={classes.button}
-            onClick={orderStorage}
-          >
+          </Button>
+          <Button style={classes.button} click={orderStorage}>
             Order
-          </motion.button>
+          </Button>
         </div>
       )}
     </>

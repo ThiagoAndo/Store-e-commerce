@@ -8,6 +8,8 @@ import { useContext } from "react";
 import { deleteCartData, updateCartData } from "@/helpers/cart-actions";
 import classes from "./cart-item.module.css";
 import Image from "next/image";
+import Button from "../ui/button/btn";
+
 const CartItem = ({ title, amount, price, id, isShow }) => {
   const dispatch = useDispatch();
   const { data: session } = useSession();
@@ -70,23 +72,13 @@ const CartItem = ({ title, amount, price, id, isShow }) => {
         </div>
         <div className={classes.actions}>
           {isShow && (
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring" }}
-              onClick={removeItemHandler}
-            >
+            <Button style={classes.button} click={removeItemHandler}>
               {btnDisplay}
-            </motion.button>
+            </Button>
           )}
           <button className={classes.amount}>x {amount}</button>
           {isShow && (
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring" }}
-              onClick={addItemHandler}
-            >
-              +
-            </motion.button>
+            <Button style={classes.button} click={addItemHandler}> + </Button>
           )}
         </div>
       </motion.li>

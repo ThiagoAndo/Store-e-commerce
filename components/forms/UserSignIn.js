@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { inpuReg } from "@/components/ui/formInput/inputInfo";
+import Button from "../ui/button/btn";
 import Input from "../ui/formInput/input";
 import style from "./UserSignIn.module.css";
 import useForm from "@/hooks/useForm";
@@ -44,13 +45,7 @@ function UserSignIn({ handleGuest, isOrdering, handleSubmit }) {
               />
             ))}
           </div>
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: "spring", stiffness: 150 }}
-            className={style.button}
-          >
-            REGISTER
-          </motion.button>
+          <Button style={style.button}>REGISTER </Button>
         </form>
       </motion.div>
     </>

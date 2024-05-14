@@ -19,8 +19,8 @@ export const fetchCartData = (userId) => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch(
-        `http://localhost:8080/cart/${userId}`
-        // `https://libraryapi-gtct.onrender.com/cart/${userId}`
+        // `http://localhost:8080/cart/${userId}`
+        `https://libraryapi-gtct.onrender.com/cart/${userId}`
       );
 
       if (!response.ok) {
@@ -59,8 +59,8 @@ export const sendCartData = (cart) => {
     const sendRequest = async () => {
       const id = localStorage.getItem("id");
       const response = await fetch(
-        `http://localhost:8080/cart`,
-        // "https://libraryapi-gtct.onrender.com/cart",
+        // `http://localhost:8080/cart`,
+        "https://libraryapi-gtct.onrender.com/cart",
         {
           method: "POST",
           body: JSON.stringify({
@@ -88,7 +88,10 @@ export const sendCartData = (cart) => {
 
 export const deleteCartData = async (cart, op) => {
   try {
-    let response = await fetch(`http://localhost:8080/cart`, {
+    let response = await fetch(
+      // `http://localhost:8080/cart`
+        `https://libraryapi-gtct.onrender.com/cart`
+    , {
       method: "DELETE",
       body: JSON.stringify({
         cart,
@@ -99,7 +102,6 @@ export const deleteCartData = async (cart, op) => {
       },
     });
     // let response = await fetch(
-    //   `https://libraryapi-gtct.onrender.com/add/${id}`
     // );
 
     if (response.ok) {

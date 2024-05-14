@@ -46,8 +46,8 @@ function CheckoutPage() {
 
       try {
         fetch(
-          `http://localhost:8080/${e.route}`,
-          //  `https://libraryapi-gtct.onrender.com/user/get`,
+          // `http://localhost:8080/${e.route}`,
+           `https://libraryapi-gtct.onrender.com/${e.route}`,
           {
             method: "POST",
             body: JSON.stringify({ ...e }),

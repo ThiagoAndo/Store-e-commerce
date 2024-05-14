@@ -47,14 +47,15 @@ export function formatValue(value) {
 export function setStorage(data) {
   localStorage.setItem("id", data.id);
   localStorage.setItem("email", data.email_address);
-  localStorage.setItem("name", data.first_name + " " + data.last_name);
+  localStorage.setItem("first", data.first_name);
+  localStorage.setItem("last",  data.last_name);
 }
 
 export async function setAdd(id) {
   try {
     let response = await fetch(
-      `http://localhost:8080/add/${id}`
-      // `https://libraryapi-gtct.onrender.com/add/${id}`
+      // `http://localhost:8080/add/${id}`
+      `https://libraryapi-gtct.onrender.com/add/${id}`
     );
 
     if (response.ok) {
@@ -86,12 +87,16 @@ export function gatherData(e) {
 
 export function getStorageUser() {
   return {
-    id: localStorage.getItem("id"),
-    email: localStorage.getItem("email"),
-    name: localStorage.getItem("name"),
-    line_one: localStorage.getItem("line_one"),
-    line_two: localStorage.getItem("line_two"),
-    town_city: localStorage.getItem("town_city"),
-    constry_state: localStorage.getItem("constry_state"),
+    user: [
+      localStorage.getItem("first"),
+      localStorage.getItem("last"),
+      localStorage.getItem("email"),
+    ],
+    add: [
+      localStorage.getItem("line_one"),
+      localStorage.getItem("line_two"),
+      localStorage.getItem("town_city"),
+      localStorage.getItem("constry_state"),
+    ],
   };
 }
