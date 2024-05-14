@@ -23,7 +23,7 @@ function CheckoutPage() {
     const id = localStorage.getItem("id") || null;
 
     const order = {
-      identifier: "order",
+      route: "order",
       id,
       name: data.first_name + " " + data.last_name,
       email: data.email_address,
@@ -31,7 +31,7 @@ function CheckoutPage() {
     };
 
     const add = {
-      identifier: "add",
+      route: "add",
       line_one: data.line_one,
       line_two: data.line_two,
       town_city: data.town_city,
@@ -46,7 +46,7 @@ function CheckoutPage() {
 
       try {
         fetch(
-          `http://localhost:8080/${e.identifier}`,
+          `http://localhost:8080/${e.route}`,
           //  `https://libraryapi-gtct.onrender.com/user/get`,
           {
             method: "POST",

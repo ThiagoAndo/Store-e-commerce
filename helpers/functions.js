@@ -50,6 +50,27 @@ export function setStorage(data) {
   localStorage.setItem("name", data.first_name + " " + data.last_name);
 }
 
+export async function setAdd(id) {
+  try {
+    let response = await fetch(
+      `http://localhost:8080/add/${id}`
+      // `https://libraryapi-gtct.onrender.com/add/${id}`
+    );
+
+    if (response.ok) {
+      const [resp] = await response.json();
+      if (!response?.message) {
+        localStorage.setItem("line_one", resp.line_one);
+        localStorage.setItem("line_two", resp.line_two);
+        localStorage.setItem("town_city", resp.town_city);
+        localStorage.setItem("constry_state", resp.constry_state);
+      }
+    }
+  } catch (error) {
+    return { error: "Connecting to the database failed!" };
+  }
+}
+
 export function gatherData(e) {
   let entries = [];
   const fd = new FormData(e.target);
@@ -60,5 +81,17 @@ export function gatherData(e) {
   return {
     entries,
     data,
+  };
+}
+
+export function getStorageUser() {
+  return {
+    id: localStorage.getItem("id"),
+    email: localStorage.getItem("email"),
+    name: localStorage.getItem("name"),
+    line_one: localStorage.getItem("line_one"),
+    line_two: localStorage.getItem("line_two"),
+    town_city: localStorage.getItem("town_city"),
+    constry_state: localStorage.getItem("constry_state"),
   };
 }

@@ -5,17 +5,15 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: auto ;
+  margin: auto;
   z-index: 100;
-
 }
 
-.fixed{
+.fixed {
   position: fixed;
   width: 100%;
   top: 0;
   background: linear-gradient(90deg, #303030b5, #2c2612b5);
-  
 }
 
 .navigation {
@@ -40,7 +38,7 @@
   cursor: pointer;
 }
 
-.up_btn{
+.up_btn {
   position: fixed;
   font-size: 1.5rem;
   font-weight: bold;
@@ -49,7 +47,7 @@
   border-radius: 60px;
   padding: 20px;
   bottom: 50px;
-  right:  20px;
+  right: 20px;
   cursor: pointer;
   text-decoration: none;
 }

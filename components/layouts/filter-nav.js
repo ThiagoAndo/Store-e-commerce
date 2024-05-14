@@ -158,7 +158,7 @@ function FilterHeader() {
           </li>
         </motion.ul>
         <AnimatePresence>
-          {scrollPosition >= 700 ? (
+          {scrollPosition >= 150 ? (
             <motion.button
               className={classes.up_btn}
               onClick={handleBtn}

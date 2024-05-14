@@ -15,8 +15,7 @@ export const getStorageData = () => {
   };
 };
 
-export const fetchCartData = () => {
-  const userId = localStorage.getItem("id");
+export const fetchCartData = (userId) => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch(
@@ -56,7 +55,6 @@ export const fetchCartData = () => {
 };
 
 export const sendCartData = (cart) => {
-  console.log("cart");
   return async (dispatch) => {
     const sendRequest = async () => {
       const id = localStorage.getItem("id");

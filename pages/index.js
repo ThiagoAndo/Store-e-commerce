@@ -28,9 +28,6 @@ function Products(props) {
   useEffect(() => {
     if (items.length === 0) {
       dispatch(getStorageData());
-      if (session) {
-        dispatch(fetchCartData());
-      }
     }
   }, [session]);
 

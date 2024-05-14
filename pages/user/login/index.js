@@ -2,10 +2,15 @@ import UserLogin from "@/components/forms/UserLogin";
 import { useState, useContext } from "react";
 import { signIn } from "next-auth/react";
 import NotificationContext from "@/store/context/notification-context";
-import { setStorage } from "@/helpers/functions";
+import { setStorage, setAdd } from "@/helpers/functions";
+import { fetchCartData } from "@/helpers/cart-actions";
+import { useDispatch } from "react-redux";
+import { deleteCartData, sendCartData } from "@/helpers/cart-actions";
+
 function Login() {
   const [feedback, setFeedback] = useState("");
   const notificationCtx = useContext(NotificationContext);
+  const dispatch = useDispatch();
 
   function handleLogin({ email_address, password }) {
     notificationCtx.showNotification({
@@ -45,6 +50,18 @@ function Login() {
               email: email_address,
             });
             setStorage(data);
+            setAdd(data.id);
+            const isCart = JSON.parse(localStorage.getItem("cart"));
+            if (isCart === null) {
+              dispatch(fetchCartData(data.id));
+            } else {
+              const user_id = localStorage.getItem("id");
+              deleteCartData(user_id, 0);
+
+              isCart.forEach((e) => {
+                dispatch(sendCartData(e));
+              });
+            }
           }
         });
     } catch (error) {

@@ -5,7 +5,6 @@ import { deleteCartData } from "@/helpers/cart-actions";
 import { formatValue } from "@/helpers/functions";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import fetchUserAdd from "@/helpers/fetchUserAdrress";
 import classes from "./cart.module.css";
 import CartItem from "./cart-item";
 const Cart = ({ cart = true }) => {
@@ -17,28 +16,18 @@ const Cart = ({ cart = true }) => {
   const { data: session } = useSession();
   async function orderStorage() {
     if (session) {
-      const id = localStorage.getItem("id");
-      const ret = await fetchUserAdd(id);
-      if (ret?.message) {
-        dispatch(cartActions.toggle());
-        router.push("/checkout");
-      } else {
-        localStorage.setItem("addresss", ret);
-        dispatch(cartActions.toggle());
-        router.push("/checkout");
-      }
+      dispatch(cartActions.toggle());
+      router.push("/checkout");
     } else {
       dispatch(cartActions.toggle());
       localStorage.setItem("order", "ordering");
       router.push("/user/login");
     }
   }
-
-
   function handleRemove() {
     if (session) {
-      const user_id = localStorage.getItem("id");
-      deleteCartData( user_id ,  0 );
+      const  user_id = localStorage.getItem("id");
+      deleteCartData(user_id, 0);
     }
     dispatch(cartActions.removeAll());
   }

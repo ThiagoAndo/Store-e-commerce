@@ -4,12 +4,15 @@ import { sendCartData, updateCartData } from "@/helpers/cart-actions";
 import { cartActions } from "@/store/redux/cart-slice";
 import { formatValue } from "@/helpers/functions";
 import { getCurrentDate } from "@/helpers/functions";
+import { useSession } from "next-auth/react";
+
 import StarRating from "../ui/rating/StarRating";
 import classes from "./product-info.module.css";
 function ProductInfo({ props }) {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.items);
   const cart = useSelector((state) => state.cart.items);
+  const { data: session } = useSession();
 
   const { title, brand, description, id } = props;
   let price = props.price - props.price * (props.discountPercentage * 0.01);
@@ -23,7 +26,7 @@ function ProductInfo({ props }) {
 
     if (items.length === 0) createAt = getCurrentDate();
     else createAt = items[0].createAt;
-    createAt = dispatch(
+    dispatch(
       cartActions.addItemToCart({
         id,
         title,
@@ -32,18 +35,25 @@ function ProductInfo({ props }) {
       })
     );
 
-    if (!prt?.id) {
-      dispatch(
-        sendCartData({
-          createAt,
-        })
-      );
-    } else {
-      updateCartData({
-        item_id: id,
-        user_id: localStorage.getItem("id"),
-        qnt: prt.quantity + 1,
-      });
+    if (session) {
+      const name = title;
+      if (!prt?.id) {
+        dispatch(
+          sendCartData({
+            id,
+            name,
+            price,
+            quantity: 1,
+            createAt,
+          })
+        );
+      } else {
+        updateCartData({
+          item_id: id,
+          user_id: localStorage.getItem("id"),
+          qnt: prt.quantity + 1,
+        });
+      }
     }
   }
 

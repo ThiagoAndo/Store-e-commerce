@@ -18,14 +18,17 @@ const CartItem = ({ title, amount, price, id, isShow }) => {
   else btnDisplay = "-";
   const removeItemHandler = () => {
     dispatch(cartActions.removeItemFromCart(id));
-    if (session && amount >1) {
-      updateCartData({
-        item_id: id,
-        user_id: localStorage.getItem("id"),
-        qnt: (amount -= 1),
-      });
-    } else {
-      deleteCartData({ item_id: id, user_id: localStorage.getItem("id") },1);
+
+    if (session) {
+      if (amount > 1) {
+        updateCartData({
+          item_id: id,
+          user_id: localStorage.getItem("id"),
+          qnt: (amount -= 1),
+        });
+      } else {
+        deleteCartData({ item_id: id, user_id: localStorage.getItem("id") }, 1);
+      }
     }
   };
   const addItemHandler = () => {
@@ -36,12 +39,13 @@ const CartItem = ({ title, amount, price, id, isShow }) => {
         price,
       })
     );
-
-    updateCartData({
-      item_id: id,
-      user_id: localStorage.getItem("id"),
-      qnt: (amount += 1),
-    });
+    if (session) {
+      updateCartData({
+        item_id: id,
+        user_id: localStorage.getItem("id"),
+        qnt: (amount += 1),
+      });
+    }
   };
   return (
     prt && (
