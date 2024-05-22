@@ -12,7 +12,6 @@ import Input from "../ui/formInput/input";
 import style from "./UserSignIn.module.css";
 import style_2 from "./UserCheckout.module.css";
 import useForm from "@/hooks/useForm";
-import { getStorageUser } from "@/helpers/functions";
 import Button from "../ui/button/btn";
 
 function UserCheckOut({ handleSubmit }) {
@@ -43,7 +42,6 @@ function UserCheckOut({ handleSubmit }) {
     localStorage.removeItem(`guest`);
   };
   useEffect(() => {
-    const { user, add } = getStorageUser();
     setTimeout(() => {
       setUSer([
         [

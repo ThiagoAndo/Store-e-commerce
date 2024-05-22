@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-
 function Button(props) {
   return (
     <motion.button

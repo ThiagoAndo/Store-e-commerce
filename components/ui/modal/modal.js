@@ -21,7 +21,9 @@ const ModalOverlay = (props) => {
       transition={{ duration: 0.5, type: "spring" }}
       exit={{ opacity: 0, y: 100 }}
       open
-      className={classes.modal}
+      className={
+        classes.modal + " " + `${props.isConf && classes.confirmation}`
+      }
     >
       <div className={classes.content}>{props.children}</div>
     </motion.div>
@@ -41,7 +43,7 @@ const Modal = (props) => {
     <Fragment>
       {createPortal(<Backdrop />, document.querySelector("#myportal"))}
       {createPortal(
-        <ModalOverlay>{props.children}</ModalOverlay>,
+        <ModalOverlay isConf={props.isConf}>{props.children}</ModalOverlay>,
         document.querySelector("#myportal")
       )}
     </Fragment>

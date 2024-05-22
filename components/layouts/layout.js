@@ -10,6 +10,7 @@ import Footer from "./footer";
 import Cart from "../cart/cart";
 import UserMenu from "../user/UserMenu";
 import Modal from "../ui/modal/modal";
+import ConfBlock from "../cart/confirmation";
 
 function Layout(props) {
   const currentPath = usePathname();
@@ -17,6 +18,7 @@ function Layout(props) {
   const activeNotification = notificationCtx.notification;
   const isVisible = useSelector((state) => state.cart.cartIsVisible);
   const isMenu = useSelector((state) => state.user.menuVisible);
+  const isConfVisible = useSelector((state) => state.conf.visible);
 
   return (
     <Fragment>
@@ -26,9 +28,9 @@ function Layout(props) {
             <Cart />
           </Modal>
         )}
-        {isVisible && (
-          <Modal>
-            <Cart />
+        {isConfVisible && (
+          <Modal isConf={isConfVisible}>
+            <ConfBlock />
           </Modal>
         )}
       </AnimatePresence>

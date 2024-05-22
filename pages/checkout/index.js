@@ -1,9 +1,13 @@
 import UserCheckOut from "@/components/forms/UserCheckout";
 import { useContext, useEffect } from "react";
 import NotificationContext from "@/store/context/notification-context";
+import { confActions } from "@/store/redux/conf.slice";
+import { useDispatch, useSelector } from "react-redux";
 
 function CheckoutPage() {
   const notificationCtx = useContext(NotificationContext);
+  const dispatch = useDispatch();
+
 
   function handleCheck(data) {
     notificationCtx.showNotification({
@@ -53,24 +57,20 @@ function CheckoutPage() {
               "Content-Type": "application/json",
             },
           }
-        )
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            console.log(data);
-          });
+        ).then((response) => {
+          if (response && e.route ==="add") {
+            dispatch(confActions.toggle());
+          }
+        });
       } catch (error) {
         console.log(error);
       }
     });
   }
-  useEffect(() => {
-
-
-    
-  }, []);
-  return <UserCheckOut handleSubmit={handleCheck} />;
+  useEffect(() => {}, []);
+  return (
+      <UserCheckOut handleSubmit={handleCheck} />
+  );
 }
 
 export default CheckoutPage;
