@@ -32,21 +32,19 @@ function ProductInfo({ props }) {
         title,
         price,
         createAt,
-      })
+      })                                                                                                                                     
     );
 
     if (session) {
       const name = title;
       if (!prt?.id) {
-        dispatch(
-          sendCartData({
+         sendCartData({
             id,
             name,
             price,
             quantity: 1,
             createAt,
           })
-        );
       } else {
         updateCartData({
           item_id: id,

@@ -46,7 +46,6 @@ function Products(props) {
     };
   }, [scrollPosition]);
 
-
   useEffect(() => {
     let position = localStorage.getItem("position");
     if (!position) {
@@ -90,7 +89,7 @@ export async function getStaticProps() {
     props: {
       products: data,
     },
-    // revalidate: 1130,((( will inplament it only if alawing add product )))
+    revalidate: 1200,
   };
 }
 export default Products;

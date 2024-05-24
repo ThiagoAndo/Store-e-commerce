@@ -1,5 +1,5 @@
 import { cartActions } from "../store/redux/cart-slice";
-
+import { getUserToken } from "./functions";
 export const getStorageData = () => {
   const cart = JSON.parse(localStorage.getItem("cart"));
   const qntTotal = Number(localStorage.getItem("qnt"));
@@ -54,55 +54,58 @@ export const fetchCartData = (userId) => {
   };
 };
 
-export const sendCartData = (cart) => {
-  return async (dispatch) => {
-    const sendRequest = async () => {
-      const id = localStorage.getItem("id");
-      const response = await fetch(
-        // `http://localhost:8080/cart`,
-        "https://libraryapi-gtct.onrender.com/cart",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            item: cart,
-            id,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+export const sendCartData = async (cart) => {
+  const token = getUserToken();
+  const id = localStorage.getItem("id");
 
-      if (!response.ok) {
-        throw new Error("Sending cart data failed.");
+  try {
+    let response = await fetch(
+      // `http://localhost:8080/cart`,
+      `https://libraryapi-gtct.onrender.com/cart`,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization':
+            "Bearer "+ token,
+        },
+        body: JSON.stringify({
+          item: cart,
+          id,
+        }),
       }
-    };
+    );
 
-    try {
-      await sendRequest();
-    } catch (error) {
-      console.log(error);
+    if (response.ok) {
+      response = await response.json();
+      return response;
     }
-  };
+  } catch (error) {
+    return { error: "Connecting to the database failed!" };
+  }
 };
 
 export const deleteCartData = async (cart, op) => {
+  const token = getUserToken();
+
   try {
     let response = await fetch(
-      // `http://localhost:8080/cart`
-        `https://libraryapi-gtct.onrender.com/cart`
-    , {
-      method: "DELETE",
-      body: JSON.stringify({
-        cart,
-        op,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    // let response = await fetch(
-    // );
+      `http://localhost:8080/cart`,
+      // `https://libraryapi-gtct.onrender.com/cart`,
+      {
+        method: "DELETE",
+
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': "Bearer " + token,
+        },
+        body: JSON.stringify({
+          cart,
+          op,
+        }),
+      }
+    );
 
     if (response.ok) {
       response = await response.json();
@@ -114,19 +117,24 @@ export const deleteCartData = async (cart, op) => {
 };
 
 export const updateCartData = async (cart) => {
+  const token = getUserToken();
   try {
     let response = await fetch(
-      `http://localhost:8080/cart`,
-      //   `https://libraryapi-gtct.onrender.com/add/${id}`
+      // `http://localhost:8080/cart`,
+
+      `https://libraryapi-gtct.onrender.com/cart`,
 
       {
         method: "PATCH",
+
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+
         body: JSON.stringify({
           cart,
         }),
-        headers: {
-          "Content-Type": "application/json",
-        },
       }
     );
 

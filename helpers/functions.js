@@ -49,6 +49,11 @@ export function setStorage(data) {
   localStorage.setItem("email", data.email_address);
   localStorage.setItem("first", data.first_name);
   localStorage.setItem("last",  data.last_name);
+  localStorage.setItem("token", data.token);
+}
+
+export function getUserToken(){
+  return localStorage.getItem("token")
 }
 
 export async function setAdd(id) {
