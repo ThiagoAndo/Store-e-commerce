@@ -3,6 +3,7 @@ import { useContext } from "react";
 import NotificationContext from "@/store/context/notification-context";
 import { confActions } from "@/store/redux/conf.slice";
 import { useDispatch } from "react-redux";
+import { getUserToken } from "@/helpers/functions";
 
 function CheckoutPage() {
   const notificationCtx = useContext(NotificationContext);
@@ -52,15 +53,17 @@ function CheckoutPage() {
       console.log({ ...e });
 
       try {
+        const token = getUserToken();
         fetch(
           // `http://localhost:8080/${e.route}`,
           `https://libraryapi-gtct.onrender.com/${e.route}`,
           {
             method: "POST",
-            body: JSON.stringify({ ...e }),
             headers: {
               "Content-Type": "application/json",
+              'Authorization': "Bearer " + token,
             },
+            body: JSON.stringify({ ...e }),
           }
         ).then((response) => {
           if (response && e.route === "add") {

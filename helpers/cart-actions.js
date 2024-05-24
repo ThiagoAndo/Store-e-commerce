@@ -64,7 +64,6 @@ export const sendCartData = async (cart) => {
       `https://libraryapi-gtct.onrender.com/cart`,
       {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json",
           'Authorization':
