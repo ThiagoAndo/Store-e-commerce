@@ -91,11 +91,10 @@ export const deleteCartData = async (cart, op) => {
 
   try {
     let response = await fetch(
-      `http://localhost:8080/cart`,
-      // `https://libraryapi-gtct.onrender.com/cart`,
+      // `http://localhost:8080/cart`,
+      `https://libraryapi-gtct.onrender.com/cart`,
       {
         method: "DELETE",
-
         headers: {
           "Content-Type": "application/json",
           'Authorization': "Bearer " + token,
@@ -121,23 +120,18 @@ export const updateCartData = async (cart) => {
   try {
     let response = await fetch(
       // `http://localhost:8080/cart`,
-
       `https://libraryapi-gtct.onrender.com/cart`,
-
       {
         method: "PATCH",
-
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
+          'Authorization': "Bearer " + token,
         },
-
-        body: JSON.stringify({
+          body: JSON.stringify({
           cart,
         }),
       }
     );
-
     if (response.ok) {
       response = await response.json();
       return response;

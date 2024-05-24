@@ -54,7 +54,8 @@ const cartSlice = createSlice({
         state.totalQuantity = totalQnt(state.items);
       } else {
         existingItem.quantity++;
-        existingItem.totalPrice = existingItem.totalPrice + newItem.price;
+        console.log(existingItem.totalPrice);
+        existingItem.totalPrice = existingItem.price * existingItem.quantity;
         state.totalQuantity = totalQnt(state.items);
       }
       state.totalCart = some(state.items);

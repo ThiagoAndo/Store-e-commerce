@@ -23,9 +23,11 @@ function CheckoutPage() {
       }
     };
 
+    const id = localStorage.getItem("id") || null;
+
     let order = {
       route: "order",
-      id: localStorage.getItem("id") || null,
+      id,
       name: data.first_name + " " + data.last_name,
       email: data.email_address,
       cart: isGuest(),
@@ -37,10 +39,14 @@ function CheckoutPage() {
       line_two: data.line_two,
       town_city: data.town_city,
       constry_state: data.constry_state,
-      id: localStorage.getItem("id") || null,
+      id,
     };
-    const myArray = [order, add];
-
+    let myArray = [];
+    if (id) {
+      myArray = [order, add];
+    } else {
+      myArray = [order];
+    }
     myArray.forEach((e) => {
       console.log(e.identifier);
       console.log({ ...e });
