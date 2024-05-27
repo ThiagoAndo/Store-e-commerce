@@ -7,7 +7,6 @@ import style from "./UserSignIn.module.css";
 import style_2 from "./UserCheckout.module.css";
 import useForm from "@/hooks/useForm";
 import Button from "../ui/button/btn";
-
 function UserCheckOut({
   handleSubmit,
   inpuShip,
@@ -17,9 +16,7 @@ function UserCheckOut({
   checkout = true,
 }) {
   const { cartItems, scope, checked, focus, setChecked, getEvent } = useForm();
-
   const [User, setUSer] = useState([[], []]);
-
   const onOptionChange = (val) => {
     setChecked(val);
     if (val != "e-money") {
@@ -35,7 +32,6 @@ function UserCheckOut({
       });
     }
   };
-
   const handleThisSubmit = (e) => {
     const { check, data } = getEvent(e, false, false, true);
     check && handleSubmit(data);
@@ -46,7 +42,7 @@ function UserCheckOut({
         [
           localStorage.getItem("first"),
           localStorage.getItem("last"),
-          localStorage.getItem("email"),
+          checkout === true ? localStorage.getItem("email") : "",
         ],
         [
           localStorage.getItem("line_one"),
@@ -56,8 +52,7 @@ function UserCheckOut({
         ],
       ]);
     }, 500);
-  }, []);
-
+  }, [setUSer]);
   return (
     <motion.div
       className={checkout === true ? style_2.check_pag : style_2.userData}
@@ -70,7 +65,6 @@ function UserCheckOut({
           <div className={style.action}>
             <h2>{checkout === true ? "CHECKOUT" : "PROFILE"}</h2>
           </div>
-
           <p> {checkout === true ? "BILLING DETAILS" : "USER DETAILS"}</p>
           <div className={style_2.detail}>
             {inpCheck.map((inp, i) => (
@@ -97,7 +91,6 @@ function UserCheckOut({
               />
             ))}
           </div>
-
           {checkout && (
             <>
               <p>PAYMENT DETAILS </p>

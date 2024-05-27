@@ -6,32 +6,24 @@ import { useContext } from "react";
 import { signOut } from "next-auth/react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
-
 import classes from "./UserMenu.module.css";
 import NotificationContext from "@/store/context/notification-context";
-
 function UserMenu() {
   const dispatch = useDispatch();
   const notificationCtx = useContext(NotificationContext);
   const router = useRouter();
-
   const total = useSelector((state) => state.cart.totalQuantity);
   const { user } = getStorageUser();
   const userInitials = user[0][0] + "" + user[1][0];
-
   function handleUserMenuVis() {
     dispatch(userActions.visible());
   }
-
   function handleUserMenuHid() {
     dispatch(userActions.hidden());
   }
-
   function handleRoutes(route) {
-    const r = route;
-    router.push(`/user/${r}`);
+    router.push(`/user/${route}`);
   }
-
   function handleToggle(click) {
     if (total === 0 && click === "click") {
       notificationCtx.showNotification({
@@ -63,12 +55,19 @@ function UserMenu() {
       });
     }
   }
+  const MenuOpt = ({ children, action }) => {
+    return (
+      <motion.p key={0} whileHover={{ color: "#ff9b05" }} onClick={action}>
+        {children}
+      </motion.p>
+    );
+  };
   return (
     <motion.div
       className={classes.userMenu}
-      initial={{ x: 300, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={{ x: 300, opacity: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ duration: 0.7, type: "spring" }}
       onMouseEnter={handleUserMenuVis}
       onMouseLeave={handleUserMenuHid}
@@ -85,38 +84,15 @@ function UserMenu() {
         </li>
         <li>
           <div className={classes.body_inf}>
-            <motion.p
-              key={0}
-              whileHover={{ scale: 1.01, color: "#ff9b05" }}
-              transition={{ type: "spring", stiffness: 150 }}
-              onClick={handleToggle.bind(null, "click")}
-            >
-              My cart
-            </motion.p>
-            <motion.p
-              key={1}
-              whileHover={{ scale: 1.01, color: "#ff9b05" }}
-              transition={{ type: "spring", stiffness: 150 }}
-              onClick={handleRoutes.bind(null, "changeData")}
-            >
+            <MenuOpt action={handleToggle.bind(null, "click")}>My cart</MenuOpt>
+            <MenuOpt action={handleRoutes.bind(null, "changeData")}>
               Edit Profile
-            </motion.p>
-            <motion.p
-              key={2}
-              whileHover={{ scale: 1.01, color: "#ff9b05" }}
-              transition={{ type: "spring", stiffness: 150 }}
-              onClick={handleRoutes.bind(null, "purchases")}
-            >
+            </MenuOpt>
+            <MenuOpt action={handleRoutes.bind(null, "purchases")}>
               My purchases
-            </motion.p>
-            <motion.p
-              key={3}
-              whileHover={{ scale: 1.01, color: "#ff9b05" }}
-              transition={{ type: "spring", stiffness: 150 }}
-              onClick={logoutHandler}
-            >
-              Log out
-            </motion.p>
+            </MenuOpt>
+            <MenuOpt action={logoutHandler}>Log out</MenuOpt>
+            <MenuOpt action={logoutHandler}>Delete account</MenuOpt>
           </div>
         </li>
       </ul>

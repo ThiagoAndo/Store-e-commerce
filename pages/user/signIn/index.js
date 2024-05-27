@@ -48,9 +48,9 @@ function SignIn() {
       }
 
       if (data.hasOwnProperty("message")) {
-        setFeedbackItems(data);
+        setFeedbackItems(data.message);
       } else {
-        setFeedbackItems(data);
+        setFeedbackItems(data.email_address);
         signIn("credentials", {
           redirect: false,
           email: user.email,
@@ -60,11 +60,11 @@ function SignIn() {
       notification(null, "Sending Request:", error.message, "error");
     }
   }
-  console.log("feedbackItems");
-  console.log(feedbackItems);
   useEffect(() => {
     if (feedbackItems) {
       notification(null, "Invalid Action:", feedbackItems);
+        setFeedbackItems('');
+
       return;
     } else if (feedbackItems?.email_address) {
       router.replace("/");

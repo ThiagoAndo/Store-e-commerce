@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import {  useState } from "react";
 import { useInputAnimation } from "@/hooks/useInput";
 import { useNotification } from "@/hooks/useNotification";
-import { useSession } from "next-auth/react";
 import { useSelector } from "react-redux";
 
 import {

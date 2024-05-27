@@ -1,4 +1,4 @@
-const Confirmation = () => {
+const ConfIcon = () => {
   return (
     <svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
       <g fill="none" fill-rule="evenodd">
@@ -13,4 +13,4 @@ const Confirmation = () => {
   );
 };
 
-export default Confirmation;
+export default ConfIcon;

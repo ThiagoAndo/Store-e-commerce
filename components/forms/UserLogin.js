@@ -1,33 +1,29 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { useNotification } from "@/hooks/useNotification";
+import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
 import { inpuReg } from "@/components/ui/formInput/inputInfo";
-import { useNotification } from "@/hooks/useNotification";
-import Input from "../ui/formInput/input";
 import useForm from "@/hooks/useForm";
+import Input from "../ui/formInput/input";
 import Button from "../ui/button/btn";
 import style from "./UserLogin.module.css";
-
 function UserLogin({ handling, LoginBack }) {
   const { scope, focus, getEvent } = useForm();
-  const router = useRouter();
-  const { data: session } = useSession();
   const { notification } = useNotification();
+  const { data: session } = useSession();
+  const router = useRouter();
   const fields = [];
   fields.push(inpuReg[2]);
   fields.push(inpuReg[3]);
-
   function handleClick(e) {
     e.preventDefault();
     router.replace("/user/signIn");
   }
-
   function loginHandler(e) {
     const { login, data } = getEvent(e, false, true, false);
     login && handling(data);
   }
-
   useEffect(() => {
     const isOrdering = localStorage.getItem("order");
     if (LoginBack?.message) {
@@ -35,11 +31,11 @@ function UserLogin({ handling, LoginBack }) {
         notification(
           null,
           "Not Found:",
-          "Email might not be right, Or user has not been registered",
+          "Email might not be right.  Or user has not been registered"
         );
         return;
       } else if (LoginBack.message.slice(0, 5) === "Wrong") {
-        notification(null, "Wrong Input:","Your password does not match.");
+        notification(null, "Wrong Input:", "Your password does not match.");
         return;
       }
     }
@@ -49,7 +45,6 @@ function UserLogin({ handling, LoginBack }) {
       router.replace("/checkout");
     }
   }, [LoginBack, session]);
-
   return (
     <>
       <AnimatePresence>
@@ -86,7 +81,6 @@ function UserLogin({ handling, LoginBack }) {
             </div>
             <Button style={style.button}>Sign in Securely </Button>
           </motion.form>
-
           <motion.form
             key={4}
             initial={{ x: 15, opacity: 0 }}
@@ -101,7 +95,6 @@ function UserLogin({ handling, LoginBack }) {
               <h3>✔ Access your saved items. </h3>
               <h3>✔ Instant access to your account.</h3>
             </div>
-
             <Button click={handleClick} style={style.button}>
               Continue Securely
             </Button>

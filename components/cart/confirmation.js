@@ -1,4 +1,4 @@
-import Confirmation from "../ui/confirmation/conf-icon";
+import ConIcon from "../ui/confirmation/conf-icon";
 import Button from "../ui/button/btn";
 import classes from "./confirmation.module.css";
 import { useRouter } from "next/router";
@@ -17,7 +17,7 @@ function ConfBlock() {
   return (
     <div className={classes.container}>
       <span>
-        <Confirmation />
+        <ConIcon />
       </span>
       <h1>THANK YOU FOR YOUR ORDER</h1>
       <p>You will receive an email confirmation shortly.</p>

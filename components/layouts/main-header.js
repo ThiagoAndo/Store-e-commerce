@@ -80,14 +80,14 @@ function MainHeader() {
           transition={{ type: "spring", duration: 0.3 }}
           onClick={handleClick}
         >
-          <Link className={classes.link} href="/" >
+          <Link className={classes.link} href="/">
             {currentPath.includes("product") ? " ⬅ Back" : "Next Store"}
           </Link>
         </motion.div>
         <motion.div
           className={classes.search}
           whileHover={{ width: 410 }}
-          transition={{ type: "spring", duration: 0.6, marginRight: 0 }}
+          transition={{ duration: 0.4, marginRight: 0 }}
         >
           {currentPath === "/" ? <SearchBar /> : null}
         </motion.div>
@@ -97,8 +97,10 @@ function MainHeader() {
               scale: 1.1,
               borderRadius: "10rem",
               boxShadow: "0px 2px 0px rgba(242, 100, 18, 0.8)",
+              zIndex: -3000,
             }}
             className={classes.cart_effec}
+            transition={{ type: "spring", duration: 0.3 }}
           >
             <div
               className={cartClass}

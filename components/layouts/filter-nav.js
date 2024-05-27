@@ -1,17 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "@/store/context/products-context";
-import classes from "./filter-nav.module.css";
 import {
   motion,
   AnimatePresence,
   useScroll,
   useTransform,
 } from "framer-motion";
+import classes from "./filter-nav.module.css";
 function FilterHeader() {
-  const store = useContext(ProductContext);
-  const { scrollY } = useScroll();
   const [scrollPosition, setScrollPosition] = useState(0);
+  const { scrollY } = useScroll();
   const navWidth = useTransform(scrollY, [0, 30, 130], ["70%", "90%", "95%"]);
+  const store = useContext(ProductContext);
   const handleScroll = () => {
     const position = window.scrollY;
     setScrollPosition(position);
@@ -31,6 +31,18 @@ function FilterHeader() {
   function handleClick(num) {
     store.getFiltered(num);
   }
+  const MenuBtn = ({ children, action }) => {
+    return (
+      <motion.button
+        whileHover={{ color: "#ff9b05" }}
+        transition={{ type: "spring", duration: 0.4 }}
+        className={classes.filter}
+        onClick={action}
+      >
+        {children}
+      </motion.button>
+    );
+  };
   return (
     <AnimatePresence>
       <motion.nav
@@ -52,109 +64,19 @@ function FilterHeader() {
       >
         <motion.ul className={classes.navigation} style={{ width: navWidth }}>
           <li>
-            <motion.button
-              whileHover={{
-                boxShadow: "0 1px 0px rgba(242, 100, 18, 0.8)",
-                borderRadius: " 0.5rem",
-                paddingBottom: "0.2rem",
-              }}
-              variants={{
-                hidden: { opacity: 0, scale: 0.5 },
-                visible: { opacity: 1, scale: [0.8, 1.3, 1] },
-              }}
-              transition={{ type: "spring", duration: 0.4 }}
-              key={1}
-              className={classes.filter}
-              onClick={() => {
-                handleClick(1);
-              }}
-            >
-              Men
-            </motion.button>
+            <MenuBtn action={() => { handleClick(1) }}> Men </MenuBtn>
           </li>
           <li>
-            <motion.button
-              whileHover={{
-                boxShadow: "0 1px 0px rgba(242, 100, 18, 0.8)",
-                borderRadius: " 0.5rem",
-                paddingBottom: "0.2rem",
-              }}
-              variants={{
-                hidden: { opacity: 0, scale: 0.5 },
-                visible: { opacity: 1, scale: [0.8, 1.3, 1] },
-              }}
-              transition={{ type: "spring", duration: 0.4 }}
-              key={2}
-              className={classes.filter}
-              onClick={() => {
-                handleClick(2);
-              }}
-            >
-              Women
-            </motion.button>
+            <MenuBtn action={() => { handleClick(2) }}> Women </MenuBtn>
           </li>
           <li>
-            <motion.button
-              whileHover={{
-                boxShadow: "0 1px 0px rgba(242, 100, 18, 0.8)",
-                borderRadius: " 0.5rem",
-                paddingBottom: "0.2rem",
-              }}
-              variants={{
-                hidden: { opacity: 0, scale: 0.5 },
-                visible: { opacity: 1, scale: [0.8, 1.3, 1] },
-              }}
-              transition={{ type: "spring", duration: 0.4 }}
-              key={3}
-              className={classes.filter}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Home
-            </motion.button>
+            <MenuBtn action={() => { handleClick(3) }}> Home </MenuBtn>
           </li>
           <li>
-            <motion.button
-              whileHover={{
-                boxShadow: "0 1px 0px rgba(242, 100, 18, 0.8)",
-                borderRadius: " 0.5rem",
-                paddingBottom: "0.2rem",
-              }}
-              variants={{
-                hidden: { opacity: 0, scale: 0.5 },
-                visible: { opacity: 1, scale: [0.8, 1.3, 1] },
-              }}
-              transition={{ type: "spring", duration: 0.4 }}
-              key={4}
-              className={classes.filter}
-              onClick={() => {
-                handleClick(4);
-              }}
-            >
-              Self care
-            </motion.button>
+            <MenuBtn action={() => { handleClick(4) }}> Self care </MenuBtn>
           </li>
           <li>
-            <motion.button
-              whileHover={{
-                boxShadow: "0 1px 0px rgba(242, 100, 18, 0.8)",
-                borderRadius: " 0.5rem",
-                paddingBottom: "0.2rem",
-              }}
-              variants={{
-                hidden: { opacity: 0, scale: 0.5 },
-                visible: { opacity: 1, scale: [0.8, 1.3, 1] },
-              }}
-              transition={{ type: "spring", duration: 0.4 }}
-              key={5}
-              className={classes.filter}
-              onClick={() => {
-                handleClick(5);
-              }}
-            >
-              Electronics
-            </motion.button>
+            <MenuBtn action={() => { handleClick(5) }}> Electronics</MenuBtn>
           </li>
         </motion.ul>
         <AnimatePresence>

@@ -40,7 +40,7 @@ export default function Input({
         className={style.input}
         placeholder={ph}
         type={typeI}
-        onFocus={handleFocus && handleChange}
+        onFocus={handleFocus ||  handleChange}
         disabled={dis}
         value={thisVal}
         onChange={handleChange}

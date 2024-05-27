@@ -48,7 +48,7 @@ function SearchBar({ click }) {
         border: "1px solid #FFFAFA",
         borderRadius: "8px",
         backgroundColor: "#25200f",
-        hoverBackgroundColor: "#f9b241",
+        hoverBackgroundColor: "#ff9b05",
         color: "white",
         fontSize: "20px",
         iconColor: "white",

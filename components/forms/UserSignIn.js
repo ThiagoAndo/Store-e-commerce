@@ -1,18 +1,16 @@
 import { motion } from "framer-motion";
 import { inpuReg } from "@/components/ui/formInput/inputInfo";
+
+import useForm from "@/hooks/useForm";
 import Button from "../ui/button/btn";
 import Input from "../ui/formInput/input";
 import style from "./UserSignIn.module.css";
-import useForm from "@/hooks/useForm";
-
 function UserSignIn({ handleGuest, isOrdering, handleSubmit }) {
   const { scope, focus, getEvent } = useForm();
-
   function handleEvent(e) {
     const { signin, data } = getEvent(e,true, false,false);
     signin && handleSubmit(data);
   }
-
   return (
     <>
       <motion.div

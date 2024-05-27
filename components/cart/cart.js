@@ -5,7 +5,6 @@ import { deleteCartData } from "@/helpers/cart-actions";
 import { formatValue } from "@/helpers/functions";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-
 import Button from "../ui/button/btn";
 import classes from "./cart.module.css";
 import CartItem from "./cart-item";
