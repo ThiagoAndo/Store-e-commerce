@@ -5,21 +5,31 @@ import { cartActions } from "@/store/redux/cart-slice";
 import { useContext } from "react";
 import { signOut } from "next-auth/react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
+
 import classes from "./UserMenu.module.css";
 import NotificationContext from "@/store/context/notification-context";
 
 function UserMenu() {
   const dispatch = useDispatch();
   const notificationCtx = useContext(NotificationContext);
+  const router = useRouter();
+
   const total = useSelector((state) => state.cart.totalQuantity);
-  const {user} =getStorageUser()
+  const { user } = getStorageUser();
   const userInitials = user[0][0] + "" + user[1][0];
+
   function handleUserMenuVis() {
     dispatch(userActions.visible());
   }
 
   function handleUserMenuHid() {
     dispatch(userActions.hidden());
+  }
+
+  function handleRoutes(route) {
+    const r = route;
+    router.push(`/user/${r}`);
   }
 
   function handleToggle(click) {
@@ -87,6 +97,7 @@ function UserMenu() {
               key={1}
               whileHover={{ scale: 1.01, color: "#ff9b05" }}
               transition={{ type: "spring", stiffness: 150 }}
+              onClick={handleRoutes.bind(null, "changeData")}
             >
               Edit Profile
             </motion.p>
@@ -94,6 +105,7 @@ function UserMenu() {
               key={2}
               whileHover={{ scale: 1.01, color: "#ff9b05" }}
               transition={{ type: "spring", stiffness: 150 }}
+              onClick={handleRoutes.bind(null, "purchases")}
             >
               My purchases
             </motion.p>

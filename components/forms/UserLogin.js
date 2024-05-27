@@ -6,9 +6,7 @@ import { inpuReg } from "@/components/ui/formInput/inputInfo";
 import { useNotification } from "@/hooks/useNotification";
 import Input from "../ui/formInput/input";
 import useForm from "@/hooks/useForm";
-import { fieldRegister } from "@/components/ui/formInput/inputInfo";
 import Button from "../ui/button/btn";
-
 import style from "./UserLogin.module.css";
 
 function UserLogin({ handling, LoginBack }) {
@@ -19,9 +17,6 @@ function UserLogin({ handling, LoginBack }) {
   const fields = [];
   fields.push(inpuReg[2]);
   fields.push(inpuReg[3]);
-  const fieldNames = [];
-  fieldNames.push(fieldRegister[2]);
-  fieldNames.push(fieldRegister[3]);
 
   function handleClick(e) {
     e.preventDefault();
@@ -39,14 +34,12 @@ function UserLogin({ handling, LoginBack }) {
       if (LoginBack.message.slice(0, 5) === "Could") {
         notification(
           null,
-          "email might not be right, Or user has not been registered",
-          "Not Found"
+          "Not Found:",
+          "Email might not be right, Or user has not been registered",
         );
-        empty(fieldNames[0]);
         return;
       } else if (LoginBack.message.slice(0, 5) === "Wrong") {
-        empty(fieldNames[1]);
-        notification(null, "wrong password", null);
+        notification(null, "Wrong Input:","Your password does not match.");
         return;
       }
     }

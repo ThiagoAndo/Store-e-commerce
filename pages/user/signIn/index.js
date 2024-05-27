@@ -60,10 +60,11 @@ function SignIn() {
       notification(null, "Sending Request:", error.message, "error");
     }
   }
-
+  console.log("feedbackItems");
+  console.log(feedbackItems);
   useEffect(() => {
-    if (feedbackItems?.message) {
-      notification(null, feedbackItems.message, "Invalid Action:");
+    if (feedbackItems) {
+      notification(null, "Invalid Action:", feedbackItems);
       return;
     } else if (feedbackItems?.email_address) {
       router.replace("/");

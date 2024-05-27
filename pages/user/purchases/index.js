@@ -1,8 +1,7 @@
-
 function ChangePassword() {
   return (
     <>
-      <h1>Change Password</h1>
+      <h1>Orders history</h1>
     </>
   );
 }

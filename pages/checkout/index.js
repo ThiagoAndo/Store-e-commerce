@@ -4,11 +4,18 @@ import NotificationContext from "@/store/context/notification-context";
 import { confActions } from "@/store/redux/conf.slice";
 import { useDispatch } from "react-redux";
 import { getUserToken } from "@/helpers/functions";
+import {
+  inpuShip,
+  inpuPay,
+  inpuReg,
+  fieldChekout,
+} from "@/components/ui/formInput/inputInfo";
 
 function CheckoutPage() {
   const notificationCtx = useContext(NotificationContext);
   const dispatch = useDispatch();
-
+  const inpCheck = inpuReg.slice();
+  inpCheck.pop();
   function handleCheck(data) {
     notificationCtx.showNotification({
       title: "Sending Request:",
@@ -23,9 +30,7 @@ function CheckoutPage() {
         return false;
       }
     };
-
     const id = localStorage.getItem("id") || null;
-
     let order = {
       route: "order",
       id,
@@ -42,16 +47,13 @@ function CheckoutPage() {
       constry_state: data.constry_state,
       id,
     };
-    let myArray = [];
+    let reqArray = [];
     if (id) {
-      myArray = [order, add];
+      reqArray = [order, add];
     } else {
-      myArray = [order];
+      reqArray = [order];
     }
-    myArray.forEach((e) => {
-      console.log(e.identifier);
-      console.log({ ...e });
-
+    reqArray.forEach((e, index) => {
       try {
         const token = getUserToken();
         fetch(
@@ -61,12 +63,13 @@ function CheckoutPage() {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              'Authorization': "Bearer " + token,
+              Authorization: "Bearer " + token,
             },
             body: JSON.stringify({ ...e }),
           }
         ).then((response) => {
-          if (response && e.route === "add") {
+          console.log(response);
+          if (response.ok && e.route != "add") {
             dispatch(confActions.toggle());
           }
         });
@@ -75,7 +78,15 @@ function CheckoutPage() {
       }
     });
   }
-  return <UserCheckOut handleSubmit={handleCheck} />;
-}
 
+  return (
+    <UserCheckOut
+      handleSubmit={handleCheck}
+      inpuShip={inpuShip}
+      inpuPay={inpuPay}
+      inpCheck={inpCheck}
+      fieldChekout={fieldChekout}
+    />
+  );
+}
 export default CheckoutPage;

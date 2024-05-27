@@ -1,9 +1,19 @@
 import style from "./input.module.css";
-import { useInputAnimation } from "@/hooks/useInput";
-
-export default function Input({ id, ph, typeI, handleFocus, dis = false, val }) {
+import { useRef, useState, useEffect } from "react";
+export default function Input({
+  id,
+  ph,
+  typeI,
+  handleFocus,
+  dis = false,
+  val,
+}) {
+  const [thisVal, setThisVal] = useState();
   let label = id.split("_");
-  const { focus, scope } = useInputAnimation();
+  const thisRef = useRef();
+  const handleChange = () => {
+    setThisVal(thisRef.current.value);
+  };
 
   label =
     label.length > 1
@@ -14,20 +24,26 @@ export default function Input({ id, ph, typeI, handleFocus, dis = false, val }) 
         label[1].slice(1, label[0].length + 1)
       : id[0].toUpperCase() + id.slice(1, id.length);
 
+  useEffect(() => {
+    setThisVal(val);
+  }, [val]);
+
   return (
     <div>
       <label className={style.label} htmlFor={id} id={`lab${id}`}>
         {label}
       </label>
       <input
+        ref={thisRef}
         id={id}
         name={id}
         className={style.input}
         placeholder={ph}
         type={typeI}
-        onFocus={handleFocus}
+        onFocus={handleFocus && handleChange}
         disabled={dis}
-        value={val}
+        value={thisVal}
+        onChange={handleChange}
       />
     </div>
   );

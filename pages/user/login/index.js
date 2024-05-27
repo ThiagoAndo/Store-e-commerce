@@ -35,6 +35,7 @@ function Login() {
       )
         .then((response) => {
           if (response.ok) {
+            console.log(response)
             return response.json();
           } else {
             setFeedback({ message: "Connecting to the database failed!" });
@@ -59,7 +60,7 @@ function Login() {
               deleteCartData(user_id, 0);
 
               isCart.forEach((e) => {
-                dispatch(sendCartData(e));
+                sendCartData(e);
               });
             }
           }
