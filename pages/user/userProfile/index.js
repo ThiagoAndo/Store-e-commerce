@@ -9,6 +9,8 @@ import UserCheckOut from "@/components/forms/UserCheckout";
 function handleCheck() {
   console.log("save");
 }
+
+
 const inpCheck = [inpuReg[0], inpuReg[1], inpuReg[3]];
 function ChangeData() {
   return (

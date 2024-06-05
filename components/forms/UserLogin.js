@@ -21,7 +21,7 @@ function UserLogin({ handling, LoginBack }) {
     router.replace("/user/signIn");
   }
   function loginHandler(e) {
-    const { login, data } = getEvent(e, false, true, false,false);
+    const { login, data } = getEvent(e, false, true, false, false);
     login && handling(data);
   }
   useEffect(() => {
