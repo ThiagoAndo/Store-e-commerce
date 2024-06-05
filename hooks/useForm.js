@@ -61,7 +61,6 @@ export default function useForm() {
     } else if (isProfile) {
       confEmpty(fieldProfile);
       inpFields = [...fieldProfile];
-      inpFields[3] = inpFields[2];
     } else if (isCheck) {
       inpFields = fieldChekout;
       confEmpty(
@@ -86,20 +85,18 @@ export default function useForm() {
       const last = entries[1][0].toUpperCase() + entries[1].slice(1);
       name = isNameValid(first + " " + last);
     }
-    if (!isProfile) {
       email = isEmailValid(entries[2]);
       password = isPasswordValid(entries[3]);
-    } else {
-      password = isPasswordValid(entries[2]);
-    }
-    if (!email && (isSignin || isLogin || isCheck)) {
+
+
+    if (!email && (isSignin || isLogin || isCheck || isProfile)) {
       empty(inpFields[2]);
       notification("email");
     } else if (!name) {
       notification("name");
       empty(inpFields[0]);
       empty(inpFields[1]);
-    } else if (!password && (isSignin || isLogin || isProfile)) {
+    } else if (!password && (isSignin || isLogin)) {
       notification("password");
       empty(inpFields[3]);
     }
@@ -107,7 +104,7 @@ export default function useForm() {
       login: email && password,
       check: email && name,
       signin: email && name && password,
-      prof: name && password,
+      prof: email && name && password,
       data,
     };
   };

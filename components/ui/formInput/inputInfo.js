@@ -77,7 +77,7 @@ export const fieldChekout = [
 export const fieldProfile = [
   { label: "labfirst_name", input: "first_name" },
   { label: "lablast_name", input: "last_name" },
-  { label: "labpassword", input: "password" },
+  { label: "labemail_address", input: "email_address" },
   { label: "labline_one", input: "line_one" },
   { label: "labline_two", input: "line_two" },
   { label: "labtown_city", input: "town_city" },

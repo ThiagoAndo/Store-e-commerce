@@ -53,7 +53,7 @@ function UserCheckOut({
         [
           localStorage.getItem("first"),
           localStorage.getItem("last"),
-          checkout === true ? localStorage.getItem("email") : "",
+          localStorage.getItem("email") ,
         ],
         [
           localStorage.getItem("line_one"),

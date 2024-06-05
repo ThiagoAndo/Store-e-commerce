@@ -11,7 +11,7 @@ function handleCheck() {
 }
 
 
-const inpCheck = [inpuReg[0], inpuReg[1], inpuReg[3]];
+const inpCheck = [inpuReg[0], inpuReg[1], inpuReg[2]];
 function ChangeData() {
   return (
     <UserCheckOut
