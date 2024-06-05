@@ -86,6 +86,8 @@ function CheckoutPage() {
       inpuPay={inpuPay}
       inpCheck={inpCheck}
       fieldChekout={fieldChekout}
+      checkout={true}
+      profile={false}
     />
   );
 }

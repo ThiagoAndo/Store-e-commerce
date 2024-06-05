@@ -21,7 +21,7 @@ function UserLogin({ handling, LoginBack }) {
     router.replace("/user/signIn");
   }
   function loginHandler(e) {
-    const { login, data } = getEvent(e, false, true, false);
+    const { login, data } = getEvent(e, false, true, false,false);
     login && handling(data);
   }
   useEffect(() => {
@@ -31,11 +31,11 @@ function UserLogin({ handling, LoginBack }) {
         notification(
           null,
           "Not Found:",
-          "Email might not be right.  Or user has not been registered"
+          " EMAIL MIGHT NOT BE RIGHT. OR USER HAS NOT BEEN REGISTERED"
         );
         return;
       } else if (LoginBack.message.slice(0, 5) === "Wrong") {
-        notification(null, "Wrong Input:", "Your password does not match.");
+        notification(null, "Wrong Input:", "YOUR PASSWORD DOES NOT MATCH.");
         return;
       }
     }

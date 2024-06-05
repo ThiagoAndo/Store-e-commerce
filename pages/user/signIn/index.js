@@ -21,7 +21,7 @@ function SignIn() {
   }
 
   async function submitFormHandler(user) {
-    notification(null, "Sending Request:", "Registering new user", "pending");
+    notification(null, "Sending Request:", "REGISTERING NEW USER.", "pending");
     user.password = await hash(user.password, 12);
     user.id = uniqid();
     user.created_at = getCurrentDate();
@@ -62,7 +62,7 @@ function SignIn() {
   }
   useEffect(() => {
     if (feedbackItems) {
-      notification(null, "Invalid Action:", feedbackItems);
+      notification(null, "Invalid Action:", feedbackItems.toUpperCase());
         setFeedbackItems('');
 
       return;
@@ -70,7 +70,7 @@ function SignIn() {
       router.replace("/");
       notification(
         null,
-        "User registered successfully!",
+        "USER REGISTERED SUCCESSFULLY!",
         "Registered:",
         "success"
       );

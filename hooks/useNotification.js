@@ -13,7 +13,8 @@ export function useNotification() {
     const thisTitle = title || "Wrong Input:";
     const thisStatus = status || "error";
     const msg =
-      passed || `your ${field} is not valid. Make sure to enter a valid one!.`;
+      passed ||
+      `YOUR ${field.toUpperCase()} IS NOT VALID.  MAKE SURE TO ENERT A VALID ONE!`;
     notificationCtx.showNotification({
       title: thisTitle,
       message: msg,

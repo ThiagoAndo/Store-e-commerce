@@ -73,3 +73,13 @@ export const fieldChekout = [
   { label: "labe-Money_PIN", input: "e-Money_PIN" },
   { label: "labe-Money_Number", input: "e-Money_Number" },
 ];
+
+export const fieldProfile = [
+  { label: "labfirst_name", input: "first_name" },
+  { label: "lablast_name", input: "last_name" },
+  { label: "labpassword", input: "password" },
+  { label: "labline_one", input: "line_one" },
+  { label: "labline_two", input: "line_two" },
+  { label: "labtown_city", input: "town_city" },
+  { label: "labconstry_state", input: "constry_state" },
+];

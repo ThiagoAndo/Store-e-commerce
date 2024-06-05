@@ -15,7 +15,7 @@ function Login() {
   function handleLogin({ email_address, password }) {
     notificationCtx.showNotification({
       title: "Sending Request:",
-      message: `Getting User Credentials.`,
+      message: `GETTING USER CREDENTIALS.`,
       status: "pending",
     });
     try {
@@ -68,7 +68,7 @@ function Login() {
     } catch (error) {
       notificationCtx.showNotification({
         title: "Sending Request:",
-        message: error.message,
+        message: error.message.toUpperCase(),
         status: "error",
       });
     }

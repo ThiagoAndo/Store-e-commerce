@@ -13,7 +13,8 @@ function UserCheckOut({
   inpuPay,
   inpCheck,
   fieldChekout,
-  checkout = true,
+  checkout,
+  profile,
 }) {
   const { cartItems, scope, checked, focus, setChecked, getEvent } = useForm();
   const [User, setUSer] = useState([[], []]);
@@ -33,8 +34,9 @@ function UserCheckOut({
     }
   };
   const handleThisSubmit = (e) => {
-    const { check, data } = getEvent(e, false, false, true);
-    check && handleSubmit(data);
+    const { prof, check, data } = getEvent(e, false, false, checkout, profile);
+    checkout && check && handleSubmit(data);
+    checkout && prof && handleSubmit(data);
   };
   useEffect(() => {
     setTimeout(() => {
@@ -63,10 +65,14 @@ function UserCheckOut({
       <div className={style_2.container}>
         <form onSubmit={handleThisSubmit} ref={scope}>
           <div className={style.action}>
-            <h2>{checkout === true ? "CHECKOUT" : "PROFILE"}</h2>
+            <h2>{checkout === true ? "CHECKOUT" : "EDIT PROFILE"}</h2>
           </div>
-          <p> {checkout === true ? "BILLING DETAILS" : "USER DETAILS"}</p>
-          <div className={style_2.detail}>
+          <p> {checkout === true ? "BILLING DETAILS" : "ENTER DETAILS"}</p>
+          <div
+            className={
+              checkout === true ? style_2.detail : style_2.detail_profile
+            }
+          >
             {inpCheck.map((inp, i) => (
               <Input
                 key={inp.id}
@@ -78,7 +84,7 @@ function UserCheckOut({
               />
             ))}
           </div>
-          <p> {checkout === true ? "SHIPPING INFO" : "ADDRESS DETAILS"}</p>
+          <p> {checkout === true ? "SHIPPING INFO" : "ENTER ADDRESS"}</p>
           <div className={style_2.shipping}>
             {inpuShip.map((inp, i) => (
               <Input

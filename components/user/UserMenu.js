@@ -85,7 +85,7 @@ function UserMenu() {
         <li>
           <div className={classes.body_inf}>
             <MenuOpt action={handleToggle.bind(null, "click")}>My cart</MenuOpt>
-            <MenuOpt action={handleRoutes.bind(null, "changeData")}>
+            <MenuOpt action={handleRoutes.bind(null, "userProfile")}>
               Edit Profile
             </MenuOpt>
             <MenuOpt action={handleRoutes.bind(null, "purchases")}>

@@ -14,8 +14,8 @@
   list-style: none;
 }
 .search {
-  min-width: 15em;
   margin-left: 10px;
+  min-width: 15rem;
 }
 .icon_container {
   display: flex;
@@ -24,6 +24,7 @@
   width: 12rem;
 }
 .cart_effec {
+  margin-left: 0.1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

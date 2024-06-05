@@ -19,6 +19,7 @@ function ChangeData() {
       inpCheck={inpCheck}
       fieldChekout={fieldChekout}
       checkout={false}
+      profile={true}
     />
   );
 }

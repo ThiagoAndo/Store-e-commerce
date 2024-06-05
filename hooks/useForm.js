@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { useInputAnimation } from "@/hooks/useInput";
 import { useNotification } from "@/hooks/useNotification";
 import { useSelector } from "react-redux";
@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import {
   fieldRegister,
   fieldChekout,
+  fieldProfile,
 } from "@/components/ui/formInput/inputInfo";
 import { gatherData } from "@/helpers/functions";
 import {
@@ -19,28 +20,15 @@ export default function useForm() {
   const { focus, empty, scope } = useInputAnimation();
   const [checked, setChecked] = useState("e-money");
   const cartItems = useSelector((state) => state.cart.items);
-
-  const getEvent = (e, isSignin, isLogin, isCheck) => {
+  let email;
+  let password;
+  const getEvent = (e, isSignin, isLogin, isCheck, isProfile) => {
     e.preventDefault();
     let inpFields = [];
     let name = true;
 
-    if (isSignin) {
-      inpFields = fieldRegister;
-    } else if (isLogin) {
-      inpFields.push(fieldRegister[2]);
-      inpFields.push(fieldRegister[3]);
-    } else if (isCheck) {
-      inpFields = fieldChekout;
-    }
-
     if (cartItems.length <= 0 && isCheck) {
-      notification(
-        null,
-        "Empty cart:",
-        `Choose a product to proceed.`,
-        "pending"
-      );
+      notification(null, "Empty cart:", `CHOSE A PEODUCT TO PROCEED.`, "error");
       return {
         check: false,
         signin: false,
@@ -60,22 +48,32 @@ export default function useForm() {
         });
       });
 
-      entries.map((field) => {
+      entries.map((field, i) => {
         if (field === "") {
-          empty(passed[index]);
+          console.log(passed[i]);
+
+          empty(passed[i]);
           checkEmpty++;
         }
-        index++;
       });
     }
 
     if (isSignin) {
+      inpFields = fieldRegister;
       confEmpty(fieldRegister);
     } else if (isLogin) {
+      inpFields.push(fieldRegister[2]);
+      inpFields.push(fieldRegister[3]);
       confEmpty(inpFields);
-      entries.unshift("","");
-      inpFields.unshift("","")
+      entries.unshift("", "");
+      inpFields.unshift("", "");
+    } else if (isProfile) {
+      confEmpty(fieldProfile);
+      inpFields = [...fieldProfile];
+      inpFields[3] = inpFields[2];
     } else if (isCheck) {
+      inpFields = fieldChekout;
+
       confEmpty(
         checked === "e-money"
           ? fieldChekout
@@ -84,36 +82,47 @@ export default function useForm() {
     }
 
     if (checkEmpty > 0) {
+      if (isCheck) {
+        notification(null, "Empty Fields:", `FILL IN THE FORM`, "error");
+      }
       return {
         login: false,
         check: false,
         signin: false,
+        profile: false,
       };
     }
 
-    if (isSignin || isCheck) {
+    if (isSignin || isCheck || isProfile) {
       const first = entries[0][0].toUpperCase() + entries[0].slice(1);
       const last = entries[1][0].toUpperCase() + entries[1].slice(1);
       name = isNameValid(first + " " + last);
     }
-    const email = isEmailValid(entries[2]);
-    const password = isPasswordValid(entries[3]);
 
-    if (!email) {
+    if (!isProfile) {
+      email = isEmailValid(entries[2]);
+      password = isPasswordValid(entries[3]);
+    } else {
+      password = isPasswordValid(entries[2]);
+    }
+
+    if (!email && (isSignin || isLogin || isCheck)) {
       empty(inpFields[2]);
       notification("email");
     } else if (!name) {
-      notification("name", "make sure to write one name per field.");
+      notification("name");
       empty(inpFields[0]);
       empty(inpFields[1]);
-    } else if (!password && (isSignin||isLogin)) {
+    } else if (!password && (isSignin || isLogin || isProfile)) {
       notification("password");
       empty(inpFields[3]);
     }
+
     return {
       login: email && password,
       check: email && name,
       signin: email && name && password,
+      prof: name && password,
       data,
     };
   };

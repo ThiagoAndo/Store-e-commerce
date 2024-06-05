@@ -87,7 +87,7 @@ function MainHeader() {
         <motion.div
           className={classes.search}
           whileHover={{ width: 410 }}
-          transition={{ duration: 0.4, marginRight: 0 }}
+          transition={{ type: "spring", duration: 1, marginRight: 0 }}
         >
           {currentPath === "/" ? <SearchBar /> : null}
         </motion.div>
@@ -96,11 +96,10 @@ function MainHeader() {
             whileHover={{
               scale: 1.1,
               borderRadius: "10rem",
-              boxShadow: "0px 2px 0px rgba(242, 100, 18, 0.8)",
-              zIndex: -3000,
+              boxShadow: "0 2px 0px rgba(242, 100, 18, 0.8)",
             }}
-            className={classes.cart_effec}
             transition={{ type: "spring", duration: 0.3 }}
+            className={classes.cart_effec}
           >
             <div
               className={cartClass}
