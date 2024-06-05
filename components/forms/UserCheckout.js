@@ -26,6 +26,7 @@ function UserCheckOut({
       });
     }
   }
+  
 
   const onOptionChange = (val) => {
     setChecked(val);
@@ -45,7 +46,7 @@ function UserCheckOut({
   const handleThisSubmit = (e) => {
     const { prof, check, data } = getEvent(e, false, false, checkout, profile);
     checkout && check && handleSubmit(data);
-    profile && prof && handleChange.length > 0 && handleSubmit(data);
+    profile && prof && handleChange.length > 0 && handleSubmit(data, hasChanged);
   };
   useEffect(() => {
     setTimeout(() => {
@@ -53,7 +54,7 @@ function UserCheckOut({
         [
           localStorage.getItem("first"),
           localStorage.getItem("last"),
-          localStorage.getItem("email") ,
+          localStorage.getItem("email"),
         ],
         [
           localStorage.getItem("line_one"),
