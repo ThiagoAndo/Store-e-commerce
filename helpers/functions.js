@@ -48,12 +48,12 @@ export function setStorage(data) {
   localStorage.setItem("id", data.id);
   localStorage.setItem("email", data.email_address);
   localStorage.setItem("first", data.first_name);
-  localStorage.setItem("last",  data.last_name);
+  localStorage.setItem("last", data.last_name);
   localStorage.setItem("token", data.token);
 }
 
-export function getUserToken(){
-  return localStorage.getItem("token")
+export function getUserToken() {
+  return localStorage.getItem("token");
 }
 
 export async function setAdd(id) {
@@ -74,6 +74,37 @@ export async function setAdd(id) {
     }
   } catch (error) {
     return { error: "Connecting to the database failed!" };
+  }
+}
+
+export async function updateData(email_address, password) {
+  try {
+    fetch(
+      // `http://localhost:8080/user/get`,
+      `https://libraryapi-gtct.onrender.com/user/get`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: email_address,
+          password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw "Connecting to the database failed!";
+        }
+      })
+      .then((data) => {
+        setStorage(data);
+      });
+  } catch (error) {
+    console.log(`This error: ${error} happend on fetch update user`);
   }
 }
 

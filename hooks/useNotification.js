@@ -14,7 +14,7 @@ export function useNotification() {
     const thisStatus = status || "error";
     const msg =
       passed ||
-      `YOUR ${field.toUpperCase()} IS NOT VALID.  MAKE SURE TO ENERT A VALID ONE!`;
+      `YOUR ${field} IS NOT VALID.  MAKE SURE TO ENTER A VALID ONE!`;
     notificationCtx.showNotification({
       title: thisTitle,
       message: msg,

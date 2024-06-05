@@ -22,6 +22,8 @@ function SignIn() {
 
   async function submitFormHandler(user) {
     notification(null, "Sending Request:", "REGISTERING NEW USER.", "pending");
+  localStorage.setItem("password", user.password);
+
     user.password = await hash(user.password, 12);
     user.id = uniqid();
     user.created_at = getCurrentDate();

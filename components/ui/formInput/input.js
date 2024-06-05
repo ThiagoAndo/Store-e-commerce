@@ -8,7 +8,7 @@ export default function Input({
   dis = false,
   val,
 }) {
-  const [thisVal, setThisVal] = useState();
+  const [thisVal, setThisVal] = useState(val);
   let label = id.split("_");
   const thisRef = useRef();
   const handleChange = () => {
@@ -21,7 +21,7 @@ export default function Input({
         label[0].slice(1, label[0].length) +
         " " +
         label[1][0].toUpperCase() +
-        label[1].slice(1, label[0].length + 1)
+        label[1].slice(1, label[0].length + 1)  
       : id[0].toUpperCase() + id.slice(1, id.length);
 
   useEffect(() => {

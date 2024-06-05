@@ -7,6 +7,7 @@ import style from "./UserSignIn.module.css";
 import style_2 from "./UserCheckout.module.css";
 import useForm from "@/hooks/useForm";
 import Button from "../ui/button/btn";
+import { inpuShip, inpuReg } from "@/components/ui/formInput/inputInfo";
 function UserCheckOut({
   handleSubmit,
   inpuShip,
@@ -18,6 +19,24 @@ function UserCheckOut({
 }) {
   const { cartItems, scope, checked, focus, setChecked, getEvent } = useForm();
   const [User, setUSer] = useState([[], []]);
+  const [hasChanged, setHasChanged] = useState([]);
+
+  function handleChange(e) {
+    const det = inpuReg.map((inp) => e.target.name === inp.id);
+    const adr = inpuShip.map((inp) => e.target.name === inp.id);
+    console.log();
+    if (det.includes(true)) {
+      if (!hasChanged.includes("detail")) {
+        setHasChanged((prev) => [...prev, "detail"]);
+      }
+    } else if (adr.includes(true)) {
+      //This is just a test
+      if (!hasChanged.includes("address")) {
+        setHasChanged((prev) => [...prev, "address"]);
+      }
+    }
+  }
+
   const onOptionChange = (val) => {
     setChecked(val);
     if (val != "e-money") {
@@ -36,7 +55,10 @@ function UserCheckOut({
   const handleThisSubmit = (e) => {
     const { prof, check, data } = getEvent(e, false, false, checkout, profile);
     checkout && check && handleSubmit(data);
-    checkout && prof && handleSubmit(data);
+    profile &&
+      prof &&
+      handleChange.length > 0 &&
+      handleSubmit(data, hasChanged);
   };
   useEffect(() => {
     setTimeout(() => {
@@ -44,7 +66,7 @@ function UserCheckOut({
         [
           localStorage.getItem("first"),
           localStorage.getItem("last"),
-          checkout === true ? localStorage.getItem("email") : "",
+          localStorage.getItem("email"),
         ],
         [
           localStorage.getItem("line_one"),
@@ -63,7 +85,13 @@ function UserCheckOut({
       transition={{ duration: 0.6, type: "spring" }}
     >
       <div className={style_2.container}>
-        <form onSubmit={handleThisSubmit} ref={scope}>
+        <form
+          onSubmit={handleThisSubmit}
+          ref={scope}
+          onChange={(e) => {
+            handleChange(e);
+          }}
+        >
           <div className={style.action}>
             <h2>{checkout === true ? "CHECKOUT" : "EDIT PROFILE"}</h2>
           </div>

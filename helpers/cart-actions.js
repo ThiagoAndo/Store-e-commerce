@@ -57,6 +57,7 @@ export const fetchCartData = (userId) => {
 export const sendCartData = async (cart) => {
   const token = getUserToken();
   const id = localStorage.getItem("id");
+              console.log("cart");
 
   try {
     let response = await fetch(
