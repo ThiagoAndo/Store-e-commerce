@@ -30,6 +30,7 @@ function UserCheckOut({
         setHasChanged((prev) => [...prev, "detail"]);
       }
     } else if (adr.includes(true)) {
+      //This is just a test 
       if (!hasChanged.includes("address")) {
         setHasChanged((prev) => [...prev, "address"]);
       }
