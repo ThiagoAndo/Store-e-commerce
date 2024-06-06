@@ -19,7 +19,6 @@ function Login() {
       status: "pending",
     });
     try {
-      localStorage.setItem("password", password);
       fetch(
         // `http://localhost:8080/user/get`,
         `https://libraryapi-gtct.onrender.com/user/get`,
@@ -36,6 +35,7 @@ function Login() {
       )
         .then((response) => {
           if (response.ok) {
+            localStorage.setItem("password", password);
             return response.json();
           } else {
             setFeedback({ message: "Connecting to the database failed!" });

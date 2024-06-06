@@ -39,6 +39,7 @@ function ChangeData() {
       async function fetchData(data, url) {
         notification(null, "Sending Request:", "SAVING USER DATA", "pending");
         const token = getUserToken();
+        const email = data.email_address
 
         try {
           let response = await fetch(
@@ -55,26 +56,29 @@ function ChangeData() {
           );
           if (response.ok) {
             data = await response.json();
-            notification(
-              null,
-              "Success:",
-              "USER INFORMATION HAS BEEN UPDATED.",
-              "success"
-            );
-            if (url === "user") {
-              
-              updateData(data.email_address, )
+            if (data?.error) {
+              throw data.message
             } else {
-              setAdd(id);
-            }
+              notification(
+                null,
+                "Success:",
+                "USER INFORMATION HAS BEEN UPDATED.",
+                "success"
+              );
+              if (url === "user") {
+                updateData(email);
+              } else {
+                setAdd(id);
+              }
 
-            route.push("/");
+              route.push("/");
+            }
           } else {
             throw "Connecting to the database failed!";
           }
         } catch (error) {
           console.log(error);
-          notification(null, "Sending Request:", error.message, "error");
+          notification(null, "Sending Request:", error, "error");
         }
       }
     }

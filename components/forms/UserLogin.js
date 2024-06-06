@@ -74,7 +74,7 @@ function UserLogin({ handling, LoginBack }) {
                   key={inp.id}
                   id={inp.id}
                   ph={inp.ph}
-                  typeI={inp.typeI}
+                  typeI={inp.type}
                   handleFocus={focus}
                 />
               ))}

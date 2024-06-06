@@ -1,10 +1,6 @@
-import pkg from "bcryptjs";
-const { hash } = pkg;
-import uniqid from "uniqid";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
-import { getCurrentDate } from "../../../helpers/functions";
 import { setStorage } from "../../../helpers/functions";
 import { useNotification } from "@/hooks/useNotification";
 import UserSignIn from "@/components/forms/UserSignIn";
@@ -22,13 +18,7 @@ function SignIn() {
 
   async function submitFormHandler(user) {
     notification(null, "Sending Request:", "REGISTERING NEW USER.", "pending");
-  localStorage.setItem("password", user.password);
-
-    user.password = await hash(user.password, 12);
-    user.id = uniqid();
-    user.created_at = getCurrentDate();
     let data = null;
-    setStorage(user);
     try {
       let response = await fetch(
         // "http://localhost:8080/user/new",
@@ -44,15 +34,16 @@ function SignIn() {
 
       if (response.ok) {
         data = await response.json();
+        localStorage.setItem("password", user.password);
       } else {
-        setFeedbackItems("Connecting to the database failed!");
         throw "Connecting to the database failed!";
       }
 
       if (data.hasOwnProperty("message")) {
-        setFeedbackItems(data.message);
+        setFeedbackItems({ message: data.message });
       } else {
-        setFeedbackItems(data.email_address);
+        setStorage(data);
+        setFeedbackItems({ ok: "ok" });
         signIn("credentials", {
           redirect: false,
           email: user.email,
@@ -63,12 +54,12 @@ function SignIn() {
     }
   }
   useEffect(() => {
-    if (feedbackItems) {
-      notification(null, "Invalid Action:", feedbackItems.toUpperCase());
-        setFeedbackItems('');
+    if (feedbackItems?.message) {
+      notification(null, "Invalid Action:", feedbackItems.message.toUpperCase());
+      setFeedbackItems("");
 
       return;
-    } else if (feedbackItems?.email_address) {
+    } else if (feedbackItems?.ok) {
       router.replace("/");
       notification(
         null,

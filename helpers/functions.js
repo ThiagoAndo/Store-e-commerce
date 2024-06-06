@@ -77,7 +77,10 @@ export async function setAdd(id) {
   }
 }
 
-export async function updateData(email_address, password) {
+export async function updateData(email) {
+  console.log(email_address);
+  console.log("email_address");
+  const password = localStorage.getItem("password");
   try {
     fetch(
       // `http://localhost:8080/user/get`,
@@ -85,7 +88,7 @@ export async function updateData(email_address, password) {
       {
         method: "POST",
         body: JSON.stringify({
-          email: email_address,
+          email,
           password,
         }),
         headers: {

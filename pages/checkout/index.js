@@ -3,7 +3,7 @@ import { useContext } from "react";
 import NotificationContext from "@/store/context/notification-context";
 import { confActions } from "@/store/redux/conf.slice";
 import { useDispatch } from "react-redux";
-import { getUserToken } from "@/helpers/functions";
+import { getUserToken, set, setAdd } from "@/helpers/functions";
 import {
   inpuShip,
   inpuPay,
@@ -53,7 +53,7 @@ function CheckoutPage() {
     } else {
       reqArray = [order];
     }
-    reqArray.forEach((e, index) => {
+    reqArray.forEach((e) => {
       try {
         const token = getUserToken();
         fetch(
@@ -70,6 +70,8 @@ function CheckoutPage() {
         ).then((response) => {
           console.log(response);
           if (response.ok && e.route != "add") {
+            const id = localStorage.getItem("id");
+            setAdd(id);
             dispatch(confActions.toggle());
           }
         });
