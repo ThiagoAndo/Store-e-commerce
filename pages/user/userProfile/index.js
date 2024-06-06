@@ -12,16 +12,24 @@ const inpCheck = [inpuReg[0], inpuReg[1], inpuReg[2]];
 function ChangeData() {
   const { notification } = useNotification();
 
-
-  function handleCheck(data, whatChange) {
+  async function handleCheck(data, whatChange) {
     if (whatChange.length === 0) {
-      notification(null, "Invalid Action:", "USER DETAILS HAVE NOT CHANGED", "error");
+      notification(
+        null,
+        "Invalid Action:",
+        "USER DETAILS HAVE NOT CHANGED",
+        "error"
+      );
     }
 
-    console.log(data);
-    console.log(whatChange);
-  }
 
+    const isFetch = inpuReg.map((inp, i) => {
+      if (inp.id === whatChange[i]) return true;
+      else return;
+    });
+    console.log(isFetch);
+    // console.log(whatChange);
+  }
 
   return (
     <UserCheckOut
