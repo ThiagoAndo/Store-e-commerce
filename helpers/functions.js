@@ -14,12 +14,11 @@ export function getCurrentDate() {
 export function isEmailValid(email) {
   console.log(email);
   let match = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  // if (email.match(match)) {
-  //   return true;
-  // } else {
-  //   return false;
-  // }
-  return true
+  if (email.match(match)) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 export function isNameValid(name) {
@@ -67,6 +66,8 @@ export async function setAdd(id) {
 
     if (response.ok) {
       const [resp] = await response.json();
+      console.log("adrStorage");
+      console.log(resp);
       if (!response?.message) {
         adrStorage(resp);
       }
@@ -77,7 +78,6 @@ export async function setAdd(id) {
 }
 
 export function adrStorage(resp) {
-  console.log("chamo");
   localStorage.setItem("line_one", resp.line_one);
   localStorage.setItem("line_two", resp.line_two);
   localStorage.setItem("town_city", resp.town_city);

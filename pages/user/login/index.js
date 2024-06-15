@@ -43,8 +43,6 @@ function Login() {
         })
         .then((data) => {
           if (data.hasOwnProperty("message")) {
-      console.log(data);
-
             setFeedback(data);
           } else {
             signIn("credentials", {

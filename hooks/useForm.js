@@ -103,7 +103,6 @@ export default function useForm() {
       const first = entries[0][0].toUpperCase() + entries[0].slice(1);
       const last = entries[1][0].toUpperCase() + entries[1].slice(1);
       name = isNameValid(first + " " + last);
-      name = isEmailValid(name);
     }
     email = isEmailValid(entries[2]);
     password = isPasswordValid(entries[3]);
