@@ -12,12 +12,14 @@ export function getCurrentDate() {
 }
 
 export function isEmailValid(email) {
+  console.log(email);
   let match = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  if (email.match(match)) {
-    return true;
-  } else {
-    return false;
-  }
+  // if (email.match(match)) {
+  //   return true;
+  // } else {
+  //   return false;
+  // }
+  return true
 }
 
 export function isNameValid(name) {
@@ -44,12 +46,12 @@ export function formatValue(value) {
   }).format(value);
 }
 
-export function setStorage(data, call=null) {
+export function setStorage(data, call = null) {
   localStorage.setItem("id", data.id);
   localStorage.setItem("email", data.email_address);
   localStorage.setItem("first", data.first_name);
   localStorage.setItem("last", data.last_name);
-  if(call===null) localStorage.setItem("token", data.token);
+  if (call === null) localStorage.setItem("token", data.token);
 }
 
 export function getUserToken() {
