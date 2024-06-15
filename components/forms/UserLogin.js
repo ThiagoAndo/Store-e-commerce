@@ -31,7 +31,7 @@ function UserLogin({ handling, LoginBack }) {
         notification(
           null,
           "Not Found:",
-          " EMAIL MIGHT NOT BE RIGHT. OR USER HAS NOT BEEN REGISTERED"
+          " EMAIL MIGHT NOT BE RIGHT OR USER HAS NOT BEEN REGISTERED"
         );
         return;
       } else if (LoginBack.message.slice(0, 5) === "Wrong") {
