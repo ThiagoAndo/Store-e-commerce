@@ -52,10 +52,11 @@ function ChangeData() {
       httpCAll.push(add);
     }
 
-    httpCAll.forEach((e, index) => {
+    httpCAll.forEach(async (e, index) => {
+      let data = null;
       try {
         const token = getUserToken();
-        fetch(
+        const response = await fetch(
           // `http://localhost:8080/${e.route}`,
           `https://libraryapi-gtct.onrender.com/${e.route}`,
           {
@@ -66,31 +67,26 @@ function ChangeData() {
             },
             body: JSON.stringify({ ...e }),
           }
-        )
-          .then((response) => {
-            if (response.ok) {
-              return response;
-            }
-          })
-          .then((data) => {
-            console.log(data.message);
-            // if (data.message[0] === "U" && index === httpCAll.length - 1) {
-            //   notification(
-            //     null,
-            //     "Sending Request:",
-            //     "USER DETAILS HAVE BEEN UPDATED",
-            //     "success"
-            //   );
-            //   route.push("/");
-            // } else {
-            //   notification(
-            //     null,
-            //     "Invalid Action:",
-            //     data.message,
-            //     "error"
-            //   );
-            // }
-          });
+        );
+        if (response.ok) {
+          data = await response.json();
+        }
+        if (data?.error) {
+          notification(null, "Invalid Action:", data.error, "error");
+          return;
+        }
+
+        if (index === httpCAll.length - 1) {
+          notification(
+            null,
+            "Sending Request:",
+            "USER DETAILS HAVE BEEN UPDATED",
+            "success"
+          );
+          route.push("/");
+        } else {
+          notification(null, "Invalid Action:", data.message, "error");
+        }
       } catch (error) {
         console.log(error);
       }
