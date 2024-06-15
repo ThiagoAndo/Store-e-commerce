@@ -31,18 +31,23 @@ export default function useForm() {
         signin: false,
       };
     }
+
     const { entries, data } = gatherData(e);
+
     let index = 0;
     let checkEmpty = 0;
-    function confEmpty(passed) {
-      entries.map(() => {
+    function confEmpty(passed, i, len) {
+      const thiI = i || 0;
+      const thisLeng = len || entries.length;
+
+      entries.slice(thiI, thisLeng).map(() => {
         focus({
           target: {
             id: passed[index].input,
           },
         });
       });
-      entries.map((field, i) => {
+      entries.slice(thiI, thisLeng).map((field, i) => {
         if (field === "") {
           empty(passed[i]);
           checkEmpty++;
@@ -53,14 +58,25 @@ export default function useForm() {
       inpFields = fieldRegister;
       confEmpty(fieldRegister);
     } else if (isLogin) {
+      console.log("isLogin");
       inpFields.push(fieldRegister[2]);
       inpFields.push(fieldRegister[3]);
       confEmpty(inpFields);
       entries.unshift("", "");
       inpFields.unshift("", "");
-    } else if (isProfile) {
-      confEmpty(fieldProfile);
-      inpFields = [...fieldProfile];
+    } else if (isProfile[0] && isProfile[1][0]) {
+      if (isProfile[1].length == 1) {
+        if (isProfile[1][0] === "detail") {
+          confEmpty(fieldProfile.slice(0, 3), 0, 3);
+          inpFields = fieldProfile.slice(0, 3);
+        } else if (isProfile[1][0] === "address") {
+          confEmpty(fieldProfile.slice(3, 7), 3, 7);
+          inpFields = fieldProfile.slice(3, 5);
+        }
+      } else {
+        confEmpty(fieldProfile);
+        inpFields = fieldProfile;
+      }
     } else if (isCheck) {
       inpFields = fieldChekout;
       confEmpty(
@@ -69,8 +85,10 @@ export default function useForm() {
           : [...fieldChekout.slice(0, [fieldChekout.length - 2])]
       );
     }
+
     if (checkEmpty > 0) {
-      if (isCheck) {
+
+      if (isCheck || isProfile[0]) {
         notification(null, "Empty Fields:", `FILL IN THE FORM`, "error");
       }
       return {
@@ -80,16 +98,16 @@ export default function useForm() {
         profile: false,
       };
     }
-    if (isSignin || isCheck || isProfile) {
+
+    if (isSignin || isCheck || isProfile[0]) {
       const first = entries[0][0].toUpperCase() + entries[0].slice(1);
       const last = entries[1][0].toUpperCase() + entries[1].slice(1);
       name = isNameValid(first + " " + last);
     }
-      email = isEmailValid(entries[2]);
-      password = isPasswordValid(entries[3]);
+    email = isEmailValid(entries[2]);
+    password = isPasswordValid(entries[3]);
 
-
-    if (!email && (isSignin || isLogin || isCheck || isProfile)) {
+    if (!email && (isSignin || isLogin || isCheck || isProfile[0])) {
       empty(inpFields[2]);
       notification("email");
     } else if (!name) {

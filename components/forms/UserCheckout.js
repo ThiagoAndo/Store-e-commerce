@@ -7,7 +7,7 @@ import style from "./UserSignIn.module.css";
 import style_2 from "./UserCheckout.module.css";
 import useForm from "@/hooks/useForm";
 import Button from "../ui/button/btn";
-import { inpuShip, inpuReg } from "@/components/ui/formInput/inputInfo";
+import { inpuReg } from "@/components/ui/formInput/inputInfo";
 function UserCheckOut({
   handleSubmit,
   inpuShip,
@@ -24,20 +24,17 @@ function UserCheckOut({
   function handleChange(e) {
     const det = inpuReg.map((inp) => e.target.name === inp.id);
     const adr = inpuShip.map((inp) => e.target.name === inp.id);
-    console.log();
     if (det.includes(true)) {
       if (!hasChanged.includes("detail")) {
         setHasChanged((prev) => [...prev, "detail"]);
       }
     } else if (adr.includes(true)) {
-      //This is just a test 
+      //This is just a test
       if (!hasChanged.includes("address")) {
         setHasChanged((prev) => [...prev, "address"]);
       }
     }
   }
-
-  console.log(hasChanged);
 
   const onOptionChange = (val) => {
     setChecked(val);
@@ -55,7 +52,10 @@ function UserCheckOut({
     }
   };
   const handleThisSubmit = (e) => {
-    const { prof, check, data } = getEvent(e, false, false, checkout, profile);
+    const { prof, check, data } = getEvent(e, false, false, checkout, [
+      profile,
+      hasChanged,
+    ]);
     checkout && check && handleSubmit(data);
     profile &&
       prof &&

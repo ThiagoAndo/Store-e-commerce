@@ -22,13 +22,11 @@ function ChangeData() {
       );
     }
 
-
     const isFetch = inpuReg.map((inp, i) => {
       if (inp.id === whatChange[i]) return true;
       else return;
     });
-    console.log(isFetch);
-    // console.log(whatChange);
+    console.log(whatChange);
   }
 
   return (
