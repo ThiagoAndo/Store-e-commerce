@@ -10,7 +10,7 @@ import {
   inpuReg,
   fieldChekout,
 } from "@/components/ui/formInput/inputInfo";
-
+import { adrStorage } from "@/helpers/functions";
 function CheckoutPage() {
   const notificationCtx = useContext(NotificationContext);
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ function CheckoutPage() {
   function handleCheck(data) {
     notificationCtx.showNotification({
       title: "Sending Request:",
-      message: `Processing Invoice.`,
+      message: `PROCESSING INVOICE.`,
       status: "pending",
     });
     let isGuest = () => {
@@ -31,7 +31,7 @@ function CheckoutPage() {
       }
     };
     const id = localStorage.getItem("id") || null;
-    let order = {
+    const order = {
       route: "order",
       id,
       name: data.first_name + " " + data.last_name,
@@ -39,7 +39,7 @@ function CheckoutPage() {
       cart: isGuest(),
     };
 
-    let add = {
+    const add = {
       route: "add",
       line_one: data.line_one,
       line_two: data.line_two,
@@ -47,13 +47,15 @@ function CheckoutPage() {
       constry_state: data.constry_state,
       id,
     };
+    adrStorage(add);
+
     let reqArray = [];
     if (id) {
       reqArray = [order, add];
     } else {
       reqArray = [order];
     }
-    reqArray.forEach((e, index) => {
+    reqArray.forEach((e) => {
       try {
         const token = getUserToken();
         fetch(
@@ -68,7 +70,6 @@ function CheckoutPage() {
             body: JSON.stringify({ ...e }),
           }
         ).then((response) => {
-          console.log(response);
           if (response.ok && e.route != "add") {
             dispatch(confActions.toggle());
           }

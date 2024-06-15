@@ -14,7 +14,6 @@ function SignIn() {
     localStorage.setItem("guest", "guest");
     router.replace("/checkout");
   }
-
   async function submitFormHandler(user) {
     notification(null, "Sending Request:", "REGISTERING NEW USER.", "pending");
     let data = null;
@@ -30,7 +29,7 @@ function SignIn() {
           },
         }
       );
-
+    
       if (response.ok) {
         data = await response.json();
         if (data.hasOwnProperty("message")) {

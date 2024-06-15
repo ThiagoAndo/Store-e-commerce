@@ -25,13 +25,13 @@ function UserCheckOut({
     const det = inpuReg.map((inp) => e.target.name === inp.id);
     const adr = inpuShip.map((inp) => e.target.name === inp.id);
     if (det.includes(true)) {
-      if (!hasChanged.includes("detail")) {
-        setHasChanged((prev) => [...prev, "detail"]);
+      if (!hasChanged.includes("user")) {
+        setHasChanged((prev) => [...prev, "user"]);
       }
     } else if (adr.includes(true)) {
       //This is just a test
-      if (!hasChanged.includes("address")) {
-        setHasChanged((prev) => [...prev, "address"]);
+      if (!hasChanged.includes("add")) {
+        setHasChanged((prev) => [...prev, "add"]);
       }
     }
   }
@@ -57,10 +57,7 @@ function UserCheckOut({
       hasChanged,
     ]);
     checkout && check && handleSubmit(data);
-    profile &&
-      prof &&
-      handleChange.length > 0 &&
-      handleSubmit(data, hasChanged);
+    profile && prof && handleSubmit(data, hasChanged);
   };
   useEffect(() => {
     setTimeout(() => {

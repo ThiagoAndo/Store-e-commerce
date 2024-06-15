@@ -44,16 +44,16 @@ export function formatValue(value) {
   }).format(value);
 }
 
-export function setStorage(data) {
+export function setStorage(data, call=null) {
   localStorage.setItem("id", data.id);
   localStorage.setItem("email", data.email_address);
   localStorage.setItem("first", data.first_name);
-  localStorage.setItem("last",  data.last_name);
-  localStorage.setItem("token", data.token);
+  localStorage.setItem("last", data.last_name);
+  if(call===null) localStorage.setItem("token", data.token);
 }
 
-export function getUserToken(){
-  return localStorage.getItem("token")
+export function getUserToken() {
+  return localStorage.getItem("token");
 }
 
 export async function setAdd(id) {
@@ -66,15 +66,20 @@ export async function setAdd(id) {
     if (response.ok) {
       const [resp] = await response.json();
       if (!response?.message) {
-        localStorage.setItem("line_one", resp.line_one);
-        localStorage.setItem("line_two", resp.line_two);
-        localStorage.setItem("town_city", resp.town_city);
-        localStorage.setItem("constry_state", resp.constry_state);
+        adrStorage(resp);
       }
     }
   } catch (error) {
     return { error: "Connecting to the database failed!" };
   }
+}
+
+export function adrStorage(resp) {
+  console.log("chamo");
+  localStorage.setItem("line_one", resp.line_one);
+  localStorage.setItem("line_two", resp.line_two);
+  localStorage.setItem("town_city", resp.town_city);
+  localStorage.setItem("constry_state", resp.constry_state);
 }
 
 export function gatherData(e) {
