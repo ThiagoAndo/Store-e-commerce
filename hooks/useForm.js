@@ -59,7 +59,6 @@ export default function useForm() {
       inpFields = fieldRegister;
       confEmpty(fieldRegister);
     } else if (isLogin) {
-      console.log("isLogin");
       inpFields.push(fieldRegister[2]);
       inpFields.push(fieldRegister[3]);
       confEmpty(inpFields);

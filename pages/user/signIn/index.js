@@ -29,7 +29,7 @@ function SignIn() {
           },
         }
       );
-    
+
       if (response.ok) {
         data = await response.json();
         if (data.hasOwnProperty("message")) {
@@ -39,7 +39,11 @@ function SignIn() {
             redirect: false,
             email: user.email,
           });
-          router.replace("/");
+          if (isOrdering) {
+            router.replace("/checkout");
+          } else {
+            router.replace("/");
+          }
           setStorage(data);
           notification(
             null,

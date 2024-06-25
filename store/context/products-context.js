@@ -3,7 +3,6 @@ import { useEffect, createContext, useState } from "react";
 export const ProductContext = createContext({
   products: [],
   men: [],
-  proFiltered: {},
   woman: [],
   elctronics: [],
   home: [],
@@ -25,7 +24,6 @@ const productsSelfcare = [];
 
 export default function ProductsContextProvider({ children }) {
   const [products, setProducts] = useState([]);
-  const [proFiltered, setProFiltered] = useState({});
   const [filtered, setFiltered] = useState([]);
 
   useEffect(() => {
@@ -38,21 +36,23 @@ export default function ProductsContextProvider({ children }) {
   function addProducts(prts, images) {
     let buildData = prts.map((prt) => {
       prt.images = images.filter((img) => prt.id === img.item_id);
-        return prt;
+      return prt;
     });
     if (products.length === 0) setProducts(buildData);
   }
 
   function addTitle() {
-    products.map((product) => {
-      let title;
-      if (product.title.length > 30) {
-        title = product.title.slice(0, 30) + "...";
-      } else {
-        title = product.title;
-      }
-      productsTitle.push({ id: product.id, name: title });
-    });
+    if (productsTitle.length === 0) {
+      products.map((product) => {
+        let title;
+        if (product.title.length > 30) {
+          title = product.title.slice(0, 30) + "...";
+        } else {
+          title = product.title;
+        }
+        productsTitle.push({ id: product.id, name: title });
+      });
+    }
   }
 
   function categories() {
@@ -117,7 +117,6 @@ export default function ProductsContextProvider({ children }) {
     products,
     productsTitle,
     filtered,
-    proFiltered,
     addProducts,
     addTitle,
     categories,

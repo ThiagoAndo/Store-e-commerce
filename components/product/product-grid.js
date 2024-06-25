@@ -7,7 +7,7 @@ export default function ProductGrid() {
   const store = useContext(ProductContext);
 
   return (
-    <ul className={classes.meals}>
+    <ul className={classes.products}>
       {store.filtered.map((item) => (
         <li key={item.id}>
           <ProductItem {...item} />

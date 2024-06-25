@@ -17,6 +17,11 @@
   flex-direction: column;
   gap: 2.1rem;
 }
+.summary > img {
+  width: auto;
+  height: auto;
+  
+}
 .price {
   color: #000000;
   font-weight: bold;

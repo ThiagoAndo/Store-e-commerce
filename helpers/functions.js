@@ -12,7 +12,6 @@ export function getCurrentDate() {
 }
 
 export function isEmailValid(email) {
-  console.log(email);
   let match = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   if (email.match(match)) {
     return true;
@@ -66,8 +65,6 @@ export async function setAdd(id) {
 
     if (response.ok) {
       const [resp] = await response.json();
-      console.log("adrStorage");
-      console.log(resp);
       if (!response?.message) {
         adrStorage(resp);
       }

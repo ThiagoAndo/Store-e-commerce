@@ -28,7 +28,7 @@ function UserSignIn({ handleGuest, isOrdering, handleSubmit }) {
                 transition={{ type: "spring", stiffness: 250 }}
                 onClick={handleGuest}
               >
-                Guest checkout
+               GUEST CHECKOUT
               </motion.a>
             )}
           </div>

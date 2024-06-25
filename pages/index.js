@@ -55,7 +55,6 @@ function Products(props) {
     window.scrollTo({
       top: position,
     });
-    localStorage.removeItem("position");
     setInterval(() => {
       window.addEventListener("scroll", handleScroll, { passive: true });
     }, 500);

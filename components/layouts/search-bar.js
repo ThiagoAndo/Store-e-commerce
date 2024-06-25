@@ -1,10 +1,8 @@
 import { useContext, useState, useEffect } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { ProductContext } from "../../store/context/products-context";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import classes from "./main-header.module.css";
-
-
 
 const formatResult = (item) => {
   return (
@@ -17,19 +15,20 @@ const formatResult = (item) => {
 function hadleKey(e) {
   console.log(e);
 }
-function SearchBar({ click }) {
-  const [items, setItems] = useState();
+const initialState = [];
+function SearchBar() {
+  const [items, setItems] = useState(initialState);
 
-  const router = useRouter()
+  const router = useRouter();
   const handleOnSelect = (item) => {
-    router.push( `/product/${item.id}`);
+    router.push(`/product/${item.id}`);
   };
 
   const store = useContext(ProductContext);
   store.addTitle();
 
   useEffect(() => {
-    setItems(store.productsTitle);
+    if (items.length === 0) setItems(store.productsTitle);
   }, []);
 
   return (

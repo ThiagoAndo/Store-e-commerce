@@ -12,10 +12,7 @@ const some = (items) =>
   );
 
 const totalQnt = (items) =>
-  items.reduce(
-    (accumulator, item) => accumulator + item.quantity,
-    0
-  );
+  items.reduce((accumulator, item) => accumulator + item.quantity, 0);
 
 const cartSlice = createSlice({
   name: "cart",
@@ -54,7 +51,6 @@ const cartSlice = createSlice({
         state.totalQuantity = totalQnt(state.items);
       } else {
         existingItem.quantity++;
-        console.log(existingItem.totalPrice);
         existingItem.totalPrice = existingItem.price * existingItem.quantity;
         state.totalQuantity = totalQnt(state.items);
       }
