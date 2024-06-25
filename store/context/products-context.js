@@ -29,19 +29,21 @@ export default function ProductsContextProvider({ children }) {
   const [filtered, setFiltered] = useState([]);
 
   useEffect(() => {
-    setFiltered(products);
-    categories();
+    if (products.length > 0) {
+      setFiltered(products);
+      categories();
+    }
   }, [products]);
 
   function addProducts(prts, images) {
-    let neWproduc = [];
-    prts.map((prt) => {
+    let buildData = prts.map((prt) => {
       prt.images = images.filter((img) => prt.id === img.item_id);
-      if (prt.images.length > 1) {
-        neWproduc.push(prt);
+      if (prt.images.length > 0) {
+        return prt;
       }
     });
-    if (products.length === 0) setProducts(neWproduc);
+
+    if (products.length === 0) setProducts(buildData);
   }
 
   function addTitle() {
@@ -110,11 +112,9 @@ export default function ProductsContextProvider({ children }) {
         console.log("Something went wrong with getFiltered");
     }
   }
-
   function getProFiltered(id) {
     return products.filter((pro) => pro.id === id);
   }
-
 
   const productContext = {
     products,

@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import ProductGrid from "../components/product/product-grid";
 import { getAllProducts } from "../helpers/fetchProducts";
 import { ProductContext } from "../store/context/products-context";
-import { getStorageData, fetchCartData } from "@/helpers/cart-actions";
+import { getStorageData } from "@/helpers/cart-actions";
 
 function Products(props) {
   const { products } = props;
