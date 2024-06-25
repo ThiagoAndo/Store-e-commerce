@@ -9,7 +9,13 @@ export default function ProductItem({ title, brand, thumbnail, id }) {
     <article className={classes.product}>
       <header>
         <div className={classes.image}>
-          <Image src={thumbnail} alt={title} fill />
+          <Image
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            src={thumbnail}
+            alt={title}
+            fill
+            priority={true}
+          />
         </div>
         <div className={classes.headerText}>
           <h2>{title}</h2>

@@ -32,6 +32,7 @@ export default function StarRating({ props }) {
             />
             <Image
               src={star}
+              alt={"Start image"}
               size={50}
               onMouseEnter={() => israting && setHover(ratingValue)}
               onMouseLeave={() => israting && setHover(null)}

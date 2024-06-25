@@ -12,6 +12,7 @@ const ProductDetail = ({ id }) => {
   useEffect(() => {
     setProduct(store.getProFiltered(id));
   }, [id]);
+
   if (product.length === 1) {
     const [produc] = product;
     return (

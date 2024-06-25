@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+
 import classes from "./slider.module.css";
 
 function ProductSlider({ myproduc }) {
@@ -82,7 +83,7 @@ function ProductSlider({ myproduc }) {
           >
             {myproduc.images.map((img, idx) => (
               <div className={classes["img-body"]} key={idx}>
-                <img alt= {`Product images ${idx}`} src={img.image} className={classes["body_img"]} />
+                 <img alt= {`Product images ${idx}`} src={img.image} className={classes["body_img"]} /> 
               </div>
             ))}
           </Slider>
@@ -100,7 +101,6 @@ function ProductSlider({ myproduc }) {
                   src={img.image}
                   className={classes["img_wrapper"]}
                 />
-                {currentSlide}
               </div>
             ))}
           </div>

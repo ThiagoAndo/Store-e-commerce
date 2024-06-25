@@ -5,8 +5,6 @@ import { ProductContext } from "@/store/context/products-context";
 
 export default function ProductGrid() {
   const store = useContext(ProductContext);
-  // console.log("store.filtered");
-  // console.log(store.filtered);
 
   return (
     <ul className={classes.meals}>

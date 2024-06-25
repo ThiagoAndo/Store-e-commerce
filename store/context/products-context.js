@@ -38,11 +38,8 @@ export default function ProductsContextProvider({ children }) {
   function addProducts(prts, images) {
     let buildData = prts.map((prt) => {
       prt.images = images.filter((img) => prt.id === img.item_id);
-      if (prt.images.length > 0) {
         return prt;
-      }
     });
-
     if (products.length === 0) setProducts(buildData);
   }
 
