@@ -34,7 +34,7 @@ export function useFetch(get) {
           setFetchedData(data);
         }
       } catch (error) {
-        setError({ message: "Failed to fetch user purchases" });
+        setError({ message: "Failed to fetch user purchases!" });
       }
 
       setIsFetching(false);

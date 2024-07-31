@@ -8,13 +8,12 @@ function ErrorComp({ message }) {
   msg = msg.split("");
 
   return (
-    <motion.div
-      className={style.error_h1}
-      id="new-challenge-images"
-    >
+    <motion.div className={style.error_h1} id="new-challenge-images">
       {msg.map((letter, i) => (
         <motion.p
-          className={style.text}
+          className={
+            letter === "." ? style.text + " " + style.trans : style.text
+          }
           initial={{ opacity: 0, rotateY: 0 }}
           animate={{
             opacity: 1,
