@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 import ProductGrid from "../components/product/product-grid";
+import ErrorComp from "@/components/ui/error/ErrorComp";
 import { getAllProducts } from "../helpers/fetchProducts";
 import { ProductContext } from "../store/context/products-context";
 import { getStorageData } from "@/helpers/cart-actions";
@@ -66,20 +67,7 @@ function Products(props) {
   if (!products.hasOwnProperty("error")) {
     return <ProductGrid />;
   } else {
-    return (
-      <h1
-        style={{
-          color: "red",
-          margin: "auto",
-          marginTop: "5rem",
-          marginBottom: "5rem",
-          width: "70%",
-          textAlign: "center",
-        }}
-      >
-        {products.error ?? "Could not feth products"}🚫
-      </h1>
-    );
+    return <ErrorComp message={products.error  ?? "Could not feth products"} />;
   }
 }
 export async function getStaticProps() {

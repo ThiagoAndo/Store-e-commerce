@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Jost:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap");
+.error_h1 {
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  list-style: none;
+  height: 70vh;
+}
+
+.text {
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 3rem;
+}
