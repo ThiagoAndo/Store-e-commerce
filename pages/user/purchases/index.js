@@ -83,10 +83,6 @@ function ChangePassword() {
   // }
 
   if (fetchedData?.length > 0) {
-    console.log(error);
-    console.log("error");
-    console.log(fetchedData);
-    console.log("fetchedData");
     return <Mounted data={fetchedData} />;
   }
 }

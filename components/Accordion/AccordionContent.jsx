@@ -13,14 +13,16 @@ export default function AccordionContent({ className, content }) {
     <motion.div
       initial={{ height: 0, opacity: 0 }}
       animate={isOpen ? { height: "auto", opacity: 1 } : null}
-      exit={{ height: 0, opacity: 0 }}
+      transition={{ duration: 0.6, type: "spring" }}
       className={
-        isOpen
-          ? `${classes[className] ?? ""} open`
-          : `${classes[className] ?? ""} close`
+        isOpen ? `${className ?? ""} open` : `${className ?? ""} close`
       }
     >
-      <motion.article>
+      <motion.article
+        initial={{ opacity: 0 }}
+        animate={isOpen ? { opacity: 1 } : null}
+        transition={{ duration: 2, type: "spring" }}
+      >
         <p>You can&apos;t go wrong with us.</p>
         <p>
           We are in the business of planning highly individualized vacation

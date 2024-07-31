@@ -1,10 +1,12 @@
 import { useAccordionContext } from "./Accordion.jsx";
 import { useAccordionItemContext } from "./AccordionItem.jsx";
+import { useAccordionDataContext } from "./AccordionMounted.jsx";
 import { motion } from "framer-motion";
 import classes from "./Accordion.module.css";
 
 export default function AccordionTitle({ className, children }) {
   const { toggleItem, openItemId } = useAccordionContext();
+  const{data} =useAccordionDataContext()
   const id = useAccordionItemContext();
   const isOpen = openItemId === id;
   return (
