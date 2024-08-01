@@ -3,7 +3,6 @@ import { Triangle } from "react-loader-spinner";
 import Mounted from "@/components/purchaseAccordion/AccordionMounted";
 import ErrorComp from "@/components/ui/error/ErrorComp";
 import { getUserToken } from "@/helpers/functions";
-
 export function useFetch(get, cartId) {
   const [isFetching, setIsFetching] = useState();
   const [error, setError] = useState();
@@ -18,7 +17,6 @@ export function useFetch(get, cartId) {
         url = `https://libraryapi-gtct.onrender.com/order/${id}`;
       } else {
         url = `https://libraryapi-gtct.onrender.com/cart/purchased/params?user_id=${id}&cart_id=${cartId}`;
-        
       }
       setIsFetching(true);
       try {
@@ -71,9 +69,10 @@ function PurchaseHistory() {
     return <ErrorComp message={error.message} />;
   }
 
-
   if (fetchedData?.length > 0) {
     return <Mounted data={fetchedData} />;
+  } else {
+    return <ErrorComp message={"Nothing to show!"} isError={false} />;
   }
 }
 export default PurchaseHistory;

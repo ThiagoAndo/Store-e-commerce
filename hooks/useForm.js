@@ -18,7 +18,6 @@ export default function useForm() {
   const { focus, empty, scope } = useInputAnimation();
   const [checked, setChecked] = useState("e-money");
   const cartItems = useSelector((state) => state.cart.items);
-  let name;
   let email;
   let password;
   const getEvent = (e, isSignin, isLogin, isCheck, isProfile) => {

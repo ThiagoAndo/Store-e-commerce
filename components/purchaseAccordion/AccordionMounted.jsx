@@ -1,24 +1,10 @@
-import { useContext } from "react";
 import { useRouter } from "next/router.js";
 import { motion } from "framer-motion";
 import { formatValue } from "@/helpers/functions.js";
 import Accordion from "./Accordion.jsx";
 import classes from "./Accordion.module.css";
-import NotificationContext from "@/store/context/notification-context";
 
 function Mounted({ data }) {
-  console.log(data)
-  console.log("data");
-  const router = useRouter();
-  const notificationCtx = useContext(NotificationContext);
-  if (data?.length === 0) {
-    router.replace("/");
-    notificationCtx.showNotification({
-      title: "Nothing to show:",
-      message: `You have not made any purchase.`,
-      status: "pending",
-    });
-  }
   return (
     <motion.article
       className={classes.main}
@@ -36,9 +22,9 @@ function Mounted({ data }) {
             >
               <Accordion.Title
                 className="accordion-item-title"
-                date={ inv.paid_at.split("h")[0]}
-                hour={ inv.paid_at.split("h")[1]}
-                total={ formatValue(inv.total)}
+                date={inv.paid_at.split("h")[0]}
+                hour={inv.paid_at.split("h")[1]}
+                total={formatValue(inv.total)}
               />
               <Accordion.Content
                 cart={inv.cart_id}

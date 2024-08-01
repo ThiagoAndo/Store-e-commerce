@@ -17,16 +17,17 @@ export function useInputAnimation() {
   }
 
   function handleEmpty({ label, input }) {
+    console.log(input + " " + label);
     animate(
       "#" + input,
-      { x: [-10, 0, 10, 0], borderColor: "#FA8072" },
-      { type: "spring", duration: 0.3, delay: stagger(0.05) }
+      { x: [-15, 0, 15, 0], borderColor: "#FA8072" },
+      { duration: 0.2, delay: stagger(0.05) }
     );
 
     animate(
       "#" + label,
-      { x: [-10, 0, 10, 0], color: "#FA8072" },
-      { type: "spring", duration: 0.3, delay: stagger(0.05) }
+      { color: ["#FA8072", "#f84a36", "#FA8072"], fontWeight:[400,700,400 ] },
+      { duration: 0.3, delay: stagger(0.05) }
     );
   }
 

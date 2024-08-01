@@ -3,7 +3,6 @@ import { useAccordionItemContext } from "./AccordionItem.jsx";
 import { motion } from "framer-motion";
 import classes from "./Accordion.module.css";
 
-
 export default function AccordionTitle({ className, date, hour, total }) {
   const { toggleItem, openItemId } = useAccordionContext();
   const id = useAccordionItemContext();
@@ -15,9 +14,15 @@ export default function AccordionTitle({ className, date, hour, total }) {
         toggleItem(id);
       }}
     >
-      <h2 className={classes[className]}>{date}</h2>
-      <h2 className={classes[className]}>{hour}</h2>
-      <h2 className={classes[className]}>{total}</h2>
+      <h2 className={classes[className]}>
+        Date: <span>{date}</span>
+      </h2>
+      <h2 className={classes[className]}>
+        Hour: <span>{hour}</span>
+      </h2>
+      <h2 className={classes[className]}>
+        Total: <span>{total}</span>
+      </h2>
       <motion.h2
         animate={{
           rotate: isOpen ? 180 : 0,

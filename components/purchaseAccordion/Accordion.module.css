@@ -14,10 +14,23 @@
 }
 
 .title-comp {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 0.3fr;
   background: linear-gradient(90deg, #312824, #251f0e);
   cursor: pointer;
   box-shadow: 0px 0px 2px white;
+}
+
+.title-comp span {
+  color: white;
+  font-weight: 400;
+}
+
+
+
+.title-comp h2:last-of-type {
+  color: #ff9b05;
+  text-align: center;
 }
 .accordion-item-title {
   position: relative;
@@ -25,7 +38,7 @@
   margin: 0;
   padding: 1rem;
   font-size: 1.15rem;
-  color: #c1d9fa;
+  color: white;
 }
 .accordion-item-content {
   position: inherit;
@@ -47,13 +60,12 @@
   max-height: 20rem;
   overflow: auto;
   color: #000000;
+  background: #dbdbdb41;
 }
-.cart_items li{
- justify-content: center;
-  
+.cart_items li {
+  justify-content: center;
 }
-.cart_items button{
- background-color: transparent;
- margin-left: 1rem;
-  
+.cart_items button {
+  background-color: transparent;
+  margin-left: 1rem;
 }
