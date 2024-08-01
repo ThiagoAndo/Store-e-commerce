@@ -25,7 +25,6 @@ function Mounted({ data }) {
       transition={{ duration: 0.6, type: "spring" }}
     >
       <section>
-        <h2>Why work with us?</h2>
         <Accordion className="accordion">
           {data.map((inv) => (
             <Accordion.Item
