@@ -1,14 +1,16 @@
 import { useContext } from "react";
 import { useRouter } from "next/router.js";
 import { motion } from "framer-motion";
+import { formatValue } from "@/helpers/functions.js";
 import Accordion from "./Accordion.jsx";
 import classes from "./Accordion.module.css";
 import NotificationContext from "@/store/context/notification-context";
 
 function Mounted({ data }) {
+  console.log(data)
+  console.log("data");
   const router = useRouter();
   const notificationCtx = useContext(NotificationContext);
-
   if (data?.length === 0) {
     router.replace("/");
     notificationCtx.showNotification({
@@ -32,12 +34,12 @@ function Mounted({ data }) {
               id={inv.invoice_id}
               className="accordion-item"
             >
-              <Accordion.Title className="accordion-item-title">
-                {"Date: " +
-                  inv.paid_at.split("h")[0] +
-                  "  Hour:  " +
-                  inv.paid_at.split("h")[1]}
-              </Accordion.Title>
+              <Accordion.Title
+                className="accordion-item-title"
+                date={ inv.paid_at.split("h")[0]}
+                hour={ inv.paid_at.split("h")[1]}
+                total={ formatValue(inv.total)}
+              />
               <Accordion.Content
                 cart={inv.cart_id}
                 className="accordion-item-content"

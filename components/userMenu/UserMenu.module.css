@@ -11,6 +11,7 @@
   border: solid 0.5px #ffffff;
   border-radius: 0.2rem;
   cursor: pointer;
+  z-index: 1000 ;
 }
 .user_list {
   list-style-type: none;

@@ -4,11 +4,11 @@ import { useSelector } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import Notification from "@/components/ui/notification/notification";
 import NotificationContext from "@/store/context/notification-context";
-import MainHeader from "./main-header";
-import FilterHeader from "./filter-nav";
-import Footer from "./footer";
+import MainHeader from "../navigation/main-header";
+import FilterHeader from "../navigation/filter-nav";
+import Footer from "../ui/footer/footer";
 import Cart from "../cart/cart";
-import UserMenu from "../user/UserMenu";
+import UserMenu from "../userMenu/UserMenu";
 import Modal from "../ui/modal/modal";
 import ConfBlock from "../cart/confirmation";
 

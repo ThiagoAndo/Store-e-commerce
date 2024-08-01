@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Triangle } from "react-loader-spinner";
-import Mounted from "@/components/Accordion/AccordionMounted";
+import Mounted from "@/components/purchaseAccordion/AccordionMounted";
 import ErrorComp from "@/components/ui/error/ErrorComp";
 import { getUserToken } from "@/helpers/functions";
 

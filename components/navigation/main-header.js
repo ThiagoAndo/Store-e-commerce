@@ -81,7 +81,7 @@ function MainHeader() {
           onClick={handleClick}
         >
           <Link className={classes.link} href="/">
-            {currentPath.includes("product") ? " ⬅ Back" : "Next Store"}
+            {currentPath!= "/" ? " ⬅ Back" : "Next Store"}
           </Link>
         </motion.div>
         <motion.div

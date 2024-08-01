@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import Layout from "../components/layouts/layout";
+import Layout from "../components/appLayout/layout";
 import ProductsContextProvider from "../store/context/products-context";
 import { NotificationContextProvider } from "@/store/context/notification-context";
 import StorageContextProvider from "@/store/context/storage-context";

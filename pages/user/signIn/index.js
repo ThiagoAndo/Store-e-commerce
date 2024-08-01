@@ -47,8 +47,8 @@ function SignIn() {
           setStorage(data);
           notification(
             null,
-            "USER REGISTERED SUCCESSFULLY!",
             "Registered:",
+            "USER REGISTERED SUCCESSFULLY!",
             "success"
           );
         }
