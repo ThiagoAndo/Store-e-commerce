@@ -14,13 +14,15 @@ const CartItem = ({ title, amount, price, id, isShow }) => {
   const dispatch = useDispatch();
   const { data: session } = useSession();
   const store = useContext(ProductContext);
+  console.log(id);
+  console.log("id");
   const [prt] = store.getProFiltered(id);
   let btnDisplay = null;
   if (amount === 1) btnDisplay = "🗑️";
   else btnDisplay = "-";
   const removeItemHandler = () => {
     dispatch(cartActions.removeItemFromCart(id));
-
+    
     if (session) {
       if (amount > 1) {
         updateCartData({

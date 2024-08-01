@@ -8,8 +8,6 @@ import NotificationContext from "@/store/context/notification-context";
 function Mounted({ data }) {
   const router = useRouter();
   const notificationCtx = useContext(NotificationContext);
-  console.log(data);
-  console.log("data");
 
   if (data?.length === 0) {
     router.replace("/");

@@ -13,7 +13,6 @@ export default function AccordionTitle({ className, children }) {
       className={classes["title-comp"]}
       onClick={() => {
         toggleItem(id);
-        handleClick();
       }}
     >
       <h3 className={classes[className]}>{children}</h3>

@@ -1,17 +1,20 @@
+import { motion } from "framer-motion";
+import { useState } from "react";
 import { useAccordionContext } from "./Accordion.jsx";
 import { useAccordionItemContext } from "./AccordionItem.jsx";
-import { motion } from "framer-motion";
 import { useFetch } from "@/pages/user/purchases/index.js";
+import classes from "./Accordion.module.css";
 
+import CartItem from "../cart/cart-item.js";
 export default function AccordionContent({ className, cart }) {
   const { openItemId } = useAccordionContext();
   const id = useAccordionItemContext();
   const { fetchedData } = useFetch("cart", cart);
-
   const isOpen = openItemId === id;
 
-  console.log(id + " " + cart);
-  console.log(fetchedData);
+  const { items } = fetchedData ? fetchedData : { items: false };
+  console.log(items);
+  console.log("items");
 
   return (
     <motion.div
@@ -27,11 +30,19 @@ export default function AccordionContent({ className, cart }) {
         animate={isOpen ? { opacity: 1 } : null}
         transition={{ duration: 1, type: "spring" }}
       >
-        <p>You can&apos;t go wrong with us.</p>
-        <p>
-          We are in the business of planning highly individualized vacation
-          trips for more than 20 years.
-        </p>
+        <ul className={classes.cart_items}>
+          {items &&
+            items.map((item) => (
+              <CartItem
+                key={item.item_id}
+                title={item.name}
+                amount={item.qnt}
+                price={item.price}
+                id={item.item_id}
+                isShow={false}
+              />
+            ))}
+        </ul>
       </motion.article>
     </motion.div>
   );
