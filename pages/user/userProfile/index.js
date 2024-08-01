@@ -45,7 +45,7 @@ function ChangeData() {
     adrStorage(add);
     if (whatChange.length === 1 && whatChange[0] === "user") {
       httpCAll.push(user);
-    } else if (whatChange.length === 1 && whatChange[0] === "user") {
+    } else if (whatChange.length === 1 && whatChange[0] === "add") {
       httpCAll.push(add);
     } else {
       httpCAll.push(user);

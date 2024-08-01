@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-
 import AccordionItem from "./AccordionItem.jsx";
 import AccordionTitle from "./AccordionTitle.jsx";
 import AccordionContent from "./AccordionContent.jsx";
@@ -18,7 +17,7 @@ export function useAccordionContext() {
   return ctx;
 }
 
-export default function Accordion({ children, className, id = "key" }) {
+export default function Accordion({ children, className, id }) {
   const [openItemId, setOpenItemId] = useState();
 
   function toggleItem(id) {

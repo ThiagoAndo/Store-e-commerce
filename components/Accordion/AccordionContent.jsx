@@ -1,13 +1,17 @@
 import { useAccordionContext } from "./Accordion.jsx";
 import { useAccordionItemContext } from "./AccordionItem.jsx";
 import { motion } from "framer-motion";
-import classes from "./Accordion.module.css";
+import { useFetch } from "@/pages/user/purchases/index.js";
 
-export default function AccordionContent({ className, content }) {
+export default function AccordionContent({ className, cart }) {
   const { openItemId } = useAccordionContext();
   const id = useAccordionItemContext();
+  const { fetchedData } = useFetch("cart", cart);
 
   const isOpen = openItemId === id;
+
+  console.log(id + " " + cart);
+  console.log(fetchedData);
 
   return (
     <motion.div
@@ -21,7 +25,7 @@ export default function AccordionContent({ className, content }) {
       <motion.article
         initial={{ opacity: 0 }}
         animate={isOpen ? { opacity: 1 } : null}
-        transition={{ duration: 2, type: "spring" }}
+        transition={{ duration: 1, type: "spring" }}
       >
         <p>You can&apos;t go wrong with us.</p>
         <p>

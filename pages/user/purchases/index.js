@@ -1,12 +1,10 @@
-import { useRouter } from "next/router";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Triangle } from "react-loader-spinner";
 import Mounted from "@/components/Accordion/AccordionMounted";
 import ErrorComp from "@/components/ui/error/ErrorComp";
 import { getUserToken } from "@/helpers/functions";
-import NotificationContext from "@/store/context/notification-context";
 
-export function useFetch(get) {
+export function useFetch(get, cartId) {
   const [isFetching, setIsFetching] = useState();
   const [error, setError] = useState();
   const [fetchedData, setFetchedData] = useState();
@@ -18,6 +16,9 @@ export function useFetch(get) {
       let url = null;
       if (get === "history") {
         url = `https://libraryapi-gtct.onrender.com/order/${id}`;
+      } else {
+        url = `https://libraryapi-gtct.onrender.com/cart/purchased/params?user_id=${id}&cart_id=${cartId}`;
+        
       }
       setIsFetching(true);
       try {
@@ -50,10 +51,8 @@ export function useFetch(get) {
   };
 }
 
-function ChangePassword() {
+function PurchaseHistory() {
   const { isFetching, error, fetchedData } = useFetch("history");
-  const notificationCtx = useContext(NotificationContext);
-  const router = useRouter();
 
   if (isFetching) {
     return (
@@ -64,8 +63,6 @@ function ChangePassword() {
           width="300"
           color="#ff9b05"
           ariaLabel="triangle-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
         />
       </div>
     );
@@ -73,17 +70,10 @@ function ChangePassword() {
   if (error) {
     return <ErrorComp message={error.message} />;
   }
-  // if (fetchedData?.length === 0) {
-  //   router.replace("/");
-  //   notificationCtx.showNotification({
-  //     title: "Nothing to show:",
-  //     message: `You have not made any purchase.`,
-  //     status: "pending",
-  //   });
-  // }
+
 
   if (fetchedData?.length > 0) {
     return <Mounted data={fetchedData} />;
   }
 }
-export default ChangePassword;
+export default PurchaseHistory;

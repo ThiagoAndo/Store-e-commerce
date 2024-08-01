@@ -1,7 +1,7 @@
 .main {
   max-width: 40rem;
   margin: 2rem auto 5rem;
-  height: 60vh;
+  min-height: 60vh;
 }
 
 .accordion {
@@ -22,7 +22,7 @@
   display: flex;
   background-color: #363e57;
   cursor: pointer;
-  box-shadow: 0px 0px 5qpx black;
+  box-shadow: 0px 0px 5px black;
 }
 .accordion-item-title {
   position: relative;
