@@ -77,6 +77,28 @@ export async function setAdd(id) {
   }
 }
 
+export async function deleteUser() {
+  const token = getUserToken();
+  const id = localStorage.getItem(id);
+
+  try {
+    let response = await fetch("https://libraryapi-gtct.onrender.com/user/", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(id),
+    });
+
+    if (response.ok) {
+      return true;
+    }
+  } catch (error) {
+    return { error: "Connecting to the database failed!" };
+  }
+}
+
 export function adrStorage(resp) {
   localStorage.setItem("line_one", resp.line_one);
   localStorage.setItem("line_two", resp.line_two);

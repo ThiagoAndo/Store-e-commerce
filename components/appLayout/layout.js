@@ -10,7 +10,7 @@ import Footer from "../ui/footer/footer";
 import Cart from "../cart/cart";
 import UserMenu from "../userMenu/UserMenu";
 import Modal from "../ui/modal/modal";
-import ConfBlock from "../cart/confirmation";
+import ConfBlock from "../ConfirmationComp/confirmation";
 
 function Layout(props) {
   const currentPath = usePathname();

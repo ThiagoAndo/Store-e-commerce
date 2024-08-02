@@ -5,8 +5,9 @@ import { useRouter } from "next/router";
 import { confActions } from "@/store/redux/conf.slice";
 import { cartActions } from "@/store/redux/cart-slice";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-function ConfBlock() {
+const PurchaseConf = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const handleClick = () => {
@@ -26,6 +27,34 @@ function ConfBlock() {
       </Button>
     </div>
   );
+};
+
+const DeleteConf = () => {
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(confActions.toggle());
+  };
+  return <button onClick={handleClick}></button>;
+};
+
+function ConfBlock() {
+  const conf = useSelector((state) => state.conf.confType);
+console.log(conf);
+console.log("conf");
+  if (conf === "conf") {
+    return (
+      <div className={classes.container}>
+        <h1>Confirmation</h1>;
+      </div>
+    );
+  } else {
+    return (
+      <div className={classes.container}>
+        <h1>delete</h1>;
+      </div>
+    );
+  }
 }
 
 export default ConfBlock;

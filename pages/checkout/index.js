@@ -71,6 +71,7 @@ function CheckoutPage() {
           }
         ).then((response) => {
           if (response.ok && e.route != "add") {
+            dispatch(confActions.changeType("conf"));
             dispatch(confActions.toggle());
           }
         });

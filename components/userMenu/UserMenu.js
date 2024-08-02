@@ -7,6 +7,7 @@ import { signOut } from "next-auth/react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import classes from "./UserMenu.module.css";
+import { confActions } from "@/store/redux/conf.slice";
 import NotificationContext from "@/store/context/notification-context";
 function UserMenu() {
   const dispatch = useDispatch();
@@ -33,6 +34,11 @@ function UserMenu() {
       });
     }
     dispatch(cartActions.toggle());
+  }
+  function handleStartDeletion(){
+    dispatch(confActions.changeType("delete"))
+    dispatch(confActions.toggle());
+
   }
 
   async function logoutHandler() {
@@ -92,7 +98,7 @@ function UserMenu() {
               My purchases
             </MenuOpt>
             <MenuOpt action={logoutHandler}>Log out</MenuOpt>
-            <MenuOpt action={logoutHandler}>Delete account</MenuOpt>
+            <MenuOpt action={handleStartDeletion}>Delete account</MenuOpt>
           </div>
         </li>
       </ul>

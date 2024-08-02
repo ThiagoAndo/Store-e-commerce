@@ -1,12 +1,15 @@
-import { motion } from "framer-motion";
-import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import classes from "./product-item.module.css";
 import Button from "../ui/button/btn";
 
 export default function ProductItem({ title, brand, thumbnail, id }) {
   const link = `product/${id}`;
+  const router = useRouter();
 
+  function handleClick() {
+    router.replace(link);
+  }
 
   return (
     <article className={classes.product}>
@@ -27,7 +30,7 @@ export default function ProductItem({ title, brand, thumbnail, id }) {
       </header>
       <div className={classes.content}>
         <div className={classes.actions}>
-          <Button style={classes.actions}>View Details</Button>
+          <Button style={classes.actions} click={handleClick}>View Details</Button>
         </div>
       </div>
     </article>

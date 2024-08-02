@@ -4,11 +4,14 @@ const confSlice = createSlice({
   name: "conf",
   initialState: {
     visible: false,
+    confType: null,
   },
   reducers: {
     toggle(state) {
       state.visible = !state.visible;
-      
+    },
+    changeType(state, action) {
+      state.confType = action.payload;
     },
   },
 });
