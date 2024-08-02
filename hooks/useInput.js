@@ -17,7 +17,6 @@ export function useInputAnimation() {
   }
 
   function handleEmpty({ label, input }) {
-    console.log(input + " " + label);
     animate(
       "#" + input,
       { x: [-15, 0, 15, 0], borderColor: "#FA8072" },

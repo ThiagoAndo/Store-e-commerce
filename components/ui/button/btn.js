@@ -12,7 +12,7 @@ function Button(props) {
             }
           : {}
       }
-      whileHover={{ scale: 1.1 }}
+      whileHover={{ scale: 1.06 }}
       transition={{ type: "spring", stiffness: 150 }}
       className={props.style}
       onClick={props.click}

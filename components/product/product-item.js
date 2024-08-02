@@ -1,9 +1,12 @@
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import classes from "./product-item.module.css";
+import Button from "../ui/button/btn";
 
 export default function ProductItem({ title, brand, thumbnail, id }) {
   const link = `product/${id}`;
+
 
   return (
     <article className={classes.product}>
@@ -24,7 +27,7 @@ export default function ProductItem({ title, brand, thumbnail, id }) {
       </header>
       <div className={classes.content}>
         <div className={classes.actions}>
-          <Link href={link}>View Details</Link>
+          <Button style={classes.actions}>View Details</Button>
         </div>
       </div>
     </article>
