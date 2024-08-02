@@ -43,10 +43,10 @@ function SearchBar() {
       placeholder={"Search for a product"}
       autoFocus
       styling={{
-        height: "39px",
+        height: "45px",
         border: "1px solid #FFFAFA",
         borderRadius: "8px",
-        backgroundColor: "#25200f",
+        backgroundColor: "#212020",
         hoverBackgroundColor: "#ff9b05",
         color: "white",
         fontSize: "20px",
@@ -54,7 +54,7 @@ function SearchBar() {
         lineColor: "#f9b241",
         placeholderColor: "white",
         clearIconMargin: "3px 8px 0 0",
-        zIndex: "2",
+        zIndex: "1000",
         fontFamily: "Lato",
       }}
     />

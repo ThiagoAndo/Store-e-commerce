@@ -68,5 +68,7 @@
 .actions button:hover,
 .actions button:active {
   background: linear-gradient(90deg, #fd4715, #f9b241);
-  box-shadow: 0 0 6px rgba(242, 100, 18, 0.8);
+  box-shadow: 0 0 6px #f26412cc;
+  align-items: center;
+  align-content: center;
 }

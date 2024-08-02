@@ -45,8 +45,8 @@ export default function ProductsContextProvider({ children }) {
     if (productsTitle.length === 0) {
       products.map((product) => {
         let title;
-        if (product.title.length > 30) {
-          title = product.title.slice(0, 30) + "...";
+        if (product.title.length > 25) {
+          title = product.title.slice(0, 25) + " ...";
         } else {
           title = product.title;
         }

@@ -72,6 +72,7 @@ export async function setAdd(id) {
       }
     }
   } catch (error) {
+    localStorage.setItem("address", "undefined");
     return { error: "Connecting to the database failed!" };
   }
 }

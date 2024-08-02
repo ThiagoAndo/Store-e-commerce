@@ -15,7 +15,9 @@
 }
 .search {
   margin-left: 10px;
-  min-width: 15rem;
+  width: 21rem;
+  max-height: 5rem;
+  z-index: 100;
 }
 .icon_container {
   display: flex;

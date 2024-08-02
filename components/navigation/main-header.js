@@ -81,13 +81,13 @@ function MainHeader() {
           onClick={handleClick}
         >
           <Link className={classes.link} href="/">
-            {currentPath!= "/" ? " ⬅ Back" : "Next Store"}
+            {currentPath != "/" ? " ⬅ Back" : "Next Store"}
           </Link>
         </motion.div>
         <motion.div
           className={classes.search}
-          whileHover={{ width: 410 }}
-          transition={{ type: "spring", duration: 1, marginRight: 0 }}
+          whileHover={{ scale: [1.05, 1] }}
+          transition={{ type: "spring", duration: 1, stiffness:100 }}
         >
           {currentPath === "/" ? <SearchBar /> : null}
         </motion.div>
