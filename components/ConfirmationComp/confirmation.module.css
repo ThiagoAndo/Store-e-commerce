@@ -1,22 +1,26 @@
-.container{
-    margin: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap:2rem;
-    color: black;
+.container {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  color: black;
+}
+#deletion p {
+  color: black;
 }
 
-.container > P{
-    font-size: 1rem;
-    color: darkgrey;
+.p {
+  font-size: 1rem;
+  color: darkgrey;
 }
+
 .button {
   height: 2.5rem;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   border-radius: 4px;
   border: none;
-  background: linear-gradient(90deg, #D87D4A, #fbaf85);
+  background: linear-gradient(90deg, #d87d4a, #fbaf85);
   color: #ffffff;
   cursor: pointer;
 }

@@ -1,12 +1,17 @@
-import style from "./ErrorComp.module.css";
+import style from "./AnimeComp.module.css";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "../button/btn";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-function ErrorComp({ message, isError = true }) {
+function Anime({ message, isError = true }) {
   const [showTxt, setShowTxt] = useState(true);
   const [showBtn, setShowBtn] = useState(false);
+
+  let thisClass= null;
+
+  // if(isError)
+
   const router = useRouter();
   let msg;
   msg = message.replaceAll(" ", ".");
@@ -36,14 +41,14 @@ function ErrorComp({ message, isError = true }) {
 
   return (
     <div
-      className={isError ? style.error_h1 : style.error_h1 + " " + style.msn_h1}
+      className={isError ? style.error : style.error + " " + style.msn}
     >
       <AnimatePresence>
         {showTxt &&
           msg.map((letter, i) => (
             <motion.p
               className={
-                letter === "." ? style.text + " " + style.trans : style.text
+                letter === "." ?  style.trans : style.text
               }
               initial={{ opacity: 0, rotateY: 0 }}
               animate={{
@@ -69,4 +74,4 @@ function ErrorComp({ message, isError = true }) {
   );
 }
 
-export default ErrorComp;
+export default Anime;

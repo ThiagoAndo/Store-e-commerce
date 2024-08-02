@@ -2,14 +2,22 @@ import { Fragment } from "react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
-
+import { confActions } from "@/store/redux/conf.slice";
+import { useDispatch, useSelector } from "react-redux";
 import classes from "./Modal.module.css";
 
 const Backdrop = (props) => {
   return <div className={classes.backdrop} onClick={props.onClose} />;
 };
 
-const ModalOverlay = (props) => {
+const ModalOverlay = ({ children, cart }) => {
+  const msnType = useSelector((state) => state.conf.confType);
+  console.log(cart);
+  console.log("cart");
+  let thisClass = "";
+  if (!cart) {
+    thisClass = msnType === "conf" ? classes.confirmation : classes.delete;
+  }
   return (
     <motion.div
       variants={{
@@ -21,16 +29,14 @@ const ModalOverlay = (props) => {
       transition={{ duration: 0.5, type: "spring" }}
       exit={{ opacity: 0, y: 100 }}
       open
-      className={
-        classes.modal + " " + `${props.isConf && classes.confirmation}`
-      }
+      className={classes.modal + " " + `${thisClass}`}
     >
-      <div className={classes.content}>{props.children}</div>
+      <div className={classes.content}>{children}</div>
     </motion.div>
   );
 };
 
-const Modal = (props) => {
+const Modal = ({children, cart = false}) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -43,7 +49,7 @@ const Modal = (props) => {
     <Fragment>
       {createPortal(<Backdrop />, document.querySelector("#myportal"))}
       {createPortal(
-        <ModalOverlay isConf={props.isConf}>{props.children}</ModalOverlay>,
+        <ModalOverlay cart={cart}>{children}</ModalOverlay>,
         document.querySelector("#myportal")
       )}
     </Fragment>

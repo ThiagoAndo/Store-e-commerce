@@ -35,10 +35,9 @@ function UserMenu() {
     }
     dispatch(cartActions.toggle());
   }
-  function handleStartDeletion(){
-    dispatch(confActions.changeType("delete"))
+  function handleStartDeletion() {
+    dispatch(confActions.changeType("delete"));
     dispatch(confActions.toggle());
-
   }
 
   async function logoutHandler() {
@@ -61,13 +60,19 @@ function UserMenu() {
       });
     }
   }
-  const MenuOpt = ({ children, action }) => {
+
+  const MenuOpt = ({ children, action, isDelete = false }) => {
     return (
-      <motion.p key={0} whileHover={{ color: "#ff9b05" }} onClick={action}>
+      <motion.p
+        key={0}
+        whileHover={isDelete ? { color: "#FA8072" } : { color: "#ff9b05" }}
+        onClick={action}
+      >
         {children}
       </motion.p>
     );
   };
+
   return (
     <motion.div
       className={classes.userMenu}
@@ -98,7 +103,9 @@ function UserMenu() {
               My purchases
             </MenuOpt>
             <MenuOpt action={logoutHandler}>Log out</MenuOpt>
-            <MenuOpt action={handleStartDeletion}>Delete account</MenuOpt>
+            <MenuOpt isDelete={true} action={handleStartDeletion}>
+              Delete account
+            </MenuOpt>
           </div>
         </li>
       </ul>

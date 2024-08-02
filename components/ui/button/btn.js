@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-function Button(props) {
+function Button({ children, rotate = false , click, style}) {
   return (
     <motion.button
-      initial={props?.rotate ? { opacity: 0, rotateY: 0 } : {}}
+      initial={rotate ? { opacity: 0, rotateY: 0 } : {}}
       animate={
-        props?.rotate
+        rotate
           ? {
               opacity: 1,
               rotateZ: [360, 260, 180, 90, 90, 360, 260, 180, 90, 0],
@@ -12,12 +12,12 @@ function Button(props) {
             }
           : {}
       }
-      whileHover={{ scale: 1.06 }}
+      whileHover={rotate ? {} : { scale: 1.06 }}
       transition={{ type: "spring", stiffness: 150 }}
-      className={props.style}
-      onClick={props.click}
+      className={style}
+      onClick={click}
     >
-      {props.children}
+      {children}
     </motion.button>
   );
 }

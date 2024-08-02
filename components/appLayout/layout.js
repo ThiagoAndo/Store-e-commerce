@@ -24,12 +24,12 @@ function Layout(props) {
     <Fragment>
       <AnimatePresence>
         {isVisible && (
-          <Modal>
+          <Modal cart={isVisible}> 
             <Cart />
           </Modal>
         )}
         {isConfVisible && (
-          <Modal isConf={isConfVisible}>
+          <Modal>
             <ConfBlock />
           </Modal>
         )}

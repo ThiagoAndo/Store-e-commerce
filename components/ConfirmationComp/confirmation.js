@@ -1,13 +1,13 @@
+import { useRouter } from "next/router";
+import { cartActions } from "@/store/redux/cart-slice";
+import { confActions } from "@/store/redux/conf.slice";
+import { useDispatch, useSelector } from "react-redux";
 import ConIcon from "../ui/confirmation/conf-icon";
 import Button from "../ui/button/btn";
 import classes from "./confirmation.module.css";
-import { useRouter } from "next/router";
-import { confActions } from "@/store/redux/conf.slice";
-import { cartActions } from "@/store/redux/cart-slice";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import Anime from "../ui/txtAnime/AnimeComp";
 
-const PurchaseConf = () => {
+const PurchaseConf = function PurchaseConf() {
   const dispatch = useDispatch();
   const router = useRouter();
   const handleClick = () => {
@@ -39,19 +39,19 @@ const DeleteConf = () => {
 };
 
 function ConfBlock() {
-  const conf = useSelector((state) => state.conf.confType);
-console.log(conf);
-console.log("conf");
-  if (conf === "conf") {
-    return (
-      <div className={classes.container}>
-        <h1>Confirmation</h1>;
-      </div>
-    );
+  const msnType = useSelector((state) => state.conf.confType);
+  if (msnType === "conf") {
+    return <PurchaseConf />;
   } else {
     return (
-      <div className={classes.container}>
-        <h1>delete</h1>;
+      <div className={classes.container} id={"deletion"}>
+        <Anime
+          isError={false}
+          isMsn={false}
+          isDelete={true}
+          message={"Are you sure ?"}
+        />
+        ;
       </div>
     );
   }

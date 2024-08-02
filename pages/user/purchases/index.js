@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Triangle } from "react-loader-spinner";
 import Mounted from "@/components/purchaseAccordion/AccordionMounted";
-import ErrorComp from "@/components/ui/error/ErrorComp";
+import Anime from "@/components/ui/txtAnime/AnimeComp";
 import { getUserToken } from "@/helpers/functions";
 export function useFetch(get, cartId) {
   const [isFetching, setIsFetching] = useState();
@@ -66,13 +66,27 @@ function PurchaseHistory() {
     );
   }
   if (error) {
-    return <ErrorComp message={error.message} />;
+    return (
+      <Anime
+        isError={true}
+        isMsn={false}
+        isDelete={false}
+        message={error.message}
+      />
+    );
   }
 
   if (fetchedData?.length > 0) {
     return <Mounted data={fetchedData} />;
   } else {
-    return <ErrorComp message={"Nothing to show!"} isError={false} />;
+    return (
+      <Anime
+        message={"Nothing to show!"}
+        isError={false}
+        isMsn={true}
+        isDelete={false}
+      />
+    );
   }
 }
 export default PurchaseHistory;
