@@ -20,9 +20,14 @@ const PurchaseConf = function PurchaseConf() {
       <span>
         <ConIcon />
       </span>
-      <h1>THANK YOU FOR YOUR ORDER</h1>
-      <p>You will receive an email confirmation shortly.</p>
-      <Button style={classes.button} click={handleClick}>
+      <h1 className={classes.h1}>THANK YOU FOR YOUR ORDER</h1>
+      <p className={classes.p}>
+        You will receive an email confirmation shortly.
+      </p>
+      <Button
+        style={`${classes.button + " " + classes.btn_conf}`}
+        click={handleClick}
+      >
         BACK TO HOME
       </Button>
     </div>
@@ -49,7 +54,9 @@ const DeleteConf = () => {
       <hr />
       <h2>This action can not be undone!</h2>
       <div className={classes.btn_container}>
-        <Button click={handleClick}  style={classes.button}>Skip</Button>
+        <Button click={handleClick} style={classes.button}>
+          Skip
+        </Button>
         <Button style={`${classes.button + " " + classes.btn_delete}`}>
           Delete
         </Button>

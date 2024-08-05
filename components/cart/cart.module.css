@@ -11,6 +11,7 @@
   justify-content: space-between;
 }
 .li_action > button {
+  color: #ff9b05;
   background-color: transparent;
   border: none;
   cursor: pointer;

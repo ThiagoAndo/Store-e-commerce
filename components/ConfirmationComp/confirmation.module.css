@@ -2,10 +2,17 @@
   margin: 1rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 2rem;
   color: black;
   padding-top: 1rem;
 }
+
+.h1 {
+  text-align: center;
+  color: white;
+}
+
 .deletion > h2 {
   text-align: center;
   color: white;
@@ -15,6 +22,7 @@
 .p {
   font-size: 1rem;
   color: darkgrey;
+  text-align: center;
 }
 
 .btn_container {
@@ -38,6 +46,12 @@
   cursor: pointer;
 }
 
+.btn_conf {
+  height: 3rem;
+  width: 18rem;
+  align-self: center;
+  font-weight: bold;
+}
 .btn_delete {
 }
 
