@@ -35,7 +35,27 @@ const DeleteConf = () => {
   const handleClick = () => {
     dispatch(confActions.toggle());
   };
-  return <button onClick={handleClick}></button>;
+  return (
+    <div
+      className={`${classes.container + " " + classes.deletion}`}
+      id={"deletion"}
+    >
+      <Anime
+        isError={false}
+        isMsn={false}
+        isDelete={true}
+        message={"Are you sure ?"}
+      />
+      <hr />
+      <h2>This action can not be undone!</h2>
+      <div className={classes.btn_container}>
+        <Button click={handleClick}  style={classes.button}>Skip</Button>
+        <Button style={`${classes.button + " " + classes.btn_delete}`}>
+          Delete
+        </Button>
+      </div>
+    </div>
+  );
 };
 
 function ConfBlock() {
@@ -43,17 +63,7 @@ function ConfBlock() {
   if (msnType === "conf") {
     return <PurchaseConf />;
   } else {
-    return (
-      <div className={classes.container} id={"deletion"}>
-        <Anime
-          isError={false}
-          isMsn={false}
-          isDelete={true}
-          message={"Are you sure ?"}
-        />
-        ;
-      </div>
-    );
+    return <DeleteConf />;
   }
 }
 

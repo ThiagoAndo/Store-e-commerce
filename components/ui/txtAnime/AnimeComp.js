@@ -4,52 +4,53 @@ import Button from "../button/btn";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-function Anime({ message, isError = true }) {
+function Anime({ message, isError, isMsn, isDelete }) {
   const [showTxt, setShowTxt] = useState(true);
   const [showBtn, setShowBtn] = useState(false);
-
-  let thisClass= null;
-
-  // if(isError)
-
+  let thisClass = null;
   const router = useRouter();
   let msg;
-  msg = message.replaceAll(" ", ".");
+  msg = message.replaceAll(" ", "#");
   msg = msg.split("");
+
+  if (isError) {
+    thisClass = style.error;
+  }
+  if (isMsn) {
+    thisClass = style.error + " " + style.msn;
+  }
+
+  if (isDelete) {
+    thisClass = style.error + " " + style.delete;
+  }
+
   function handleClick() {
     router.replace("/");
   }
   useEffect(() => {
     let timer;
-    if (!isError) {
+    let timer2;
+    if (isMsn) {
       timer = setTimeout(() => {
         setShowBtn(true);
       }, 2600);
-    }
-    return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    let timer2;
-    if (!isError) {
       timer2 = setTimeout(() => {
         setShowTxt(false);
       }, 2500);
     }
-    return () => clearInterval(timer2);
+    return () => {
+      clearInterval(timer);
+      clearInterval(timer2);
+    };
   }, []);
 
   return (
-    <div
-      className={isError ? style.error : style.error + " " + style.msn}
-    >
+    <div className={thisClass}>
       <AnimatePresence>
         {showTxt &&
           msg.map((letter, i) => (
             <motion.p
-              className={
-                letter === "." ?  style.trans : style.text
-              }
+              className={letter === "#" ? style.trans : style.text}
               initial={{ opacity: 0, rotateY: 0 }}
               animate={{
                 opacity: 1,

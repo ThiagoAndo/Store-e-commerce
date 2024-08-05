@@ -4,9 +4,12 @@
   flex-direction: column;
   gap: 2rem;
   color: black;
+  padding-top: 1rem;
 }
-#deletion p {
-  color: black;
+.deletion > h2 {
+  text-align: center;
+  color: white;
+  font-weight: 900;
 }
 
 .p {
@@ -14,13 +17,31 @@
   color: darkgrey;
 }
 
+.btn_container {
+  width: 85%;
+  margin: 1rem auto 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .button {
   height: 2.5rem;
+  width: 5rem;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   border-radius: 4px;
   border: none;
-  background: linear-gradient(90deg, #d87d4a, #fbaf85);
+  background: linear-gradient(90deg, #fd4715, #f9b241);
   color: #ffffff;
   cursor: pointer;
+}
+
+.btn_delete {
+}
+
+.btn_delete:hover {
+  color: black;
+  background: linear-gradient(90deg, #fd1515, #f54c4c);
 }

@@ -13,22 +13,53 @@
   top: 20vh;
   left: 55%;
   width: 35%;
-  background: linear-gradient(90deg, #ffffff, #f6f6f6);
+  background: linear-gradient(90deg, #f6f6f6, #2a221f);
   padding: 1rem;
   border-radius: 14px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   z-index: 30;
-  color: #ffffff;
+  color: #2a221f;
 }
 
 .confirmation {
   left: 32.5%;
-   background: linear-gradient(220deg, #D87D4A,  #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff,#fbaf85);
+  background: linear-gradient(
+    220deg,
+    #d87d4a,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #fbaf85
+  );
 }
-
-
 
 .delete {
   left: 32.5%;
-   background: linear-gradient(220deg, #dd1414,  #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff,#fb8585);
+  width: fit-content;
+  background: linear-gradient(
+    220deg,
+    #dd1414,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #2a221f,
+    #f06f6f
+  );
 }

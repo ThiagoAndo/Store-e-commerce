@@ -8,10 +8,15 @@
   list-style: none;
   height: 70vh;
 }
-.msn_{
+
+.msn{
   color: black;
 }
 
+.delete{
+   height: 10vh;
+
+}
 
 .text {
   font-family: "Orbitron", sans-serif;
