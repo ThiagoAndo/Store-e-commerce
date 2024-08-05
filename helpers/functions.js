@@ -62,7 +62,7 @@ export async function setAdd(id) {
   try {
     let response = await fetch(
       // `http://localhost:8080/add/${id}`
-      `https://libraryapi-gtct.onrender.com/add/${id}`
+      `https://store-api-tlin.onrender.com/add/${id}`
     );
 
     if (response.ok) {
@@ -82,7 +82,7 @@ export async function deleteUser() {
   const id = localStorage.getItem(id);
 
   try {
-    let response = await fetch("https://libraryapi-gtct.onrender.com/user/", {
+    let response = await fetch("https://store-api-tlin.onrender.com/user/", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

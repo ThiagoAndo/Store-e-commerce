@@ -14,9 +14,9 @@ export function useFetch(get, cartId) {
       const id = localStorage.getItem("id");
       let url = null;
       if (get === "history") {
-        url = `https://libraryapi-gtct.onrender.com/order/${id}`;
+        url = `https://store-api-tlin.onrender.com/order/${id}`;
       } else {
-        url = `https://libraryapi-gtct.onrender.com/cart/purchased/params?user_id=${id}&cart_id=${cartId}`;
+        url = `https://store-api-tlin.onrender.com/cart/purchased/params?user_id=${id}&cart_id=${cartId}`;
       }
       setIsFetching(true);
       try {

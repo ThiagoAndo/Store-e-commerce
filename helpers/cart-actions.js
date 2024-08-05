@@ -20,7 +20,7 @@ export const fetchCartData = (userId) => {
     const fetchData = async () => {
       const response = await fetch(
         // `http://localhost:8080/cart/${userId}`
-        `https://libraryapi-gtct.onrender.com/cart/${userId}`
+        `https://store-api-tlin.onrender.com/cart/${userId}`
       );
 
       if (!response.ok) {
@@ -60,7 +60,7 @@ export const sendCartData = async (cart) => {
   try {
     let response = await fetch(
       // `http://localhost:8080/cart`,
-      `https://libraryapi-gtct.onrender.com/cart`,
+      `https://store-api-tlin.onrender.com/cart`,
       {
         method: "POST",
         headers: {
@@ -90,7 +90,7 @@ export const deleteCartData = async (cart, op) => {
   try {
     let response = await fetch(
       // `http://localhost:8080/cart`,
-      `https://libraryapi-gtct.onrender.com/cart`,
+      `https://store-api-tlin.onrender.com/cart`,
       {
         method: "DELETE",
         headers: {
@@ -118,7 +118,7 @@ export const updateCartData = async (cart) => {
   try {
     let response = await fetch(
       // `http://localhost:8080/cart`,
-      `https://libraryapi-gtct.onrender.com/cart`,
+      `https://store-api-tlin.onrender.com/cart`,
       {
         method: "PATCH",
         headers: {
