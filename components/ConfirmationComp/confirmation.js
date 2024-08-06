@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { confActions } from "@/store/redux/conf.slice";
 import { cartActions } from "@/store/redux/cart-slice";
+import { useRouter } from "next/router";
 import ConIcon from "../ui/confirmation/conf-icon";
 import Button from "../ui/button/btn";
 import classes from "./confirmation.module.css";
@@ -10,6 +11,7 @@ import { logoutHandler } from "@/helpers/functions";
 
 const PurchaseConf = function PurchaseConf() {
   const dispatch = useDispatch();
+  const router = useRouter( );
   const handleClick = () => {
     dispatch(confActions.toggle());
     dispatch(cartActions.removeAll());
