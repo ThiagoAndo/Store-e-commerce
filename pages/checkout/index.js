@@ -60,7 +60,7 @@ function CheckoutPage() {
         const token = getUserToken();
         fetch(
           // `http://localhost:8080/${e.route}`,
-          `https://store-api-tlin.onrender.com/${e.route}`,
+          `https://api-store-pj2y.onrender.com/${e.route}`,
           {
             method: "POST",
             headers: {

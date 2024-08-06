@@ -20,7 +20,7 @@ function SignIn() {
     try {
       let response = await fetch(
         // "http://localhost:8080/user/new",
-        "https://store-api-tlin.onrender.com/user/new",
+        "https://api-store-pj2y.onrender.com/user/new",
         {
           method: "POST",
           body: JSON.stringify(user),

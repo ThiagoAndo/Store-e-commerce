@@ -63,7 +63,7 @@ function ChangeData() {
         const token = getUserToken();
         const response = await fetch(
           // `http://localhost:8080/${e.route}`,
-          `https://store-api-tlin.onrender.com/${e.route}`,
+          `https://api-store-pj2y.onrender.com/${e.route}`,
           {
             method: e.method,
             headers: {

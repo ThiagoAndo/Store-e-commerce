@@ -1,15 +1,15 @@
-import { useRouter } from "next/router";
-import { cartActions } from "@/store/redux/cart-slice";
-import { confActions } from "@/store/redux/conf.slice";
 import { useDispatch, useSelector } from "react-redux";
+import { confActions } from "@/store/redux/conf.slice";
+import { cartActions } from "@/store/redux/cart-slice";
 import ConIcon from "../ui/confirmation/conf-icon";
 import Button from "../ui/button/btn";
 import classes from "./confirmation.module.css";
 import Anime from "../ui/txtAnime/AnimeComp";
+import fetchDelete from "@/helpers/fetchDellete";
+import { logoutHandler } from "@/helpers/functions";
 
 const PurchaseConf = function PurchaseConf() {
   const dispatch = useDispatch();
-  const router = useRouter();
   const handleClick = () => {
     dispatch(confActions.toggle());
     dispatch(cartActions.removeAll());
@@ -37,9 +37,17 @@ const PurchaseConf = function PurchaseConf() {
 const DeleteConf = () => {
   const dispatch = useDispatch();
 
-  const handleClick = () => {
+  const handleSkip = () => {
     dispatch(confActions.toggle());
   };
+
+  const handleDelete = async () => {
+    const ret = await fetchDelete();
+    if (ret) {
+      logoutHandler();
+    }
+  };
+
   return (
     <div
       className={`${classes.container + " " + classes.deletion}`}
@@ -54,10 +62,13 @@ const DeleteConf = () => {
       <hr />
       <h2>This action can not be undone!</h2>
       <div className={classes.btn_container}>
-        <Button click={handleClick} style={classes.button}>
+        <Button click={handleSkip} style={classes.button}>
           Skip
         </Button>
-        <Button style={`${classes.button + " " + classes.btn_delete}`}>
+        <Button
+          click={handleDelete}
+          style={`${classes.button + " " + classes.btn_delete}`}
+        >
           Delete
         </Button>
       </div>

@@ -1,3 +1,5 @@
+import { signOut } from "next-auth/react";
+
 export function getCurrentDate() {
   const date = new Date();
   const day = date.getDate();
@@ -62,7 +64,7 @@ export async function setAdd(id) {
   try {
     let response = await fetch(
       // `http://localhost:8080/add/${id}`
-      `https://store-api-tlin.onrender.com/add/${id}`
+      `https://api-store-pj2y.onrender.com/add/${id}`
     );
 
     if (response.ok) {
@@ -82,7 +84,7 @@ export async function deleteUser() {
   const id = localStorage.getItem(id);
 
   try {
-    let response = await fetch("https://store-api-tlin.onrender.com/user/", {
+    let response = await fetch("https://api-store-pj2y.onrender.com/user/", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -133,4 +135,25 @@ export function getStorageUser() {
       localStorage.getItem("constry_state"),
     ],
   };
+}
+
+export async function logoutHandler() {
+  let myPromise = new Promise(function (myResolve, myReject) {
+    localStorage.clear();
+    const id = localStorage.getItem("id");
+
+    if (!id) {
+      myResolve("OK");
+    } else {
+      myReject("Error");
+    }
+  });
+  const resolve = await myPromise;
+
+  if (resolve === "OK") {
+    signOut({
+      callbackUrl:
+        "https://store-comerce-ahwgoy6xn-thiago-freitas-projects-0d31c9d5.vercel.app/",
+    });
+  }
 }
