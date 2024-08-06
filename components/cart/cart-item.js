@@ -79,8 +79,7 @@ const CartItem = ({ title, amount, price, id, isShow }) => {
           <button className={classes.amount}>x {amount}</button>
           {isShow && (
             <Button style={classes.button} click={addItemHandler}>
-              {" "}
-              +{" "}
+              +
             </Button>
           )}
         </div>

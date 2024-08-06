@@ -12,8 +12,6 @@ const Backdrop = (props) => {
 
 const ModalOverlay = ({ children, cart }) => {
   const msnType = useSelector((state) => state.conf.confType);
-  console.log(cart);
-  console.log("cart");
   let thisClass = "";
   if (!cart) {
     thisClass = msnType === "conf" ? classes.confirmation : classes.delete;
@@ -36,7 +34,7 @@ const ModalOverlay = ({ children, cart }) => {
   );
 };
 
-const Modal = ({children, cart = false}) => {
+const Modal = ({ children, cart = false }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

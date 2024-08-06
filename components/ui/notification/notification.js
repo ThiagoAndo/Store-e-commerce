@@ -6,7 +6,6 @@ import NotificationContext from "../../../store/context/notification-context";
 
 function Notification(props) {
   const notificationCtx = useContext(NotificationContext);
-
   const { title, message, status } = props;
 
   let statusClasses = "";

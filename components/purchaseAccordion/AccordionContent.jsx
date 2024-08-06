@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { useAccordionContext } from "./Accordion.jsx";
 import { useAccordionItemContext } from "./AccordionItem.jsx";
 import { useFetch } from "@/pages/user/purchases/index.js";
@@ -13,8 +12,6 @@ export default function AccordionContent({ className, cart }) {
   const isOpen = openItemId === id;
 
   const { items } = fetchedData ? fetchedData : { items: false };
-  console.log(items);
-  console.log("items");
 
   return (
     <motion.div

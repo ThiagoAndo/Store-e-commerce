@@ -51,7 +51,10 @@ function Login() {
             });
             setStorage(data);
             setAdd(data.id);
+            
             const isCart = JSON.parse(localStorage.getItem("cart"));
+            console.log(isCart);
+            console.log("isCart");
             if (isCart === null) {
               dispatch(fetchCartData(data.id));
             } else {
