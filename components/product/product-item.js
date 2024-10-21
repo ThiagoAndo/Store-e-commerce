@@ -24,7 +24,7 @@ export default function ProductItem({ title, brand, thumbnail, id }) {
           />
         </div>
         <div className={classes.headerText}>
-          <h2>{title}</h2>
+          <h3>{title}</h3>
           <p>{brand}</p>
         </div>
       </header>

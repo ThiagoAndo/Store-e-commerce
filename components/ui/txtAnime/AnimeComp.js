@@ -16,7 +16,7 @@ function Anime({ message, isError, isMsn, isDelete }) {
   if (isError) {
     thisClass = style.error;
   }
-  if (isMsn) {
+  if (isMsn ) {
     thisClass = style.error + " " + style.msn;
   }
 
@@ -67,7 +67,7 @@ function Anime({ message, isError, isMsn, isDelete }) {
           ))}
         {showBtn && (
           <Button style={style.button} rotate={true} click={handleClick}>
-            {" ⬅ Back"}
+            {"Back TO HOME"}
           </Button>
         )}
       </AnimatePresence>

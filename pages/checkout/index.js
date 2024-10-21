@@ -73,6 +73,7 @@ function CheckoutPage() {
           if (response.ok && e.route != "add") {
             dispatch(confActions.changeType("conf"));
             dispatch(confActions.toggle());
+            notificationCtx.hideNotification()
           }
         });
       } catch (error) {

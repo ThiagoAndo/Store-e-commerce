@@ -72,10 +72,8 @@ function MainHeader() {
       <nav className={classes.navigation}>
         <motion.div
           whileHover={{
-            scale: 1.05,
             boxShadow: "0 2px 0px rgba(242, 100, 18, 0.8)",
             borderRadius: " 0.5rem",
-            paddingBottom: "0.3rem",
           }}
           transition={{ type: "spring", duration: 0.3 }}
           onClick={handleClick}
@@ -84,17 +82,10 @@ function MainHeader() {
             {currentPath != "/" ? " ⬅ Back" : "Next Store"}
           </Link>
         </motion.div>
-        <motion.div
-          className={classes.search}
-          whileHover={{ scale: [1.05, 1] }}
-          transition={{ type: "spring", duration: 1, stiffness:100 }}
-        >
-          {currentPath === "/" ? <SearchBar /> : null}
-        </motion.div>
+        {currentPath === "/" ? <SearchBar /> : null}
         <div className={classes.icon_container}>
           <motion.div
             whileHover={{
-              scale: 1.1,
               borderRadius: "10rem",
               boxShadow: "0 2px 0px rgba(242, 100, 18, 0.8)",
             }}
@@ -126,7 +117,6 @@ function MainHeader() {
           ) : (
             <motion.div
               whileHover={{
-                scale: 1.1,
                 borderRadius: "10rem",
                 boxShadow: "0 2px 0px rgba(242, 100, 18, 0.8)",
               }}

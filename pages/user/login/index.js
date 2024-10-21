@@ -35,6 +35,7 @@ function Login() {
       )
         .then((response) => {
           if (response.ok) {
+            notificationCtx.hideNotification()
             return response.json();
           } else {
             setFeedback({ message: "Connecting to the database failed!" });

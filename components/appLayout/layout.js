@@ -11,6 +11,7 @@ import Cart from "../cart/cart";
 import UserMenu from "../userMenu/UserMenu";
 import Modal from "../ui/modal/modal";
 import ConfBlock from "../ConfirmationComp/confirmation";
+import Head from "next/head";
 
 function Layout(props) {
   const currentPath = usePathname();
@@ -22,9 +23,12 @@ function Layout(props) {
 
   return (
     <Fragment>
+      <Head>
+        <title>Home</title>
+      </Head>
       <AnimatePresence>
         {isVisible && (
-          <Modal cart={isVisible}> 
+          <Modal cart={isVisible}>
             <Cart />
           </Modal>
         )}
