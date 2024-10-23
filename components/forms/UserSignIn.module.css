@@ -67,3 +67,12 @@
   cursor: pointer;
   margin: 2rem 0 1rem 0;
 }
+
+
+@media only screen and (min-width : 369px) and (max-width : 500px) {
+  .container {
+      width: 84%;
+    
+    }
+
+}

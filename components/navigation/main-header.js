@@ -82,7 +82,7 @@ function MainHeader() {
             {currentPath != "/" ? " ⬅ Back" : "Next Store"}
           </Link>
         </motion.div>
-        {currentPath === "/" ? <SearchBar /> : null}
+        <div className={classes.search}>{currentPath === "/" ? <SearchBar /> : null}</div>
         <div className={classes.icon_container}>
           <motion.div
             whileHover={{

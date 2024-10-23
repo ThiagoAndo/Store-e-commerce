@@ -67,7 +67,7 @@ function Anime({ message, isError, isMsn, isDelete }) {
           ))}
         {showBtn && (
           <Button style={style.button} rotate={true} click={handleClick}>
-            {"Back TO HOME"}
+            {"HOME"}
           </Button>
         )}
       </AnimatePresence>

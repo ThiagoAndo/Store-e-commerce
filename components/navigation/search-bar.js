@@ -54,7 +54,7 @@ function SearchBar() {
         lineColor: "#f9b241",
         placeholderColor: "white",
         clearIconMargin: "3px 8px 0 0",
-        zIndex: "1000",
+        zIndex: "-1000",
         fontFamily: "Lato",
       }}
     />

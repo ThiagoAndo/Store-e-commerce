@@ -96,7 +96,7 @@ function UserLogin({ handling, LoginBack }) {
               <h3>✔ Instant access to your account.</h3>
             </div>
             <Button click={handleClick} style={style.button}>
-              Continue Securely
+              Sign up
             </Button>
           </motion.form>
         </div>
