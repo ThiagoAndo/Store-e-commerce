@@ -3,6 +3,7 @@
   padding: 1rem 5%;
   height: fit-content;
   background: linear-gradient(90deg, #202020, #25200f);
+  z-index: 1000;
 }
 
 .navigation {
@@ -118,6 +119,9 @@
     display: flex;
     flex-wrap: wrap;
     height: fit-content;
+    position: relative;
+    position: fixed;
+    top: 0;
   }
 
   .link {
@@ -125,6 +129,11 @@
     color: #fffafa;
     font-size: 2rem;
     font-weight: bold;
+    margin-left: 80px;
+  }
+
+  .no_margin{
+    margin: 0;
   }
 
   .icon_container {
@@ -154,6 +163,5 @@
     margin-top: .5rem;
     order: 3;
   }
-
 
 }

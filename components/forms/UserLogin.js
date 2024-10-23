@@ -48,16 +48,6 @@ function UserLogin({ handling, LoginBack }) {
   return (
     <>
       <AnimatePresence>
-        <motion.div
-          key={1}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, type: "spring" }}
-          className={style.h2_container}
-        >
-          <p className={style.paragraph}>Already Registered?</p>
-          <p className={style.paragraph}>New User?</p>
-        </motion.div>
         <div className={style.container}>
           <motion.form
             key={2}
@@ -68,6 +58,7 @@ function UserLogin({ handling, LoginBack }) {
             onSubmit={loginHandler}
             ref={scope}
           >
+            <p className={style.paragraph}>Already Registered?</p>
             <div className={style.cont_container}>
               {fields.map((inp) => (
                 <Input
@@ -88,6 +79,7 @@ function UserLogin({ handling, LoginBack }) {
             transition={{ duration: 0.6, type: "spring" }}
             className={style.form}
           >
+            <p className={style.paragraph}>New User?</p>
             <div className={style.cont_container}>
               <h3>✔ Receive special offers and promotions.</h3>
               <h3>✔ Speed your way through checkout.</h3>

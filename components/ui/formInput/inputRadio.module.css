@@ -1,5 +1,5 @@
 .radio {
-  height: 2.5rem;
+  height: 3.5rem;
   border: 1px solid #ababab;
   border-radius: 4px;
   display: flex;
@@ -8,6 +8,7 @@
   font-weight: 600;
   cursor: pointer;
   padding-left: 0.5rem;
+  font-size: 1.2rem;
 }
 
 .radio input {
