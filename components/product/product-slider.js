@@ -61,10 +61,12 @@ export default function DetailSlider({ img }) {
         {img.map((i) => (
           <div key={i.image} className="keen-slider__slide number-slide">
             <Image
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              width={300}
+              height={200}
+              // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               src={i.image}
               alt={"Product image"}
-              fill
+              // fill
               priority={true}
             />
           </div>
@@ -76,9 +78,9 @@ export default function DetailSlider({ img }) {
           <div key={i.image} className="keen-slider__slide number-slide">
             <Image
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              fill
               src={i.image}
               alt={"Product image"}
-              fill
               priority={true}
             />
           </div>

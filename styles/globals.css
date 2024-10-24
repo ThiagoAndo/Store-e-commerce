@@ -70,8 +70,8 @@ input[type=number] {
   font-weight: 500;
   height: 217px;
   max-height: 100vh;
-  border: solid 1px #ff9b05;
   border-radius: .5rem;
+  border: solid 1px #ff9b05;
 
 }
 
@@ -85,7 +85,7 @@ input[type=number] {
 .thumbnail .keen-slider__slide {
   font-size: 30px;
   margin-top: 10px;
-  height: 108px;
+  height: 100px;
 }
 
 .thumbnail .keen-slider__slide {
@@ -93,9 +93,8 @@ input[type=number] {
 }
 
 .thumbnail .keen-slider__slide.active {
-  border: 2px dashed black;
+  border: 2px dashed rgb(160, 160, 160);
 }
-
 
 /* Filter products mobile */
 .account {
@@ -281,6 +280,10 @@ label[for="ham-menu"] {
     margin-top: 17rem;
     min-height: fit-content;
 
+  }
+
+  .slider-cont {
+    width: 35%;
   }
 
 
