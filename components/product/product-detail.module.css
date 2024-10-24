@@ -1,23 +1,22 @@
-.container_pro{
+.container_pro {
   display: grid;
-  grid-template-columns:5% 45% 45% 5%; 
-  
+  grid-template-columns: 5% 45% 45% 5%;
   width: 100%;
   height: 100vh;
 }
 
-.mage{
+.mage {
   width: 200px;
   height: 200px;
 }
 
-.slider{
+.slider {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 2rem;
   padding: 1rem;
-  
+
 }
 
 .info {
@@ -26,4 +25,29 @@
   justify-content: center;
   margin: 2rem;
 
+}
+
+@media only screen and (min-width : 369px) and (max-width : 500px) {
+  .container_pro {
+    margin-top: -10rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    overflow: hidden;
+  }
+
+  .slider {
+    margin-bottom: 3rem;
+    margin-left: 1.5rem;
+  }
+
+  .info {
+    width: 368px;
+    margin-top: -4rem;
+    padding-top: 0;
+  }
+
+  .display {
+    display: none;
+  }
 }

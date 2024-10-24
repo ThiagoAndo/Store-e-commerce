@@ -70,8 +70,9 @@ input[type=number] {
   font-weight: 500;
   height: 217px;
   max-height: 100vh;
-  border: solid 1px #ff9b05;
   border-radius: .5rem;
+  border: solid 1px #ff9b05;
+  /* margin-left: 1rem; */
 
 }
 
@@ -85,7 +86,7 @@ input[type=number] {
 .thumbnail .keen-slider__slide {
   font-size: 30px;
   margin-top: 10px;
-  height: 108px;
+  height: 100px;
 }
 
 .thumbnail .keen-slider__slide {
@@ -93,10 +94,17 @@ input[type=number] {
 }
 
 .thumbnail .keen-slider__slide.active {
-  border: 2px dashed black;
+  border: 2px dashed rgb(160, 160, 160);
 }
 
+.suspense{
+  background-image: url("../assets/Eclipse.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.main_slide{
 
+}
 /* Filter products mobile */
 .account {
   height: 30%;
@@ -284,4 +292,8 @@ label[for="ham-menu"] {
   }
 
 
+
+.slider-cont{
+  width:350px;
+}
 }

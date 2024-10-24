@@ -48,7 +48,7 @@
 
 @media only screen and (min-width : 369px) and (max-width : 500px) {
   .modal {
-    top: 40vh;
+    top: 20vh;
     left: 10%;
     width: 80%;
   }

@@ -4,7 +4,6 @@ import { Menu } from "../userMenu/UserMenu";
 import { useSession } from "next-auth/react";
 import { useRef } from "react";
 import { usePathname } from "next/navigation";
-
 import Link from "next/link";
 // Style of this component is on global.css
 
@@ -27,7 +26,7 @@ export default function NavMobile() {
     <>
       <input ref={ref} type="checkbox" id="ham-menu" />
       <label htmlFor="ham-menu">
-        <div class="hide-des">
+        <div className="hide-des">
           <span className="menu-line"></span>
           <span className="menu-line"></span>
           <span className="menu-line"></span>
