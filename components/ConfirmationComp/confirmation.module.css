@@ -13,7 +13,7 @@
   color: white;
 }
 
-.deletion > h2 {
+.deletion>h2 {
   text-align: center;
   color: black;
   font-weight: 900;
@@ -52,10 +52,32 @@
   align-self: center;
   font-weight: bold;
 }
-.btn_delete {
-}
+
+.btn_delete {}
 
 .btn_delete:hover {
   color: black;
   background: linear-gradient(90deg, #fd1515, #f54c4c);
+}
+
+
+@media only screen and (min-width : 369px) and (max-width : 500px) {
+.container{
+  font-size: 1rem;
+}
+.container>h1 {
+  margin-top: 1rem;
+}
+.container >span{
+  margin-left: 4rem;
+  scale: 1.2;
+}
+.p {
+  font-size: 1.5rem;
+  
+}
+
+.button {
+  font-size: 1.5rem;
+}
 }

@@ -11,18 +11,15 @@
   border: solid 0.5px #ffffff;
   border-radius: 0.2rem;
   cursor: pointer;
-  z-index: 1000 ;
+  z-index: 1000;
 }
+
 .user_list {
   list-style-type: none;
 }
 
-.head {
-  display: flex;
-  gap: 0.5rem;
-  border-bottom: solid 1px #ff9b05;
-  padding: 1rem;
-}
+
+
 .head_log {
   padding: 0.5rem;
   background-color: #ffffff;
@@ -44,6 +41,7 @@
   align-self: center;
   gap: 0.2rem;
 }
+
 .head_inf p {
   color: #ddd6cb;
   font-size: 0.7rem;
@@ -55,4 +53,25 @@
   gap: 1rem;
   padding: 1.2rem;
   font-weight: bold;
+}
+
+@media only screen and (min-width : 369px) and (max-width : 500px) {
+  .head {
+    margin-top: 6rem;
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: solid 1px #ff9b05;
+    padding: 1rem;
+  }
+
+  .head_inf {
+    font-size: 1.2rem;
+  }
+
+  .body_inf {
+    color: rgb(97, 97, 97);
+    ;
+    font-size: 1.2rem;
+    padding-left: 4.3rem;
+  }
 }

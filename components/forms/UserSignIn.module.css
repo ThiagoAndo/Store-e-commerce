@@ -71,8 +71,8 @@
 
 @media only screen and (min-width : 369px) and (max-width : 500px) {
   .container {
-    margin-top: 13rem;
       width: 84%;
+    margin-top: -7rem;
     
     }
 

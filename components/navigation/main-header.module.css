@@ -10,24 +10,25 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   list-style: none;
 }
 
 .search {
-  margin-left: 10px;
   width: 21rem;
   max-height: 5rem;
   z-index: 10;
+  margin-right: 2rem;
 }
 
 .icon_container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
   width: 12rem;
+  gap: 3rem;
 }
 
 .cart_effec {
@@ -71,11 +72,21 @@
   fill: #ffffff;
 }
 
+.cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: fit-content;
+}
+
 .link {
+  display: flex;
+  flex-direction: row;
   text-decoration: none;
   color: #fffafa;
   font-size: 3rem;
   font-weight: bold;
+  width: 15rem
 }
 
 .bump {
@@ -116,51 +127,78 @@
 
 @media only screen and (min-width : 369px) and (max-width : 500px) {
   .header {
-    display: flex;
-    flex-wrap: wrap;
     height: fit-content;
     position: relative;
     position: fixed;
     top: 0;
+    width: 100%;
+  }
+
+
+  .navigation {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .cont {
+    width: 18rem;
   }
 
   .link {
     text-decoration: none;
     color: #fffafa;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
-    margin-left: 80px;
+    padding-left: 5.5rem;
+    width: 100%;
+
   }
 
-  .no_margin{
-    margin: 0;
+  .no_margin {
+   padding-left: 7rem;
+    width: 20rem;
+  }
+  .no_width{
+    width: 0px;
   }
 
   .icon_container {
-    font-size: .5rem;
-    width: 9rem;
+    width: 5rem;
   }
 
-  .icon_cart {
-    scale: .7;
+  .cart_effec {
+    margin-right: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 0px;
+    height: 75px;
   }
 
   .icon_cart_full {
-    scale: .7;
+    scale: .9;
   }
 
   .icon_user_log {
-    scale: .85;
+    scale: .95;
 
   }
 
   .icon_user {
-    scale: .85;
+    scale: .95;
 
   }
 
   .search {
-    margin-top: .5rem;
+    margin: 1rem 0px .5rem .9rem;
     order: 3;
   }
 

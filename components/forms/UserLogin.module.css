@@ -75,10 +75,12 @@
   .container {
     flex-direction: column;
     height: 105vh;
+    padding: 0;
+    margin-top: -8rem;
+    padding-left: 1rem;
   }
 
   .form {
-    margin-top: 5rem;
     width: 90%;
     max-width: 90%;
   }
@@ -88,5 +90,3 @@
   }
 }
 
-
-@media (min-width : 501px) and (max-width : 1000px) {}
