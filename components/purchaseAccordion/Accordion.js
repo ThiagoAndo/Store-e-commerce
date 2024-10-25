@@ -1,10 +1,9 @@
 import { createContext, useContext, useState } from "react";
-import AccordionItem from "./AccordionItem.jsx";
-import AccordionTitle from "./AccordionTitle.jsx";
-import AccordionContent from "./AccordionContent.jsx";
+import AccordionItem from "./AccordionItem";
+import AccordionTitle from "./AccordionTitle";
+import AccordionContent from "./AccordionContent";
 import classes from "./Accordion.module.css";
 const AccordionContext = createContext();
-
 export function useAccordionContext() {
   const ctx = useContext(AccordionContext);
 

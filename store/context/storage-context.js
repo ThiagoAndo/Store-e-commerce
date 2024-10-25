@@ -1,10 +1,8 @@
 import { createContext, useState, useEffect } from "react";
-
 export const StorageContext = createContext({
   storagePro: [],
   addStorage: function (id) {},
 });
-
 export function StorageContextProvider(props) {
   const [storagePro, setStoragePro] = useState([]);
   

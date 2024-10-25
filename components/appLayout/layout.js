@@ -6,7 +6,6 @@ import Notification from "@/components/ui/notification/notification";
 import NotificationContext from "@/store/context/notification-context";
 import MainHeader from "../navigation/main-header";
 import FilterHeader from "../navigation/filter-nav";
-import NavMobile from "../navigation/nav-mobile";
 import Footer from "../ui/footer/footer";
 import Cart from "../cart/cart";
 import UserMenu from "../userMenu/UserMenu";
@@ -22,7 +21,6 @@ function Layout(props) {
   const isMenu = useSelector((state) => state.user.menuVisible);
   const isConfVisible = useSelector((state) => state.conf.visible);
 
-
   return (
     <Fragment>
       <Head>
@@ -30,12 +28,12 @@ function Layout(props) {
       </Head>
       <AnimatePresence>
         {isVisible && (
-          <Modal cart={isVisible}>
+          <Modal key={0} cart={isVisible}>
             <Cart />
           </Modal>
         )}
         {isConfVisible && (
-          <Modal>
+          <Modal key={1}>
             <ConfBlock />
           </Modal>
         )}

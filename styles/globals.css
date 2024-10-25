@@ -23,7 +23,9 @@ body {
       #ffffff80,
     );
 }
-
+main {
+  min-height: 70vh;
+}
 
 .not-found {
   display: flex;

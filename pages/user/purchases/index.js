@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import { Triangle } from "react-loader-spinner";
 import Mounted from "@/components/purchaseAccordion/AccordionMounted";
-import Anime from "@/components/ui/txtAnime/AnimeComp";
+import Anime from "@/components/ui/animeComp/AnimeComp";
 import { getUserToken } from "@/helpers/functions";
 export function useFetch(get, cartId) {
   const [isFetching, setIsFetching] = useState();
   const [error, setError] = useState();
   const [fetchedData, setFetchedData] = useState();
-
   useEffect(() => {
     async function fetchData() {
       const token = getUserToken();
@@ -35,7 +34,6 @@ export function useFetch(get, cartId) {
       } catch (error) {
         setError({ message: "Failed to fetch user purchases!" });
       }
-
       setIsFetching(false);
     }
 

@@ -1,6 +1,5 @@
 import img from "@/assets/icon-thank-you.svg";
 import Image from "next/image";
-
 const Conf = () => {
   return (
     <section id={"finishd"} class={"grid_month addOn"}>

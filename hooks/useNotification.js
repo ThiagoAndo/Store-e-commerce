@@ -1,6 +1,5 @@
 import NotificationContext from "@/store/context/notification-context";
 import { useContext } from "react";
-
 export function useNotification() {
   const notificationCtx = useContext(NotificationContext);
   const hadleNotification = (

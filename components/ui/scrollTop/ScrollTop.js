@@ -1,16 +1,12 @@
 import { motion } from "framer-motion";
 import classes from "./ScrollTop.module.css"
 export default function ScrollBtn() {
-
   const handleBtn = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
-
-
-
   return (
     <motion.button
       className={classes.up_btn}

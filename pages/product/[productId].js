@@ -1,8 +1,7 @@
 import ProductDetail from "@/components/product/product-detail";
 import { getAllProducts } from "@/helpers/fetchProducts";
-import { useContext, useEffect, useState, useCallback } from "react";
+import { useContext } from "react";
 import { ProductContext } from "@/store/context/products-context";
-
 function DetailedProduct(props) {
   const store = useContext(ProductContext);
   const id = props.selectedEvent;
@@ -10,7 +9,6 @@ function DetailedProduct(props) {
 }
 export async function getStaticProps(context) {
   let eventId = context.params.productId;
-
   return {
     props: {
       selectedEvent: eventId,
@@ -20,7 +18,6 @@ export async function getStaticProps(context) {
 }
 export async function getStaticPaths() {
   const data = await getAllProducts();
-
   const paths = data.products.map((product) => ({
     params: { productId: product.id },
   }));

@@ -15,21 +15,18 @@ export function useInputAnimation() {
       { type: "spring", duration: 0.2 }
     );
   }
-
   function handleEmpty({ label, input }) {
     animate(
       "#" + input,
       { x: [-15, 0, 15, 0], borderColor: "#FA8072" },
       { duration: 0.2, delay: stagger(0.05) }
     );
-
     animate(
       "#" + label,
       { color: ["#FA8072", "#f84a36", "#FA8072"], fontWeight:[400,700,400 ] },
       { duration: 0.3, delay: stagger(0.05) }
     );
   }
-
   return {
     focus: handleFocus,
     empty: handleEmpty,

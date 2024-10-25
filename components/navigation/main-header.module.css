@@ -3,7 +3,7 @@
   padding: 1rem 5%;
   height: fit-content;
   background: linear-gradient(90deg, #202020, #25200f);
-  z-index: 1000;
+  z-index: 5000;
 }
 
 .navigation {

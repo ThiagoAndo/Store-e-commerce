@@ -5,6 +5,8 @@
   background: linear-gradient(90deg, #ffffff, #dbdbdb41);
   border-radius: 8px;
   box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
 }
 
 .action {
@@ -15,7 +17,8 @@
   border-bottom: solid black 1px;
   margin-bottom: 2rem;
 }
-.action > a {
+
+.action>a {
   cursor: pointer;
   margin-right: 3px;
   font-size: 1rem;
@@ -54,8 +57,7 @@
 }
 
 .button {
-  width: 100%;
-  margin: auto;
+  width: 60%;
   height: 3rem;
   padding: 0.5rem 1rem;
   font-size: 1.3rem;
@@ -65,15 +67,24 @@
   box-shadow: 0 0 12px rgba(242, 100, 18, 0.8);
   color: #d9e2f1;
   cursor: pointer;
-  margin: 2rem 0 1rem 0;
+  margin: 2rem 5rem 0px;
 }
 
 
 @media only screen and (min-width : 369px) and (max-width : 500px) {
   .container {
-      width: 84%;
+    width: 84%;
     margin-top: -7rem;
-    
-    }
-
+  }
+  .action>a {
+    cursor: pointer;
+    margin-right: 0;
+    font-size: .8rem;
+    margin-left: 2rem;
+    text-decoration: none;
+  }
+  .button {
+    width: 70%;
+    margin: 2rem 2rem 0px;
+  }
 }

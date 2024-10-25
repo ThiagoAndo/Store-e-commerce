@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { inpuReg } from "@/components/ui/formInput/inputInfo";
-
 import useForm from "@/hooks/useForm";
 import Button from "../ui/button/btn";
 import Input from "../ui/formInput/input";

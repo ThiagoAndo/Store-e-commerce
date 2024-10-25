@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 const confSlice = createSlice({
   name: "conf",
   initialState: {

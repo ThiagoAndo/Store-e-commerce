@@ -3,7 +3,6 @@ import "keen-slider/keen-slider.min.css";
 import Image from "next/image";
 import { useState } from "react";
 // Style of this component is on global.css
-
 function ThumbnailPlugin(mainRef) {
   return (slider) => {
     function removeActive() {

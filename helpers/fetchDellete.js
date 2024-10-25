@@ -1,11 +1,10 @@
 import { getUserToken } from "./functions";
-
 const fetchDelete = async () => {
   const token = getUserToken();
   const id = localStorage.getItem("id");
   try {
     let response = await fetch(
-      // `http://localhost:8080/cart`,
+      // `http://localhost:8080/user`,
       `https://api-store-pj2y.onrender.com/user`,
       {
         method: "DELETE",

@@ -1,15 +1,11 @@
 import { useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-
 import classes from "./notification.module.css";
 import NotificationContext from "../../../store/context/notification-context";
-
 function Notification(props) {
   const notificationCtx = useContext(NotificationContext);
   const { title, message, status } = props;
-
   let statusClasses = "";
-
   if (status === "success") {
     statusClasses = classes.success;
   }
@@ -21,9 +17,7 @@ function Notification(props) {
   if (status === "pending") {
     statusClasses = classes.pending;
   }
-
   const activeClasses = `${classes.notification} ${statusClasses}`;
-
   return (
     <AnimatePresence>
       <motion.div

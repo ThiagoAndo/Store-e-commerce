@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { StarRatingDiv } from "./StarRatingStyles";
 import star from "@/assets/star.svg";
 import Image from "next/image";
-
 export default function StarRating({ props }) {
   const [rating, setRating] = useState();
   const [hover, setHover] = useState();

@@ -6,7 +6,6 @@ import { setStorage, setAdd } from "@/helpers/functions";
 import { fetchCartData } from "@/helpers/cart-actions";
 import { useDispatch } from "react-redux";
 import { deleteCartData, sendCartData } from "@/helpers/cart-actions";
-
 function Login() {
   const [feedback, setFeedback] = useState("");
   const notificationCtx = useContext(NotificationContext);

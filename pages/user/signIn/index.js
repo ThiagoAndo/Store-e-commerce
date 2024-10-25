@@ -4,12 +4,10 @@ import { signIn } from "next-auth/react";
 import { setStorage } from "../../../helpers/functions";
 import { useNotification } from "@/hooks/useNotification";
 import UserSignIn from "@/components/forms/UserSignIn";
-
 function SignIn() {
   const [isOrdering, setIsOrdering] = useState(null);
   const { notification } = useNotification();
   const router = useRouter();
-
   function handleGuest() {
     localStorage.setItem("guest", "guest");
     router.replace("/checkout");
@@ -29,7 +27,6 @@ function SignIn() {
           },
         }
       );
-
       if (response.ok) {
         data = await response.json();
         if (data.hasOwnProperty("message")) {

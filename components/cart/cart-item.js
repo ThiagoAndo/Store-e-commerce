@@ -51,39 +51,42 @@ const CartItem = ({ title, amount, price, id, isShow }) => {
   };
   return (
     prt && (
-      <motion.li
-        layout
-        exit={{ y: -30, opacity: 0 }}
-        className={classes.cart_item}
-      >
-        <div>
-          <div className={classes.summary}>
-            <Image
-              src={prt.thumbnail}
-              alt={prt.title}
-              height={70}
-              width={110}
-            />
-            <div>
-              <h3>{title}</h3>
-              <span className={classes.price}>{formatValue(price)}</span>
+      <>
+        <h3 className={classes.title}>{title}</h3>
+        <motion.li
+          key={title}
+          layout
+          exit={{ y: -30, opacity: 0 }}
+          className={classes.cart_item}
+        >
+          <div>
+            <div className={classes.summary}>
+              <Image
+                src={prt.thumbnail}
+                alt={prt.title}
+                height={70}
+                width={110}
+              />
+              <div>
+                <span className={classes.price}>{formatValue(price)}</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div className={classes.actions}>
-          {isShow && (
-            <Button style={classes.button} click={removeItemHandler}>
-              {btnDisplay}
-            </Button>
-          )}
-          <button className={classes.amount}>x {amount}</button>
-          {isShow && (
-            <Button style={classes.button} click={addItemHandler}>
-              +
-            </Button>
-          )}
-        </div>
-      </motion.li>
+          <div className={classes.actions}>
+            {isShow && (
+              <Button style={classes.button} click={removeItemHandler}>
+                {btnDisplay}
+              </Button>
+            )}
+            <button className={classes.amount}>x {amount}</button>
+            {isShow && (
+              <Button style={classes.button} click={addItemHandler}>
+                +
+              </Button>
+            )}
+          </div>
+        </motion.li>
+      </>
     )
   );
 };

@@ -10,7 +10,6 @@ import { cartActions } from "@/store/redux/cart-slice";
 import { logoutHandler } from "@/helpers/functions";
 import { userActions } from "@/store/redux/user.slice";
 import useMediaScreen from "@/hooks/useMediaScreen";
-
 function UserMenu() {
   return (
     <motion.div
@@ -63,11 +62,11 @@ export function Menu({ toggle }) {
   async function logout() {
     logoutHandler();
   }
-
+ let countKey =0;
   const MenuOpt = ({ children, action, isDelete = false }) => {
     return (
       <motion.p
-        key={0}
+        key={countKey ++}
         whileHover={isDelete ? { color: "#FA8072" } : { color: "#ff9b05" }}
         onClick={() => {
           size && toggle();
