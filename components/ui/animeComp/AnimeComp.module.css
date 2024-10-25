@@ -7,13 +7,16 @@
   list-style: none;
   height: 70vh;
 }
+
 .msn {
   color: black;
 }
+
 .delete {
   color: #000000;
   height: 10vh;
 }
+
 .text {
   font-family: "Orbitron", sans-serif;
   font-optical-sizing: auto;
@@ -49,7 +52,7 @@
 
 
 @media only screen and (min-width : 369px) and (max-width : 500px) {
-.text {
+  .text {
     font-family: "Orbitron", sans-serif;
     font-optical-sizing: auto;
     font-weight: 900;
@@ -57,5 +60,7 @@
     font-size: 1.7rem;
   }
 
-    
+  .button {
+    width: 65%;
+  }
 }

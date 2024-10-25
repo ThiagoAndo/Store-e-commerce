@@ -1,11 +1,9 @@
 import { signOut } from "next-auth/react";
-
 export function getCurrentDate() {
   const date = new Date();
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
-
   let currentDate = `${Number(day) < 10 ? 0 : ""}${day}-${
     Number(month) < 10 ? 0 : ""
   }${month}-${year}h${new String(new Date(Date.now()))
@@ -14,7 +12,6 @@ export function getCurrentDate() {
 
   return currentDate;
 }
-
 export function isEmailValid(email) {
   let match = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   if (email.match(match)) {
@@ -23,7 +20,6 @@ export function isEmailValid(email) {
     return false;
   }
 }
-
 export function isNameValid(name) {
   let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
   if (!regName.test(name)) {
@@ -32,7 +28,6 @@ export function isNameValid(name) {
     return true;
   }
 }
-
 export function isPasswordValid(password) {
   if (password.trim().length >= 8) {
     return true;
@@ -40,14 +35,12 @@ export function isPasswordValid(password) {
     return false;
   }
 }
-
 export function formatValue(value) {
   return new Intl.NumberFormat("de-DE", {
     style: "currency",
     currency: "EUR",
   }).format(value);
 }
-
 export function setStorage(data, call = null) {
   localStorage.setItem("id", data.id);
   localStorage.setItem("email", data.email_address);
@@ -55,18 +48,15 @@ export function setStorage(data, call = null) {
   localStorage.setItem("last", data.last_name);
   if (call === null) localStorage.setItem("token", data.token);
 }
-
 export function getUserToken() {
   return localStorage.getItem("token");
 }
-
 export async function setAdd(id) {
   try {
     let response = await fetch(
       // `http://localhost:8080/add/${id}`
       `https://api-store-pj2y.onrender.com/add/${id}`
     );
-
     if (response.ok) {
       const [resp] = await response.json();
       if (!response?.message) {
@@ -78,7 +68,6 @@ export async function setAdd(id) {
     return { error: "Connecting to the database failed!" };
   }
 }
-
 export async function deleteUser() {
   const token = getUserToken();
   const id = localStorage.getItem(id);
@@ -100,14 +89,12 @@ export async function deleteUser() {
     return { error: "Connecting to the database failed!" };
   }
 }
-
 export function adrStorage(resp) {
   localStorage.setItem("line_one", resp.line_one);
   localStorage.setItem("line_two", resp.line_two);
   localStorage.setItem("town_city", resp.town_city);
   localStorage.setItem("constry_state", resp.constry_state);
 }
-
 export function gatherData(e) {
   let entries = [];
   const fd = new FormData(e.target);
@@ -120,7 +107,6 @@ export function gatherData(e) {
     data,
   };
 }
-
 export function getStorageUser() {
   return {
     user: [
@@ -136,7 +122,6 @@ export function getStorageUser() {
     ],
   };
 }
-
 export async function logoutHandler() {
   let myPromise = new Promise(function (myResolve, myReject) {
     localStorage.clear();
@@ -149,7 +134,6 @@ export async function logoutHandler() {
     }
   });
   const resolve = await myPromise;
-
   if (resolve === "OK") {
     signOut({
       callbackUrl:

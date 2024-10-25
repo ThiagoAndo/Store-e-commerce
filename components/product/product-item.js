@@ -2,15 +2,12 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import classes from "./product-item.module.css";
 import Button from "../ui/button/btn";
-
 export default function ProductItem({ title, brand, thumbnail, id }) {
   const link = `product/${id}`;
   const router = useRouter();
-
   function handleClick() {
     router.replace(link);
   }
-
   return (
     <article className={classes.product}>
       <header>

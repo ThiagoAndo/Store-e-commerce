@@ -5,13 +5,13 @@ import { useRouter } from "next/router";
 import ConIcon from "../ui/confirmation/conf-icon";
 import Button from "../ui/button/btn";
 import classes from "./confirmation.module.css";
-import Anime from "../ui/txtAnime/AnimeComp";
+import Anime from "../ui/animeComp/AnimeComp";
 import fetchDelete from "@/helpers/fetchDellete";
 import { logoutHandler } from "@/helpers/functions";
 
 const PurchaseConf = function PurchaseConf() {
   const dispatch = useDispatch();
-  const router = useRouter( );
+  const router = useRouter();
   const handleClick = () => {
     dispatch(confActions.toggle());
     dispatch(cartActions.removeAll());

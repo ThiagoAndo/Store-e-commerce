@@ -31,15 +31,12 @@ export default function useForm() {
         signin: false,
       };
     }
-
     const { entries, data } = gatherData(e);
-
     let index = 0;
     let checkEmpty = 0;
     function confEmpty(passed, i, len) {
       const thiI = i || 0;
       const thisLeng = len || entries.length;
-
       entries.slice(thiI, thisLeng).map(() => {
         focus({
           target: {
@@ -84,7 +81,6 @@ export default function useForm() {
           : [...fieldChekout.slice(0, [fieldChekout.length - 2])]
       );
     }
-
     if (checkEmpty > 0) {
       if (isCheck || isProfile[0]) {
         notification(null, "Empty Fields:", `FILL IN THE FORM`, "error");
@@ -96,7 +92,6 @@ export default function useForm() {
         prof: false,
       };
     }
-
     if (isSignin || isCheck || isProfile[0]) {
       const first = entries[0][0].toUpperCase() + entries[0].slice(1);
       const last = entries[1][0].toUpperCase() + entries[1].slice(1);

@@ -7,7 +7,6 @@ import ProductInfo from "./product-info";
 import classes from "./product-detail.module.css";
 import { getProductById } from "@/helpers/fetchProducts";
 import { getAllProducts } from "@/helpers/fetchProducts";
-
 const ProductDetail = ({ id }) => {
   const [product, setProduct] = useState([]);
   const store = useContext(ProductContext);

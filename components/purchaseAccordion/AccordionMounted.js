@@ -1,9 +1,7 @@
-import { useRouter } from "next/router.js";
 import { motion } from "framer-motion";
-import { formatValue } from "@/helpers/functions.js";
-import Accordion from "./Accordion.jsx";
+import { formatValue } from "@/helpers/functions";
+import Accordion from "./Accordion";
 import classes from "./Accordion.module.css";
-
 function Mounted({ data }) {
   return (
     <motion.article

@@ -9,6 +9,8 @@
 .li_action {
   display: flex;
   justify-content: space-between;
+  padding: 0 .3rem .5rem .3rem;
+  border-bottom: solid black 1px;
 }
 .li_action > button {
   color: #ff9b05;

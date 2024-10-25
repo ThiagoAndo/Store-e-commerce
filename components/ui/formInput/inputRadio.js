@@ -1,5 +1,4 @@
 import style from "./inputRadio.module.css";
-
 function Radio({ id, lab, onChoice, check, name }) {
   return (
     <div

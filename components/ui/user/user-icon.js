@@ -1,8 +1,6 @@
 import { useSession } from "next-auth/react";
-
 const UserIcon = ({}) => {
   const { data: session } = useSession();
-
   if (session) {
     return (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">

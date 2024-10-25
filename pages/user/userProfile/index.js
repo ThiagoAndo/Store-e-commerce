@@ -9,7 +9,6 @@ import UserCheckOut from "@/components/forms/UserCheckout";
 import { getUserToken } from "@/helpers/functions";
 import { useRouter } from "next/router";
 import { setStorage, adrStorage } from "@/helpers/functions";
-
 const inpCheck = [inpuReg[0], inpuReg[1], inpuReg[2]];
 function ChangeData() {
   const { notification } = useNotification();
@@ -85,7 +84,6 @@ function ChangeData() {
           );
           return;
         }
-
         if (index === httpCAll.length - 1) {
           notification(
             null,
@@ -102,7 +100,6 @@ function ChangeData() {
       }
     });
   }
-
   return (
     <UserCheckOut
       handleSubmit={handleCheck}

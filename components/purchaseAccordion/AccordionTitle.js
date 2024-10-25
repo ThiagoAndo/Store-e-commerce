@@ -1,9 +1,9 @@
-import { useAccordionContext } from "./Accordion.jsx";
-import { useAccordionItemContext } from "./AccordionItem.jsx";
+import { useAccordionContext } from "./Accordion";
+import { useAccordionItemContext } from "./AccordionItem";
 import { motion } from "framer-motion";
 import classes from "./Accordion.module.css";
-
 export default function AccordionTitle({ className, date, hour, total }) {
+ date =  date.replaceAll("-","/")
   const { toggleItem, openItemId } = useAccordionContext();
   const id = useAccordionItemContext();
   const isOpen = openItemId === id;

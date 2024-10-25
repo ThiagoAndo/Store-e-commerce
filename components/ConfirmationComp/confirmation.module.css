@@ -62,26 +62,32 @@
 
 
 @media only screen and (min-width : 369px) and (max-width : 500px) {
-.container{
-  font-size: 1rem;
+.container {
+  margin: 0;
 }
 .container>h1 {
-  margin-top: 1rem;
+ font-size: 1rem;
 }
 .container >span{
-  margin-left: 4rem;
-  scale: 1.2;
+  scale: .8;
 }
 .deletion>h2 {
  font-size: 1rem;
   font-weight: 900;
 }
 .p {
-  font-size: 1.5rem;
+  font-size: 1rem;
   
 }
 
 .button {
-  font-size: 1rem;
+  font-size: rem;
+}
+
+.btn_conf {
+  height: 3rem;
+  width: 70%;
+  align-self: center;
+  font-weight: bold;
 }
 }

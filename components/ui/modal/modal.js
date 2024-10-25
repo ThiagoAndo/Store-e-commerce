@@ -2,14 +2,11 @@ import { Fragment } from "react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
-import { confActions } from "@/store/redux/conf.slice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import classes from "./Modal.module.css";
-
 const Backdrop = (props) => {
   return <div className={classes.backdrop} onClick={props.onClose} />;
 };
-
 const ModalOverlay = ({ children, cart }) => {
   const msnType = useSelector((state) => state.conf.confType);
   let thisClass = "";

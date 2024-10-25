@@ -1,10 +1,9 @@
 import { motion } from "framer-motion";
-import { useAccordionContext } from "./Accordion.jsx";
-import { useAccordionItemContext } from "./AccordionItem.jsx";
-import { useFetch } from "@/pages/user/purchases/index.js";
+import { useAccordionContext } from "./Accordion";
+import { useAccordionItemContext } from "./AccordionItem";
+import { useFetch } from "@/pages/user/purchases/index";
 import classes from "./Accordion.module.css";
-
-import CartItem from "../cart/cart-item.js";
+import CartItem from "../cart/cart-item";
 export default function AccordionContent({ className, cart }) {
   const { openItemId } = useAccordionContext();
   const id = useAccordionItemContext();

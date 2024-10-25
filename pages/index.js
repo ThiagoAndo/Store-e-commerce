@@ -2,11 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 import ProductGrid from "../components/product/product-grid";
-import Anime from "@/components/ui/txtAnime/AnimeComp";
+import Anime from "@/components/ui/animeComp/AnimeComp";
 import { getAllProducts } from "../helpers/fetchProducts";
 import { ProductContext } from "../store/context/products-context";
 import { getStorageData } from "@/helpers/cart-actions";
-
 function Products(props) {
   const { products } = props;
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -14,24 +13,20 @@ function Products(props) {
   const store = useContext(ProductContext);
   const { data: session } = useSession();
   const dispatch = useDispatch();
-
   const handleScroll = () => {
     const position = window.scrollY;
     setScrollPosition(position);
   };
-
   useEffect(() => {
     if (!products.hasOwnProperty("error")) {
       store.addProducts(products.products, products.images);
     }
   }, [store.addProducts]);
-
   useEffect(() => {
     if (items.length === 0) {
       dispatch(getStorageData());
     }
   }, [session]);
-
   useEffect(() => {
     localStorage.removeItem("order");
     let timer1 = setTimeout(
@@ -41,12 +36,10 @@ function Products(props) {
 
       200
     );
-
     return () => {
       clearTimeout(timer1);
     };
   }, [scrollPosition]);
-
   useEffect(() => {
     let position = localStorage.getItem("position");
     if (!position) {
@@ -63,7 +56,6 @@ function Products(props) {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
   if (!products.hasOwnProperty("error")) {
     return <ProductGrid />;
   } else {

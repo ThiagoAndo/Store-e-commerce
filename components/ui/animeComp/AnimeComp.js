@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import Button from "../button/btn";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-
 function Anime({ message, isError, isMsn, isDelete }) {
   const [showTxt, setShowTxt] = useState(true);
   const [showBtn, setShowBtn] = useState(false);

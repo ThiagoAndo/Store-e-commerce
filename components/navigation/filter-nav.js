@@ -9,7 +9,6 @@ import {
 import ScrollBtn from "../ui/scrollTop/ScrollTop";
 import classes from "./filter-nav.module.css";
 import useMediaScreen from "@/hooks/useMediaScreen";
-
 function FilterHeader() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const { scrollY } = useScroll();

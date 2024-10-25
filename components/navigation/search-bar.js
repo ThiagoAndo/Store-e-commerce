@@ -3,7 +3,6 @@ import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { ProductContext } from "../../store/context/products-context";
 import { useRouter } from "next/router";
 import classes from "./main-header.module.css";
-
 const formatResult = (item) => {
   return (
     <div className="result-wrapper">

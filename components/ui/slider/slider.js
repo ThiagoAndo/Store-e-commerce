@@ -3,10 +3,7 @@ import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-
 import classes from "./slider.module.css";
-
 function ProductSlider({ myproduc }) {
   const [nav1, setNav1] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);

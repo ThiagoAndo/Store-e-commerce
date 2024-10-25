@@ -10,7 +10,6 @@ import { cartActions } from "@/store/redux/cart-slice";
 import { logoutHandler } from "@/helpers/functions";
 import { userActions } from "@/store/redux/user.slice";
 import useMediaScreen from "@/hooks/useMediaScreen";
-
 function UserMenu() {
   return (
     <motion.div

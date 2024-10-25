@@ -14,7 +14,6 @@ import CartIcon from "../ui/cart/cart-icon";
 import useMediaScreen from "@/hooks/useMediaScreen";
 import { useSession } from "next-auth/react";
 import NavMobile from "./nav-mobile";
-
 let stp = false;
 function MainHeader() {
   const currentPath = usePathname();
@@ -117,7 +116,7 @@ function MainHeader() {
               <CartIcon />
             </div>
           </motion.div>
-              {size ? null : <DeskActions />}
+          {size ? null : <DeskActions />}
         </div>
       </nav>
       {size ? <NavMobile /> : null}

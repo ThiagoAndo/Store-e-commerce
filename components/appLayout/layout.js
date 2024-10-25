@@ -6,7 +6,6 @@ import Notification from "@/components/ui/notification/notification";
 import NotificationContext from "@/store/context/notification-context";
 import MainHeader from "../navigation/main-header";
 import FilterHeader from "../navigation/filter-nav";
-import NavMobile from "../navigation/nav-mobile";
 import Footer from "../ui/footer/footer";
 import Cart from "../cart/cart";
 import UserMenu from "../userMenu/UserMenu";

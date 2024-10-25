@@ -5,7 +5,6 @@ import { cartActions } from "@/store/redux/cart-slice";
 import { formatValue } from "@/helpers/functions";
 import { getCurrentDate } from "@/helpers/functions";
 import { useSession } from "next-auth/react";
-
 import StarRating from "../ui/rating/StarRating";
 import classes from "./product-info.module.css";
 function ProductInfo({ props }) {

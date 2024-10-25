@@ -1,19 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 const record = (items, totalQuantity) => {
   localStorage.setItem("cart", JSON.stringify(items));
   localStorage.setItem("qnt", JSON.stringify(totalQuantity));
 };
-
 const some = (items) =>
   items.reduce(
     (accumulator, item) => accumulator + item.price * item.quantity,
     0
   );
-
 const totalQnt = (items) =>
   items.reduce((accumulator, item) => accumulator + item.quantity, 0);
-
 const cartSlice = createSlice({
   name: "cart",
   initialState: {

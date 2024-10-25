@@ -6,7 +6,6 @@ import { useRef } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 // Style of this component is on global.css
-
 export default function NavMobile() {
   const { data: session } = useSession();
 

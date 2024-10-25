@@ -1,5 +1,4 @@
 import { getUserToken } from "./functions";
-
 const fetchDelete = async () => {
   const token = getUserToken();
   const id = localStorage.getItem("id");

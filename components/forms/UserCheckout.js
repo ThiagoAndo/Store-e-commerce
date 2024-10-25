@@ -3,8 +3,7 @@ import { motion } from "framer-motion";
 import Radio from "../ui/formInput/inputRadio";
 import Cart from "../cart/cart";
 import Input from "../ui/formInput/input";
-import style from "./UserSignIn.module.css";
-import style_2 from "./UserCheckout.module.css";
+import style from "./UserCheckout.module.css";
 import useForm from "@/hooks/useForm";
 import Button from "../ui/button/btn";
 import { inpuReg } from "@/components/ui/formInput/inputInfo";
@@ -78,12 +77,12 @@ function UserCheckOut({
   }, [setUSer]);
   return (
     <motion.div
-      className={checkout === true ? style_2.check_pag : style_2.userData}
+      className={checkout === true ? style.check_pag : style.userData}
       initial={{ y: 200, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, type: "spring" }}
     >
-      <div className={style_2.container}>
+      <div className={style.container}>
         <form
           onSubmit={handleThisSubmit}
           ref={scope}
@@ -97,7 +96,7 @@ function UserCheckOut({
           <p> {checkout === true ? "BILLING DETAILS" : "ENTER DETAILS"}</p>
           <div
             className={
-              checkout === true ? style_2.detail : style_2.detail_profile
+              checkout === true ? style.detail : style.detail_profile
             }
           >
             {inpCheck.map((inp, i) => (
@@ -112,7 +111,7 @@ function UserCheckOut({
             ))}
           </div>
           <p> {checkout === true ? "SHIPPING INFO" : "ENTER ADDRESS"}</p>
-          <div className={style_2.shipping}>
+          <div className={style.shipping}>
             {inpuShip.map((inp, i) => (
               <Input
                 key={inp.id}
@@ -127,7 +126,7 @@ function UserCheckOut({
           {checkout && (
             <>
               <p>PAYMENT DETAILS </p>
-              <div className={style_2.payment}>
+              <div className={style.payment}>
                 <p>Payment Method </p>
                 <Radio
                   id={"e-money"}
@@ -161,7 +160,7 @@ function UserCheckOut({
         </form>
       </div>
       {cartItems.length > 0 && checkout && (
-        <div className={style_2.summary}>
+        <div className={style.summary}>
           <Cart cart={false} />
         </div>
       )}

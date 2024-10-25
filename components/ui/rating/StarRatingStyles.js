@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import star from "@/assets/star.svg";
-
 export const StarRatingDiv = styled.div`
   .starWrapper {
     filter: drop-shadow(0px 0px 1px gray);
@@ -27,4 +25,3 @@ export const StarRatingDiv = styled.div`
     display: none;
   }
 `;
-// background: url(${star});
