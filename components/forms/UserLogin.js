@@ -8,11 +8,16 @@ import useForm from "@/hooks/useForm";
 import Input from "../ui/formInput/input";
 import Button from "../ui/button/btn";
 import style from "./UserLogin.module.css";
+import useMediaScreen from "@/hooks/useMediaScreen";
+
 function UserLogin({ handling, LoginBack }) {
   const { scope, focus, getEvent } = useForm();
   const { notification } = useNotification();
   const { data: session } = useSession();
   const router = useRouter();
+  let { match: size } = useMediaScreen(
+    "only screen and (min-width : 369px) and (max-width : 500px)"
+  );
   const fields = [];
   fields.push(inpuReg[2]);
   fields.push(inpuReg[3]);
@@ -71,26 +76,33 @@ function UserLogin({ handling, LoginBack }) {
               ))}
             </div>
             <Button style={style.button}>Sign in Securely </Button>
+            {size && (
+              <Button click={handleClick} style={style.button}>
+                New user
+              </Button>
+            )}
           </motion.form>
-          <motion.form
-            key={4}
-            initial={{ x: 15, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6, type: "spring" }}
-            className={style.form}
-          >
-            <p className={style.paragraph}>New User?</p>
-            <div className={style.cont_container}>
-              <h3>✔ Receive special offers and promotions.</h3>
-              <h3>✔ Speed your way through checkout.</h3>
-              <h3>✔ View your order history and your current addresses.</h3>
-              <h3>✔ Access your saved items. </h3>
-              <h3>✔ Instant access to your account.</h3>
-            </div>
-            <Button click={handleClick} style={style.button}>
-              Sign up
-            </Button>
-          </motion.form>
+          {!size && (
+            <motion.form
+              key={4}
+              initial={{ x: 15, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.6, type: "spring" }}
+              className={style.form}
+            >
+              <p className={style.paragraph}>New User?</p>
+              <div className={style.cont_container}>
+                <h3>✔ Receive special offers and promotions.</h3>
+                <h3>✔ Speed your way through checkout.</h3>
+                <h3>✔ View your order history and your current addresses.</h3>
+                <h3>✔ Access your saved items. </h3>
+                <h3>✔ Instant access to your account.</h3>
+              </div>
+              <Button click={handleClick} style={style.button}>
+                Sign up
+              </Button>
+            </motion.form>
+          )}
         </div>
       </AnimatePresence>
     </>

@@ -6,6 +6,8 @@ import DetailSlider from "./product-slider";
 import ProductInfo from "./product-info";
 import classes from "./product-detail.module.css";
 import { getProductById } from "@/helpers/fetchProducts";
+import { getAllProducts } from "@/helpers/fetchProducts";
+
 const ProductDetail = ({ id }) => {
   const [product, setProduct] = useState([]);
   const store = useContext(ProductContext);
@@ -16,9 +18,11 @@ const ProductDetail = ({ id }) => {
         setProduct(store.getProFiltered(id));
       } else {
         const pro = await getProductById(id);
+        const product = await getAllProducts();
         if (pro?.images) {
           store.addProducts(pro.products, pro.images);
           setProduct(store.products);
+          store.addProducts(product.products, product.images);
         } else {
           setProduct("wrong id");
         }
@@ -26,7 +30,6 @@ const ProductDetail = ({ id }) => {
     },
     [id, store]
   );
-
 
   useEffect(() => {
     print();

@@ -119,14 +119,15 @@ input[type=number] {
 label[for="ham-menu"] {
   display: block;
   position: fixed;
-  top: 25px;
-  left: 20px;
+  top: 5px;
+  left: 5px;
   z-index: 2000;
   width: 60px;
   height: 60px;
   background-color: #808080;
   border-radius: 15px;
-  border: 2px solid black
+  border: 2px solid black;
+  scale: .8;
 }
 
 .ham-menu {
@@ -159,12 +160,13 @@ label[for="ham-menu"] {
   margin-top: 6rem;
   height: 20%;
   width: 100%;
+  margin-bottom: 3rem;
 }
 
 
 .ham-menu>.account>a {
   padding-left: 3rem;
-  padding-top: 3rem;
+  padding-top: 2rem;
   list-style: none;
   font-size: 2rem;
   white-space: nowrap;
@@ -188,6 +190,7 @@ label[for="ham-menu"] {
 
 .ham-menu>.filter>li {
   padding-left: 3rem;
+  padding-top: 2rem;
   list-style: none;
   font-size: 1.2rem;
   white-space: nowrap;

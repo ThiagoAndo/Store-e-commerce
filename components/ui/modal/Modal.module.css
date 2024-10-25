@@ -52,7 +52,9 @@
     left: 10%;
     width: 80%;
   }
-
+.backdrop {
+  height: 220vh;
+}
 }
 
 @media (min-width : 501px) and (max-width : 1000px) {
@@ -64,5 +66,7 @@
     width: 40%;
   }
 
-
+.backdrop {
+  height: 220vh;
+}
 }
