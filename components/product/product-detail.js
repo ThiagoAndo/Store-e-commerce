@@ -1,17 +1,36 @@
 import React from "react";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import { ProductContext } from "@/store/context/products-context";
 import Link from "next/link";
 import DetailSlider from "./product-slider";
 import ProductInfo from "./product-info";
 import classes from "./product-detail.module.css";
-
+import { getProductById } from "@/helpers/fetchProducts";
 const ProductDetail = ({ id }) => {
   const [product, setProduct] = useState([]);
   const store = useContext(ProductContext);
+
+  const print = useCallback(
+    async function print() {
+      if (store.products.length >= 1) {
+        setProduct(store.getProFiltered(id));
+      } else {
+        const pro = await getProductById(id);
+        if (pro?.images) {
+          store.addProducts(pro.products, pro.images);
+          setProduct(store.products);
+        } else {
+          setProduct("wrong id");
+        }
+      }
+    },
+    [id, store]
+  );
+
+
   useEffect(() => {
-    setProduct(store.getProFiltered(id));
-  }, []);
+    print();
+  }, [print]);
 
   if (product.length === 1) {
     const [produc] = product;
@@ -29,7 +48,7 @@ const ProductDetail = ({ id }) => {
         <div className={classes.display}></div>
       </div>
     );
-  } else {
+  } else if (product == "wrong id") {
     return (
       <div className="not-found">
         <h1>Ooops...</h1>

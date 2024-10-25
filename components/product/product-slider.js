@@ -64,7 +64,7 @@ export default function DetailSlider({ img }) {
               src={i.image}
               alt={"Product image"}
               priority={true}
-              onLoadingComplete={() =>{
+              onLoad={() =>{
                 if(idx === 2 || idx ===img.length-1)setLoading(false) ;
               }
               }

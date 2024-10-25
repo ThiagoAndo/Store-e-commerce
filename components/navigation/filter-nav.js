@@ -46,9 +46,7 @@ function FilterHeader() {
   };
   return (
     <AnimatePresence>
-      {size === true ? (
-        null
-      ) : (
+      {size === true ? null : (
         <motion.nav
           className={
             scrollPosition >= 121
@@ -67,51 +65,17 @@ function FilterHeader() {
           transition={{ duration: 0.3, type: "spring" }}
         >
           <motion.ul className={classes.navigation} style={{ width: navWidth }}>
-            <li>
-              <MenuBtn
-                action={() => {
-                  handleClick(1);
-                }}
-              >
-                Men
-              </MenuBtn>
-            </li>
-            <li>
-              <MenuBtn
-                action={() => {
-                  handleClick(2);
-                }}
-              >
-                Women
-              </MenuBtn>
-            </li>
-            <li>
-              <MenuBtn
-                action={() => {
-                  handleClick(3);
-                }}
-              >
-                Home
-              </MenuBtn>
-            </li>
-            <li>
-              <MenuBtn
-                action={() => {
-                  handleClick(4);
-                }}
-              >
-                Self care
-              </MenuBtn>
-            </li>
-            <li>
-              <MenuBtn
-                action={() => {
-                  handleClick(5);
-                }}
-              >
-                Electronics
-              </MenuBtn>
-            </li>
+            {["Men", "Women", "Home", "Self care", "Electronics"].map((btn,i) => (
+              <li key={btn}>
+                <MenuBtn
+                  action={() => {
+                    handleClick(i+1);
+                  }}
+                >
+                 {btn}
+                </MenuBtn>
+              </li>
+            ))}
           </motion.ul>
         </motion.nav>
       )}

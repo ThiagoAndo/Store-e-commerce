@@ -16,15 +16,21 @@
     justify-content: space-between;
 }
 .headerText h2 {
-    margin: 0;
+    margin: 1rem 0 !important;
     color: #ffffff;
 
 }
 .headerText > p:first-of-type {
-    margin-top: 0.5rem;
+    margin: 1rem 0;
     font-size: 1rem;
     color: #ffffff;
+    font-style: italic;
 }
+
+ .description >p:first-of-type{
+    color: #f9b241;
+    margin-bottom: .5rem;
+ }
 .headerText div {
     margin-bottom: 2rem;
 }

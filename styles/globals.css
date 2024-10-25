@@ -24,13 +24,15 @@ body {
     );
 }
 
+
 .not-found {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin-top: 7rem;
+  margin: 7rem auto;
   text-align: center;
   height: 10rem;
+  width: 80%;
 }
 
 .not-found a {
@@ -290,8 +292,6 @@ label[for="ham-menu"] {
     min-height: fit-content;
 
   }
-
-
 
 .slider-cont{
   width:350px;

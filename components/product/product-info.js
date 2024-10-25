@@ -58,9 +58,9 @@ function ProductInfo({ props }) {
   return (
     <article className={classes.product}>
       <div className={classes.headerText}>
-        <p>{brand}</p>
+        <p>Brand: {brand}</p>
         <h2>{title}</h2>
-        <div>
+        <div className={classes.description}>
           <p>Description</p>
           <p>{description}</p>
         </div>

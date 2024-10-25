@@ -38,7 +38,9 @@ export default function ProductsContextProvider({ children }) {
       prt.images = images.filter((img) => prt.id === img.item_id);
       return prt;
     });
+
     if (products.length === 0) setProducts(buildData);
+  
   }
 
   function addTitle() {

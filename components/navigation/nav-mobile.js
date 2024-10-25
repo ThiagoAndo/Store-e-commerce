@@ -9,8 +9,7 @@ import Link from "next/link";
 
 export default function NavMobile() {
   const { data: session } = useSession();
-  console.log(session);
-  console.log("session");
+
   const ref = useRef();
   const store = useContext(ProductContext);
   const path = usePathname();

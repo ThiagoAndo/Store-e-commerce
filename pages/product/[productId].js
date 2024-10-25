@@ -1,6 +1,10 @@
 import ProductDetail from "@/components/product/product-detail";
 import { getAllProducts } from "@/helpers/fetchProducts";
+import { useContext, useEffect, useState, useCallback } from "react";
+import { ProductContext } from "@/store/context/products-context";
+
 function DetailedProduct(props) {
+  const store = useContext(ProductContext);
   const id = props.selectedEvent;
   return <ProductDetail id={id} />;
 }

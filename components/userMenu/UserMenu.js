@@ -8,6 +8,8 @@ import NotificationContext from "@/store/context/notification-context";
 import { getStorageUser } from "@/helpers/functions";
 import { cartActions } from "@/store/redux/cart-slice";
 import { logoutHandler } from "@/helpers/functions";
+import { userActions } from "@/store/redux/user.slice";
+import useMediaScreen from "@/hooks/useMediaScreen";
 
 function UserMenu() {
   return (
@@ -23,6 +25,23 @@ function UserMenu() {
   );
 }
 export function Menu({ toggle }) {
+  const dispatch = useDispatch();
+  const notificationCtx = useContext(NotificationContext);
+  const router = useRouter();
+  const total = useSelector((state) => state.cart.totalQuantity);
+  const { user } = getStorageUser();
+  const userInitials = user[0][0] + "" + user[1][0];
+  let { match: size } = useMediaScreen(
+    "only screen and (min-width : 369px) and (max-width : 500px)"
+  );
+
+  function handleUserMenuVis() {
+    dispatch(userActions.visible());
+  }
+
+  function handleUserMenuHid() {
+    dispatch(userActions.hidden());
+  }
   function handleRoutes(route) {
     router.push(`/user/${route}`);
   }
@@ -51,7 +70,7 @@ export function Menu({ toggle }) {
         key={0}
         whileHover={isDelete ? { color: "#FA8072" } : { color: "#ff9b05" }}
         onClick={() => {
-          toggle();
+          size && toggle();
           action();
         }}
       >
@@ -59,15 +78,13 @@ export function Menu({ toggle }) {
       </motion.p>
     );
   };
-  const dispatch = useDispatch();
-  // onClick={()=>{ setTimeout(()=>{ action()},500)}
-  const notificationCtx = useContext(NotificationContext);
-  const router = useRouter();
-  const total = useSelector((state) => state.cart.totalQuantity);
-  const { user } = getStorageUser();
-  const userInitials = user[0][0] + "" + user[1][0];
+
   return (
-    <ul className={classes.user_list}>
+    <ul
+      className={classes.user_list}
+      onMouseEnter={!size ? handleUserMenuVis : null}
+      onMouseLeave={!size ? handleUserMenuHid : null}
+    >
       <li>
         <div className={classes.head}>
           <div className={classes.head_log}>{userInitials}</div>

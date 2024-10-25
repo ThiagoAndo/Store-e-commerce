@@ -10,5 +10,14 @@
     right: 20px;
     cursor: pointer;
     text-decoration: none;
-    z-index: 1000;
+    z-index: 900;
+}
+
+@media only screen and (min-width : 369px) and (max-width : 500px) {
+
+    .up_btn {
+        top: 550px;
+        height: fit-content;
+    }
+
 }

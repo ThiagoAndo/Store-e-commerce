@@ -49,38 +49,3 @@
     }
 }
 
-@media only screen and (min-width : 369px) and (max-width : 500px) {
-    /* .header {
-        position: fixed;
-        top: 169px;
-        height: 70vh;
-        width: 90%;
-        margin: 0;
-        padding: 0;
-    }
-
-    .fixed {
-        position: fixed;
-        opacity: .5;
-        width: 70%;
-        height: 40vh;
-        margin: -200px 0px;
-        padding: 0;
-    }
-
-    .navigation {
-        width: 70%;
-        height: 40vh;
-        margin: -200px auto 0px 0px;
-        padding: 0;
-        flex-direction: column;
-    }
-
-    .navigation li button {
-        font-size: 1.5rem;
-    } */
-
-
-
-
-}
