@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import Button from "../ui/button/btn";
 import classes from "./cart.module.css";
 import CartItem from "./cart-item";
-const Cart = ({ cart = true , cartData =false}) => {
+const Cart = ({ cart = true }) => {
   const cartItems = useSelector((state) => state.cart.items);
   const cartQnt = useSelector((state) => state.cart.totalQuantity);
   const total = useSelector((state) => state.cart.totalCart);
@@ -28,7 +28,7 @@ const Cart = ({ cart = true , cartData =false}) => {
   function handleRemove() {
     if (session) {
       const user_id = localStorage.getItem("id");
-      deleteCartData(user_id, 0);
+      deleteCartData(user_id);
     }
     dispatch(cartActions.removeAll());
   }

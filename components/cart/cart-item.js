@@ -5,7 +5,7 @@ import { cartActions } from "@/store/redux/cart-slice";
 import { formatValue } from "@/helpers/functions";
 import { motion } from "framer-motion";
 import { useContext } from "react";
-import { deleteCartData, updateCartData } from "@/helpers/cart-actions";
+import { deleteCartItem, updateCartData } from "@/helpers/cart-actions";
 import classes from "./cart-item.module.css";
 import Image from "next/image";
 import Button from "../ui/button/btn";
@@ -26,10 +26,13 @@ const CartItem = ({ title, amount, price, id, isShow }) => {
         updateCartData({
           item_id: id,
           user_id: localStorage.getItem("id"),
-          qnt: (amount -= 1),
+          quantity: (amount -= 1),
         });
       } else {
-        deleteCartData({ item_id: id, user_id: localStorage.getItem("id") }, 1);
+        deleteCartItem({
+          item_id: id,
+          user_id: localStorage.getItem("id"),
+        });
       }
     }
   };
@@ -45,7 +48,7 @@ const CartItem = ({ title, amount, price, id, isShow }) => {
       updateCartData({
         item_id: id,
         user_id: localStorage.getItem("id"),
-        qnt: (amount += 1),
+        quantity: (amount += 1),
       });
     }
   };
@@ -54,6 +57,7 @@ const CartItem = ({ title, amount, price, id, isShow }) => {
       <>
         <h3 className={classes.title}>{title}</h3>
         <motion.li
+          key={title}
           layout
           exit={{ y: -30, opacity: 0 }}
           className={classes.cart_item}

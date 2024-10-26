@@ -56,20 +56,27 @@ function ChangeData() {
 
     httpCAll.forEach(async (e, index) => {
       let data = null;
-      let method = null;
+      let myObj = {};
+      for (const key in e) {
+        if (e.hasOwnProperty(key)) {
+          if (key != "route" && key != "method") {
+            myObj[key] = e[key];
+          }
+        }
+      }
 
       try {
         const token = getUserToken();
         const response = await fetch(
-          // `http://localhost:8080/${e.route}`,
-          `https://api-store-pj2y.onrender.com/${e.route}`,
+          `http://localhost:8080/${e.route}`,
+          // `https://api-store-pj2y.onrender.com/${e.route}`,
           {
             method: e.method,
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + token,
             },
-            body: JSON.stringify({ ...e }),
+            body: JSON.stringify(myObj),
           }
         );
         if (response.ok) {
@@ -92,10 +99,9 @@ function ChangeData() {
             "success"
           );
           route.push("/");
-        } else {
-          notification(null, "Invalid Action:", data.message, "error");
-        }
+        } 
       } catch (error) {
+        notification(null, "Invalid Action:", data.message, "error");
         console.log(error);
       }
     });

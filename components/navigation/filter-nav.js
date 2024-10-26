@@ -47,6 +47,7 @@ function FilterHeader() {
     <AnimatePresence>
       {size === true ? null : (
         <motion.nav
+          key={"nav"}
           className={
             scrollPosition >= 121
               ? `${classes.header + " " + classes.fixed}`
@@ -63,18 +64,24 @@ function FilterHeader() {
           animate="visible"
           transition={{ duration: 0.3, type: "spring" }}
         >
-          <motion.ul className={classes.navigation} style={{ width: navWidth }}>
-            {["Men", "Women", "Home", "Self care", "Electronics"].map((btn,i) => (
-              <li key={btn}>
-                <MenuBtn
-                  action={() => {
-                    handleClick(i+1);
-                  }}
-                >
-                 {btn}
-                </MenuBtn>
-              </li>
-            ))}
+          <motion.ul
+            key={"ul"}
+            className={classes.navigation}
+            style={{ width: navWidth }}
+          >
+            {["Men", "Women", "Home", "Self care", "Electronics"].map(
+              (btn, i) => (
+                <li key={btn}>
+                  <MenuBtn
+                    action={() => {
+                      handleClick(i + 1);
+                    }}
+                  >
+                    {btn}
+                  </MenuBtn>
+                </li>
+              )
+            )}
           </motion.ul>
         </motion.nav>
       )}

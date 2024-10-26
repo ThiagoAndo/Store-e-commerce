@@ -62,11 +62,12 @@ export function Menu({ toggle }) {
   async function logout() {
     logoutHandler();
   }
+  let countKey = 0;
 
   const MenuOpt = ({ children, action, isDelete = false }) => {
     return (
       <motion.p
-        key={0}
+        key={countKey++}
         whileHover={isDelete ? { color: "#FA8072" } : { color: "#ff9b05" }}
         onClick={() => {
           size && toggle();

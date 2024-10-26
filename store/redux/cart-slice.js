@@ -18,7 +18,6 @@ const cartSlice = createSlice({
     changed: false,
     cartIsVisible: false,
     totalCart: 0,
-    createAt: null,
     oneTimeReplace: 0,
   },
   reducers: {
@@ -42,7 +41,6 @@ const cartSlice = createSlice({
           quantity: 1,
           totalPrice: newItem.price,
           name: newItem.title,
-          createAt: newItem.createAt,
         });
         state.totalQuantity = totalQnt(state.items);
       } else {

@@ -4,8 +4,8 @@ const fetchDelete = async () => {
   const id = localStorage.getItem("id");
   try {
     let response = await fetch(
-      // `http://localhost:8080/cart`,
-      `https://api-store-pj2y.onrender.com/user`,
+      `http://localhost:8080/user`,
+      // `https://api-store-pj2y.onrender.comv`,
       {
         method: "DELETE",
         headers: {

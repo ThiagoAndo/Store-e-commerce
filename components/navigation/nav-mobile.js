@@ -15,7 +15,6 @@ export default function NavMobile() {
 
   function action() {
     ref.current.checked = !ref.current.checked;
-    console.log(ref.current.checked);
   }
   function handleClick(num) {
     store.getFiltered(num);

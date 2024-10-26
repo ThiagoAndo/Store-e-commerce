@@ -51,44 +51,24 @@ export function setStorage(data, call = null) {
 export function getUserToken() {
   return localStorage.getItem("token");
 }
-export async function setAdd(id) {
+export async function setAddress(id) {
   try {
     let response = await fetch(
-      // `http://localhost:8080/add/${id}`
-      `https://api-store-pj2y.onrender.com/add/${id}`
+      `http://localhost:8080/add/${id}`
+      // `https://api-store-pj2y.onrender.com/add/${id}`
     );
+  
     if (response.ok) {
-      const [resp] = await response.json();
-      if (!response?.message) {
-        adrStorage(resp);
-      }
+      const resp = await response.json();
+
+      adrStorage(resp);
     }
   } catch (error) {
     localStorage.setItem("address", "undefined");
     return { error: "Connecting to the database failed!" };
   }
 }
-export async function deleteUser() {
-  const token = getUserToken();
-  const id = localStorage.getItem(id);
 
-  try {
-    let response = await fetch("https://api-store-pj2y.onrender.com/user/", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify(id),
-    });
-
-    if (response.ok) {
-      return true;
-    }
-  } catch (error) {
-    return { error: "Connecting to the database failed!" };
-  }
-}
 export function adrStorage(resp) {
   localStorage.setItem("line_one", resp.line_one);
   localStorage.setItem("line_two", resp.line_two);
