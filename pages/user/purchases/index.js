@@ -3,6 +3,8 @@ import { Triangle } from "react-loader-spinner";
 import Mounted from "@/components/purchaseAccordion/AccordionMounted";
 import Anime from "@/components/ui/animeComp/AnimeComp";
 import { getUserToken } from "@/helpers/functions";
+import Head from "next/head";
+
 export function useFetch(get, cartId) {
   const [isFetching, setIsFetching] = useState();
   const [error, setError] = useState();
@@ -13,8 +15,10 @@ export function useFetch(get, cartId) {
       const id = localStorage.getItem("id");
       let url = null;
       if (get === "history") {
+        // url = `http://localhost:8080/order/${id}`;
         url = `https://api-store-pj2y.onrender.com/order/${id}`;
       } else {
+        // url = `http://localhost:8080/cart/purchased/params?user_id=${id}&cart_id=${cartId}`;
         url = `https://api-store-pj2y.onrender.com/cart/purchased/params?user_id=${id}&cart_id=${cartId}`;
       }
       setIsFetching(true);
@@ -27,7 +31,7 @@ export function useFetch(get, cartId) {
         });
         const data = await response.json();
         if (!response.ok) {
-          throw new Error("Failed to fetch user purchases");
+          setFetchedData([]);
         } else {
           setFetchedData(data);
         }
@@ -65,25 +69,42 @@ function PurchaseHistory() {
   }
   if (error) {
     return (
-      <Anime
-        isError={true}
-        isMsn={false}
-        isDelete={false}
-        message={error.message}
-      />
+      <>
+        <Head>
+          <title>Purchases</title>
+        </Head>
+        <Anime
+          isError={true}
+          isMsn={false}
+          isDelete={false}
+          message={error.message}
+        />
+      </>
     );
   }
 
   if (fetchedData?.length > 0) {
-    return <Mounted data={fetchedData} />;
+    return (
+      <>
+        <Head>
+          <title>Purchases</title>
+        </Head>
+        <Mounted data={fetchedData} />
+      </>
+    );
   } else {
     return (
-      <Anime
-        message={"Nothing to show!"}
-        isError={false}
-        isMsn={true}
-        isDelete={false}
-      />
+      <>
+        <Head>
+          <title>Purchases</title>
+        </Head>
+        <Anime
+          message={"Nothing to show!"}
+          isError={false}
+          isMsn={true}
+          isDelete={false}
+        />
+      </>
     );
   }
 }

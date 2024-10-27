@@ -1,11 +1,13 @@
 import "../styles/globals.css";
-import Layout from "../components/appLayout/layout";
+import RootLayout from "./layout";
 import ProductsContextProvider from "../store/context/products-context";
 import { NotificationContextProvider } from "@/store/context/notification-context";
 import StorageContextProvider from "@/store/context/storage-context";
 import { SessionProvider } from "next-auth/react";
 import { Provider } from "react-redux";
 import store from "@/store/redux";
+
+
 
 function App({ Component, pageProps }) {
   return (
@@ -14,9 +16,9 @@ function App({ Component, pageProps }) {
         <StorageContextProvider>
           <NotificationContextProvider>
             <ProductsContextProvider>
-              <Layout>
+              <RootLayout>
                 <Component {...pageProps} />
-              </Layout>
+              </RootLayout>
             </ProductsContextProvider>
           </NotificationContextProvider>
         </StorageContextProvider>

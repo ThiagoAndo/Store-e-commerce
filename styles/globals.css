@@ -11,6 +11,9 @@
   font-family: "Lato", sans-serif;
 }
 
+main{
+  min-height: 70vh;
+}
 
 body {
   color: rgb(var(--foreground-rgb));

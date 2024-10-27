@@ -5,7 +5,7 @@ const fetchDelete = async () => {
   try {
     let response = await fetch(
       // `http://localhost:8080/user`,
-      `https://api-store-pj2y.onrender.com/user`,
+      `https://api-store-pj2y.onrender.com`,
       {
         method: "DELETE",
         headers: {

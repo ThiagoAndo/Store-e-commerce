@@ -1,5 +1,5 @@
-import { cartActions } from "../store/redux/cart-slice";
 import { getUserToken } from "./functions";
+import { cartActions } from "@/store/redux/cart-slice";
 export const getStorageData = () => {
   const cart = JSON.parse(localStorage.getItem("cart"));
   const qntTotal = Number(localStorage.getItem("qnt"));
@@ -40,9 +40,9 @@ export const fetchCartData = (userId) => {
           ["quantity"]: item.qnt,
           ["totalPrice"]: item.price,
           ["name"]: item.name,
-          ["createAt"]: item.creation_at,
         };
       });
+
       dispatch(
         cartActions.replaceCart({
           items: transData,
@@ -56,7 +56,7 @@ export const fetchCartData = (userId) => {
 
 export const sendCartData = async (cart) => {
   const token = getUserToken();
-  const id = localStorage.getItem("id");
+  const user_id = localStorage.getItem("id");
   try {
     let response = await fetch(
       // `http://localhost:8080/cart`,
@@ -65,12 +65,11 @@ export const sendCartData = async (cart) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          'Authorization':
-            "Bearer "+ token,
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify({
           item: cart,
-          id,
+          user_id,
         }),
       }
     );
@@ -84,7 +83,7 @@ export const sendCartData = async (cart) => {
   }
 };
 
-export const deleteCartData = async (cart, op) => {
+export const deleteCartData = async (user_id) => {
   const token = getUserToken();
 
   try {
@@ -95,11 +94,10 @@ export const deleteCartData = async (cart, op) => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          'Authorization': "Bearer " + token,
+          Authorization: "Bearer " + token,
         },
         body: JSON.stringify({
-          cart,
-          op,
+          user_id,
         }),
       }
     );
@@ -112,6 +110,36 @@ export const deleteCartData = async (cart, op) => {
     return { error: "Connecting to the database failed!" };
   }
 };
+
+
+export const deleteCartItem = async (cart) => {
+  const token = getUserToken();
+
+  try {
+    let response = await fetch(
+      // `http://localhost:8080/cart/item`,
+      `https://api-store-pj2y.onrender.com/cart/item`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify({
+          cart,
+        }),
+      }
+    );
+
+    if (response.ok) {
+      response = await response.json();
+      return response;
+    }
+  } catch (error) {
+    return { error: "Connecting to the database failed!" };
+  }
+};
+
 
 export const updateCartData = async (cart) => {
   const token = getUserToken();

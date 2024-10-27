@@ -51,17 +51,16 @@ export function setStorage(data, call = null) {
 export function getUserToken() {
   return localStorage.getItem("token");
 }
-export async function setAdd(id) {
+export async function setAddress(id) {
   try {
     let response = await fetch(
       // `http://localhost:8080/add/${id}`
       `https://api-store-pj2y.onrender.com/add/${id}`
     );
     if (response.ok) {
-      const [resp] = await response.json();
-      if (!response?.message) {
-        adrStorage(resp);
-      }
+      const resp = await response.json();
+
+      adrStorage(resp);
     }
   } catch (error) {
     localStorage.setItem("address", "undefined");

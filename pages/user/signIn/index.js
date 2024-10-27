@@ -4,6 +4,8 @@ import { signIn } from "next-auth/react";
 import { setStorage } from "../../../helpers/functions";
 import { useNotification } from "@/hooks/useNotification";
 import UserSignIn from "@/components/forms/UserSignIn";
+import Head from "next/head";
+
 function SignIn() {
   const [isOrdering, setIsOrdering] = useState(null);
   const { notification } = useNotification();
@@ -64,11 +66,16 @@ function SignIn() {
   }, []);
 
   return (
-    <UserSignIn
-      isOrdering={isOrdering}
-      handleGuest={handleGuest}
-      handleSubmit={submitFormHandler}
-    />
+    <>
+      <Head>
+        <title>Sign In</title>
+      </Head>
+      <UserSignIn
+        isOrdering={isOrdering}
+        handleGuest={handleGuest}
+        handleSubmit={submitFormHandler}
+      />
+    </>
   );
 }
 

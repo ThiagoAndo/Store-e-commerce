@@ -1,19 +1,20 @@
+
+
 import { Fragment, useContext } from "react";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import Notification from "@/components/ui/notification/notification";
 import NotificationContext from "@/store/context/notification-context";
-import MainHeader from "../navigation/main-header";
-import FilterHeader from "../navigation/filter-nav";
-import Footer from "../ui/footer/footer";
-import Cart from "../cart/cart";
-import UserMenu from "../userMenu/UserMenu";
-import Modal from "../ui/modal/modal";
-import ConfBlock from "../ConfirmationComp/confirmation";
-import Head from "next/head";
+import MainHeader from "../components/navigation/main-header";
+import FilterHeader from "../components/navigation/filter-nav";
+import Footer from "../components/ui/footer/footer";
+import Cart from "../components/cart/cart";
+import UserMenu from "../components/userMenu/UserMenu";
+import Modal from "../components/ui/modal/modal";
+import ConfBlock from "../components/ConfirmationComp/confirmation";
 
-function Layout(props) {
+function RootLayout(props) {
   const currentPath = usePathname();
   const notificationCtx = useContext(NotificationContext);
   const activeNotification = notificationCtx.notification;
@@ -23,9 +24,6 @@ function Layout(props) {
 
   return (
     <Fragment>
-      <Head>
-        <title>Home</title>
-      </Head>
       <AnimatePresence>
         {isVisible && (
           <Modal key={0} cart={isVisible}>
@@ -54,4 +52,4 @@ function Layout(props) {
   );
 }
 
-export default Layout;
+export default RootLayout;

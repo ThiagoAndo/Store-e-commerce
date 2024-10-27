@@ -9,6 +9,8 @@ import UserCheckOut from "@/components/forms/UserCheckout";
 import { getUserToken } from "@/helpers/functions";
 import { useRouter } from "next/router";
 import { setStorage, adrStorage } from "@/helpers/functions";
+import Head from "next/head";
+
 const inpCheck = [inpuReg[0], inpuReg[1], inpuReg[2]];
 function ChangeData() {
   const { notification } = useNotification();
@@ -56,7 +58,14 @@ function ChangeData() {
 
     httpCAll.forEach(async (e, index) => {
       let data = null;
-      let method = null;
+      let myObj = {};
+      for (const key in e) {
+        if (e.hasOwnProperty(key)) {
+          if (key != "route" && key != "method") {
+            myObj[key] = e[key];
+          }
+        }
+      }
 
       try {
         const token = getUserToken();
@@ -69,7 +78,7 @@ function ChangeData() {
               "Content-Type": "application/json",
               Authorization: "Bearer " + token,
             },
-            body: JSON.stringify({ ...e }),
+            body: JSON.stringify(myObj),
           }
         );
         if (response.ok) {
@@ -92,24 +101,28 @@ function ChangeData() {
             "success"
           );
           route.push("/");
-        } else {
-          notification(null, "Invalid Action:", data.message, "error");
         }
       } catch (error) {
+        notification(null, "Invalid Action:", data.message, "error");
         console.log(error);
       }
     });
   }
   return (
-    <UserCheckOut
-      handleSubmit={handleCheck}
-      inpuShip={inpuShip}
-      inpuPay={inpuPay}
-      inpCheck={inpCheck}
-      fieldChekout={fieldChekout}
-      checkout={false}
-      profile={true}
-    />
+    <>
+      <Head>
+        <title>Profile</title>
+      </Head>
+      <UserCheckOut
+        handleSubmit={handleCheck}
+        inpuShip={inpuShip}
+        inpuPay={inpuPay}
+        inpCheck={inpCheck}
+        fieldChekout={fieldChekout}
+        checkout={false}
+        profile={true}
+      />
+    </>
   );
 }
 export default ChangeData;
