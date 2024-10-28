@@ -3,12 +3,17 @@ import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 import { setStorage } from "../../../helpers/functions";
 import { useNotification } from "@/hooks/useNotification";
+import { useDispatch } from "react-redux";
+import { sendCartData } from "@/helpers/cart-actions";
+
 import UserSignIn from "@/components/forms/UserSignIn";
 import Head from "next/head";
 
 function SignIn() {
   const [isOrdering, setIsOrdering] = useState(null);
   const { notification } = useNotification();
+  const dispatch = useDispatch();
+
   const router = useRouter();
   function handleGuest() {
     localStorage.setItem("guest", "guest");
@@ -34,16 +39,21 @@ function SignIn() {
         if (data.hasOwnProperty("message")) {
           notification(null, "Invalid Action:", data.message.toUpperCase());
         } else {
+          setStorage(data);
           signIn("credentials", {
             redirect: false,
             email: user.email,
           });
           if (isOrdering) {
+            const cart = JSON.parse(localStorage.getItem("cart"));
+            cart.map((p) => {
+              const { id, name, price, quantity } = p;
+              sendCartData({ id, name, price, quantity });
+            });
             router.replace("/checkout");
           } else {
             router.replace("/");
           }
-          setStorage(data);
           notification(
             null,
             "Registered:",
