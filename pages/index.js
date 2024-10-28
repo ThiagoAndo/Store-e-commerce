@@ -8,39 +8,6 @@ import { ProductContext } from "../store/context/products-context";
 import { getStorageData } from "@/helpers/cart-actions";
 import Head from "next/head";
 
-export const metadata = {
-  openGraph: {
-    title: "Next Store",
-    url: "https://store-comerce.vercel.app/",
-    description: "E-commerce web app built with Next.JS",
-    type: "website",
-    images: [
-      {
-        url: "https://drive.google.com/file/d/1ZF6kpPq-bYCgiqRZc6jtL5Vq69VkeZ4b/view",
-        type: "image/jpg",
-        width: 1200,
-        height: 630,
-        alt: "Home",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Next Store",
-    url: "https://store-comerce.vercel.app/",
-    description: "E-commerce web app built with Next.JS",
-    type: "website",
-    images: [
-      {
-        url: "https://drive.google.com/file/d/1ZF6kpPq-bYCgiqRZc6jtL5Vq69VkeZ4b/view",
-        type: "image/jpg",
-        width: 1200,
-        height: 630,
-        alt: "Home",
-      },
-    ],
-  },
-};
 function Products(props) {
   const { products } = props;
   const [scrollPosition, setScrollPosition] = useState(0);

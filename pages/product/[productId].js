@@ -2,19 +2,11 @@ import ProductDetail from "@/components/product/product-detail";
 import { getAllProducts } from "@/helpers/fetchProducts";
 import { useContext } from "react";
 import { ProductContext } from "@/store/context/products-context";
-import Head from "next/head";
 
 function DetailedProduct(props) {
   const store = useContext(ProductContext);
   const id = props.selectedEvent;
-  return (
-    <>
-      <Head>
-        <title>Products</title>
-      </Head>
-      <ProductDetail id={id} />;
-    </>
-  );
+  return <ProductDetail id={id} />;
 }
 export async function getStaticProps(context) {
   let eventId = context.params.productId;

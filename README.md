@@ -1,56 +1,224 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<center><h1> Multi REST API's web application </h1> </center> </br><p align="center"> <img width="300" src="assets/cart.svg"></p>
+  
+<div style="text-align: justify">
+The Next Online Shopping is a modern, full-stack e-commerce web application built to showcase a professional approach to online shopping platforms. I Developed it using React JS, Next JS, Node JS, and Express JS, this project highlights a range of skills, from interactive front-end development to efficient back-end  <a href="https://github.com/ThiagoAndo/rest-countries-api-with-color-theme-switcher-master.git">API</a>. Users is be able to: management. Designed with user experience at its core, the platform is optimized for ease of use, enabling smooth navigation, intuitive product browsing, and streamlined order processing. By leveraging local storage and a robust API (<a href="https://github.com/ThiagoAndo/rest-countries-api-with-color-theme-switcher-master.git">Next-store-API</a>), this application provides a seamless shopping experience that’s fast, responsive, and capable of scaling with user demand.
+</div>
+
+## Table of contents
+
+- [Overview](#overview)
+  - [Key Features](#built-using)
+  - [Flowchart](#flowchart)
+  - [Screenshot](#screenshot)
+- [Local development](#local-development)
+  - [Instructions](#instructions)
+  - [Test](#🧪-test)
+  - [Useful resources](#useful-resources)
+- [Author and alive web site links](#author)
 
 
-### The challenge
 
-Users should be able to:
+## Overview
 
-- Complete each step of the sequence
-- Go back to a previous step to update their selections
-- See a summary of their selections on the final step and confirm their order
-- View the optimal layout for the interface depending on their device's screen size
-- See hover and focus states for all interactive elements on the page
-- Receive form validation messages if:
-  - A field has been missed
-  - The email address is not formatted correctly
-  - A step is submitted, but no selection has been made
+### Key Features
+
+<div style="text-align: justify">
+  <ul>
+    <li>
+      <span style="font-weight:bold">Responsive Design:</span> A mobile-friendly layout ensuring smooth navigation across all devices.
+    </li>
+     <li>
+      <span style="font-weight:bold">User-Friendly Interface:</span> An intuitive design makes searching, viewing, and selecting products easy and engaging.
+    </li>
+     <li>
+      <span style="font-weight:bold">Local Storage Integration: </span>  Provides a continuous shopping experience by saving the user’s preferences and cart details.
+    </li>
+     <li>
+      <span style="font-weight:bold"><a href="https://github.com/ThiagoAndo/rest-countries-api-with-color-theme-switcher-master.git">Backend API:</a></span> A custom-built API to handle user authentication, product management, and order processing.
+    </li>
+     <li>
+      <span style="font-weight:bold">Efficient State Management:</span> Use of local storage and modern libraries to manage state effectively.
+    </li>
+</ul>
+</div>
 
 
-## Getting Started
+### User is be able to:
 
-First, run the development server:
+<div style="text-align: justify">
+  <ul>
+    <li>
+      <span style="font-weight:bold">Register a New User:</span> Users can create an account to access personalized features.
+    </li>
+     <li>
+      <span style="font-weight:bold">Update User Information:</span>Easily modify profile details as needed.
+    </li>
+     <li>
+      <span style="font-weight:bold">View All Products: </span>  Browse through a comprehensive list of available products.
+    </li>
+     <li>
+      <span style="font-weight:bold">View Product Details:</span>  Access in-depth information for individual products.
+    </li>
+     <li>
+      <span style="font-weight:bold">Filter Products by Name:</span> Quickly find products using search functionality.
+    </li>
+     <li>
+      <span style="font-weight:bold">Filter Products by Category:</span> Sort products by category for easier navigation.
+    </li>
+     <li>
+      <span style="font-weight:bold">Add Products to Cart:</span> Save items for later purchase with a simple click.
+    </li>
+     <li>
+      <span style="font-weight:bold">Purchase a Product: </span> Complete transactions seamlessly within the app.
+     <li>
+      <span style="font-weight:bold">Guest Checkout:</span>  Allows users to make purchases without creating an account.
+    </li>
+     <li>
+      <span style="font-weight:bold">Check Purchase History</span> View past transactions for tracking orders.
+    </li>
+   
+</ul>
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Built using
+
+- Next JS
+- Redux toolkit
+- Framer motion
+- useContext API
+- Keen-slider
+
+
+### Flowchart
+
+<br />
+<br />
+<br />
+
+<p align="center" style="solid 1px red">
+    <img  src="assets/screenshots/Multi-API.png" alt="Mobile Version Picture">
+</p>
+<br />
+<br />
+<br />
+## Screenshot
+
+<br />
+<br />
+
+<p align="center" style="solid 1px red">
+    <img  src="assets/screenshots/home.png" alt="Mobile Version Picture">
+     <figcaption>Fig.1 - Home page</figcaption>
+</p>
+<br />
+<br />
+
+<p align="center" style="solid 1px red">
+    <img  src="assets/screenshots/countrySearch.png" alt="Mobile Version Picture">
+     <figcaption>Fig.2 - Input search</figcaption>
+</p>
+<br />
+<br />
+
+<p align="center" style="solid 1px red">
+    <img  src="assets/screenshots/countryFilter.png" alt="Mobile Version Picture">
+     <figcaption>Fig.2 - Input fielter</figcaption>
+</p>
+
+<br />
+<br />
+
+<p align="center" style="solid 1px red">
+    <img  src="assets/screenshots/expanded.png" alt="Mobile Version Picture">
+     <figcaption>Fig.3 - Country detailed</figcaption>
+</p>
+
+<br />
+<br />
+
+<p align="center" style="solid 1px red">
+    <img  src="assets/screenshots/countySearch.png" alt="Mobile Version Picture">
+     <figcaption>Fig.4 - Irish counties input search</figcaption>
+</p>
+
+<br />
+<br />
+<p align="center" style="solid 1px red">
+    <img  src="assets/screenshots/countyFilter.png" alt="Mobile Version Picture">
+     <figcaption>Fig.5 - Irish counties input filter</figcaption>
+</p>
+<br />
+<br />
+
+<p align="center" style="solid 1px red">
+    <img  src="assets/screenshots/full.png" alt="Mobile Version Picture">
+     <figcaption>Fig.5 -Full forecast application</figcaption>
+</p>
+</br>
+</br>
+<p align="center" style="solid 1px red">
+    <img  src="assets/screenshots/error.png" alt="Mobile Version Picture">
+     <figcaption>Fig.6 -Error page</figcaption>
+</p>
+<br />
+<br />
+<br />
+<img align="right" src="https://i.ibb.co/CJfW18H/ship.gif" width="200"/>
+
+## Local development
+
+To run the project from a container, ensure that Node.js (version 14 or higher)
+and npm (version 7 or higher) are installed on your development machine.
+
+### Instructions
+
+- Fork this repository
+- Clone your forked repository
+- CD into the project folder
+- Sing up to Geoapify, TimeZoneDB and OpenWeather APIs to optain your user keys. They all provide free services.
+- Create a `.env` file in the root directory with those variables:
+
+```shell
+VITE_GEOPIFY= your Geoapify key
+VITE_TIME_ZONE_KEY= your TimeZoneDB key
+VITE_WEATHER_SECRETE_KEY= your OpenWeather key
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To install the application:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```shell
+npm install
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+To start the development server:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```shell
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 🧪 Test
 
-## Learn More
+After the project is installed and running, you can simulate accessing the application from abroad using Git by running the following command:
 
-To learn more about Next.js, take a look at the following resources:
+```shell
+git checkout 68cedd3
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Or if you want simulate accessing the application from a remote Irish countie run:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```shell
+git checkout 272f4ad
+```
 
-## Deploy on Vercel
+## Author
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Github - [Thiago Ando de Freitas](https://github.com/ThiagoAndo)
+- Personal website - [Portfolio](https://thiago-freitas-portfolio.vercel.app/)
+- Alive Website - [rest-countries-api](https://rest-mult-api.netlify.app)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<hr />
+
+ <div style="text-align: center" >
+<h5 style="color:black;">"The impediment to action advances action. What stands in the way becomes the way"</h5>
+<h5 style="color:black;">Marcus Aurelius </h5>
+</div>

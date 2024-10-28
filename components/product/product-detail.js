@@ -7,6 +7,8 @@ import ProductInfo from "./product-info";
 import classes from "./product-detail.module.css";
 import { getProductById } from "@/helpers/fetchProducts";
 import { getAllProducts } from "@/helpers/fetchProducts";
+import Head from "next/head";
+
 const ProductDetail = ({ id }) => {
   const [product, setProduct] = useState([]);
   const store = useContext(ProductContext);
@@ -36,19 +38,23 @@ const ProductDetail = ({ id }) => {
 
   if (product.length === 1) {
     const [produc] = product;
-
     return (
-      <div className={classes.container_pro}>
-        <div className={classes.display}></div>
-        <div className={classes.slider}>
-          <DetailSlider img={produc.images} />
-        </div>
+      <>
+        <Head>
+          <title>{produc.title}</title>
+        </Head>
+        <div className={classes.container_pro}>
+          <div className={classes.display}></div>
+          <div className={classes.slider}>
+            <DetailSlider img={produc.images} />
+          </div>
 
-        <div className={classes.info}>
-          <ProductInfo props={produc} />
+          <div className={classes.info}>
+            <ProductInfo props={produc} />
+          </div>
+          <div className={classes.display}></div>
         </div>
-        <div className={classes.display}></div>
-      </div>
+      </>
     );
   } else if (product == "wrong id") {
     return (

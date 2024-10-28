@@ -15,7 +15,6 @@ function ProductInfo({ props }) {
   let price = props.price - props.price * (props.discountPercentage * 0.01);
   const rating = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
 
-  let createAt = null;
   function handleClick() {
     const [prt] = cart.filter((prt) => {
       return prt.id === id;
