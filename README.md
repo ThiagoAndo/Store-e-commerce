@@ -1,28 +1,23 @@
-<center><h1> Multi REST API's web application </h1> </center> </br><p align="center"> <img width="300" src="assets/cart.svg"></p>
+<center><h1> Next Store</h1> </center> </br><p align="center"> <img width="300" src="assets/cart.svg"></p>
   
 <div style="text-align: justify">
-The Next Online Shopping is a modern, full-stack e-commerce web application built to showcase a professional approach to online shopping platforms. I Developed it using React JS, Next JS, Node JS, and Express JS, this project highlights a range of skills, from interactive front-end development to efficient back-end  <a href="https://github.com/ThiagoAndo/rest-countries-api-with-color-theme-switcher-master.git">API</a>. Users is be able to: management. Designed with user experience at its core, the platform is optimized for ease of use, enabling smooth navigation, intuitive product browsing, and streamlined order processing. By leveraging local storage and a robust API (<a href="https://github.com/ThiagoAndo/rest-countries-api-with-color-theme-switcher-master.git">Next-store-API</a>), this application provides a seamless shopping experience that’s fast, responsive, and capable of scaling with user demand.
+The Next Store Online Shopping is a modern, full-stack e-commerce web application built to showcase a professional approach to online shopping platforms. I Developed it using React JS, Next JS, Node JS, and Express JS, this project highlights a range of skills, from interactive front-end development to efficient back-end  <a href="https://github.com/ThiagoAndo/Next-store-API.git">API</a>. Designed with user experience at its core, the platform is optimized for ease of use, enabling smooth navigation, intuitive product browsing, and streamlined order processing. By leveraging local storage and a robust API (<a href="https://github.com/ThiagoAndo/Next-store-API.git">Next-store-API</a>), this application provides a seamless shopping experience that’s fast, responsive, and capable of scaling with user demand.
 </div>
-<div style="text-align: justify">
-The Next Online Shopping is a modern, full-stack e-commerce web application built to showcase a professional approach to online shopping platforms. I Developed it using React JS, Next JS, Node JS, and Express JS, this project highlights a range of skills, from interactive front-end development to efficient back-end  <a href="https://github.com/ThiagoAndo/rest-countries-api-with-color-theme-switcher-master.git">API</a>. Users is be able to: management. Designed with user experience at its core, the platform is optimized for ease of use, enabling smooth navigation, intuitive product browsing, and streamlined order processing. By leveraging local storage and a robust API (<a href="https://github.com/ThiagoAndo/rest-countries-api-with-color-theme-switcher-master.git">Next-store-API</a>), this application provides a seamless shopping experience that’s fast, responsive, and capable of scaling with user demand.
-</div>
-<div style="text-align: justify">
-The Next Online Shopping is a modern, full-stack e-commerce web application built to showcase a professional approach to online shopping platforms. I Developed it using React JS, Next JS, Node JS, and Express JS, this project highlights a range of skills, from interactive front-end development to efficient back-end  <a href="https://github.com/ThiagoAndo/rest-countries-api-with-color-theme-switcher-master.git">API</a>. Users is be able to: management. Designed with user experience at its core, the platform is optimized for ease of use, enabling smooth navigation, intuitive product browsing, and streamlined order processing. By leveraging local storage and a robust API (<a href="https://github.com/ThiagoAndo/rest-countries-api-with-color-theme-switcher-master.git">Next-store-API</a>), this application provides a seamless shopping experience that’s fast, responsive, and capable of scaling with user demand.
+
 </div>
 
 ## Table of contents
 
 - [Overview](#overview)
-  - [Key Features](#built-using)
+  - [Key Features](#key-features)
+  - [Actions](#actions)
+  - [Built using](#built-using)
   - [Flowchart](#flowchart)
-  - [Screenshot](#screenshot)
+  - [Screenshots](#screenshots)
 - [Local development](#local-development)
-  - [Instructions](#instructions)
-  - [Test](#🧪-test)
-  - [Useful resources](#useful-resources)
+  - [Instructions](#💡-instructions)
+  - [Running full-stack](#🧪-running-full-stack)
 - [Author and alive web site links](#author)
-
-
 
 ## Overview
 
@@ -31,60 +26,60 @@ The Next Online Shopping is a modern, full-stack e-commerce web application buil
 <div style="text-align: justify">
   <ul>
     <li>
-      <span style="font-weight:bold">Responsive Design:</span> A mobile-friendly layout ensuring smooth navigation across all devices.
+      <h4 >Responsive Design:</h4> A mobile-friendly layout ensuring smooth navigation across all devices.
     </li>
      <li>
-      <span style="font-weight:bold">User-Friendly Interface:</span> An intuitive design makes searching, viewing, and selecting products easy and engaging.
+      <h4 >User-Friendly Interface:</h4> An intuitive design makes searching, viewing, and selecting products easy and engaging.
     </li>
      <li>
-      <span style="font-weight:bold">Local Storage Integration: </span>  Provides a continuous shopping experience by saving the user’s preferences and cart details.
+      <h4 >Local Storage Integration: </h4>  Provides a continuous shopping experience by saving the user’s preferences and cart details.
     </li>
      <li>
-      <span style="font-weight:bold"><a href="https://github.com/ThiagoAndo/rest-countries-api-with-color-theme-switcher-master.git">Backend API:</a></span> A custom-built API to handle user authentication, product management, and order processing.
+      <h4 ><a href="https://github.com/ThiagoAndo/rest-countries-api-with-color-theme-switcher-master.git">Backend API:</a></h4> A custom-built API to handle user authentication, product management, and order processing.
     </li>
      <li>
-      <span style="font-weight:bold">Efficient State Management:</span> Use of local storage and modern libraries to manage state effectively.
+      <h4 >Efficient State Management:</h4> Use of local storage and modern libraries to manage state effectively.
     </li>
 </ul>
 </div>
+<br />
 
-
-### User is be able to:
+### Actions
 
 <div style="text-align: justify">
   <ul>
     <li>
-      <span style="font-weight:bold">Register a New User:</span> Users can create an account to access personalized features.
+      <h4 >Register a New User:</h4> Users can create an account to access personalized features.
     </li>
      <li>
-      <span style="font-weight:bold">Update User Information:</span>Easily modify profile details as needed.
+      <h4 >Update User Information:</h4> Easily modify profile details as needed.
     </li>
      <li>
-      <span style="font-weight:bold">View All Products: </span>  Browse through a comprehensive list of available products.
+      <h4 >View All Products: </h4>  Browse through a comprehensive list of available products.
     </li>
      <li>
-      <span style="font-weight:bold">View Product Details:</span>  Access in-depth information for individual products.
+      <h4 >View Product Details:</h4>  Access in-depth information for individual products.
     </li>
      <li>
-      <span style="font-weight:bold">Filter Products by Name:</span> Quickly find products using search functionality.
+      <h4 >Filter Products by Name:</h4> Quickly find products using search functionality.
     </li>
      <li>
-      <span style="font-weight:bold">Filter Products by Category:</span> Sort products by category for easier navigation.
+      <h4 >Filter Products by Category:</h4> Sort products by category for easier navigation.
     </li>
      <li>
-      <span style="font-weight:bold">Add Products to Cart:</span> Save items for later purchase with a simple click.
+      <h4 >Add Products to Cart:</h4> Save items for later purchase with a simple click.
     </li>
      <li>
-      <span style="font-weight:bold">Purchase a Product: </span> Complete transactions seamlessly within the app.
+      <h4 >Purchase a Product: </h4> Complete transactions seamlessly within the app.
      <li>
-      <span style="font-weight:bold">Guest Checkout:</span>  Allows users to make purchases without creating an account.
+      <h4 >Guest Checkout:</h4>  Allows users to make purchases without creating an account.
     </li>
      <li>
-      <span style="font-weight:bold">Check Purchase History</span> View past transactions for tracking orders.
+      <h4 >Check Purchase History</h4> View past transactions for tracking orders.
     </li>
-   
 </ul>
 </div>
+<br />
 
 ### Built using
 
@@ -94,101 +89,94 @@ The Next Online Shopping is a modern, full-stack e-commerce web application buil
 - useContext API
 - Keen-slider
 
+## Flowchart
+###  Click on the flowchart image and view it in a larger format.
 
-### Flowchart
-
-<br />
-<br />
-<br />
-
-<p align="center" style="solid 1px red">
-    <img  src="assets/screenshots/Multi-API.png" alt="Mobile Version Picture">
-</p>
-<br />
-<br />
-<br />
-## Screenshot
 
 <br />
 <br />
 
-<p align="center" style="solid 1px red">
-    <img  src="assets/screenshots/home.png" alt="Mobile Version Picture">
-     <figcaption>Fig.1 - Home page</figcaption>
-</p>
-<br />
-<br />
-
-<p align="center" style="solid 1px red">
-    <img  src="assets/screenshots/countrySearch.png" alt="Mobile Version Picture">
-     <figcaption>Fig.2 - Input search</figcaption>
-</p>
-<br />
-<br />
-
-<p align="center" style="solid 1px red">
-    <img  src="assets/screenshots/countryFilter.png" alt="Mobile Version Picture">
-     <figcaption>Fig.2 - Input fielter</figcaption>
+<p align="center" >
+        <img  src="./assets/screenshots/e-commerce.drawio.png"width="900" alt="flowchart ">
 </p>
 
 <br />
 <br />
 
-<p align="center" style="solid 1px red">
-    <img  src="assets/screenshots/expanded.png" alt="Mobile Version Picture">
-     <figcaption>Fig.3 - Country detailed</figcaption>
+## Screenshots
+
+<br />
+<br />
+
+<p align="center" >
+        <img  src="./assets/screenshots/second.gif"width="600" alt="Website gif">
+     <center><p>1-Starting ordering</p></center>
 </p>
 
 <br />
 <br />
 
-<p align="center" style="solid 1px red">
-    <img  src="assets/screenshots/countySearch.png" alt="Mobile Version Picture">
-     <figcaption>Fig.4 - Irish counties input search</figcaption>
+<p align="center" >
+      <img  src="./assets/screenshots/third.gif" width="600"  alt="Website gif">
+       <center><p>2-Finishing ordering</p></center>
 </p>
 
 <br />
 <br />
-<p align="center" style="solid 1px red">
-    <img  src="assets/screenshots/countyFilter.png" alt="Mobile Version Picture">
-     <figcaption>Fig.5 - Irish counties input filter</figcaption>
+
+<p align="center" >
+    <img  src="assets/screenshots/forth.gif" width="600" alt="Website gif">
+      <center> <p>3-Registering new user</p></center>
 </p>
+
 <br />
 <br />
 
-<p align="center" style="solid 1px red">
-    <img  src="assets/screenshots/full.png" alt="Mobile Version Picture">
-     <figcaption>Fig.5 -Full forecast application</figcaption>
+<p align="center" >
+    <img  src="assets/screenshots/mob_1.png" width="200"alt="Mobile Version Picture">
+       <center><p>Fig.1-Resposive</p></center>
 </p>
-</br>
-</br>
-<p align="center" style="solid 1px red">
-    <img  src="assets/screenshots/error.png" alt="Mobile Version Picture">
-     <figcaption>Fig.6 -Error page</figcaption>
-</p>
+
 <br />
+<br />
+
+<p align="center" >
+    <img  src="assets/screenshots/mob_2.png" width="200" alt="Mobile Version Picture">
+      <center> <p>Fig.2-Resposive</p></center>
+</p>
+
+<br />
+<br />
+
+<p align="center" >
+    <img  src="assets/screenshots/mob_3.png" width="200" alt="Mobile Version Picture">
+      <center> <p>Fig.3-Resposive</p></center>
+</p>
+
+<br />
+<br />
+
+<p align="center" >
+    <img  src="assets/screenshots/mob_4.png" width="200" alt="Mobile Version Picture">
+      <center><p>Fig.4-Resposive</p></center>
+</p>
+
+
 <br />
 <br />
 <img align="right" src="https://i.ibb.co/CJfW18H/ship.gif" width="200"/>
+
 
 ## Local development
 
 To run the project from a container, ensure that Node.js (version 14 or higher)
 and npm (version 7 or higher) are installed on your development machine.
 
-### Instructions
+### 💡 Instructions
 
 - Fork this repository
 - Clone your forked repository
 - CD into the project folder
-- Sing up to Geoapify, TimeZoneDB and OpenWeather APIs to optain your user keys. They all provide free services.
-- Create a `.env` file in the root directory with those variables:
-
-```shell
-VITE_GEOPIFY= your Geoapify key
-VITE_TIME_ZONE_KEY= your TimeZoneDB key
-VITE_WEATHER_SECRETE_KEY= your OpenWeather key
-```
 
 To install the application:
 
@@ -202,29 +190,26 @@ To start the development server:
 npm run dev
 ```
 
-### 🧪 Test
+### 🧪 Running full-stack
 
-After the project is installed and running, you can simulate accessing the application from abroad using Git by running the following command:
-
-```shell
-git checkout 68cedd3
-```
-
-Or if you want simulate accessing the application from a remote Irish countie run:
+If you would like to run the full-stack application locally, please follow the instructions outlined above. Once all steps are completed, you can initiate the application by entering the following command:
 
 ```shell
-git checkout 272f4ad
+git checkout localhost
 ```
+
+This command will switch to the `localhost` branch, automatically updating all HTTP addresses to `https://localhost:8080`. Next, you will need the backend to complete the setup. You can find the backend project in this repository <a href="https://github.com/ThiagoAndo/Next-store-API.git">in this repository</a>. Both applications need to be instaled and initiated.
+
 
 ## Author
 
 - Github - [Thiago Ando de Freitas](https://github.com/ThiagoAndo)
 - Personal website - [Portfolio](https://thiago-freitas-portfolio.vercel.app/)
-- Alive Website - [rest-countries-api](https://rest-mult-api.netlify.app)
+- Alive Website - [Next Store](https://store-comerce.vercel.app/)
 
 <hr />
 
  <div style="text-align: center" >
-<h5 style="color:black;">"The impediment to action advances action. What stands in the way becomes the way"</h5>
-<h5 style="color:black;">Marcus Aurelius </h5>
+<h4 style="color:black;">"The impediment to action advances action. What stands in the way becomes the way"</h4>
+<h4 style="color:black;">Marcus Aurelius </h4>
 </div>
