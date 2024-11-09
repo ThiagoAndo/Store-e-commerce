@@ -205,7 +205,7 @@ This command will switch to the `localhost` branch, automatically updating all H
 
 - Github - [Thiago Ando de Freitas](https://github.com/ThiagoAndo)
 - Personal website - [Portfolio](https://thiago-freitas-portfolio.vercel.app/)
-- Alive Website - [Next Store](https://store-comerce.vercel.app/)
+- Live Website - [Next Store](https://store-comerce.vercel.app/)
 
 <hr />
 
