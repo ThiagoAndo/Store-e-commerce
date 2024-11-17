@@ -4,12 +4,7 @@ import NotificationContext from "@/store/context/notification-context";
 import { confActions } from "@/store/redux/conf.slice";
 import { useDispatch } from "react-redux";
 import { getUserToken } from "@/helpers/functions";
-import {
-  inpuShip,
-  inpuPay,
-  inpuReg,
-  fieldChekout,
-} from "@/components/ui/formInput/inputInfo";
+import { inpuShip, inpuPay, inpuReg, fieldChekout } from "@/helpers/inputInfo";
 import { adrStorage } from "@/helpers/functions";
 import Head from "next/head";
 

@@ -1,39 +1,26 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Radio from "../ui/formInput/inputRadio";
+import Radio from "./formInput/inputRadio";
 import Cart from "../cart/cart";
-import Input from "../ui/formInput/input";
+import Input from "./formInput/input";
 import style from "./UserCheckout.module.css";
 import useForm from "@/hooks/useForm";
 import Button from "../ui/button/btn";
-import { inpuReg } from "@/components/ui/formInput/inputInfo";
-function UserCheckOut({
-  handleSubmit,
-  inpuShip,
-  inpuPay,
-  inpCheck,
-  fieldChekout,
-  checkout,
-  profile,
-}) {
-  const { cartItems, scope, checked, focus, setChecked, getEvent } = useForm();
-  const [User, setUSer] = useState([[], []]);
-  const [hasChanged, setHasChanged] = useState([]);
+import { inpuReg, inpuShip, inpuPay, fieldChekout } from "@/helpers/inputInfo";
+import { useNotification } from "@/hooks/useNotification";
+import useFill from "@/hooks/useFillForm";
+import useConfEmpty from "@/hooks/confEmpty";
+import { useSelector } from "react-redux";
 
-  function handleChange(e) {
-    const det = inpuReg.map((inp) => e.target.name === inp.id);
-    const adr = inpuShip.map((inp) => e.target.name === inp.id);
-    if (det.includes(true)) {
-      if (!hasChanged.includes("user")) {
-        setHasChanged((prev) => [...prev, "user"]);
-      }
-    } else if (adr.includes(true)) {
-      //This is just a test
-      if (!hasChanged.includes("add")) {
-        setHasChanged((prev) => [...prev, "add"]);
-      }
-    }
-  }
+// This form is used for userChekout and user profile
+
+function UserCheckOut({ handleSubmit }) {
+  const user = useFill();
+  const { scope, focus, isEmpty } = useConfEmpty();
+  const [checked, setChecked] = useState("e-money");
+  const cartItems = useSelector((state) => state.cart.items);
+
+  // const { cartItems, scope, checked, focus, setChecked, getEvent } = useForm();
 
   const onOptionChange = (val) => {
     setChecked(val);
@@ -51,33 +38,18 @@ function UserCheckOut({
     }
   };
   const handleThisSubmit = (e) => {
-    const { prof, check, data } = getEvent(e, false, false, checkout, [
-      profile,
-      hasChanged,
-    ]);
-    checkout && check && handleSubmit(data);
-    profile && prof && handleSubmit(data, hasChanged);
+    e.preventDefault();
+    let empty = null;
+    // const { prof, check, data } = getEvent(e, false, false, checkout, [
+    //   profile,
+    //   hasChanged,
+    // ]);
+    // check && handleSubmit(data);
+    empty = isEmpty(e, fieldChekout);
   };
-  useEffect(() => {
-    setTimeout(() => {
-      setUSer([
-        [
-          localStorage.getItem("first"),
-          localStorage.getItem("last"),
-          localStorage.getItem("email"),
-        ],
-        [
-          localStorage.getItem("line_one"),
-          localStorage.getItem("line_two"),
-          localStorage.getItem("town_city"),
-          localStorage.getItem("constry_state"),
-        ],
-      ]);
-    }, 500);
-  }, [setUSer]);
   return (
     <motion.div
-      className={checkout === true ? style.check_pag : style.userData}
+      className={style.check_pag}
       initial={{ y: 200, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, type: "spring" }}
@@ -91,26 +63,22 @@ function UserCheckOut({
           }}
         >
           <div className={style.action}>
-            <h2>{checkout === true ? "CHECKOUT" : "EDIT PROFILE"}</h2>
+            <h2>{"CHECKOUT"}</h2>
           </div>
-          <p> {checkout === true ? "BILLING DETAILS" : "ENTER DETAILS"}</p>
-          <div
-            className={
-              checkout === true ? style.detail : style.detail_profile
-            }
-          >
-            {inpCheck.map((inp, i) => (
+          <p> {"BILLING DETAILS"}</p>
+          <div className={style.detail}>
+            {inpuReg.slice(0, 3).map((inp, i) => (
               <Input
                 key={inp.id}
                 id={inp.id}
                 ph={inp.ph}
                 typeI={inp.type}
                 handleFocus={focus}
-                val={User[0][i]}
+                val={user[0][i]}
               />
             ))}
           </div>
-          <p> {checkout === true ? "SHIPPING INFO" : "ENTER ADDRESS"}</p>
+          <p> {"SHIPPING INFO"}</p>
           <div className={style.shipping}>
             {inpuShip.map((inp, i) => (
               <Input
@@ -119,51 +87,45 @@ function UserCheckOut({
                 ph={inp.ph}
                 typeI={inp.type}
                 handleFocus={focus}
-                val={User[1][i]}
+                val={user[1][i]}
               />
             ))}
           </div>
-          {checkout && (
-            <>
-              <p>PAYMENT DETAILS </p>
-              <div className={style.payment}>
-                <p>Payment Method </p>
-                <Radio
-                  id={"e-money"}
-                  lab={"e-money"}
-                  onChoice={onOptionChange}
-                  check={checked}
-                />
-                <Radio
-                  id={"cash"}
-                  name={"acquisition"}
-                  lab={"Cash on Delivery"}
-                  onChoice={onOptionChange}
-                  check={checked}
-                />
-                {inpuPay.map((inp) => (
-                  <Input
-                    key={inp.id}
-                    id={inp.id}
-                    ph={inp.ph}
-                    typeI={inp.type}
-                    dis={checked === "e-money" ? false : true}
-                    handleFocus={focus}
-                  />
-                ))}
-              </div>
-            </>
-          )}
-          <Button style={style.button}>
-            {checkout === true ? "CONTINUE & PAY" : "SAVE"}
-          </Button>
+          <p>PAYMENT DETAILS </p>
+          <div className={style.payment}>
+            <p>Payment Method </p>
+            <Radio
+              id={"e-money"}
+              lab={"e-money"}
+              onChoice={onOptionChange}
+              check={checked}
+            />
+            <Radio
+              id={"cash"}
+              name={"acquisition"}
+              lab={"Cash on Delivery"}
+              onChoice={onOptionChange}
+              check={checked}
+            />
+            {inpuPay.map((inp) => (
+              <Input
+                key={inp.id}
+                id={inp.id}
+                ph={inp.ph}
+                typeI={inp.type}
+                dis={checked === "e-money" ? false : true}
+                handleFocus={focus}
+              />
+            ))}
+          </div>
+          <Button style={style.button}>{"CONTINUE & PAY"}</Button>
         </form>
       </div>
-      {cartItems.length > 0 && checkout && (
+      {cartItems.length > 0 ? (
         <div className={style.summary}>
           <Cart cart={false} />
         </div>
-      )}
+      ) : null}
     </motion.div>
   );
 }

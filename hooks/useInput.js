@@ -1,3 +1,6 @@
+
+// This hook integrates the useAnimate hook with the input fields
+// to handle animation effects
 import { useAnimate, stagger } from "framer-motion";
 export function useInputAnimation() {
   const [scope, animate] = useAnimate();
@@ -33,3 +36,11 @@ export function useInputAnimation() {
     scope,
   };
 }
+
+// (2) [{…}, {…}]
+// 0
+// : 
+// {label: 'labemail_address', input: 'email_address'}
+// 1
+// : 
+// {label: 'labpassword', input: 'password'}

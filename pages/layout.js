@@ -9,7 +9,7 @@ import FilterHeader from "../components/navigation/filter-nav";
 import Footer from "../components/ui/footer/footer";
 import Cart from "../components/cart/cart";
 import UserMenu from "../components/userMenu/UserMenu";
-import Modal from "../components/ui/modal/modal";
+import Modal from "../components/modal/modal";
 import ConfBlock from "../components/ConfirmationComp/confirmation";
 import Head from "next/head";
 

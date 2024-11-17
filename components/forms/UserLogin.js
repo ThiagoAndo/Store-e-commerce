@@ -3,31 +3,37 @@ import { useNotification } from "@/hooks/useNotification";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { inpuReg } from "@/components/ui/formInput/inputInfo";
+import { inpuLogin, logIn } from "@/helpers/inputInfo";
 import useForm from "@/hooks/useForm";
-import Input from "../ui/formInput/input";
+import Input from "./formInput/input";
 import Button from "../ui/button/btn";
 import style from "./UserLogin.module.css";
 import useMediaScreen from "@/hooks/useMediaScreen";
+import useConfEmpty from "@/hooks/confEmpty";
 function UserLogin({ handling, LoginBack }) {
-  const { scope, focus, getEvent } = useForm();
+  const { scope, focus, isEmpty } = useConfEmpty();
+
   const { notification } = useNotification();
   const { data: session } = useSession();
   const router = useRouter();
   let { match: size } = useMediaScreen(
     "only screen and (min-width : 369px) and (max-width : 500px)"
   );
-  const fields = [];
-  fields.push(inpuReg[2]);
-  fields.push(inpuReg[3]);
+
   function handleClick(e) {
     e.preventDefault();
     router.replace("/user/signIn");
   }
   function loginHandler(e) {
-    const { login, data } = getEvent(e, false, true, false, false);
-    login && handling(data);
+    e.preventDefault();
+    const empty = isEmpty(e, logIn);
+    console.log("empty");
+    console.log(empty);
+    // const { login, data } = getEvent(e, logIn);
+    // login && handling(data);
+    handling()
   }
+
   useEffect(() => {
     const isOrdering = localStorage.getItem("order");
     if (LoginBack?.message) {
@@ -35,7 +41,7 @@ function UserLogin({ handling, LoginBack }) {
         notification(
           null,
           "Not Found:",
-          " EMAIL MIGHT NOT BE RIGHT OR USER HAS NOT BEEN REGISTERED"
+          "EMAIL MIGHT NOT BE RIGHT OR USER HAS NOT BEEN REGISTERED"
         );
         return;
       } else if (LoginBack.message.slice(0, 5) === "Wrong") {
@@ -64,7 +70,7 @@ function UserLogin({ handling, LoginBack }) {
           >
             <p className={style.paragraph}>Already Registered?</p>
             <div className={style.cont_container}>
-              {fields.map((inp) => (
+              {inpuLogin.map((inp) => (
                 <Input
                   key={inp.id}
                   id={inp.id}

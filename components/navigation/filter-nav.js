@@ -6,7 +6,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import ScrollBtn from "../ui/scrollTop/ScrollTop";
+import ScrollBtn from "../scrollTop/ScrollTop";
 import classes from "./filter-nav.module.css";
 import useMediaScreen from "@/hooks/useMediaScreen";
 function FilterHeader() {

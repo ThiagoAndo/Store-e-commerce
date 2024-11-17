@@ -1,3 +1,17 @@
+// These arrays are defined to hold the input data, which are then used to
+// dynamically render the form fields in the JSX using the map() method.
+export const inpuLogin = [
+  {
+    id: "email_address",
+    ph: "e.g. stephenking@lorem.com",
+    type: "text",
+  },
+  {
+    id: "password",
+    ph: "Minimum of eight characters",
+    type: "password",
+  },
+];
 export const inpuReg = [
   {
     id: "first_name",
@@ -56,6 +70,16 @@ export const inpuPay = [
     type: "number",
   },
 ];
+
+// These variables are utilized within the useForm hookPropertyMap, located in the
+// hooks faOldRepublic. They assist in detecting empty fields and providing user
+// feedback through validaditon message
+
+export const logIn = [
+  { label: "labemail_address", input: "email_address" },
+  { label: "labpassword", input: "password" },
+];
+
 
 export const fieldRegister = [
   { label: "labfirst_name", input: "first_name" },

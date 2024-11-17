@@ -1,14 +1,20 @@
 import { motion } from "framer-motion";
-import { inpuReg } from "@/components/ui/formInput/inputInfo";
+import { inpuReg, fieldRegister } from "@/helpers/inputInfo";
 import useForm from "@/hooks/useForm";
 import Button from "../ui/button/btn";
-import Input from "../ui/formInput/input";
+import Input from "./formInput/input";
 import style from "./UserSignIn.module.css";
+import useConfEmpty from "@/hooks/confEmpty";
+
 function UserSignIn({ handleGuest, isOrdering, handleSubmit }) {
-  const { scope, focus, getEvent } = useForm();
+  // const { scope, focus, getEvent } = useForm();
+  const { scope, focus, isEmpty } = useConfEmpty();
+
   function handleEvent(e) {
-    const { signin, data } = getEvent(e,true, false,false,false);
-    signin && handleSubmit(data);
+      e.preventDefault();
+      const empty = isEmpty(e, fieldRegister);
+    // const { signin, data } = getEvent(e, true, false, false, false);
+    // signin && handleSubmit(data);
   }
   return (
     <>
@@ -27,7 +33,7 @@ function UserSignIn({ handleGuest, isOrdering, handleSubmit }) {
                 transition={{ type: "spring", stiffness: 250 }}
                 onClick={handleGuest}
               >
-               GUEST CHECKOUT
+                GUEST CHECKOUT
               </motion.a>
             )}
           </div>

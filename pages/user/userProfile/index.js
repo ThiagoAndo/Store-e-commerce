@@ -1,30 +1,15 @@
-import {
-  inpuShip,
-  inpuPay,
-  inpuReg,
-  fieldChekout,
-} from "@/components/ui/formInput/inputInfo";
 import { useNotification } from "@/hooks/useNotification";
-import UserCheckOut from "@/components/forms/UserCheckout";
+import UserProfile from "@/components/forms/UserProfile";
 import { getUserToken } from "@/helpers/functions";
 import { useRouter } from "next/router";
 import { setStorage, adrStorage } from "@/helpers/functions";
 import Head from "next/head";
 
-const inpCheck = [inpuReg[0], inpuReg[1], inpuReg[2]];
 function ChangeData() {
   const { notification } = useNotification();
   const route = useRouter();
   async function handleCheck(data, whatChange) {
-    if (whatChange.length === 0) {
-      notification(
-        null,
-        "Invalid Action:",
-        "USER DETAILS HAVE NOT CHANGED",
-        "error"
-      );
-      return;
-    }
+  
     const id = localStorage.getItem("id") || null;
     const hasAddress = localStorage.getItem("line_one");
     const httpCAll = [];
@@ -113,14 +98,8 @@ function ChangeData() {
       <Head>
         <title>Profile</title>
       </Head>
-      <UserCheckOut
+      <UserProfile
         handleSubmit={handleCheck}
-        inpuShip={inpuShip}
-        inpuPay={inpuPay}
-        inpCheck={inpCheck}
-        fieldChekout={fieldChekout}
-        checkout={false}
-        profile={true}
       />
     </>
   );
