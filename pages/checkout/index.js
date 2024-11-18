@@ -13,7 +13,7 @@ function CheckoutPage() {
   const dispatch = useDispatch();
   const inpCheck = inpuReg.slice();
   inpCheck.pop();
-  function handleCheck(data) {
+   function handleCheck(data) {
     notificationCtx.showNotification({
       title: "Sending Request:",
       message: `PROCESSING INVOICE.`,
@@ -61,10 +61,10 @@ function CheckoutPage() {
     } else {
       reqArray = [order];
     }
-    reqArray.forEach((e, i) => {
+    reqArray.forEach(async (e, i) => {
       try {
         const token = getUserToken();
-        fetch(
+        const response = await fetch(
           // `http://localhost:8080/${e.route}`,
           `https://api-store-pj2y.onrender.com/${e.route}`,
           {
@@ -75,15 +75,19 @@ function CheckoutPage() {
             },
             body: JSON.stringify({ ...e[keys[i]] }),
           }
-        ).then((response) => {
-          if (response.ok && e.route != "add") {
-            dispatch(confActions.changeType("conf"));
-            dispatch(confActions.toggle());
-            notificationCtx.hideNotification();
-          }
-        });
+        );
+
+        if (response.ok && e.route != "add") {
+          dispatch(confActions.changeType("conf"));
+          dispatch(confActions.toggle());
+          notificationCtx.hideNotification();
+        }
       } catch (error) {
-        console.log(error?.message);
+        notificationCtx.showNotification({
+          title: "Error:",
+          message: error.message.toUpperCase(),
+          status: "error",
+        });
       }
     });
   }

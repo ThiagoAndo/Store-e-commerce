@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Input from "./formInput/input";
 import style from "./userCheckout.module.css";
-import useForm from "@/hooks/useForm";
+import useForm from "@/hooks/useCheckForm";
 import Button from "../ui/button/btn";
 import { useNotification } from "@/hooks/useNotification";
 import useConfEmpty from "@/hooks/confEmpty";

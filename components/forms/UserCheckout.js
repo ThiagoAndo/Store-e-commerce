@@ -4,7 +4,7 @@ import Radio from "./formInput/inputRadio";
 import Cart from "../cart/cart";
 import Input from "./formInput/input";
 import style from "./UserCheckout.module.css";
-import useForm from "@/hooks/useForm";
+import useForm from "@/hooks/useCheckForm";
 import Button from "../ui/button/btn";
 import { inpuReg, inpuShip, inpuPay, fieldChekout } from "@/helpers/inputInfo";
 import { useNotification } from "@/hooks/useNotification";
@@ -21,6 +21,14 @@ function UserCheckOut({ handleSubmit }) {
   const cartItems = useSelector((state) => state.cart.items);
 
   // const { cartItems, scope, checked, focus, setChecked, getEvent } = useForm();
+
+  // if (cartItems.length <= 0 && isCheck) {
+  //   notification(null, "Empty cart:", `CHOSE A PEODUCT TO PROCEED.`, "error");
+  //   return {
+  //     check: false,
+  //     signin: false,
+  //   };
+  // }
 
   const onOptionChange = (val) => {
     setChecked(val);

@@ -4,14 +4,15 @@ import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { inpuLogin, logIn } from "@/helpers/inputInfo";
-import useForm from "@/hooks/useForm";
+import useCheckForm from "@/hooks/useCheckForm";
 import Input from "./formInput/input";
 import Button from "../ui/button/btn";
 import style from "./UserLogin.module.css";
 import useMediaScreen from "@/hooks/useMediaScreen";
 import useConfEmpty from "@/hooks/confEmpty";
 function UserLogin({ handling, LoginBack }) {
-  const { scope, focus, isEmpty } = useConfEmpty();
+  const { scope, focus, isEmpty, empty } = useConfEmpty();
+  const { isValid } = useCheckForm();
 
   const { notification } = useNotification();
   const { data: session } = useSession();
@@ -24,14 +25,16 @@ function UserLogin({ handling, LoginBack }) {
     e.preventDefault();
     router.replace("/user/signIn");
   }
+
   function loginHandler(e) {
     e.preventDefault();
-    const empty = isEmpty(e, logIn);
-    console.log("empty");
-    console.log(empty);
-    // const { login, data } = getEvent(e, logIn);
-    // login && handling(data);
-    handling()
+    const emp = isEmpty(e, logIn);
+    console.log(emp);
+    if (!emp) {
+      var { isOk, data } = isValid({ e, fields: logIn, empty });
+    }
+
+    isOk && handling(data);
   }
 
   useEffect(() => {

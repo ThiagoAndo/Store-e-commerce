@@ -1,20 +1,22 @@
 import { motion } from "framer-motion";
 import { inpuReg, fieldRegister } from "@/helpers/inputInfo";
-import useForm from "@/hooks/useForm";
+import useForm from "@/hooks/useCheckForm";
 import Button from "../ui/button/btn";
 import Input from "./formInput/input";
 import style from "./UserSignIn.module.css";
 import useConfEmpty from "@/hooks/confEmpty";
 
 function UserSignIn({ handleGuest, isOrdering, handleSubmit }) {
-  // const { scope, focus, getEvent } = useForm();
+  const { getEvent } = useForm();
   const { scope, focus, isEmpty } = useConfEmpty();
 
   function handleEvent(e) {
-      e.preventDefault();
-      const empty = isEmpty(e, fieldRegister);
-    // const { signin, data } = getEvent(e, true, false, false, false);
-    // signin && handleSubmit(data);
+    e.preventDefault();
+    const empty = isEmpty(e, fieldRegister);
+    if (empty) {
+      const { signin, data } = getEvent(e);
+      // signin && handleSubmit(data);
+    }
   }
   return (
     <>

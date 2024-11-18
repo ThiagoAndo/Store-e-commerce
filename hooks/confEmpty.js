@@ -1,10 +1,11 @@
 import { gatherData } from "@/helpers/functions";
 import { useInputAnimation } from "@/hooks/useInput";
+import { useNotification } from "@/hooks/useNotification";
 
 // This hook is responsible for detecting empty fields across all forms in the application
 export default function useConfEmpty() {
   const { focus, empty, scope } = useInputAnimation();
-
+  const { notification } = useNotification();
 
   function confEmpty(e, inputs) {
     let checkEmpty = 0;
@@ -14,7 +15,6 @@ export default function useConfEmpty() {
     // console.log("entries.length");
     // console.log(entries);
     entries.map((fields, i) => {
-      console.log(inputs[i].input);
       focus({
         target: {
           id: inputs[i].input,
@@ -29,12 +29,14 @@ export default function useConfEmpty() {
       }
     });
 
-  
-
+    if (checkEmpty > 0) {
+      notification(null, "Empty Fields:", `FILL IN THE FORM`, "error");
+    }
     return checkEmpty !== 0;
   }
 
   return {
+    empty,
     scope,
     focus,
     isEmpty: confEmpty,
