@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 import { setStorage } from "../../../helpers/functions";
 import { useNotification } from "@/hooks/useNotification";
-import { useDispatch } from "react-redux";
 import { sendCartData } from "@/helpers/cart-actions";
 
 import UserSignIn from "@/components/forms/UserSignIn";
@@ -21,7 +20,7 @@ function SignIn() {
   }
   async function submitFormHandler(user) {
     // Display a notification indicating the request is being sent
-    notification(null, "Sending Request:", "REGISTERING NEW USER.", "pending");
+    notification(null, "Sending Request:", "Registering new user.", "pending");
     let data = null;
     try {
       let response = await fetch(
@@ -39,7 +38,7 @@ function SignIn() {
         data = await response.json();
         // If the response contains an error message, display it
         if (data.hasOwnProperty("message")) {
-          notification(null, "Invalid Action:", data.message.toUpperCase());
+          notification(null, "Invalid Action:", data.message);
         } else {
           // Store user data locally for autofilling forms
           setStorage(data);

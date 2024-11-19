@@ -10,12 +10,17 @@ export function useNotification() {
   ) => {
     const thisTitle = title || "Wrong Input:";
     const thisStatus = status || "error";
-    const msg =
-      passed ||
-      `YOUR ${field.toUpperCase()} IS NOT VALID! MAKE SURE TO ENTER A VALID ONE.`;
+
+    const msg = {
+      first: "First name only",
+      last: "Last name only",
+      email: "Email is not valid",
+      password: "Password must contain at least eight characters",
+    };
+
     notificationCtx.showNotification({
       title: thisTitle,
-      message: msg,
+      message: msg[field] || passed,
       status: thisStatus,
     });
   };

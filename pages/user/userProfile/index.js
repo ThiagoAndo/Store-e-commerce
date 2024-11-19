@@ -82,7 +82,7 @@ function ChangeData() {
           notification(
             null,
             "Sending Request:",
-            "USER DETAILS HAVE BEEN UPDATED.",
+            "User details have been updated.",
             "success"
           );
           route.push("/");

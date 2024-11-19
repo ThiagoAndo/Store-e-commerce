@@ -6,7 +6,7 @@ import { useNotification } from "@/hooks/useNotification";
 import { gatherData } from "@/helpers/functions";
 import {
   isEmailValid,
-  isNameValid,
+  // isNameValid,
   isPasswordValid,
 } from "@/helpers/functions";
 export default function useCheckForm() {
@@ -21,8 +21,11 @@ export default function useCheckForm() {
       switch (fields[i].input) {
         case "first_name":
           const name = data.first_name.trim().split(" ");
-          if (name.length > 0) {
-            notification("name");
+          console.log("type name");
+          console.log(typeof name);
+          console.log(name);
+          if (name.length > 1) {
+            notification("first");
             empty(fields[i]);
             isOk = false;
             i = 1000;
@@ -30,8 +33,8 @@ export default function useCheckForm() {
           break;
         case "last_name":
           const last = data.last_name.trim().split(" ");
-          if (last.length > 0) {
-            notification("name");
+          if (last.length > 1) {
+            notification("last");
             empty(fields[i]);
             isOk = false;
             i = 1000;

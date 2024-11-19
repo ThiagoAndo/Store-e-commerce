@@ -16,7 +16,7 @@
 
 .notification h2 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.6rem;
   color: white;
 }
 
@@ -30,4 +30,11 @@
 
 .error {
   background-color: #e64f35e0;
+}
+
+
+@media only screen and (min-width : 369px) and (max-width : 500px) {
+.notification h2 {
+    font-size: 1.25rem;
+  }
 }

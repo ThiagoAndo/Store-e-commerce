@@ -29,7 +29,6 @@ function UserLogin({ handling, LoginBack }) {
   function loginHandler(e) {
     e.preventDefault();
     const emp = isEmpty(e, logIn);
-    console.log(emp);
     if (!emp) {
       var { isOk, data } = isValid({ e, fields: logIn, empty });
     }

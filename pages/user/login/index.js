@@ -17,7 +17,7 @@ function Login() {
   async function handleLogin({ email_address, password }) {
     notificationCtx.showNotification({
       title: "Sending Request:",
-      message: `GETTING USER CREDENTIALS.`,
+      message: `Getting user credentials.`,
       status: "pending",
     });
     try {

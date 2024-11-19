@@ -6,14 +6,9 @@ import { useNotification } from "@/hooks/useNotification";
 export default function useConfEmpty() {
   const { focus, empty, scope } = useInputAnimation();
   const { notification } = useNotification();
-
   function confEmpty(e, inputs) {
     let checkEmpty = 0;
     const { entries } = gatherData(e);
-    // console.log(inputs.length);
-    // console.log(inputs.length);
-    // console.log("entries.length");
-    // console.log(entries);
     entries.map((fields, i) => {
       focus({
         target: {

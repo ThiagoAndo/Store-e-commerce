@@ -29,7 +29,7 @@ function Notification(props) {
         transition={{ duration: 0.3, type: "spring" }}
       >
         <h2>{title}</h2>
-        <h3>{message}</h3>
+        <h2>{message}</h2>
       </motion.div>
     </AnimatePresence>
   );
