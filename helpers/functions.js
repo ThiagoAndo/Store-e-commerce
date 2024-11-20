@@ -20,14 +20,7 @@ export function isEmailValid(email) {
     return false;
   }
 }
-export function isNameValid(name) {
-  let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
-  if (!regName.test(name)) {
-    return false;
-  } else {
-    return true;
-  }
-}
+
 export function isPasswordValid(password) {
   if (password.trim().length >= 8) {
     return true;

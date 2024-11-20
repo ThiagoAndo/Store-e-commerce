@@ -6,7 +6,7 @@ import ConIcon from "../ui/confirmation/conf-icon";
 import Button from "../ui/button/btn";
 import classes from "./confirmation.module.css";
 import Anime from "../ui/animeComp/AnimeComp";
-import fetchDelete from "@/helpers/fetchDellete";
+import fetchDelete from "@/helpers/HTTP/fetchDellete";
 import { logoutHandler } from "@/helpers/functions";
 
 const PurchaseConf = function PurchaseConf() {

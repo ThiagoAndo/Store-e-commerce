@@ -9,58 +9,71 @@ import Input from "./formInput/input";
 import Button from "../ui/button/btn";
 import style from "./UserLogin.module.css";
 import useMediaScreen from "@/hooks/useMediaScreen";
-import useConfEmpty from "@/hooks/confEmpty";
+import useConfEmpty from "@/hooks/useConfEmpty";
+/**
+ * UserLogin Component
+ * Handles user authentication by rendering a login form for existing users
+ * Validates user input, manages session
+ * and routing, and dynamically adjusts the UI based on screen size.
+ */
 function UserLogin({ handling, LoginBack }) {
   const { scope, focus, isEmpty, empty } = useConfEmpty();
   const { isValid } = useCheckForm();
-
   const { notification } = useNotification();
   const { data: session } = useSession();
   const router = useRouter();
   let { match: size } = useMediaScreen(
     "only screen and (min-width : 369px) and (max-width : 500px)"
   );
-
+  /**
+   * Redirects new users to the sign-up page.
+   */
   function handleClick(e) {
     e.preventDefault();
     router.replace("/user/signIn");
   }
-
+  /**
+   * Validates login form inputs and triggers the parent handler with valid data.
+   */
   function loginHandler(e) {
     e.preventDefault();
+    let isOk, data;
     const emp = isEmpty(e, logIn);
     if (!emp) {
-      var { isOk, data } = isValid({ e, fields: logIn, empty });
+      ({ isOk, data } = isValid({ e, fields: logIn, empty }));
     }
-
-    isOk && handling(data);
+    if (isOk) handling(data);
   }
 
   useEffect(() => {
     const isOrdering = localStorage.getItem("order");
+
+    // Displays appropriate error messages based on login feedback
     if (LoginBack?.message) {
-      if (LoginBack.message.slice(0, 5) === "Could") {
+      if (LoginBack.message.startsWith("Could")) {
         notification(
           null,
           "Not Found:",
-          "EMAIL MIGHT NOT BE RIGHT OR USER HAS NOT BEEN REGISTERED"
+          "Email might be incorrect, or the user is not registered."
         );
         return;
-      } else if (LoginBack.message.slice(0, 5) === "Wrong") {
-        notification(null, "Wrong Input:", "YOUR PASSWORD DOES NOT MATCH.");
+      } else if (LoginBack.message.startsWith("Wrong")) {
+        notification(null, "Wrong Input:", "Incorrect password.");
         return;
       }
     }
-    if (session && !isOrdering) {
-      router.replace("/");
-    } else if (session && isOrdering) {
-      router.replace("/checkout");
+
+    // Redirects authenticated users based on their ordering status
+    if (session) {
+      router.replace(isOrdering ? "/checkout" : "/");
     }
   }, [LoginBack, session]);
+
   return (
     <>
       <AnimatePresence>
         <div className={style.container}>
+          {/* Login form for existing users */}
           <motion.form
             key={2}
             initial={{ x: -15, opacity: 0 }}
@@ -72,6 +85,7 @@ function UserLogin({ handling, LoginBack }) {
           >
             <p className={style.paragraph}>Already Registered?</p>
             <div className={style.cont_container}>
+              {/* Render login input fields dynamically */}
               {inpuLogin.map((inp) => (
                 <Input
                   key={inp.id}
@@ -82,13 +96,16 @@ function UserLogin({ handling, LoginBack }) {
                 />
               ))}
             </div>
-            <Button style={style.button}>Sign in Securely </Button>
+            <Button style={style.button}>Sign in Securely</Button>
+            {/* Show "New User" button on smaller screens */}
             {size && (
               <Button click={handleClick} style={style.button}>
                 New user
               </Button>
             )}
           </motion.form>
+
+          {/* Registration information and button for new users */}
           {!size && (
             <motion.form
               key={4}

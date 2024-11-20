@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 import ProductGrid from "../components/product/product-grid";
 import Anime from "@/components/ui/animeComp/AnimeComp";
-import { getAllProducts } from "../helpers/fetchProducts";
+import { getAllProducts } from "../helpers/HTTP/fetchProducts";
 import { ProductContext } from "../store/context/products-context";
 import { getStorageData } from "@/helpers/cart-actions";
 import Head from "next/head";

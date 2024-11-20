@@ -4,31 +4,22 @@ import Radio from "./formInput/inputRadio";
 import Cart from "../cart/cart";
 import Input from "./formInput/input";
 import style from "./UserCheckout.module.css";
-import useForm from "@/hooks/useCheckForm";
 import Button from "../ui/button/btn";
 import { inpuReg, inpuShip, inpuPay, fieldChekout } from "@/helpers/inputInfo";
 import { useNotification } from "@/hooks/useNotification";
 import useFill from "@/hooks/useFillForm";
-import useConfEmpty from "@/hooks/confEmpty";
+import useConfEmpty from "@/hooks/useConfEmpty";
 import { useSelector } from "react-redux";
+import useCheckForm from "@/hooks/useCheckForm";
 
 // This form is used for userChekout and user profile
-
 function UserCheckOut({ handleSubmit }) {
   const user = useFill();
-  const { scope, focus, isEmpty } = useConfEmpty();
   const [checked, setChecked] = useState("e-money");
   const cartItems = useSelector((state) => state.cart.items);
-
-  // const { cartItems, scope, checked, focus, setChecked, getEvent } = useForm();
-
-  // if (cartItems.length <= 0 && isCheck) {
-  //   notification(null, "Empty cart:", `CHOSE A PEODUCT TO PROCEED.`, "error");
-  //   return {
-  //     check: false,
-  //     signin: false,
-  //   };
-  // }
+  const { notification } = useNotification();
+  const { scope, focus, isEmpty, empty } = useConfEmpty();
+  const { isValid } = useCheckForm();
 
   const onOptionChange = (val) => {
     setChecked(val);
@@ -47,13 +38,17 @@ function UserCheckOut({ handleSubmit }) {
   };
   const handleThisSubmit = (e) => {
     e.preventDefault();
-    let empty = null;
+    if (cartItems.length <= 0) {
+      notification(null, "Empty cart:", `Chose a product to prceed. `, "error");
+    }
+    const emp = isEmpty(e, fieldChekout);
+
     // const { prof, check, data } = getEvent(e, false, false, checkout, [
     //   profile,
     //   hasChanged,
     // ]);
     // check && handleSubmit(data);
-    empty = isEmpty(e, fieldChekout);
+    // empty = isEmpty(e, fieldChekout);
   };
   return (
     <motion.div

@@ -1,54 +1,58 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Input from "./formInput/input";
 import style from "./userCheckout.module.css";
-import useForm from "@/hooks/useCheckForm";
+import useCheckForm from "@/hooks/useCheckForm";
 import Button from "../ui/button/btn";
 import { useNotification } from "@/hooks/useNotification";
-import useConfEmpty from "@/hooks/confEmpty";
+import useConfEmpty from "@/hooks/useConfEmpty";
 import { inpuShip, inpuReg, fieldProfile } from "@/helpers/inputInfo";
 import useFill from "@/hooks/useFillForm";
+/**
+ * UserProfile Component
+ * Handles the editing of user profile and address details.
+ * Validates form inputs, tracks changes, and prevents unnecessary backend requests.
+ */
 function UserProfile({ handleSubmit }) {
   const { notification } = useNotification();
-  //   const { scope, focus,  getEvent } = useForm();
+  const { isValid } = useCheckForm();
   const [hasChanged, setHasChanged] = useState([]);
-  const { scope, focus, isEmpty } = useConfEmpty();
+  const { scope, focus, isEmpty, empty } = useConfEmpty();
   const user = useFill();
-
   //Checks changes in the form for handling requests to the beckend only if the form has chenged
   function handleChange(e) {
-    const det = inpuReg.map((inp) => e.target.name === inp.id);
-    const adr = inpuShip.map((inp) => e.target.name === inp.id);
-    if (det.includes(true)) {
+    const { name } = e.target;
+    const det = inpuReg.some((inp) => inp.id === name);
+    const adr = inpuShip.some((inp) => inp.id === name);
+    if (det) {
       if (!hasChanged.includes("user")) {
         setHasChanged((prev) => [...prev, "user"]);
       }
-    } else if (adr.includes(true)) {
+    } else if (adr) {
       if (!hasChanged.includes("add")) {
         setHasChanged((prev) => [...prev, "add"]);
       }
     }
   }
-
   const handleThisSubmit = (e) => {
     e.preventDefault();
+    let isOk, data;
+    // Cheking for empty fields in the form
+    const emp = isEmpty(e, fieldProfile);
+    //Stoping unnecessary requests to beckend
     if (hasChanged.length === 0) {
       notification(
         null,
         "Invalid Action:",
-        "USER DETAILS HAVE NOT CHANGED",
+        "User details have not changed",
         "error"
       );
       return;
     }
-    const empty = isEmpty(e, fieldProfile);
-    console.log("empty");
-    console.log(empty);
-    // const { prof, check, data } = getEvent(e, false, false, checkout, [
-    //   profile,
-    //   hasChanged,
-    // ]);
-    // profile && prof && handleSubmit(data, hasChanged);
+    if (!emp) {
+      ({ isOk, data } = isValid({ e, fields: fieldProfile, empty }));
+    }
+    isOk && handleSubmit(data, hasChanged);
   };
 
   return (

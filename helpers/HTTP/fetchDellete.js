@@ -1,4 +1,8 @@
-import { getUserToken } from "./functions";
+import { getUserToken } from "../functions";
+/**
+ * Deletes a user account from the database.
+ * Sends a DELETE request to the API with the user's ID and authorization token.
+ */
 const fetchDelete = async () => {
   const token = getUserToken();
   const id = localStorage.getItem("id");
@@ -19,7 +23,7 @@ const fetchDelete = async () => {
     );
 
     if (response.ok) {
-     return true
+      return true;
     }
   } catch (error) {
     return { error: "Connecting to the database failed!" };

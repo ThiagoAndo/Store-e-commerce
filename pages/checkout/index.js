@@ -16,7 +16,7 @@ function CheckoutPage() {
    function handleCheck(data) {
     notificationCtx.showNotification({
       title: "Sending Request:",
-      message: `PROCESSING INVOICE.`,
+      message: `Processing invoice.`,
       status: "pending",
     });
     let isGuest = () => {

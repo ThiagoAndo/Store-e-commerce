@@ -5,8 +5,8 @@ import Link from "next/link";
 import DetailSlider from "./product-slider";
 import ProductInfo from "./product-info";
 import classes from "./product-detail.module.css";
-import { getProductById } from "@/helpers/fetchProducts";
-import { getAllProducts } from "@/helpers/fetchProducts";
+import { getProductById } from "@/helpers/HTTP/fetchProducts";
+import { getAllProducts } from "@/helpers/HTTP/fetchProducts";
 import Head from "next/head";
 
 const ProductDetail = ({ id }) => {

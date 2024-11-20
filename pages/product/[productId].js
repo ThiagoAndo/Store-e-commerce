@@ -1,5 +1,5 @@
 import ProductDetail from "@/components/product/product-detail";
-import { getAllProducts } from "@/helpers/fetchProducts";
+import { getAllProducts } from "@/helpers/HTTP/fetchProducts";
 import { useContext } from "react";
 import { ProductContext } from "@/store/context/products-context";
 

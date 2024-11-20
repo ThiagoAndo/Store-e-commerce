@@ -3,21 +3,37 @@ import { inpuReg, fieldRegister } from "@/helpers/inputInfo";
 import Button from "../ui/button/btn";
 import Input from "./formInput/input";
 import style from "./UserSignIn.module.css";
-import useConfEmpty from "@/hooks/confEmpty";
+import useConfEmpty from "@/hooks/useConfEmpty";
 import useCheckForm from "@/hooks/useCheckForm";
-
+/**
+ * UserSignIn Component
+ * Handles user registration by validating input fields and submitting form data.
+ * Supports a guest checkout option if the user is placing an order.
+ */
 function UserSignIn({ handleGuest, isOrdering, handleSubmit }) {
+  // Custom hooks for validation and form field management
   const { isValid } = useCheckForm();
   const { scope, focus, isEmpty, empty } = useConfEmpty();
+
+  /**
+   * Handles the form submission:
+   * - Validates fields to ensure no empty or invalid inputs.
+   * - Calls the parent handleSubmit function with the form data if validation succeeds.
+   */
   function handleEvent(e) {
     e.preventDefault();
+    let isOk, data;
+
+    // Checks for empty fields before validating the inputs
     const emp = isEmpty(e, fieldRegister);
     if (!emp) {
-      var { isOk, data } = isValid({ e, fields: fieldRegister, empty });
+      ({ isOk, data } = isValid({ e, fields: fieldRegister, empty }));
     }
-    isOk && handleSubmit(data);
 
+    // Submits the data if validation is successful
+    isOk && handleSubmit(data);
   }
+
   return (
     <>
       <motion.div
@@ -30,6 +46,7 @@ function UserSignIn({ handleGuest, isOrdering, handleSubmit }) {
           <div className={style.action}>
             <h2>REGISTRATION</h2>
             {isOrdering && (
+              // Displays "Guest Checkout" option for users placing an order
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 250 }}
@@ -40,6 +57,7 @@ function UserSignIn({ handleGuest, isOrdering, handleSubmit }) {
             )}
           </div>
           <div className={style.input_container}>
+            {/* Renders registration input fields dynamically */}
             {inpuReg.map((inp) => (
               <Input
                 key={inp.id}
@@ -50,7 +68,7 @@ function UserSignIn({ handleGuest, isOrdering, handleSubmit }) {
               />
             ))}
           </div>
-          <Button style={style.button}>REGISTER </Button>
+          <Button style={style.button}>REGISTER</Button>
         </form>
       </motion.div>
     </>
