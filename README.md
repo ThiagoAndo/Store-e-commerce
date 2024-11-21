@@ -90,7 +90,7 @@ The Next Store Online Shopping is a modern, full-stack e-commerce web applicatio
 - Keen-slider
 
 ## Flowchart
-###  Click on the flowchart image and view it in a larger format.
+ Click on the flowchart image and view it in a larger format.
 
 
 <br />
@@ -100,6 +100,30 @@ The Next Store Online Shopping is a modern, full-stack e-commerce web applicatio
         <img  src="./assets/screenshots/e-commerce.drawio.png"width="900" alt="flowchart ">
 </p>
 
+<br />
+<br />
+
+## Components flowchart
+
+
+
+<br />
+<br />
+<p align="center" >
+        <img  src="./assets/screenshots/Flow-chart.png"width="900" alt="flowchart ">
+</p>
+<br />
+<br />
+
+## Mindmap
+
+
+
+<br />
+<br />
+<p align="center" >
+        <img  src="./assets/screenshots/component-hierarchy-diagram.png"width="900" alt="flowchart ">
+</p>
 <br />
 <br />
 
