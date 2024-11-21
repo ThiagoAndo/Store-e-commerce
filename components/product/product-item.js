@@ -18,6 +18,7 @@ export default function ProductItem({ title, brand, thumbnail, id }) {
             alt={title}
             fill
             priority={true}
+            onError={() => console.error(`Failed to load image ProductDetail: ${thumbnail}`)}
           />
         </div>
         <div className={classes.headerText}>
@@ -27,7 +28,9 @@ export default function ProductItem({ title, brand, thumbnail, id }) {
       </header>
       <div className={classes.content}>
         <div className={classes.actions}>
-          <Button style={classes.actions} click={handleClick}>View Details</Button>
+          <Button style={classes.actions} click={handleClick}>
+            View Details
+          </Button>
         </div>
       </div>
     </article>

@@ -14,19 +14,28 @@ import CartIcon from "../ui/cart/cart-icon";
 import useMediaScreen from "@/hooks/useMediaScreen";
 import { useSession } from "next-auth/react";
 import NavMobile from "./nav-mobile";
-let stp = false;
-function MainHeader() {
-  const currentPath = usePathname();
-  const dispatch = useDispatch();
-  const store = useContext(ProductContext);
-  const total = useSelector((state) => state.cart.totalQuantity);
-  const [cartClass, setCartClass] = useState(classes.icon_cart);
 
-  const { notification } = useNotification();
+let stp = false;
+
+/**
+ * MainHeader Component:
+ * This component renders the main navigation header of the application.
+ * It includes a search bar, user icon, cart icon, and a responsive navigation menu.
+ * The header adapts dynamically based on scroll position, screen size, and user actions.
+ */
+
+function MainHeader() {
+  const currentPath = usePathname(); // Tracks the current route path
+  const dispatch = useDispatch();
+  const store = useContext(ProductContext); // Access the product context
+  const total = useSelector((state) => state.cart.totalQuantity); // Total items in the cart
+  const [cartClass, setCartClass] = useState(classes.icon_cart); // Dynamic cart icon styling
+  const { notification } = useNotification(); // Custom notification hook
   let { match: size } = useMediaScreen(
-    "only screen and (min-width : 369px) and (max-width : 500px)"
+    "only screen and (min-width : 369px) and (max-width : 500px)" // Matches small screen sizes
   );
 
+  // Updates cart icon state and visibility when the total changes
   useEffect(() => {
     if (stp) {
       handleClickIcon();
@@ -37,27 +46,30 @@ function MainHeader() {
     stp = true;
   }, [total]);
 
+  // Filters products to show all categories
   function handleClick() {
     store.getFiltered(6);
   }
 
+  // Handles cart icon animations based on cart status
   function handleClickIcon() {
     if (total === 0) {
-      setCartClass(classes.icon_cart);
+      setCartClass(classes.icon_cart); // Default empty cart style
     } else {
-      setCartClass(classes.icon_cart_full + " " + classes.bump);
+      setCartClass(classes.icon_cart_full + " " + classes.bump); // Bump effect for cart updates
       setTimeout(() => {
         setCartClass(classes.icon_cart_full);
       }, 400);
     }
   }
 
+  // Toggles the cart modal and shows a notification for an empty cart
   function handleToggle(click) {
     if (total === 0 && click === "click") {
       notification(
         null,
         "Empty cart:",
-        `You have not choose any product.`,
+        `You have not chosen any product.`,
         "pending"
       );
     }
@@ -69,6 +81,7 @@ function MainHeader() {
       <nav
         className={currentPath === "/" ? classes.navigation : classes.display}
       >
+        {/* Logo and navigation link */}
         <motion.div
           whileHover={
             !size && {
@@ -91,6 +104,7 @@ function MainHeader() {
             {currentPath != "/" ? " ⬅  Back" : "Next Store"}
           </Link>
         </motion.div>
+        {/* Search bar for the home page */}
         <div
           className={
             currentPath === "/"
@@ -100,6 +114,7 @@ function MainHeader() {
         >
           {currentPath === "/" ? <SearchBar /> : null}
         </div>
+        {/* Cart and user actions */}
         <div className={classes.icon_container}>
           <motion.div
             whileHover={{
@@ -119,21 +134,27 @@ function MainHeader() {
           {size ? null : <DeskActions />}
         </div>
       </nav>
+      {/* Mobile navigation menu */}
       {size ? <NavMobile /> : null}
     </header>
   );
 }
 
+/**
+ * DeskActions Component:
+ * Renders user-specific actions for desktop views, such as showing the user menu
+ * or redirecting to the login page if the user is not authenticated.
+ */
 function DeskActions() {
-  const { data: session } = useSession();
+  const { data: session } = useSession(); // User session data
   const dispatch = useDispatch();
 
   function handleUserMenuVis() {
-    dispatch(userActions.visible());
+    dispatch(userActions.visible()); // Show user menu
   }
 
   function handleUserMenuHid() {
-    dispatch(userActions.hidden());
+    dispatch(userActions.hidden()); // Hide user menu
   }
 
   return session?.user ? (

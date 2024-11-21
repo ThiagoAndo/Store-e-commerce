@@ -38,17 +38,16 @@ function UserCheckOut({ handleSubmit }) {
   };
   const handleThisSubmit = (e) => {
     e.preventDefault();
+    let isOk, data;
     if (cartItems.length <= 0) {
-      notification(null, "Empty cart:", `Chose a product to prceed. `, "error");
+      notification(null, "Empty cart:", `Chose a product to proceed. `, "error");
     }
     const emp = isEmpty(e, fieldChekout);
 
-    // const { prof, check, data } = getEvent(e, false, false, checkout, [
-    //   profile,
-    //   hasChanged,
-    // ]);
-    // check && handleSubmit(data);
-    // empty = isEmpty(e, fieldChekout);
+    if (!emp) {
+      ({ isOk, data } = isValid({ e, fields: fieldChekout, empty }));
+    }
+    if (isOk) handleSubmit(data);
   };
   return (
     <motion.div
@@ -58,13 +57,7 @@ function UserCheckOut({ handleSubmit }) {
       transition={{ duration: 0.6, type: "spring" }}
     >
       <div className={style.container}>
-        <form
-          onSubmit={handleThisSubmit}
-          ref={scope}
-          onChange={(e) => {
-            handleChange(e);
-          }}
-        >
+        <form onSubmit={handleThisSubmit} ref={scope}>
           <div className={style.action}>
             <h2>{"CHECKOUT"}</h2>
           </div>

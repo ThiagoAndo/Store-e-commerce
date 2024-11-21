@@ -1,4 +1,6 @@
 import { useEffect, createContext, useState } from "react";
+
+// Initialize the ProductContext with default values and placeholder functions
 export const ProductContext = createContext({
   products: [],
   men: [],
@@ -14,6 +16,8 @@ export const ProductContext = createContext({
   getFiltered: () => {},
   getProFiltered: () => {},
 });
+
+// Arrays for storing categorized products and product titles
 const productsTitle = [];
 const productsMen = [];
 const productsWoman = [];
@@ -22,32 +26,34 @@ const productsHome = [];
 const productsSelfcare = [];
 
 export default function ProductsContextProvider({ children }) {
-  const [products, setProducts] = useState([]);
-  const [filtered, setFiltered] = useState([]);
+  const [products, setProducts] = useState([]); // State for all products
+  const [filtered, setFiltered] = useState([]); // State for filtered products
 
+  // Effect: Set initial filtered products and categorize them when products are updated
   useEffect(() => {
     if (products.length > 0) {
       setFiltered(products);
-      categories();
+      categories(); // Categorize products after the initial load
     }
   }, [products]);
 
+  // Adds products and their images to the state
   function addProducts(prts, images) {
     let buildData = prts.map((prt) => {
-      prt.images = images.filter((img) => prt.id === img.item_id);
+      prt.images = images.filter((img) => prt.id === img.item_id); // Associate images with the correct product
       return prt;
     });
 
-    if (products.length === 0) setProducts(buildData);
-  
+    if (products.length === 0) setProducts(buildData); // Set products only once
   }
 
+  // Creates shortened titles for products, used for displaying in UI
   function addTitle() {
     if (productsTitle.length === 0) {
       products.map((product) => {
         let title;
         if (product.title.length > 25) {
-          title = product.title.slice(0, 25) + " ...";
+          title = product.title.slice(0, 25) + " ..."; // Truncate long titles
         } else {
           title = product.title;
         }
@@ -56,11 +62,11 @@ export default function ProductsContextProvider({ children }) {
     }
   }
 
+  // Categorizes products into predefined categories
   function categories() {
-    let category;
     if (productsMen.length === 0) {
       products.map((product) => {
-        category = product.category;
+        const category = product.category;
         if (category.slice(0, 1) === "m") {
           productsMen.push(product);
         } else if (category.slice(0, 1) === "w") {
@@ -86,6 +92,7 @@ export default function ProductsContextProvider({ children }) {
     }
   }
 
+  // Filters products by category based on the provided category ID
   function getFiltered(cat) {
     switch (cat) {
       case 1:
@@ -110,10 +117,13 @@ export default function ProductsContextProvider({ children }) {
         console.log("Something went wrong with getFiltered");
     }
   }
+
+  // Retrieves a specific product by its ID
   function getProFiltered(id) {
     return products.filter((pro) => pro.id === id);
   }
 
+  // Context value to provide access to products and related methods
   const productContext = {
     products,
     productsTitle,

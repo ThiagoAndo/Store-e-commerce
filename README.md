@@ -177,6 +177,11 @@ and npm (version 7 or higher) are installed on your development machine.
 - Fork this repository
 - Clone your forked repository
 - CD into the project folder
+- Create a .env file in the root directory and Add the following environment variable:
+
+```shell
+SECRET_API_KEY=your_secret_key
+```
 
 To install the application:
 

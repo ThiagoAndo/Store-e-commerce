@@ -34,7 +34,10 @@ export const fetchCartData = (userId) => {
       );
 
       if (!response.ok) {
-        throw new Error("Could not fetch cart data!");
+        if (response.status === 404) {
+          console.log("No cart found");
+          return;
+        }
       }
 
       const data = await response.json();

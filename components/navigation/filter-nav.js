@@ -9,6 +9,12 @@ import {
 import ScrollBtn from "../scrollTop/ScrollTop";
 import classes from "./filter-nav.module.css";
 import useMediaScreen from "@/hooks/useMediaScreen";
+/**
+ * FilterHeader Component:
+ * This component renders a responsive navigation header with filter buttons.
+ * It adapts based on the scroll position and screen size, utilizing animations for a smooth UI.
+ * The filters allow users to sort products into specific categories.
+ */
 function FilterHeader() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const { scrollY } = useScroll();
@@ -31,6 +37,7 @@ function FilterHeader() {
   function handleClick(num) {
     store.getFiltered(num);
   }
+  // Reusable button component for category filters
   const MenuBtn = ({ children, action }) => {
     return (
       <motion.button

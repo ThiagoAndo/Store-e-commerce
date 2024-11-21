@@ -38,6 +38,9 @@ export default function StarRating({ props }) {
               className={
                 ratingValue <= (hover || rating) ? "activeStar" : "star"
               }
+              onError={() =>
+                console.error(`Failed to load image starComp: ${star}`)
+              }
             />
           </label>
         );

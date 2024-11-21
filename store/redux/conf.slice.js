@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+// Redux slice to handle the visibility and type of a checkout confirmation modal
 const confSlice = createSlice({
   name: "conf",
   initialState: {

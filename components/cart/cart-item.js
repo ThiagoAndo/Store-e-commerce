@@ -69,6 +69,9 @@ const CartItem = ({ title, amount, price, id, isShow }) => {
                 alt={prt.title}
                 height={70}
                 width={110}
+                onError={() =>
+                  console.error(`Failed to load image CartItem: ${prt.thumbnai}`)
+                }
               />
               <div>
                 <span className={classes.price}>{formatValue(price)}</span>

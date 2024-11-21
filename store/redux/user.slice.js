@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+// Redux slice to handle the visibility of the user menu on hover
 const userSlice = createSlice({
   name: "user",
   initialState: {
