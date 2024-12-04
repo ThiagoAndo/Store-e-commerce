@@ -47,8 +47,8 @@ export function getUserToken() {
 export async function setAddress(id) {
   try {
     let response = await fetch(
-      // `http://localhost:8080/add/${id}`
-      `https://api-store-pj2y.onrender.com/add/${id}`
+      `http://localhost:8080/add/${id}`
+      // `https://api-store-pj2y.onrender.com/add/${id}`
     );
     if (response.ok) {
       const resp = await response.json();

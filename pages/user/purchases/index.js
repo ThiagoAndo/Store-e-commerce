@@ -15,11 +15,11 @@ export function useFetch(get, cartId) {
       const id = localStorage.getItem("id");
       let url = null;
       if (get === "history") {
-        // url = `http://localhost:8080/order/${id}`;
-        url = `https://api-store-pj2y.onrender.com/order/${id}`;
+        url = `http://localhost:8080/order/${id}`;
+        // url = `https://api-store-pj2y.onrender.com/order/${id}`;
       } else {
-        // url = `http://localhost:8080/cart/purchased/params?user_id=${id}&cart_id=${cartId}`;
-        url = `https://api-store-pj2y.onrender.com/cart/purchased/params?user_id=${id}&cart_id=${cartId}`;
+        url = `http://localhost:8080/cart/purchased/params?user_id=${id}&cart_id=${cartId}`;
+        // url = `https://api-store-pj2y.onrender.com/cart/purchased/params?user_id=${id}&cart_id=${cartId}`;
       }
       setIsFetching(true);
       try {

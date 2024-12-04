@@ -22,8 +22,8 @@ function Login() {
     });
     try {
       let response = await fetch(
-        // `http://localhost:8080/user/get`,
-        `https://api-store-pj2y.onrender.com/user/get`,
+        `http://localhost:8080/user/get`,
+        // `https://api-store-pj2y.onrender.com/user/get`,
         {
           method: "POST",
           body: JSON.stringify({
