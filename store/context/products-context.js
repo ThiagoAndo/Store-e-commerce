@@ -10,6 +10,7 @@ export const ProductContext = createContext({
   selfCAre: [],
   productsTitle: [],
   filtered: [],
+  isFiltering: false,
   addProducts: () => {},
   addTitle: () => {},
   categories: () => {},
@@ -28,7 +29,7 @@ const productsSelfcare = [];
 export default function ProductsContextProvider({ children }) {
   const [products, setProducts] = useState([]); // State for all products
   const [filtered, setFiltered] = useState([]); // State for filtered products
-
+  const [isFiltering, setIsFiltering] = useState(false);
   // Effect: Set initial filtered products and categorize them when products are updated
   useEffect(() => {
     if (products.length > 0) {
@@ -97,21 +98,27 @@ export default function ProductsContextProvider({ children }) {
     switch (cat) {
       case 1:
         setFiltered(productsMen);
+        setIsFiltering(true);
         break;
       case 2:
         setFiltered(productsWoman);
+        setIsFiltering(true);
         break;
       case 3:
         setFiltered(productsHome);
+        setIsFiltering(true);
         break;
       case 4:
         setFiltered(productsSelfcare);
+        setIsFiltering(true);
         break;
       case 5:
         setFiltered(productsElctronics);
+        setIsFiltering(true);
         break;
       case 6:
         setFiltered(products);
+        setIsFiltering(false);
         break;
       default:
         console.log("Something went wrong with getFiltered");
@@ -128,6 +135,7 @@ export default function ProductsContextProvider({ children }) {
     products,
     productsTitle,
     filtered,
+    isFiltering,
     addProducts,
     addTitle,
     categories,

@@ -76,7 +76,7 @@ function FilterHeader() {
             className={classes.navigation}
             style={{ width: navWidth }}
           >
-            {["Men", "Women", "Home", "Self care", "Electronics"].map(
+            {["Men", "Women", "Home", "Self care", "Electronics", "Show all"].map(
               (btn, i) => (
                 <li key={btn}>
                   <MenuBtn

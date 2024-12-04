@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Input from "./formInput/input";
-import style from "./userCheckout.module.css";
+import style from "./UserCheckout.module.css"
 import useCheckForm from "@/hooks/useCheckForm";
 import Button from "../ui/button/btn";
 import { useNotification } from "@/hooks/useNotification";
